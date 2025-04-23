@@ -1,0 +1,70 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("MONGO_DB_URL")
+}
+
+type Permission {
+  id       String  
+  name     String  
+  resource String
+  action   String
+
+}
+
+model Role {
+  id          String       @id @default(auto()) @map("_id") @db.ObjectId
+  name        String       @unique
+  description String
+  permissions Permission[]
+  User        User[]
+
+  @@map("roles")
+}
+
+model User {
+  id               String          @id @default(auto()) @map("_id") @db.ObjectId
+  fullname         String
+  email            String          @unique
+  current_password String
+  roleId           String          @db.ObjectId
+  role             Role            @relation(fields: [roleId], references: [id])
+  status           String
+  created_at       DateTime
+  updated_at       DateTime
+  Login            Login[] 
+  PasswordReset    PasswordReset[]
+
+  @@map("users")
+}
+
+model Login {
+  id                      String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId                  String   @db.ObjectId
+  user                    User     @relation(fields: [userId], references: [id])
+  verificationCode        String
+  verificationCodeExpires DateTime
+  isUsed                  Boolean  @default(false)
+
+  @@map("logins")
+}
+
+model PasswordReset {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId     String   @db.ObjectId
+  user       User     @relation(fields: [userId], references: [id])
+  resetToken String // UUID
+  expiresAt  DateTime
+  isUsed     Boolean  @default(false)
+
+  @@map("password_resets")
+}
