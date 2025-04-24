@@ -1,6 +1,6 @@
-import { UserService } from '../src/auth-service/application/user.service';
-import { IUserRepository } from '../src/auth-service/domain/interfaces/user.interface';
-import { User } from '../src/auth-service/domain/user';
+import { UserService } from '../src/user-service/application/user.service';
+import { IUserRepository } from '../src/user-service/domain/interfaces/user.interface';
+import { User } from '../src/user-service/domain/user';
 
 class MockUserRepository implements IUserRepository {
   private users: User[] = [];
