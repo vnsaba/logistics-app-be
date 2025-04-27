@@ -33,6 +33,7 @@
     "bcryptjs": "^3.0.2",
     "concurrently": "^9.1.2",
     "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
     "logistics-app-be": "file:",
     "nodemailer": "^6.10.1",
     "nodemailer-express-handlebars": "^6.1.2",

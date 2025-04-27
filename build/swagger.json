@@ -9,6 +9,9 @@
 		"schemas": {
 			"User": {
 				"properties": {
+					"id": {
+						"type": "string"
+					},
 					"fullname": {
 						"type": "string"
 					},
@@ -31,6 +34,15 @@
 					"updated_at": {
 						"type": "string",
 						"format": "date-time"
+					},
+					"resetPasswordToken": {
+						"type": "string",
+						"nullable": true
+					},
+					"expiresTokenPasswordAt": {
+						"type": "string",
+						"format": "date-time",
+						"nullable": true
 					}
 				},
 				"required": [
@@ -40,7 +52,9 @@
 					"roleId",
 					"status",
 					"created_at",
-					"updated_at"
+					"updated_at",
+					"resetPasswordToken",
+					"expiresTokenPasswordAt"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -101,6 +115,75 @@
 									"current_password",
 									"email",
 									"fullname"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/users/forgot-password": {
+			"post": {
+				"operationId": "ForgotPassword",
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"email": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"email"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/users/reset-password": {
+			"post": {
+				"operationId": "ResetPassword",
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "token",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"newPassword": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"newPassword"
 								],
 								"type": "object"
 							}
