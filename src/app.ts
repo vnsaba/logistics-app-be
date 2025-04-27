@@ -14,6 +14,7 @@ app.use("/docs", swaggerUi.serve, async (_req: ExRequest, res: ExResponse) => {
   );
 });
 
+// Middleware to proccess incoming requests
 // Use body parser to read sent json payloads
 app.use(
   urlencoded({
@@ -23,5 +24,4 @@ app.use(
 app.use(json());
 
 // Register routes
-
 RegisterRoutes(app);
