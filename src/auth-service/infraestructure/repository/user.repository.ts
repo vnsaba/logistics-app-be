@@ -30,7 +30,6 @@ export class UserRepository implements IUserRepository {
     return user;
   }
 
-
   async updatePassword(email: string, newPassword: string): Promise<void> {
     await prisma.user.update({
       where: { email },

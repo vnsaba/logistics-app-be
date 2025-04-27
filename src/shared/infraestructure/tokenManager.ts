@@ -1,4 +1,4 @@
-import { TokenManagerInterface } from "../domain/tokenManager.interface";
+import { TokenManagerInterface } from "../domain/interfaces/tokenManager.interface";
 
 const jwt = require('jsonwebtoken');
 

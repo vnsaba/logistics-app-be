@@ -1,7 +1,7 @@
 import { IUserRepository } from '../domain/interfaces/user.interface';
 import { User } from '../domain/entity/user';
-import { PasswordService } from '../domain/service/password.service';
-import { EmailSenderInterface } from 'src/shared/domain/emailSender.interface';
+import { PasswordService } from '../../shared/infraestructure/bcryptHasher';
+import { EmailSenderInterface } from 'src/shared/domain/interfaces/emailSender.interface';
 import { generateVerificationCode } from '../../../lib/verification';
 
 export class UserService {

@@ -1,4 +1,4 @@
-import { EmailSenderInterface } from "../domain/emailSender.interface";
+import { EmailSenderInterface } from "../domain/interfaces/emailSender.interface";
 import nodemailer, { SendMailOptions } from 'nodemailer';
 import path from 'path';
 import hbs, { NodemailerExpressHandlebarsOptions } from 'nodemailer-express-handlebars';
@@ -28,17 +28,6 @@ transporter.use(
 );
 
 export class NodemailerEmailSender implements EmailSenderInterface {
-
-
-    // async sendCodeVerification(email: string, subject: string,): Promise<void> {
-    //     await this.sendEmail({ to: email, subject: subject, template: '', context: { text } });
-    // }
-
-
-    // async sendResetPasswordLink(email: string, token: string): Promise<void> {
-    //     const resetLink = ` http://localhost:${process.env.PORT}/users/reset-password?token=${token}`;
-    //     await this.sendEmail({ to: email, subject: 'Reset Password', template: 'resetPasswordEmail', context: { resetLink } });
-    // }
 
     async sendEmail({ to, subject, template, context }: {
         to: string;
