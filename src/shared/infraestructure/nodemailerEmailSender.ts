@@ -30,24 +30,28 @@ transporter.use(
 export class NodemailerEmailSender implements EmailSenderInterface {
 
 
-    async sendWelcomEmail(email: string, text: string): Promise<void> {
-        await this.sendEmail({ to: email, subject: '', template: '', context: { text } });
-    }
+    // async sendCodeVerification(email: string, subject: string,): Promise<void> {
+    //     await this.sendEmail({ to: email, subject: subject, template: '', context: { text } });
+    // }
 
-    async sendResetPasswordLink(email: string, token: string): Promise<void> {
-        const resetLink = ` http://localhost:${process.env.PORT}/users/reset-password?token=${token}`;
-        console.log('Reset link:', resetLink); // Log the reset link for debugging
-        await this.sendEmail({ to: email, subject: 'Reset Password', template: 'resetPasswordEmail', context: { resetLink } });
-    }
 
-    private async sendEmail({ to, subject, template, context }: {
+    // async sendResetPasswordLink(email: string, token: string): Promise<void> {
+    //     const resetLink = ` http://localhost:${process.env.PORT}/users/reset-password?token=${token}`;
+    //     await this.sendEmail({ to: email, subject: 'Reset Password', template: 'resetPasswordEmail', context: { resetLink } });
+    // }
+
+    async sendEmail({ to, subject, template, context }: {
         to: string;
         subject: string;
         template: string;
         context: Record<string, any>;
     }): Promise<void> {
-        console.log('Sending email to:', to); // Log the recipient email for debugging
-        console.log('Email subject:', subject); // Log the email subject for debugging
+        if (!EMAIL_USER || !EMAIL_PASSWORD) {
+            throw new Error('Email configuration is missing.');
+        }
+        if (!to || !subject || !template) {
+            throw new Error('Missing required parameters: to, subject, template.');
+        }
         try {
             const mailOptions: SendMailOptions & { template: string; context: Record<string, any> } = {
                 from: EMAIL_USER,

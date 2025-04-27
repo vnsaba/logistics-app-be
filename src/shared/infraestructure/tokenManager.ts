@@ -1,38 +1,40 @@
 import { TokenManagerInterface } from "../domain/tokenManager.interface";
-import { UserRepository } from '../../user-service/infraestructure/Repository/user.repository';
 
 const jwt = require('jsonwebtoken');
 
 export class TokenManager implements TokenManagerInterface {
-    private userRepository: UserRepository; // Repositorio de usuarios
 
-    constructor(userRepository: UserRepository) {
-        this.userRepository = userRepository; // Inicializa el repositorio de usuarios
-    }
-
-    async generateToken(email: string): Promise<string> { // Genera un token para el usuario
+    async generateToken(payload: { id: string; roleId: string, email: string }, expiresIn: string = "1h"): Promise<string> { // Genera un token para el usuario
         try {
-            const user = await this.userRepository.getByEmail(email);
-            if (!user) {
-                throw new Error('User not found');
-            }
-    
-            const token = jwt.sign({ id: user.id, roleId: user.roleId, email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
-            console.log('Token generated:', token); // Log del token generado
-            return token;
-        }catch (error) {
+            return jwt.sign(payload, process.env.JWT_SECRET, { expiresIn }); // Genera un token con una expiración de 1 hora
+        } catch (error) {
             console.error('Error generating token:', error);
-            throw new Error('Token generation failed');
+            throw new Error('Error generating token');
         }
     }
 
-    verifyToken(token: string): string | null { // Verifica el token y devuelve el email asociado
+    verifyToken(token: string): { id: string; roleId: string; email: string } { // Verifica el token y devuelve el email asociado
         try {
-            const payload  = jwt.verify(token, process.env.JWT_SECRET) as { id: string, roleId: string, email: string };
-            return payload.email; 
+            return jwt.verify(token, process.env.JWT_SECRET) as { id: string, roleId: string, email: string };
+
         } catch (error) {
             console.error('Invalid or expired token:', error);
-            return null
+            throw new Error('Invalid or expired token'); // Lanza un error si el token es inválido o ha expirado}
+
+        }
+    }
+
+    isTokenExpired(token?: string | null): boolean {
+        try {
+            const decoded = jwt.decode(token) as { exp: number };
+            if (!decoded || !decoded.exp) {
+                throw new Error("Invalid token: missing expiration");
+            }
+            const now = Math.floor(Date.now() / 1000); // Current time in seconds
+            return now > decoded.exp; // Returns true if the token has expired
+        } catch (error) {
+            console.error("Error verifying token expiration:", error);
+            throw new Error("Error verifying token expiration");
         }
     }
 

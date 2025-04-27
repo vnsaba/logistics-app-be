@@ -1,4 +1,10 @@
 export interface EmailSenderInterface {
-    sendWelcomEmail(email: string, text: string): Promise<void>;
-    sendResetPasswordLink(email:string, token:string): Promise<void>;
+    sendEmail({ to, subject, template, context }: {
+        to: string;
+        subject: string;
+        template: string;
+        context: Record<string, any>;
+    }
+    ): Promise<void>;
 }
+

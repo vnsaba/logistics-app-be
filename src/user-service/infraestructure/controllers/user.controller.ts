@@ -1,11 +1,12 @@
 import { Route, Controller, Post, Body, SuccessResponse, Query } from 'tsoa';
 import { UserService } from '../../application/user.service';
 import { UserRepository } from '../Repository/user.repository';
-import { User } from '../../domain/user';
+import { User } from '../../domain/entity/user';
 import { EmailResetPasswordService } from '../../application/requestPassword.service';
 import { TokenManager } from '../../../shared/infraestructure/tokenManager';
 import { NodemailerEmailSender } from '../../../shared/infraestructure/nodemailerEmailSender';
 import { ResetPasswordService } from '../../application/resetPassword.service';
+import { PasswordService } from '../../domain/service/password.service';
 
 @Route('users')
 export class UserController extends Controller {
@@ -17,8 +18,9 @@ export class UserController extends Controller {
     super();
     const userRepository = new UserRepository();
     const emailSender = new NodemailerEmailSender();
-    const token = new TokenManager(userRepository)
-    this.userService = new UserService(userRepository);
+    const token = new TokenManager()
+    const passwordService = new PasswordService()
+    this.userService = new UserService(userRepository, passwordService, emailSender);
     this.requestPasswordService = new EmailResetPasswordService(userRepository, emailSender, token);
     this.resetPasswordService = new ResetPasswordService(userRepository, token);
   }
