@@ -25,7 +25,12 @@
 						"type": "string"
 					},
 					"status": {
-						"type": "string"
+						"type": "string",
+						"enum": [
+							"ACTIVE",
+							"INACTIVE",
+							"PENDING"
+						]
 					},
 					"created_at": {
 						"type": "string",
@@ -43,6 +48,15 @@
 						"type": "string",
 						"format": "date-time",
 						"nullable": true
+					},
+					"verificationCode": {
+						"type": "string",
+						"nullable": true
+					},
+					"verificationCodeExpires": {
+						"type": "string",
+						"format": "date-time",
+						"nullable": true
 					}
 				},
 				"required": [
@@ -54,7 +68,9 @@
 					"created_at",
 					"updated_at",
 					"resetPasswordToken",
-					"expiresTokenPasswordAt"
+					"expiresTokenPasswordAt",
+					"verificationCode",
+					"verificationCodeExpires"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -97,9 +113,6 @@
 									"roleId": {
 										"type": "string"
 									},
-									"status": {
-										"type": "string"
-									},
 									"current_password": {
 										"type": "string"
 									},
@@ -111,7 +124,6 @@
 									}
 								},
 								"required": [
-									"status",
 									"current_password",
 									"email",
 									"fullname"

@@ -32,17 +32,15 @@ export class UserController extends Controller {
       fullname: string;
       email: string;
       current_password: string;
-      status: string;
       roleId?: string;
     }
   ): Promise<User> {
     this.setStatus(201); 
-    const { fullname, email, current_password, status, roleId } = requestBody;
+    const { fullname, email, current_password, roleId } = requestBody;
     return await this.userService.createUser(
       fullname,
       email,
       current_password,
-      status,
       roleId
     );
   }

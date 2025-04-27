@@ -4,7 +4,7 @@
 import type { TsoaRoute } from '@tsoa/runtime';
 import {  fetchMiddlewares, ExpressTemplateService } from '@tsoa/runtime';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { UserController } from './../src/user-service/infraestructure/controllers/user.controller';
+import { UserController } from './../src/auth-service/infraestructure/controllers/user.controller';
 import type { Request as ExRequest, Response as ExResponse, RequestHandler, Router } from 'express';
 
 
@@ -20,11 +20,13 @@ const models: TsoaRoute.Models = {
             "email": {"dataType":"string","required":true},
             "current_password": {"dataType":"string","required":true},
             "roleId": {"dataType":"string","required":true},
-            "status": {"dataType":"string","required":true},
+            "status": {"dataType":"union","subSchemas":[{"dataType":"enum","enums":["ACTIVE"]},{"dataType":"enum","enums":["INACTIVE"]},{"dataType":"enum","enums":["PENDING"]}],"required":true},
             "created_at": {"dataType":"datetime","required":true},
             "updated_at": {"dataType":"datetime","required":true},
             "resetPasswordToken": {"dataType":"union","subSchemas":[{"dataType":"string"},{"dataType":"enum","enums":[null]}],"required":true},
             "expiresTokenPasswordAt": {"dataType":"union","subSchemas":[{"dataType":"datetime"},{"dataType":"enum","enums":[null]}],"required":true},
+            "verificationCode": {"dataType":"union","subSchemas":[{"dataType":"string"},{"dataType":"enum","enums":[null]}],"required":true},
+            "verificationCodeExpires": {"dataType":"union","subSchemas":[{"dataType":"datetime"},{"dataType":"enum","enums":[null]}],"required":true},
         },
         "additionalProperties": false,
     },
@@ -47,7 +49,7 @@ export function RegisterRoutes(app: Router) {
 
     
         const argsUserController_createUser: Record<string, TsoaRoute.ParameterSchema> = {
-                requestBody: {"in":"body","name":"requestBody","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"roleId":{"dataType":"string"},"status":{"dataType":"string","required":true},"current_password":{"dataType":"string","required":true},"email":{"dataType":"string","required":true},"fullname":{"dataType":"string","required":true}}},
+                requestBody: {"in":"body","name":"requestBody","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"roleId":{"dataType":"string"},"current_password":{"dataType":"string","required":true},"email":{"dataType":"string","required":true},"fullname":{"dataType":"string","required":true}}},
         };
         app.post('/users',
             ...(fetchMiddlewares<RequestHandler>(UserController)),

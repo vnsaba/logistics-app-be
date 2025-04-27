@@ -1,41 +1,39 @@
-import { IUserRepository } from '../domain/interfaces/user.interface';
-import { User } from '../domain/entity/user';
-import { PasswordService } from '../../shared/infraestructure/bcryptHasher';
-import { EmailSenderInterface } from 'src/shared/domain/interfaces/emailSender.interface';
-import { generateVerificationCode } from '../../../lib/verification';
+import { IUserRepository } from "../domain/interfaces/user.interface";
+import { User } from "../domain/entity/user";
+import { PasswordService } from "../../shared/infraestructure/bcryptHasher";
+import { EmailSenderInterface } from "src/shared/domain/interfaces/emailSender.interface";
+import { generateVerificationCode } from "../../../lib/verification";
 
 export class UserService {
   private userRepository: IUserRepository;
   private passwordService: PasswordService;
-  private emailSender: EmailSenderInterface
+  private emailSender: EmailSenderInterface;
 
-  constructor(userRepository: IUserRepository, passwordService: PasswordService, emailSender: EmailSenderInterface) {
+  constructor(
+    userRepository: IUserRepository,
+    passwordService: PasswordService,
+    emailSender: EmailSenderInterface
+  ) {
     this.userRepository = userRepository;
-    this.passwordService = passwordService
-    this.emailSender = emailSender
+    this.passwordService = passwordService;
+    this.emailSender = emailSender;
   }
 
   async createUser(
     fullname: string,
     email: string,
     current_password: string,
-    status: string,
     roleId?: string
   ): Promise<User> {
-    const user = this.userRepository.getByEmail(email);
-    if (!user) {
-      throw new Error('Ya existe un usuario con ese email');
+    const existingUser = await this.userRepository.getByEmail(email);
+    if (existingUser) {
+      throw new Error("Ya existe un usuario con ese email");
     }
-    const passwordHash = await this.passwordService.hashPassword(current_password);
-
-    const newUser = new User(
-      fullname,
-      email,
-      passwordHash,
-      status,
-      roleId
+    const passwordHash = await this.passwordService.hashPassword(
+      current_password
     );
-    
+
+    const newUser = new User(fullname, email, passwordHash, roleId);
 
     const verificationCode = generateVerificationCode();
     await this.emailSender.sendEmail({
@@ -47,4 +45,3 @@ export class UserService {
     return await this.userRepository.createUser(newUser);
   }
 }
-

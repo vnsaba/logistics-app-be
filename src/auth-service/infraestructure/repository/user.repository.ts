@@ -18,6 +18,8 @@ export class UserRepository implements IUserRepository {
         updated_at: new Date(),
         resetPasswordToken: null,
         expiresTokenPasswordAt: null,
+        verificationCode: null,
+        verificationCodeExpires: null,
       },
     })
   }
