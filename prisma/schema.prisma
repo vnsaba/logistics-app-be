@@ -42,8 +42,8 @@ model User {
   created_at       DateTime
   updated_at       DateTime
   Login            Login[] 
-  PasswordReset    PasswordReset[]
-
+  resetPasswordToken       String?
+  expiresTokenPasswordAt    DateTime?
   @@map("users")
 }
 
@@ -58,13 +58,13 @@ model Login {
   @@map("logins")
 }
 
-model PasswordReset {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId     String   @db.ObjectId
-  user       User     @relation(fields: [userId], references: [id])
-  resetToken String // UUID
-  expiresAt  DateTime
-  isUsed     Boolean  @default(false)
+// model PasswordReset {
+//   id         String   @id @default(auto()) @map("_id") @db.ObjectId
+//   userId     String   @db.ObjectId
+//   user       User     @relation(fields: [userId], references: [id])
+//   resetToken String // UUID
+//   expiresAt  DateTime
+//   isUsed     Boolean  @default(false)
 
-  @@map("password_resets")
-}
+//   @@map("password_resets")
+// }

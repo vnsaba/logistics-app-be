@@ -1,4 +1,5 @@
 export class User {
+  id?: string;
   fullname: string;
   email: string;
   current_password: string;
@@ -6,13 +7,16 @@ export class User {
   status: string;
   created_at: Date;
   updated_at: Date;
+  resetPasswordToken: string | null;
+  expiresTokenPasswordAt: Date | null;
 
   constructor(
     fullname: string,
     email: string,
     current_password: string,
     status: string,
-    roleId: string = 'userRoleId'
+    roleId: string = 'userRoleId',
+    id?: string
   ) {
     if (email) {
       email = email.toLowerCase().trim();
@@ -33,7 +37,6 @@ export class User {
     if (current_password.length < 6) {
       throw new Error('La contraseña debe tener al menos 6 caracteres.');
     }
-
     this.fullname = fullname;
     this.email = email;
     this.current_password = current_password;
@@ -41,5 +44,11 @@ export class User {
     this.status = status;
     this.created_at = new Date();
     this.updated_at = new Date();
+    this.resetPasswordToken = null;
+    this.expiresTokenPasswordAt = null;
+    if(id){
+      this.id = id;
+    }
   }
+
 }
