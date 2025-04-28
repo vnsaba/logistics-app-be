@@ -25,7 +25,12 @@
 						"type": "string"
 					},
 					"status": {
-						"type": "string"
+						"type": "string",
+						"enum": [
+							"ACTIVE",
+							"INACTIVE",
+							"PENDING"
+						]
 					},
 					"created_at": {
 						"type": "string",
@@ -43,6 +48,15 @@
 						"type": "string",
 						"format": "date-time",
 						"nullable": true
+					},
+					"verificationCode": {
+						"type": "string",
+						"nullable": true
+					},
+					"verificationCodeExpires": {
+						"type": "string",
+						"format": "date-time",
+						"nullable": true
 					}
 				},
 				"required": [
@@ -54,7 +68,21 @@
 					"created_at",
 					"updated_at",
 					"resetPasswordToken",
-					"expiresTokenPasswordAt"
+					"expiresTokenPasswordAt",
+					"verificationCode",
+					"verificationCodeExpires"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"VerificationResponse": {
+				"properties": {
+					"message": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"message"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -97,9 +125,6 @@
 									"roleId": {
 										"type": "string"
 									},
-									"status": {
-										"type": "string"
-									},
 									"current_password": {
 										"type": "string"
 									},
@@ -111,7 +136,6 @@
 									}
 								},
 								"required": [
-									"status",
 									"current_password",
 									"email",
 									"fullname"
@@ -184,6 +208,47 @@
 								},
 								"required": [
 									"newPassword"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/users/verify-email": {
+			"post": {
+				"operationId": "VerifyEmail",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/VerificationResponse"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"code": {
+										"type": "string"
+									},
+									"email": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"code",
+									"email"
 								],
 								"type": "object"
 							}

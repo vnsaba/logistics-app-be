@@ -18,6 +18,8 @@ export class UserRepository implements IUserRepository {
         updated_at: new Date(),
         resetPasswordToken: null,
         expiresTokenPasswordAt: null,
+        verificationCode: userData.verificationCode,
+        verificationCodeExpires: userData.verificationCodeExpires,
       },
     })
   }
@@ -30,6 +32,23 @@ export class UserRepository implements IUserRepository {
     return user;
   }
 
+  public async updateUser(user: User): Promise<User> {
+    return await prisma.user.update({
+      where: { email: user.email },
+      data: {
+        fullname: user.fullname,
+        current_password: user.current_password,
+        roleId: user.roleId,
+        status: user.status,
+        updated_at: new Date(),
+      }
+    })
+  }
+
+  public async deleteUser(id: string): Promise<void> {
+    await prisma.user.delete({ where: { id } })
+  }
+  
   async updatePassword(email: string, newPassword: string): Promise<void> {
     await prisma.user.update({
       where: { email },

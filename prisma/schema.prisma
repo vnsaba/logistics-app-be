@@ -1,4 +1,3 @@
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -32,13 +31,19 @@ model User {
   current_password        String
   roleId                  String    @db.ObjectId
   role                    Role      @relation(fields: [roleId], references: [id])
-  status                  String
+  status                  Status    @default(PENDING)
   created_at              DateTime
   updated_at              DateTime
-  verificationCode        String
-  verificationCodeExpires DateTime
+  verificationCode        String?
+  verificationCodeExpires DateTime?
   resetPasswordToken      String?
   expiresTokenPasswordAt  DateTime?
 
   @@map("users")
+}
+
+enum Status {
+  ACTIVE
+  INACTIVE
+  PENDING
 }
