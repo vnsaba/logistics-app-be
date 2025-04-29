@@ -1,23 +1,26 @@
 
 export class User {
   id?: string;
+  created_at: Date;
+  updated_at: Date;
   fullname: string;
+  phone: string;
   email: string;
   current_password: string;
   roleId: string;
   status: 'ACTIVE' | 'INACTIVE' | 'PENDING'; 
-  created_at: Date;
-  updated_at: Date;
   resetPasswordToken: string | null;
-  expiresTokenPasswordAt: Date | null;
   verificationCode: string | null;
-  verificationCodeExpires: Date | null;
-
+  verificationCodeExpires: Date | null; 
+  twoFactorCode: string | null;
+  twoFactorExpires: Date | null; 
+  
   constructor(
     fullname: string,
     email: string,
     current_password: string,
     roleId: string = "userRoleId",
+    phone: string,
     id?: string
   ) {
     if (email) {
@@ -44,14 +47,17 @@ export class User {
     this.current_password = current_password;
     this.roleId = roleId;
     this.status = "PENDING"; 
+    this.phone = phone;
     this.created_at = new Date();
     this.updated_at = new Date();
     this.resetPasswordToken = null;
-    this.expiresTokenPasswordAt = null;
     this.verificationCode = null;
     this.verificationCodeExpires = null;
+    this.twoFactorCode = null
+    this.twoFactorExpires = null;
     if (id) {
       this.id = id;
     }
   }
+
 }

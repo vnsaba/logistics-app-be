@@ -7,6 +7,9 @@ import { TokenManager } from "../../../shared/infraestructure/tokenManager";
 import { NodemailerEmailSender } from "../../../shared/infraestructure/nodemailerEmailSender";
 import { ResetPasswordService } from "../../application/resetPassword.service";
 import { PasswordService } from "../../../shared/infraestructure/bcryptHasher";
+import { signInService } from '../../application/signInUser.service';
+import { TwilioService } from "../../../shared/infraestructure/twilioService";
+import { VerifyTwoFactorService } from '../../application/verifyTwoFactor.service';
 
 interface VerificationResponse {
   message: string;
@@ -17,13 +20,15 @@ export class UserController extends Controller {
   private readonly userService: UserService;
   private readonly requestPasswordService: EmailResetPasswordService;
   private readonly resetPasswordService: ResetPasswordService;
-
+  private readonly signInService: signInService
+  private readonly verifyTwoFactorService: VerifyTwoFactorService
   constructor() {
     super();
     const userRepository = new UserRepository();
     const emailSender = new NodemailerEmailSender();
     const token = new TokenManager();
     const passwordService = new PasswordService();
+    const SmsService = new TwilioService()
     this.userService = new UserService(
       userRepository,
       passwordService,
@@ -35,6 +40,8 @@ export class UserController extends Controller {
       token
     );
     this.resetPasswordService = new ResetPasswordService(userRepository, token);
+    this.signInService = new signInService(userRepository, SmsService, passwordService)
+    this.verifyTwoFactorService = new VerifyTwoFactorService(userRepository, token)
   }
 
   @SuccessResponse("201", "Created")
@@ -46,15 +53,17 @@ export class UserController extends Controller {
       email: string;
       current_password: string;
       roleId?: string;
+      phone: string
     }
   ): Promise<User> {
     this.setStatus(201);
-    const { fullname, email, current_password, roleId } = requestBody;
+    const { fullname, email, current_password, roleId, phone } = requestBody;
     return await this.userService.createUser(
       fullname,
       email,
       current_password,
-      roleId
+      phone,
+      roleId,
     );
   }
 
@@ -62,14 +71,14 @@ export class UserController extends Controller {
   @Post("forgot-password")
   public async forgotPassword(
     @Body() requestBody: { email: string }
-  ): Promise<void> {
+  ): Promise<VerificationResponse> {
     try {
       this.setStatus(200);
       const { email } = requestBody;
-      return await this.requestPasswordService.sendRequestEmail(email);
+      await this.requestPasswordService.sendRequestEmail(email);
+      return {message: "Password reset email sent"}
     } catch (error) {
-      console.error("Error real en forgotPassword:", error);
-      throw new Error(`el error es ${error}`);
+      throw new Error(`${error}`);
     }
   }
   @SuccessResponse("200", "OK")
@@ -77,14 +86,14 @@ export class UserController extends Controller {
   public async resetPassword(
     @Body() requestBody: { newPassword: string },
     @Query("token") token: string
-  ): Promise<void> {
+  ): Promise<VerificationResponse> {
     try {
       this.setStatus(200);
       const { newPassword } = requestBody;
-      return await this.resetPasswordService.resetPassword(token, newPassword);
+      await this.resetPasswordService.resetPassword(token, newPassword);
+      return {message: "Password reset successfully"}
     } catch (error) {
-      console.error("Error real en resetPassword:", error);
-      throw new Error(`el error es ${error}`);
+      throw new Error(`${error}`);
     }
   }
 
@@ -96,6 +105,25 @@ export class UserController extends Controller {
     this.setStatus(200);
     const { email, code } = requestBody;
     await this.userService.verifyEmail(email, code);
-    return { message: "Código verificado correctamente. Tu cuenta ha sido activada." }; 
+    return { message: "Code verified successfully. Your account has been activated." };
   }
+
+  @SuccessResponse("200", "OK")
+  @Post("signIn")
+  public async signIn(@Body() requestBody: { email: string, current_password: string }): Promise<VerificationResponse> {
+    this.setStatus(200);
+    const { email, current_password } = requestBody;
+    await this.signInService.singIn(email, current_password)
+    return { message: "Verification code sent via SMS" }
+  }
+
+  @SuccessResponse("200", "OK")
+  @Post("verify-code")
+  public async verifyCodeSms(@Body() requestBody: { id: string, code: string }): Promise<{ token: string }> {
+    this.setStatus(200);
+    const { id, code } = requestBody;
+    const { token } = await this.verifyTwoFactorService.execute(id, code);
+    return { token };
+  }
+
 }

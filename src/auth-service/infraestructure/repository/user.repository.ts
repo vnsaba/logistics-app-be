@@ -4,7 +4,10 @@ const prisma = new PrismaClient();
 import { IUserRepository } from '../../domain/interfaces/user.interface';
 
 export class UserRepository implements IUserRepository {
-
+  async findById(id: string): Promise<User | null> {
+    const user = await prisma.user.findUnique({ where: { id } });
+    return user;
+  }
 
   public async createUser(userData: User): Promise<User> {
     return await prisma.user.create({
@@ -12,12 +15,14 @@ export class UserRepository implements IUserRepository {
         fullname: userData.fullname,
         email: userData.email,
         current_password: userData.current_password,
+        phone: userData.phone,
         roleId: userData.roleId,
         status: userData.status,
         created_at: new Date(),
         updated_at: new Date(),
         resetPasswordToken: null,
-        expiresTokenPasswordAt: null,
+        twoFactorCode: null,
+        twoFactorExpires: null,
         verificationCode: userData.verificationCode,
         verificationCodeExpires: userData.verificationCodeExpires,
       },
@@ -48,7 +53,7 @@ export class UserRepository implements IUserRepository {
   public async deleteUser(id: string): Promise<void> {
     await prisma.user.delete({ where: { id } })
   }
-  
+
   async updatePassword(email: string, newPassword: string): Promise<void> {
     await prisma.user.update({
       where: { email },
@@ -59,16 +64,43 @@ export class UserRepository implements IUserRepository {
   }
 
   async clearResetToken(email: string): Promise<void> {
-    await prisma.user.update({ where: { email }, data: { resetPasswordToken: null, expiresTokenPasswordAt: null } })
+    await prisma.user.update({ where: { email }, data: { resetPasswordToken: null } })
   }
 
-  async updateResetPasswordToken(email: string, token: string, expiresAt: Date): Promise<void> {
+  async updateResetPasswordToken(email: string, token: string): Promise<void> {
     await prisma.user.update({
       where: { email },
       data: {
         resetPasswordToken: token,
-        expiresTokenPasswordAt: expiresAt,
       }
     })
+  }
+
+  async updateTwoFactor(id: string, code: string, expires: Date): Promise<void> {
+    await prisma.user.update({
+      where: { id },
+      data: {
+        twoFactorCode: code,
+        twoFactorExpires: expires
+      }
+    })
+  }
+
+  async clearTwoFactor(id: string): Promise<void> {
+    await prisma.user.update({
+      where: { id },
+      data: {
+        twoFactorCode: null,
+        twoFactorExpires: null
+      }
+    })
+  }
+
+  public async getRoleNameByUserId(roleId: string): Promise<string | null> {
+    const role = await prisma.role.findUnique({
+      where: { id: roleId }
+    });
+
+    return role?.name || null;
   }
 }
