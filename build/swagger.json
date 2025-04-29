@@ -12,7 +12,18 @@
 					"id": {
 						"type": "string"
 					},
+					"created_at": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updated_at": {
+						"type": "string",
+						"format": "date-time"
+					},
 					"fullname": {
+						"type": "string"
+					},
+					"phone": {
 						"type": "string"
 					},
 					"email": {
@@ -32,21 +43,8 @@
 							"PENDING"
 						]
 					},
-					"created_at": {
-						"type": "string",
-						"format": "date-time"
-					},
-					"updated_at": {
-						"type": "string",
-						"format": "date-time"
-					},
 					"resetPasswordToken": {
 						"type": "string",
-						"nullable": true
-					},
-					"expiresTokenPasswordAt": {
-						"type": "string",
-						"format": "date-time",
 						"nullable": true
 					},
 					"verificationCode": {
@@ -57,20 +55,31 @@
 						"type": "string",
 						"format": "date-time",
 						"nullable": true
+					},
+					"twoFactorCode": {
+						"type": "string",
+						"nullable": true
+					},
+					"twoFactorExpires": {
+						"type": "string",
+						"format": "date-time",
+						"nullable": true
 					}
 				},
 				"required": [
+					"created_at",
+					"updated_at",
 					"fullname",
+					"phone",
 					"email",
 					"current_password",
 					"roleId",
 					"status",
-					"created_at",
-					"updated_at",
 					"resetPasswordToken",
-					"expiresTokenPasswordAt",
 					"verificationCode",
-					"verificationCodeExpires"
+					"verificationCodeExpires",
+					"twoFactorCode",
+					"twoFactorExpires"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -122,6 +131,9 @@
 						"application/json": {
 							"schema": {
 								"properties": {
+									"phone": {
+										"type": "string"
+									},
 									"roleId": {
 										"type": "string"
 									},
@@ -136,6 +148,7 @@
 									}
 								},
 								"required": [
+									"phone",
 									"current_password",
 									"email",
 									"fullname"
@@ -249,6 +262,96 @@
 								"required": [
 									"code",
 									"email"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/users/signIn": {
+			"post": {
+				"operationId": "SignIn",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/VerificationResponse"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"current_password": {
+										"type": "string"
+									},
+									"email": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"current_password",
+									"email"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/users/verify-code": {
+			"post": {
+				"operationId": "VerifyCodeSms",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"token": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"token"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"code": {
+										"type": "string"
+									},
+									"id": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"code",
+									"id"
 								],
 								"type": "object"
 							}

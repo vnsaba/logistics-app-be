@@ -1,7 +1,7 @@
 import { IUserRepository } from "../domain/interfaces/user.interface";
 import { User } from "../domain/entity/user";
 import { PasswordService } from "../../shared/infraestructure/bcryptHasher";
-import { EmailSenderInterface } from "src/shared/domain/interfaces/emailSender.interface";
+import { EmailSenderInterface } from "../../shared/domain/interfaces/emailSender.interface";
 import { generateVerificationCode } from "../../../lib/verification";
 
 export class UserService {
@@ -23,6 +23,7 @@ export class UserService {
     fullname: string,
     email: string,
     current_password: string,
+    phone: string, 
     roleId?: string
   ): Promise<User> {
     const existingUser = await this.userRepository.getByEmail(email);
@@ -33,7 +34,7 @@ export class UserService {
       current_password
     );
 
-    const newUser = new User(fullname, email, passwordHash, roleId);
+    const newUser = new User(fullname, email, passwordHash, roleId, phone);
     newUser.status = "PENDING";
     const verificationCode = generateVerificationCode();
     const verificationCodeExpires = new Date();

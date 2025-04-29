@@ -15,10 +15,6 @@ export class ResetPasswordService {
         if (!payload) throw new Error('Invalid token');
         const user = await this.userRepository.getByEmail(payload.email);
 
-        if (this.tokenManager.isTokenExpired(token)) {
-            throw new Error('Token expired');
-        }
-
         if (!user) {
             throw new Error('User not found');
         }
