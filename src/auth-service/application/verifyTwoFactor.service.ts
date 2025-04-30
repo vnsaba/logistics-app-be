@@ -1,19 +1,25 @@
 import { TokenManagerInterface } from "../../shared/domain/interfaces/tokenManager.interface";
-import { IUserRepository } from "../domain/interfaces/user.interface";
+import { IUserRepository } from "../../user-service/domain/interfaces/user.interface";
+import { IRoleRepository } from "../../role-service/domain/interfaces/user.interface";
 
 export class VerifyTwoFactorService {
     private userRepository: IUserRepository;
+    private roleRepository: IRoleRepository;
     private tokenGenerator: TokenManagerInterface;
 
-    constructor(userRepository: IUserRepository, tokenGenerator: TokenManagerInterface
+    constructor(
+        userRepository: IUserRepository, 
+        roleRepository: IRoleRepository, 
+        tokenGenerator: TokenManagerInterface
     ) {
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
         this.tokenGenerator = tokenGenerator;
     }
 
-    async execute(userId: string, code: string): Promise<{ token: string }> {
+    async verifyTwoFactor(userId: string, code: string): Promise<{ token: string }> {
         const user = await this.userRepository.findById(userId);
-
+        
         if (!user?.twoFactorCode || !user?.twoFactorExpires) {
             throw new Error("Invalid verification process");
         }
@@ -24,18 +30,17 @@ export class VerifyTwoFactorService {
         }
 
         await this.userRepository.clearTwoFactor(user.id!);
-        const rol =  await this.userRepository.getRoleNameByUserId(user.roleId)
+        const role =  await this.roleRepository.findById(user.roleId)
 
-        if (!rol) {
+        if (!role) {
             throw new Error("Role not found");
         }
 
         const token = await this.tokenGenerator.generateToken({
             id: user.id!,
-            roleId: user.roleId,
-            rolName: rol,
+            role,
             email: user.email
-        }, '1h');
+        }, {  expiresIn: "1h" });
 
         return { token };
     }

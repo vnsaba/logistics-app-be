@@ -1,4 +1,4 @@
-import { IUserRepository } from '../domain/interfaces/user.interface';
+import { IUserRepository } from '../../user-service/domain/interfaces/user.interface';
 import { EmailSenderInterface } from '../../shared/domain/interfaces/emailSender.interface';
 import { TokenManagerInterface } from '../../shared/domain/interfaces/tokenManager.interface';
 
@@ -7,7 +7,11 @@ export class EmailResetPasswordService {
     private emailSender: EmailSenderInterface;
     private token: TokenManagerInterface; 
 
-    constructor(userRepository: IUserRepository, emailSender: EmailSenderInterface, token: TokenManagerInterface) {
+    constructor(
+        userRepository: IUserRepository, 
+        emailSender: EmailSenderInterface, 
+        token: TokenManagerInterface
+    ) {
         this.userRepository = userRepository;
         this.emailSender = emailSender;
         this.token = token; 
@@ -18,18 +22,21 @@ export class EmailResetPasswordService {
         if (!user) {
             throw new Error('User not found');
         }
-        const rol =  await this.userRepository.getRoleNameByUserId(user.roleId)
 
-        if (!rol) {
-            throw new Error("Role not found");
-        }
+        const token = this.token.generateToken(
+            {
+                id: user.id,
+                email: user?.email,
+            },
+            { expiresIn: '1h' }
+        ); 
 
-        const token = await this.token.generateToken({ id: user.id, roleId: user?.roleId, rolName:rol,email: user?.email }, "1h"); 
         if (!token) {
             throw new Error('Error generating token');
         }
+        
         await this.userRepository.updateResetPasswordToken(user.email, token);
-        const resetLink = ` http://localhost:${process.env.PORT}/users/reset-password?token=${token}`;
+        const resetLink = ` http://localhost:${process.env.PORT}/auth/reset-password?token=${token}`;
         await this.emailSender.sendEmail({
             to: email,
             subject: "Reset Password",
