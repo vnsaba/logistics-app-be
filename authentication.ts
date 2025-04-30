@@ -25,11 +25,11 @@ export function expressAuthentication(
         const payload =
           typeof decoded === 'string' ? null : (decoded as JwtPayload);
 
-        if (!payload || !payload.role?.name) {
+        if (!payload || !payload.role) {
           return reject(new Error('Incomplete token'));
         }
 
-        if (!scopes?.includes(payload.role.name)) {
+        if (!scopes?.includes(payload.role)) {
           return reject(new Error('You can not access this resource'));
         }
 
