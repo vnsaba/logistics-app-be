@@ -1,21 +1,21 @@
 import { TokenManagerInterface } from "../domain/interfaces/tokenManager.interface";
-
-const jwt = require('jsonwebtoken');
+import jwt, { SignOptions } from 'jsonwebtoken'
+const { JWT_SECRET } = process.env;
 
 export class TokenManager implements TokenManagerInterface {
 
-    async generateToken(payload: { id: string; roleId: string, rolName: string, email: string }, expiresIn: string = "1h"): Promise<string> {
+    generateToken(payload: Record<string, unknown>, options: SignOptions): string{
         try {
-            return jwt.sign(payload, process.env.JWT_SECRET, { expiresIn });
+            return jwt.sign(payload, JWT_SECRET!, { ...options });
         } catch (error) {
             console.error('Error generating token:', error);
             throw new Error('Error generating token');
         }
     }
 
-    verifyToken(token: string): { id: string; roleId:string;  rolName: string; email: string } {
+    verifyToken<T extends object = Record<string, unknown>>(token: string): T {
         try {
-            return jwt.verify(token, process.env.JWT_SECRET) as { id: string, roleId: string,  rolName: string;  email: string };
+            return jwt.verify(token, JWT_SECRET!) as T;
 
         } catch (error) {
             console.error('Invalid or expired token:', error);
@@ -23,5 +23,4 @@ export class TokenManager implements TokenManagerInterface {
 
         }
     }
-
 }

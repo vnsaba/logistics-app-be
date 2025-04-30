@@ -1,4 +1,4 @@
-import { IUserRepository } from '../domain/interfaces/user.interface';
+import { IUserRepository } from '../../user-service/domain/interfaces/user.interface';
 import { EmailSenderInterface } from '../../shared/domain/interfaces/emailSender.interface';
 import { TokenManagerInterface } from '../../shared/domain/interfaces/tokenManager.interface';
 
@@ -24,7 +24,16 @@ export class EmailResetPasswordService {
             throw new Error("Role not found");
         }
 
-        const token = await this.token.generateToken({ id: user.id, roleId: user?.roleId, rolName:rol,email: user?.email }, "1h"); 
+        const token = this.token.generateToken(
+            {
+                id: user.id,
+                roleId: user?.roleId,
+                rolName: rol,
+                email: user?.email,
+            },
+            { expiresIn: '1h' }
+        ); 
+
         if (!token) {
             throw new Error('Error generating token');
         }

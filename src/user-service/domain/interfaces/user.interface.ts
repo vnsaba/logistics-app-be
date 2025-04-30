@@ -1,4 +1,5 @@
 import { User } from '../entity/user';
+import { User as UserType } from '../../../../types/auth/index'
 
 export interface IUserRepository {
   findById(id:string): Promise<User | null>;
@@ -12,4 +13,5 @@ export interface IUserRepository {
   updateTwoFactor(id: string, code: string, expires: Date): Promise<void>
   clearTwoFactor(id: string): Promise<void>;
   getRoleNameByUserId(rolId: string): Promise<string | null>
+  getAllUsers(): Promise<Omit<UserType, 'current_password'>[]>
 }
