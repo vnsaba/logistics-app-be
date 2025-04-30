@@ -66,7 +66,7 @@ export class AuthController extends Controller {
   }
 
   @SuccessResponse('201', 'Created')
-  @Post()
+  @Post('register')
   public async createUser(
     @Body()
     requestBody: {
