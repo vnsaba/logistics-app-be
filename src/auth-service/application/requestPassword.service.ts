@@ -7,7 +7,11 @@ export class EmailResetPasswordService {
     private emailSender: EmailSenderInterface;
     private token: TokenManagerInterface; 
 
-    constructor(userRepository: IUserRepository, emailSender: EmailSenderInterface, token: TokenManagerInterface) {
+    constructor(
+        userRepository: IUserRepository, 
+        emailSender: EmailSenderInterface, 
+        token: TokenManagerInterface
+    ) {
         this.userRepository = userRepository;
         this.emailSender = emailSender;
         this.token = token; 
@@ -18,17 +22,10 @@ export class EmailResetPasswordService {
         if (!user) {
             throw new Error('User not found');
         }
-        const rol =  await this.userRepository.getRoleNameByUserId(user.roleId)
-
-        if (!rol) {
-            throw new Error("Role not found");
-        }
 
         const token = this.token.generateToken(
             {
                 id: user.id,
-                roleId: user?.roleId,
-                rolName: rol,
                 email: user?.email,
             },
             { expiresIn: '1h' }
@@ -37,6 +34,7 @@ export class EmailResetPasswordService {
         if (!token) {
             throw new Error('Error generating token');
         }
+        
         await this.userRepository.updateResetPasswordToken(user.email, token);
         const resetLink = ` http://localhost:${process.env.PORT}/users/reset-password?token=${token}`;
         await this.emailSender.sendEmail({

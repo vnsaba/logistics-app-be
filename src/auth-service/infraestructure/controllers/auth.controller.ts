@@ -11,6 +11,7 @@ import { TwilioService } from '../../../shared/infraestructure/twilioService';
 import { VerifyTwoFactorService } from '../../application/verifyTwoFactor.service';
 import { SignUpService } from '../../../auth-service/application/signUp.service';
 import { VerifyEmailService } from '../../../auth-service/application/verifyEmail.service';
+import { RoleRepository } from '../../../role-service/infraestructure/repository/role.repository';
 
 interface VerificationResponse {
   message: string;
@@ -29,6 +30,7 @@ export class AuthController extends Controller {
     super();
 
     const userRepository = new UserRepository();
+    const roleRepository = new RoleRepository();
     const emailSender = new NodemailerEmailSender();
     const token = new TokenManager();
     const passwordService = new PasswordService();
@@ -56,6 +58,7 @@ export class AuthController extends Controller {
 
     this.verifyTwoFactorService = new VerifyTwoFactorService(
       userRepository,
+      roleRepository,
       token
     );
 

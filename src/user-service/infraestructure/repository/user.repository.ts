@@ -104,14 +104,6 @@ export class UserRepository implements IUserRepository {
     });
   }
 
-  public async getRoleNameByUserId(roleId: string): Promise<string | null> {
-    const role = await prisma.role.findUnique({
-      where: { id: roleId },
-    });
-
-    return role?.name || null;
-  }
-
   public async getAllUsers(): Promise<Omit<UserType, 'current_password'>[]> {
     const users = await prisma.user.findMany({
       omit: {

@@ -1,13 +1,19 @@
 import { TokenManagerInterface } from "../../shared/domain/interfaces/tokenManager.interface";
 import { IUserRepository } from "../../user-service/domain/interfaces/user.interface";
+import { IRoleRepository } from "../../role-service/domain/interfaces/user.interface";
 
 export class VerifyTwoFactorService {
     private userRepository: IUserRepository;
+    private roleRepository: IRoleRepository;
     private tokenGenerator: TokenManagerInterface;
 
-    constructor(userRepository: IUserRepository, tokenGenerator: TokenManagerInterface
+    constructor(
+        userRepository: IUserRepository, 
+        roleRepository: IRoleRepository, 
+        tokenGenerator: TokenManagerInterface
     ) {
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
         this.tokenGenerator = tokenGenerator;
     }
 
@@ -24,7 +30,7 @@ export class VerifyTwoFactorService {
         }
 
         await this.userRepository.clearTwoFactor(user.id!);
-        const role =  await this.userRepository.getRoleNameByUserId(user.roleId)
+        const role =  await this.roleRepository.findById(user.roleId)
 
         if (!role) {
             throw new Error("Role not found");

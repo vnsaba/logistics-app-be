@@ -12,6 +12,5 @@ export interface IUserRepository {
   clearResetToken(email: string): Promise<void>;
   updateTwoFactor(id: string, code: string, expires: Date): Promise<void>
   clearTwoFactor(id: string): Promise<void>;
-  getRoleNameByUserId(rolId: string): Promise<string | null>
   getAllUsers(): Promise<Omit<UserType, 'current_password'>[]>
 }
