@@ -3,20 +3,25 @@ import { User } from '../../user-service/domain/entity/user';
 import { PasswordService } from '../../shared/infraestructure/bcryptHasher';
 import { EmailSenderInterface } from '../../shared/domain/interfaces/emailSender.interface';
 import { generateVerificationCode } from '../../../lib/verification';
+import { IRoleRepository } from "../../role-service/domain/interfaces/role.interface";
+
 
 export class SignUpService {
   private userRepository: IUserRepository;
   private passwordService: PasswordService;
   private emailSender: EmailSenderInterface;
+  private roleRepository: IRoleRepository;
 
   constructor(
     userRepository: IUserRepository,
     passwordService: PasswordService,
-    emailSender: EmailSenderInterface
+    emailSender: EmailSenderInterface,
+    roleRepository: IRoleRepository
   ) {
     this.userRepository = userRepository;
     this.passwordService = passwordService;
     this.emailSender = emailSender;
+    this.roleRepository = roleRepository;
   }
 
   async signUp(
@@ -24,7 +29,6 @@ export class SignUpService {
     email: string,
     current_password: string,
     phone: string,
-    roleId?: string
   ): Promise<User> {
 
     const phoneRegex = /^3\d{9}$/; // El número debe comenzar con '3' y tener exactamente 10 dígitos
@@ -40,7 +44,12 @@ export class SignUpService {
     const passwordHash =
       await this.passwordService.hashPassword(current_password);
 
-    const newUser = new User(fullname, email, passwordHash, roleId, phone);
+    const delivererRole = await this.roleRepository.findByName('REPARTIDOR');
+    if (!delivererRole) {
+      throw new Error('El rol "REPARTIDOR" no se encontró en la base de datos.');
+    }
+    const delivererRoleId = delivererRole.id;
+    const newUser = new User(fullname, email, passwordHash, delivererRoleId, phone);
     newUser.status = 'PENDING';
     const verificationCode = generateVerificationCode();
     const verificationCodeExpires = new Date();
