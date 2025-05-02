@@ -119,21 +119,19 @@ export class AuthController extends Controller {
       throw new Error(`${error}`);
     }
   }
+
   @SuccessResponse("200", "OK")
   @Post("reset-password")
   public async resetPassword(
     @Body() requestBody: { newPassword: string },
     @Query("token") token: string
   ): Promise<VerificationResponse> {
-    try {
-      this.setStatus(200);
-      const { newPassword } = requestBody;
-      await this.resetPasswordService.resetPassword(token, newPassword);
-      return { message: "Password reset successfully" };
-    } catch (error) {
-      throw new Error(`${error}`);
-    }
+    const { newPassword } = requestBody;
+    await this.resetPasswordService.resetPassword(token, newPassword);
+    this.setStatus(200);
+    return { message: newPassword };
   }
+  
 
   @SuccessResponse("200", "OK")
   @Post("verify-email")

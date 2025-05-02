@@ -38,6 +38,14 @@ export class User {
       throw new Error('El formato del email es inválido.');
     }
 
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=[\]{};':"\\|,.<>/?])[A-Za-z\d!@#$%^&*()_\-+=[\]{};':"\\|,.<>/?]{8,64}$/;
+
+    if (!passwordRegex.test(current_password)) {
+        throw new Error(
+            'Password must be 8-64 characters long, include at least one uppercase letter, one lowercase letter, one number, and one special character.'
+        );
+    }
+
     if (current_password.length < 6) {
       throw new Error('La contraseña debe tener al menos 6 caracteres.');
     }
