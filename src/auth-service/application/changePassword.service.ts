@@ -29,10 +29,14 @@ export class ChangePasswordService {
       throw new Error('La contraseña actual es incorrecta.');
     }
 
-    if (newPassword.length < 6) {
-      throw new Error('La nueva contraseña debe tener al menos 6 caracteres.');
-    }
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=[\]{};':"\\|,.<>/?])[A-Za-z\d!@#$%^&*()_\-+=[\]{};':"\\|,.<>/?]{8,64}$/;
 
+    if (!passwordRegex.test(newPassword)) {
+      throw new Error(
+        'Password must be 8-64 characters long, include at least one uppercase letter, one lowercase letter, one number, and one special character.'
+      );
+    }
+    
     const hashedPassword = await this.passwordService.hashPassword(newPassword);
     await this.userRepository.updatePassword(user.email, hashedPassword);
   }

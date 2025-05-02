@@ -30,6 +30,13 @@ export class SignUpService {
     current_password: string,
     phone: string,
   ): Promise<User> {
+
+    const phoneRegex = /^3\d{9}$/; // El número debe comenzar con '3' y tener exactamente 10 dígitos
+    if (!phoneRegex.test(phone)) {
+      throw new Error('El número de teléfono debe tener 10 dígitos y comenzar con 3.');
+    }
+    phone = `+57${phone}`
+    console.log("phone", phone)
     const existingUser = await this.userRepository.getByEmail(email);
     if (existingUser) {
       throw new Error('Ya existe un usuario con ese email');
