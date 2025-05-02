@@ -24,6 +24,7 @@ import { RoleRepository } from "../../../role-service/infraestructure/repository
 import { ChangePasswordService } from "../../application/changePassword.service";
 import { Request as ExpressRequest } from "express";
 import { authMiddleware } from "../../../middleware/auth.midlleware";
+import { AdminSignUpService } from "../../application/adminSignUp.service";
 
 interface VerificationResponse {
   message: string;
@@ -38,6 +39,7 @@ export class AuthController extends Controller {
   private readonly verifyTwoFactorService: VerifyTwoFactorService;
   private readonly verifyEmailService: VerifyEmailService;
   private readonly changePasswordService: ChangePasswordService;
+  private readonly adminSignUpService: AdminSignUpService;
 
   constructor() {
     super();
@@ -52,7 +54,8 @@ export class AuthController extends Controller {
     this.signUpService = new SignUpService(
       userRepository,
       passwordService,
-      emailSender
+      emailSender,
+      roleRepository 
     );
 
     this.requestPasswordService = new EmailResetPasswordService(
@@ -80,6 +83,10 @@ export class AuthController extends Controller {
       userRepository,
       passwordService
     );
+    this.adminSignUpService = new AdminSignUpService(
+      userRepository,
+      passwordService
+    );
   }
 
   @SuccessResponse("201", "Created")
@@ -90,18 +97,16 @@ export class AuthController extends Controller {
       fullname: string;
       email: string;
       current_password: string;
-      roleId?: string;
       phone: string;
     }
   ): Promise<User> {
     this.setStatus(201);
-    const { fullname, email, current_password, roleId, phone } = requestBody;
+    const { fullname, email, current_password, phone } = requestBody;
     return await this.signUpService.signUp(
       fullname,
       email,
       current_password,
-      phone,
-      roleId
+      phone
     );
   }
 
@@ -144,7 +149,7 @@ export class AuthController extends Controller {
     const { email, code } = requestBody;
     await this.verifyEmailService.verifyEmail(email, code);
     return {
-      message: "Code verified successfully. Your account has been activated.",
+      message: "Code verified successfully.",
     };
   }
 
@@ -199,5 +204,33 @@ export class AuthController extends Controller {
       newPassword
     );
     this.setStatus(204);
+  }
+
+  // TODO: Poner middleware de autenticación
+  @SuccessResponse("201", "Created")
+  @Post("admin/register") // Nueva ruta para el registro por el administrador
+  public async createAdminUser(
+    @Body()
+    requestBody: {
+      fullname: string;
+      email: string;
+      password: string; 
+      roleId: string; 
+      phone: string;
+    }
+  ): Promise<User> {
+    this.setStatus(201);
+
+    // Por ahora, omitimos la verificación del rol del usuario autenticado
+    const { fullname, email, password, roleId, phone } = requestBody;
+
+    // Llamamos al servicio para registrar al usuario
+    return await this.adminSignUpService.signUp(
+      fullname,
+      email,
+      password,
+      roleId,
+      phone
+    );
   }
 }
