@@ -2,7 +2,6 @@ import jwt from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
 import { UserPayload } from '../types/express';
 
-
 const secretKey = process.env.JWT_SECRET;
 
 if (!secretKey) {
