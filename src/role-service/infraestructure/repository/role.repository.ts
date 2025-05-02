@@ -1,7 +1,7 @@
 import { Role } from '../../domain/entity/role';
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
-import { IRoleRepository } from '../../domain/interfaces/user.interface';
+import { IRoleRepository } from '../../domain/interfaces/role.interface';
 
 export class RoleRepository implements IRoleRepository {
   async findById(id: string): Promise<Role | null> {

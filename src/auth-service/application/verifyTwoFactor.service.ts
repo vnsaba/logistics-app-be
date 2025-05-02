@@ -1,6 +1,6 @@
 import { TokenManagerInterface } from "../../shared/domain/interfaces/tokenManager.interface";
 import { IUserRepository } from "../../user-service/domain/interfaces/user.interface";
-import { IRoleRepository } from "../../role-service/domain/interfaces/user.interface";
+import { IRoleRepository } from "../../role-service/domain/interfaces/role.interface";
 
 export class VerifyTwoFactorService {
     private userRepository: IUserRepository;
