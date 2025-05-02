@@ -1,23 +1,35 @@
-import { Route, Controller, Post, Body, SuccessResponse, Query } from 'tsoa';
-import { UserRepository } from '../../../user-service/infraestructure/repository/user.repository';
-import { User } from '../../../user-service/domain/entity/user';
-import { EmailResetPasswordService } from '../../application/requestPassword.service';
-import { TokenManager } from '../../../shared/infraestructure/tokenManager';
-import { NodemailerEmailSender } from '../../../shared/infraestructure/nodemailerEmailSender';
-import { ResetPasswordService } from '../../application/resetPassword.service';
-import { PasswordService } from '../../../shared/infraestructure/bcryptHasher';
-import { SignInService } from '../../application/signIn.service';
-import { TwilioService } from '../../../shared/infraestructure/twilioService';
-import { VerifyTwoFactorService } from '../../application/verifyTwoFactor.service';
-import { SignUpService } from '../../../auth-service/application/signUp.service';
-import { VerifyEmailService } from '../../../auth-service/application/verifyEmail.service';
-import { RoleRepository } from '../../../role-service/infraestructure/repository/role.repository';
+import {
+  Route,
+  Controller,
+  Post,
+  Body,
+  SuccessResponse,
+  Request,
+  Middlewares,
+  Query,
+} from "tsoa";
+import { UserRepository } from "../../../user-service/infraestructure/repository/user.repository";
+import { User } from "../../../user-service/domain/entity/user";
+import { EmailResetPasswordService } from "../../application/requestPassword.service";
+import { TokenManager } from "../../../shared/infraestructure/tokenManager";
+import { NodemailerEmailSender } from "../../../shared/infraestructure/nodemailerEmailSender";
+import { ResetPasswordService } from "../../application/resetPassword.service";
+import { PasswordService } from "../../../shared/infraestructure/bcryptHasher";
+import { SignInService } from "../../application/signIn.service";
+import { TwilioService } from "../../../shared/infraestructure/twilioService";
+import { VerifyTwoFactorService } from "../../application/verifyTwoFactor.service";
+import { SignUpService } from "../../../auth-service/application/signUp.service";
+import { VerifyEmailService } from "../../../auth-service/application/verifyEmail.service";
+import { RoleRepository } from "../../../role-service/infraestructure/repository/role.repository";
+import { ChangePasswordService } from "../../application/changePassword.service";
+import { Request as ExpressRequest } from "express";
+import { authMiddleware } from "../../../middleware/auth.midlleware";
 
 interface VerificationResponse {
   message: string;
 }
 
-@Route('auth')
+@Route("auth")
 export class AuthController extends Controller {
   private readonly signUpService: SignUpService;
   private readonly requestPasswordService: EmailResetPasswordService;
@@ -25,6 +37,7 @@ export class AuthController extends Controller {
   private readonly signInService: SignInService;
   private readonly verifyTwoFactorService: VerifyTwoFactorService;
   private readonly verifyEmailService: VerifyEmailService;
+  private readonly changePasswordService: ChangePasswordService;
 
   constructor() {
     super();
@@ -63,10 +76,14 @@ export class AuthController extends Controller {
     );
 
     this.verifyEmailService = new VerifyEmailService(userRepository);
+    this.changePasswordService = new ChangePasswordService(
+      userRepository,
+      passwordService
+    );
   }
 
-  @SuccessResponse('201', 'Created')
-  @Post('register')
+  @SuccessResponse("201", "Created")
+  @Post("register")
   public async createUser(
     @Body()
     requestBody: {
@@ -88,8 +105,8 @@ export class AuthController extends Controller {
     );
   }
 
-  @SuccessResponse('200', 'OK')
-  @Post('forgot-password')
+  @SuccessResponse("200", "OK")
+  @Post("forgot-password")
   public async forgotPassword(
     @Body() requestBody: { email: string }
   ): Promise<VerificationResponse> {
@@ -97,29 +114,29 @@ export class AuthController extends Controller {
       this.setStatus(200);
       const { email } = requestBody;
       await this.requestPasswordService.sendRequestEmail(email);
-      return { message: 'Password reset email sent' };
+      return { message: "Password reset email sent" };
     } catch (error) {
       throw new Error(`${error}`);
     }
   }
-  @SuccessResponse('200', 'OK')
-  @Post('reset-password')
+  @SuccessResponse("200", "OK")
+  @Post("reset-password")
   public async resetPassword(
     @Body() requestBody: { newPassword: string },
-    @Query('token') token: string
+    @Query("token") token: string
   ): Promise<VerificationResponse> {
     try {
       this.setStatus(200);
       const { newPassword } = requestBody;
       await this.resetPasswordService.resetPassword(token, newPassword);
-      return { message: 'Password reset successfully' };
+      return { message: "Password reset successfully" };
     } catch (error) {
       throw new Error(`${error}`);
     }
   }
 
-  @SuccessResponse('200', 'OK')
-  @Post('verify-email')
+  @SuccessResponse("200", "OK")
+  @Post("verify-email")
   public async verifyEmail(
     @Body() requestBody: { email: string; code: string }
   ): Promise<VerificationResponse> {
@@ -127,29 +144,60 @@ export class AuthController extends Controller {
     const { email, code } = requestBody;
     await this.verifyEmailService.verifyEmail(email, code);
     return {
-      message: 'Code verified successfully. Your account has been activated.',
+      message: "Code verified successfully. Your account has been activated.",
     };
   }
 
-  @SuccessResponse('200', 'OK')
-  @Post('signIn')
+  @SuccessResponse("200", "OK")
+  @Post("signIn")
   public async signIn(
     @Body() requestBody: { email: string; current_password: string }
   ): Promise<VerificationResponse> {
     this.setStatus(200);
     const { email, current_password } = requestBody;
     await this.signInService.singIn(email, current_password);
-    return { message: 'Verification code sent via SMS' };
+    return { message: "Verification code sent via SMS" };
   }
 
-  @SuccessResponse('200', 'OK')
-  @Post('verify-code')
+  @SuccessResponse("200", "OK")
+  @Post("verify-code")
   public async verifyCodeSms(
     @Body() requestBody: { id: string; code: string }
   ): Promise<{ token: string }> {
     this.setStatus(200);
     const { id, code } = requestBody;
-    const { token } = await this.verifyTwoFactorService.verifyTwoFactor(id, code);
+    console.log("ID:", id);
+    console.log("Code:", code);
+    const { token } = await this.verifyTwoFactorService.verifyTwoFactor(
+      id,
+      code
+    );
     return { token };
+  }
+
+  @SuccessResponse("204", "No Content")
+  @Post("change-password")
+  @Middlewares([authMiddleware]) // Aplica el middleware dentro de un array
+  public async changePassword(
+    @Body() requestBody: { currentPassword: string; newPassword: string },
+    @Request() req: ExpressRequest
+  ): Promise<void> {
+    const userEmail = req.user?.email;
+    console.log("userEmail", userEmail);
+
+    if (!userEmail) {
+      this.setStatus(401);
+      throw new Error(
+        "Usuario no autenticado (información del usuario no encontrada en el token)."
+      );
+    }
+
+    const { currentPassword, newPassword } = requestBody;
+    await this.changePasswordService.changePassword(
+      userEmail,
+      currentPassword,
+      newPassword
+    );
+    this.setStatus(204);
   }
 }

@@ -475,6 +475,40 @@
 					}
 				}
 			}
+		},
+		"/auth/change-password": {
+			"post": {
+				"operationId": "ChangePassword",
+				"responses": {
+					"204": {
+						"description": "No Content"
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"newPassword": {
+										"type": "string"
+									},
+									"currentPassword": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"newPassword",
+									"currentPassword"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
 		}
 	},
 	"servers": [
