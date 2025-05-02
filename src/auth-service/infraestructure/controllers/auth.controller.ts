@@ -184,9 +184,8 @@ export class AuthController extends Controller {
   public async changePassword(
     @Body() requestBody: { currentPassword: string; newPassword: string },
     @Request() req: ExpressRequest
-  ): Promise<void> {
+  ): Promise<VerificationResponse> {
     const userEmail = req.user?.email;
-    console.log("userEmail", userEmail);
 
     if (!userEmail) {
       this.setStatus(401);
@@ -202,11 +201,12 @@ export class AuthController extends Controller {
       newPassword
     );
     this.setStatus(204);
+    return { message: "Password changed successfully" };
   }
 
   // TODO: Poner middleware de autenticación
   @SuccessResponse("201", "Created")
-  @Post("admin/register") // Nueva ruta para el registro por el administrador
+  @Post("admin/register") 
   public async createAdminUser(
     @Body()
     requestBody: {
