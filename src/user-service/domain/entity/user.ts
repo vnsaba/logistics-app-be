@@ -1,4 +1,3 @@
-
 export class User {
   id?: string;
   created_at: Date;
@@ -8,18 +7,18 @@ export class User {
   email: string;
   current_password: string;
   roleId: string;
-  status: 'ACTIVE' | 'INACTIVE' | 'PENDING'; 
+  status: 'ACTIVE' | 'INACTIVE' | 'PENDING';
   resetPasswordToken: string | null;
   verificationCode: string | null;
-  verificationCodeExpires: Date | null; 
+  verificationCodeExpires: Date | null;
   twoFactorCode: string | null;
-  twoFactorExpires: Date | null; 
-  
+  twoFactorExpires: Date | null;
+
   constructor(
     fullname: string,
     email: string,
     current_password: string,
-    roleId: string = "userRoleId",
+    roleId: string = 'userRoleId',
     phone: string,
     id?: string
   ) {
@@ -30,34 +29,33 @@ export class User {
     // Validate null/empty field
     if (!fullname || !email || !current_password) {
       throw new Error(
-        "Los campos fullname, email y current_password son obligatorios."
+        'Los campos fullname, email y current_password son obligatorios.'
       );
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      throw new Error("El formato del email es inválido.");
+      throw new Error('El formato del email es inválido.');
     }
 
     if (current_password.length < 6) {
-      throw new Error("La contraseña debe tener al menos 6 caracteres.");
+      throw new Error('La contraseña debe tener al menos 6 caracteres.');
     }
     this.fullname = fullname;
     this.email = email;
     this.current_password = current_password;
     this.roleId = roleId;
-    this.status = "PENDING"; 
+    this.status = 'PENDING';
     this.phone = phone;
     this.created_at = new Date();
     this.updated_at = new Date();
     this.resetPasswordToken = null;
     this.verificationCode = null;
     this.verificationCodeExpires = null;
-    this.twoFactorCode = null
+    this.twoFactorCode = null;
     this.twoFactorExpires = null;
     if (id) {
       this.id = id;
     }
   }
-
 }

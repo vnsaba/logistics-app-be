@@ -1,4 +1,4 @@
-import { Route, Controller, Post, Body, SuccessResponse, Query, Request } from "tsoa";
+import { Route, Controller, Post, Body, SuccessResponse, Query } from "tsoa";
 import { UserService } from "../../application/user.service";
 import { UserRepository } from "../repository/user.repository";
 import { User } from "../../domain/entity/user";
@@ -129,23 +129,23 @@ export class UserController extends Controller {
   }
 
 
-  @SuccessResponse("204", "No Content")
-  @Post("change-password")
-  public async changePassword(
-    @Body() requestBody: { currentPassword: string; newPassword: string },
-    @Request() req: Express.Request 
-  ): Promise<void> {
-    const email = (req as any).user?.email; 
+  // @SuccessResponse("204", "No Content")
+  // @Post("change-password")
+  // public async changePassword(
+  //   @Body() requestBody: { currentPassword: string; newPassword: string },
+  //   @Request() req: Express.Request 
+  // ): Promise<void> {
+  //   const email = (req as any).user?.email; 
 
-    if (!email) {
-      this.setStatus(401); // Unauthorized
-      throw new Error("Usuario no autenticado.");
-    }
+  //   if (!email) {
+  //     this.setStatus(401); // Unauthorized
+  //     throw new Error("Usuario no autenticado.");
+  //   }
 
-    const { currentPassword, newPassword } = requestBody;
-    await this.userService.changePassword(email, currentPassword, newPassword);
-    this.setStatus(204); // No Content - la acción se completó exitosamente
-  }
+  //   const { currentPassword, newPassword } = requestBody;
+  //   await this.userService.changePassword(email, currentPassword, newPassword);
+  //   this.setStatus(204); // No Content - la acción se completó exitosamente
+  // }
 
   
 

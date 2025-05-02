@@ -33,7 +33,7 @@ export class NodemailerEmailSender implements EmailSenderInterface {
         to: string;
         subject: string;
         template: string;
-        context: Record<string, any>;
+        context: Record<string, unknown>;
     }): Promise<void> {
         if (!EMAIL_USER || !EMAIL_PASSWORD) {
             throw new Error('Email configuration is missing.');
@@ -42,7 +42,7 @@ export class NodemailerEmailSender implements EmailSenderInterface {
             throw new Error('Missing required parameters: to, subject, template.');
         }
         try {
-            const mailOptions: SendMailOptions & { template: string; context: Record<string, any> } = {
+            const mailOptions: SendMailOptions & { template: string; context: Record<string, unknown> } = {
                 from: EMAIL_USER,
                 to,
                 subject,

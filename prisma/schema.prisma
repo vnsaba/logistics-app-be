@@ -37,9 +37,10 @@ model User {
   updated_at              DateTime
   verificationCode        String?
   verificationCodeExpires DateTime?
-  twoFactorCode           String?  
-  twoFactorExpires        DateTime? 
+  twoFactorCode           String?
+  twoFactorExpires        DateTime?
   resetPasswordToken      String?
+
   @@map("users")
 }
 

@@ -1,5 +1,5 @@
 import { TokenManagerInterface } from "../../shared/domain/interfaces/tokenManager.interface";
-import { IUserRepository } from "../domain/interfaces/user.interface";
+import { IUserRepository } from "../../user-service/domain/interfaces/user.interface";
 import { PasswordServiceInterface } from "../../shared/domain/interfaces/hashManager.interface";
 import { PasswordService } from "../../shared/infraestructure/bcryptHasher";
 
@@ -11,7 +11,7 @@ export class ResetPasswordService {
     ) { }
 
     async resetPassword(token: string, newPassword: string): Promise<void> {
-        const payload = this.tokenManager.verifyToken(token);
+        const payload = this.tokenManager.verifyToken<{ email: string }>(token);
         if (!payload) throw new Error('Invalid token');
         const user = await this.userRepository.getByEmail(payload.email);
 
