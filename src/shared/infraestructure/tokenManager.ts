@@ -13,14 +13,12 @@ export class TokenManager implements TokenManagerInterface {
         }
     }
 
-    verifyToken<T extends object = Record<string, unknown>>(token: string): T {
+    verifyToken<T extends object = Record<string, unknown>>(token: string): T | null {
         try {
             return jwt.verify(token, JWT_SECRET!) as T;
-
         } catch (error) {
-            console.error('Invalid or expired token:', error);
-            throw new Error('Invalid or expired token');
-
+            console.error('Error verifying token:', error);
+            throw new Error('Invalid or expired token' );
         }
     }
 }
