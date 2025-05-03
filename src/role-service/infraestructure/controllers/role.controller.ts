@@ -4,9 +4,6 @@ import {
   Post,
   Body,
   SuccessResponse,
-  Request,
-  Middlewares,
-  Query,
   Tags,
   Security,
   Get,
@@ -15,10 +12,10 @@ import {
   Delete,
 } from "tsoa";
 import { Role } from '../../domain/entity/role';
-import { UserRole, User as UserType } from '../../../../types/auth/index';
-import { CreateRoleService } from "src/role-service/application/create-role.service";
-import { DeleteRoleService } from "src/role-service/application/delete-role.service";
-import { UpdateRoleService } from "src/role-service/application/update-role.service";
+import { UserRole} from '../../../../types/auth/index';
+import { CreateRoleService } from "../../application/create-role.service";
+import { DeleteRoleService } from "../../application/delete-role.service";
+import { UpdateRoleService } from "../../application/update-role.service";
 import { RoleRepository } from "../repository/role.repository";
 
 @Route('roles')
