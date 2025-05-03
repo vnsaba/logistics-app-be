@@ -1,19 +1,32 @@
-# Base stage
-FROM node:22-alpine AS base
+ARG NODE_VERSION=22.15.0
+FROM node:${NODE_VERSION}-alpine AS base
 WORKDIR /app
-COPY package*.json ./
-RUN npm install
-
-# Testing stage
-FROM base AS test
-COPY . .
-RUN npm run build && npx prisma generate
-RUN npm test
-
-# Production stage
-FROM base AS prod
-COPY . .
-RUN npm run build && npx prisma generate
-
 EXPOSE 3000
-CMD ["npm", "start"]
+
+FROM base AS dev
+RUN --mount=type=bind,source=package.json,target=package.json \
+    --mount=type=bind,source=package-lock.json,target=package-lock.json \
+    --mount=type=cache,target=/root/.npm \
+    npm ci --include=dev
+USER node
+COPY . .
+CMD ["npx prisma generate", "npm run dev"]
+
+FROM base AS prod
+RUN --mount=type=bind,source=package.json,target=package.json \
+    --mount=type=bind,source=package-lock.json,target=package-lock.json \
+    --mount=type=cache,target=/root/.npm \
+    npm ci --omit=dev
+USER node
+COPY . .
+CMD ["npx prisma generate", "node dist/src/server.js"]
+
+FROM base AS test
+ENV NODE_ENV=test
+RUN --mount=type=bind,source=package.json,target=package.json \
+    --mount=type=bind,source=package-lock.json,target=package-lock.json \
+    --mount=type=cache,target=/root/.npm \
+    npm ci --include=dev
+USER node
+COPY . .
+RUN npm run test
