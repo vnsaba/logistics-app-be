@@ -10,7 +10,7 @@ RUN --mount=type=bind,source=package.json,target=package.json \
     npm ci --include=dev
 USER node
 COPY . .
-CMD ["npx prisma generate", "npm run dev"]
+CMD ["sh", "-c", "npx prisma generate && npm run dev"]
 
 FROM base AS prod
 RUN --mount=type=bind,source=package.json,target=package.json \
@@ -19,7 +19,7 @@ RUN --mount=type=bind,source=package.json,target=package.json \
     npm ci --omit=dev
 USER node
 COPY . .
-CMD ["npx prisma generate", "node dist/src/server.js"]
+CMD ["node", "dist/src/server.js"]
 
 FROM base AS test
 ENV NODE_ENV=test
