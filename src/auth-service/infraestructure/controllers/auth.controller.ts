@@ -24,7 +24,7 @@ import { RoleRepository } from "../../../role-service/infraestructure/repository
 import { ChangePasswordService } from "../../application/changePassword.service";
 import { Request as ExpressRequest } from "express";
 import { authMiddleware } from "../../../middleware/auth.midlleware";
-import { AdminSignUpService } from "../../application/AdminSignUp.service";
+import { AdminSignUpService } from "../../application/adminSignUp.service";
 
 interface VerificationResponse {
   message: string;
