@@ -25,6 +25,8 @@ import { ChangePasswordService } from "../../application/changePassword.service"
 import { Request as ExpressRequest } from "express";
 import { authMiddleware } from "../../../middleware/auth.midlleware";
 import { AdminSignUpService } from "../../application/adminSignUp.service";
+import { HttpError } from "../../../shared/errors/HttpError";
+import { ValidationError } from "src/shared/domain/interfaces/validationError";
 
 interface VerificationResponse {
   message: string;
@@ -55,7 +57,7 @@ export class AuthController extends Controller {
       userRepository,
       passwordService,
       emailSender,
-      roleRepository 
+      roleRepository
     );
 
     this.requestPasswordService = new EmailResetPasswordService(
@@ -99,15 +101,31 @@ export class AuthController extends Controller {
       current_password: string;
       phone: string;
     }
-  ): Promise<User> {
-    this.setStatus(201);
-    const { fullname, email, current_password, phone } = requestBody;
-    return await this.signUpService.signUp(
-      fullname,
-      email,
-      current_password,
-      phone
-    );
+  ): Promise<{ message: string; errors?: ValidationError[]; user?: User }> {
+    try {
+      const { fullname, email, current_password, phone } = requestBody;
+      const user = await this.signUpService.signUp(
+        fullname,
+        email,
+        current_password,
+        phone
+      );
+      this.setStatus(201);
+      return { message: "Usuario registrado exitosamente", user };
+    } catch (error) {
+      if (error instanceof HttpError) {
+        this.setStatus(error.statusCode);
+        try {
+          const errors = JSON.parse(error.message); // Intenta parsear los errores si es un array
+          return { message: "Errores de validación", errors };
+        } catch {
+          return { message: error.message }; // Si no es un array, devuelve el mensaje directamente
+        }
+      } else {
+        this.setStatus(500);
+        return { message: "Error interno del servidor." };
+      }
+    }
   }
 
   @SuccessResponse("200", "OK")
@@ -136,7 +154,6 @@ export class AuthController extends Controller {
     this.setStatus(200);
     return { message: newPassword };
   }
-  
 
   @SuccessResponse("200", "OK")
   @Post("verify-email")
@@ -206,14 +223,14 @@ export class AuthController extends Controller {
 
   // TODO: Poner middleware de autenticación
   @SuccessResponse("201", "Created")
-  @Post("admin/register") 
+  @Post("admin/register")
   public async createAdminUser(
     @Body()
     requestBody: {
       fullname: string;
       email: string;
-      password: string; 
-      roleId: string; 
+      password: string;
+      roleId: string;
       phone: string;
     }
   ): Promise<User> {
