@@ -19,4 +19,18 @@ export class RoleRepository implements IRoleRepository {
     const role = await prisma.role.findUnique({ where: { name } });
     return role;
   }
+
+
+  async create(data: { name: string; description: string }): Promise<Role> {
+    return await prisma.role.create({ data });
+  }
+
+  async update(id: string, data: { name?: string; description?: string }): Promise<Role> {
+    return await prisma.role.update({ where: { id }, data });
+  }
+
+  async delete(id: string): Promise<void> {
+    await prisma.role.delete({ where: { id } });
+  }
+
 }

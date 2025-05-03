@@ -26,7 +26,7 @@ import { Request as ExpressRequest } from "express";
 import { authMiddleware } from "../../../middleware/auth.midlleware";
 import { AdminSignUpService } from "../../application/adminSignUp.service";
 import { HttpError } from "../../../shared/errors/HttpError";
-import { ValidationError } from "src/shared/domain/interfaces/validationError";
+import { ValidationError } from "../../../../src/shared/domain/interfaces/validationError";
 
 interface VerificationResponse {
   message: string;

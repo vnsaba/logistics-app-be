@@ -5,7 +5,7 @@ import { PasswordService } from "../../shared/infraestructure/bcryptHasher";
 import { EmailSenderInterface } from "../../shared/domain/interfaces/emailSender.interface";
 import { generateVerificationCode } from "../../../lib/verification";
 import { IRoleRepository } from "../../role-service/domain/interfaces/role.interface";
-import { ValidationError } from "src/shared/domain/interfaces/validationError";
+import { ValidationError } from "../../shared/domain/interfaces/validationError";
 
 export class SignUpService {
   private userRepository: IUserRepository;
