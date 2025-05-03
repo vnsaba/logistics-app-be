@@ -30,6 +30,10 @@ export class SignInService {
       throw new Error('User not found');
     }
 
+    if (user.status !== 'ACTIVE') {
+      throw new Error('User account is not active');
+    }
+
     const isPasswordValid = await this.passwordService.comparePassword(
       password,
       user.current_password

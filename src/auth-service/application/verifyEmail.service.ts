@@ -22,8 +22,6 @@ export class VerifyEmailService {
     ) {
       throw new Error('El código de verificación ha expirado');
     }
-
-    user.status = 'ACTIVE';
     user.verificationCode = null;
     user.verificationCodeExpires = null;
 
