@@ -1,5 +1,6 @@
 import { PasswordServiceInterface } from "../../shared/domain/interfaces/hashManager.interface";
 import { IUserRepository } from '../../user-service/domain/interfaces/user.interface';
+import { HttpError } from '../../shared/errors/HttpError';
 
 export class ChangePasswordService {
   private readonly userRepository: IUserRepository;
@@ -17,7 +18,7 @@ export class ChangePasswordService {
   ): Promise<void> {
     const user = await this.userRepository.getByEmail(email);
     if (!user) {
-      throw new Error('Usuario no encontrado.');
+      throw new HttpError('Usuario no encontrado.', 404);
     }
 
     const isCurrentPasswordValid = await this.passwordService.comparePassword(
@@ -26,11 +27,16 @@ export class ChangePasswordService {
     );
 
     if (!isCurrentPasswordValid) {
-      throw new Error('La contraseña actual es incorrecta.');
+      throw new HttpError('La contraseña actual es incorrecta.', 401);
     }
 
-    if (newPassword.length < 6) {
-      throw new Error('La nueva contraseña debe tener al menos 6 caracteres.');
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=[\]{};':"\\|,.<>/?])[A-Za-z\d!@#$%^&*()_\-+=[\]{};':"\\|,.<>/?]{8,64}$/;
+
+    if (!passwordRegex.test(newPassword)) {
+      throw new HttpError(
+        'La nueva contraseña debe tener entre 8 y 64 caracteres, incluir al menos una letra mayúscula, una letra minúscula, un número y un carácter especial.',
+        400
+      );
     }
 
     const hashedPassword = await this.passwordService.hashPassword(newPassword);
