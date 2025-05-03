@@ -1,23 +1,33 @@
-# Use an official Node.js runtime as the base image
-FROM node:20-alpine
-
-# Set the working directory inside the container
+ARG NODE_VERSION=22.15.0
+FROM node:${NODE_VERSION}-alpine AS base
 WORKDIR /app
-
-# Copy package.json and package-lock.json (or yarn.lock) first to leverage Docker caching
-COPY package*.json ./
-
-# Install dependencies
-RUN npm install
-
-# Copy the rest of the application files
-COPY . .
-
-# Compile TypeScript to JavaScript
-RUN npm run build
-
-# Expose the application's port
 EXPOSE 3000
 
-# Command to start the application
-CMD ["npm", "start"]
+FROM base AS dev
+RUN --mount=type=bind,source=package.json,target=package.json \
+    --mount=type=bind,source=package-lock.json,target=package-lock.json \
+    --mount=type=cache,target=/root/.npm \
+    npm ci --include=dev
+USER node
+COPY . .
+CMD ["sh", "-c", "npx prisma generate && npm run dev"]
+
+FROM base AS prod
+RUN --mount=type=bind,source=package.json,target=package.json \
+    --mount=type=bind,source=package-lock.json,target=package-lock.json \
+    --mount=type=cache,target=/root/.npm \
+    npm ci 
+COPY . .
+RUN npm run build
+USER node
+CMD ["node", "dist/src/server.js"]
+
+FROM base AS test
+ENV NODE_ENV=test
+RUN --mount=type=bind,source=package.json,target=package.json \
+    --mount=type=bind,source=package-lock.json,target=package-lock.json \
+    --mount=type=cache,target=/root/.npm \
+    npm ci --include=dev
+USER node
+COPY . .
+RUN npm run test
