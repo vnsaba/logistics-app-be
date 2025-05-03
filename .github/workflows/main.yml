@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - dockerization
   pull_request:
     branches:
       - main
@@ -26,3 +27,8 @@ jobs:
         with:
           target: test
           load: true
+
+      - name: Build prod
+        uses: docker/build-push-action@v6
+        with:
+          target: prod
