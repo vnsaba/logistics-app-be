@@ -1,26 +1,26 @@
 export class Store {
-  id?: string;
+  id?: number;
 
   constructor(
     public name: string,
     public address: string,
-    public city_id: string,
+    public cityId: number,
     public capacity: number,
     public latitude: number,
     public longitude: number,
-    public zip_code: string,
+    public zipCode: string,
     public status: string,
-    id?: string
+    id?: number
   ) {
     // Validate field
     if (
       !name.trim() ||
       !address.trim() ||
-      !city_id.trim() ||
+      !cityId ||
       !capacity ||
       !latitude ||
       !longitude ||
-      !zip_code.trim() ||
+      !zipCode.trim() ||
       !status.trim()
     ) {
       throw new Error(

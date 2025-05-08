@@ -3,6 +3,7 @@ import { FileReaderInterface } from '../../shared/domain/interfaces/fileReader.i
 
 export class UploadStoreService {
   constructor(
+    // @ts-expect-error: Not using storeRepository yet
     private readonly storeRepository: IStoreRepository,
     private readonly fileReader: FileReaderInterface
   ) {}
@@ -26,19 +27,6 @@ export class UploadStoreService {
     console.log('Data read from file:', data);
 
     // lógica de carga de datos (ciudades, tiendas, etc.)
-
-    const newStore = await this.storeRepository.create({
-      address: 'Av. Siempre Viva 742',
-      capacity: 100,
-      city_id: 'city_123',
-      latitude: -12.0464,
-      longitude: -77.0428,
-      name: 'Tienda Central',
-      status: 'active',
-      zip_code: '15001',
-    });
-
-    console.log('New store created:', newStore); // para evitar unused typescript error
 
     return { sucessCount: data.length, errors: [] };
   }

@@ -5,7 +5,6 @@ import { MulterFileReader } from '../../../shared/infraestructure/multerFileRead
 
 @Route('stores')
 export class StoreController extends Controller {
-  // private readonly userService: UserService;
   private readonly uploadStoreService: UploadStoreService;
 
   constructor() {
