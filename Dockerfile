@@ -18,6 +18,7 @@ RUN --mount=type=bind,source=package.json,target=package.json \
     --mount=type=cache,target=/root/.npm \
     npm ci 
 COPY . .
+RUN npx prisma generate
 RUN npm run build
 USER node
 CMD ["node", "dist/src/server.js"]
