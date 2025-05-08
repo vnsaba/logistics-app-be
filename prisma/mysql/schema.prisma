@@ -1,0 +1,142 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/mysql"
+}
+
+datasource db {
+    provider = "mysql"
+    url = env("MYSQL_DB_URL")
+}
+
+enum OrderStatus {
+    PENDING
+    IN_PROFRESS
+    CANCELED
+    COMPLETED
+}
+
+enum statusStore {
+    ACTIVE
+    INACTIVE
+}
+
+enum statusProduct {
+    ACTIVE
+    INACTIVE
+}
+
+model Order {
+  id          Int      @id @default(autoincrement()) 
+  storeId     Int
+  store     Store    @relation(fields: [storeId], references: [id])         
+  deliveryId  String    
+  customerId String
+  status      OrderStatus @default(PENDING)
+  totalAmount Float
+  latitude    Float
+  longitude   Float
+  address     String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  orderItems  OrderItem[]
+}
+
+model OrderItem {
+  id          Int      @id @default(autoincrement()) 
+  orderId     Int
+  order       Order    @relation(fields: [orderId], references: [id]) 
+  productId   Int
+  product     Product  @relation(fields: [productId], references: [id])
+  quantity    Int
+  unit_price  Float
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Store {
+    id          Int      @id @default(autoincrement()) 
+    name        String
+    address     String
+    latitude    Float
+    longitude   Float
+    cityId      Int
+    city        city      @relation(fields: [cityId], references: [id])   
+    capacity    Int
+    zipCode     String
+    status      statusStore @default(ACTIVE)
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+    orders Order[] 
+    inventory Inventory[]
+}
+
+model city {
+    id          Int      @id @default(autoincrement()) 
+    name        String
+    depatamentId Int
+    depatament  Depatament @relation(fields: [depatamentId], references: [id])
+    stores Store[]
+}
+
+
+model Depatament {
+    id          Int      @id @default(autoincrement()) 
+    name        String
+    cities city[]
+}
+
+model Category {
+    id          Int      @id @default(autoincrement()) 
+    name        String
+    description String
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime  @updatedAt
+    products    Product[]
+}
+
+model Product {
+    id          Int      @id @default(autoincrement()) 
+    name        String
+    description String
+    categoryId  Int
+    category    Category @relation(fields: [categoryId], references: [id])
+    unit_price  Float
+    wight       Float
+    is_fragile  Boolean
+    dimensions_cm String
+    imageUrl       String
+    bar_code     String
+    required_refrigeration Boolean
+    date_of_expiration DateTime
+    status      statusProduct @default(ACTIVE)
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime  @updatedAt
+    inventory Inventory[]
+    orderItems OrderItem[]
+}
+
+model Inventory {
+    id          Int      @id @default(autoincrement()) 
+    productId   Int
+    product     Product  @relation(fields: [productId], references: [id])
+    storeId     Int
+    store       Store    @relation(fields: [storeId], references: [id])
+    available_quantity    Int
+    minimum_threshold     Int
+    last_reset_date      DateTime
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime  @updatedAt
+    historical_movement historical_movement[]
+}
+
+model historical_movement {
+    id          Int      @id @default(autoincrement()) 
+    inventoryId  Int
+    inventory   Inventory @relation(fields: [inventoryId], references: [id])
+    user      String
+    movement_date DateTime
+    reason     String
+    movement_type String
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime  @updatedAt
+}
