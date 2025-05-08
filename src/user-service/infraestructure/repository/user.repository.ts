@@ -1,7 +1,8 @@
 import { User } from '../../domain/entity/user';
 import { User as UserType } from '../../../../types/auth/index';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '../../../../prisma/generated/mongodb'; // Cliente de MongoDB
 const prisma = new PrismaClient();
+
 import { IUserRepository } from '../../domain/interfaces/user.interface';
 
 export class UserRepository implements IUserRepository {

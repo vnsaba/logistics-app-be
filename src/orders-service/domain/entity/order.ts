@@ -1,17 +1,17 @@
 
 export class Order {
-
     constructor(
         public id: number,
-        public customerId: number,
         public storeId: number,
         public deliveryId: string,
-        public status: 'PENDING',
+        public customerId: string,
+        public status: 'PENDING' | 'IN_PROFRESS' | 'CANCELED' | 'COMPLETED', // Ajustar el tipo
         public totalAmount: number,
-        public langitude: number,
+        public latitude: number,
         public longitude: number,
         public address: string,
-        public creaded_at: Date,
-        public update_at: Date,
+        public createdAt: Date,
+        public updatedAt: Date
     ) { }
+
 }
