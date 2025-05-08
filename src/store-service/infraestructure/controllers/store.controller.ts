@@ -23,7 +23,7 @@ export class StoreController extends Controller {
   public async loadStores(@UploadedFile() file: Express.Multer.File) {
     return await this.uploadStoreService.upload<
       Express.Multer.File,
-      { id: string; last_name3: string; last_name4: string; last_name5: string }
+      { id: string; last_name: string; phone: string; isbn: string }
     >({ file, separator: ';' });
   }
 }
