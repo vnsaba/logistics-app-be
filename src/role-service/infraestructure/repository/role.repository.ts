@@ -1,5 +1,5 @@
 import { Role } from '../../domain/entity/role';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '../../../../prisma/generated/mongodb';
 const prisma = new PrismaClient();
 import { IRoleRepository } from '../../domain/interfaces/role.interface';
 
