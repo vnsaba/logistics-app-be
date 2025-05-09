@@ -14,20 +14,20 @@ export class UploadStoreService {
   }: {
     file: F;
     separator: string;
-  }): Promise<{ sucessCount: number; errors: string[] }> {
+  }): Promise<{ successCount: number; errors: string[] }> {
     const { data, error } = await this.fileReader.read<T>({
       file,
       separator,
     });
 
     if (error) {
-      return { sucessCount: 0, errors: ['Could not process the file'] };
+      return { successCount: 0, errors: ['Could not process the file'] };
     }
 
     console.log('Data read from file:', data);
 
     // lógica de carga de datos (ciudades, tiendas, etc.)
 
-    return { sucessCount: data.length, errors: [] };
+    return { successCount: data.length, errors: [] };
   }
 }

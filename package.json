@@ -24,6 +24,7 @@
   "description": "",
   "devDependencies": {
     "@eslint/js": "^9.25.1",
+    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.1",
     "@types/jest": "^29.5.14",
     "@types/jsonwebtoken": "^9.0.9",
@@ -49,6 +50,7 @@
   "dependencies": {
     "@prisma/client": "^6.6.0",
     "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
     "csv-parser": "^3.2.0",
     "express": "^5.1.0",
     "joi": "^17.13.3",
