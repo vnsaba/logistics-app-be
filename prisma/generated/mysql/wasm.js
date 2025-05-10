@@ -158,10 +158,10 @@ exports.Prisma.StoreScalarFieldEnum = {
 exports.Prisma.CityScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  depatamentId: 'depatamentId'
+  departmentId: 'departmentId'
 };
 
-exports.Prisma.DepatamentScalarFieldEnum = {
+exports.Prisma.DepartmentScalarFieldEnum = {
   id: 'id',
   name: 'name'
 };
@@ -180,13 +180,13 @@ exports.Prisma.ProductScalarFieldEnum = {
   description: 'description',
   categoryId: 'categoryId',
   unitPrice: 'unitPrice',
-  wight: 'wight',
-  is_fragile: 'is_fragile',
-  dimensions_cm: 'dimensions_cm',
+  weight: 'weight',
+  isFragile: 'isFragile',
+  dimensionsCm: 'dimensionsCm',
   imageUrl: 'imageUrl',
-  bar_code: 'bar_code',
-  required_refrigeration: 'required_refrigeration',
-  date_of_expiration: 'date_of_expiration',
+  barCode: 'barCode',
+  requiredRefrigeration: 'requiredRefrigeration',
+  dateOfExpiration: 'dateOfExpiration',
   status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -196,20 +196,20 @@ exports.Prisma.InventoryScalarFieldEnum = {
   id: 'id',
   productId: 'productId',
   storeId: 'storeId',
-  available_quantity: 'available_quantity',
-  minimum_threshold: 'minimum_threshold',
-  last_reset_date: 'last_reset_date',
+  availableQuantity: 'availableQuantity',
+  minimumThreshold: 'minimumThreshold',
+  lastResetDate: 'lastResetDate',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.Historical_movementScalarFieldEnum = {
+exports.Prisma.HistoricalMovementScalarFieldEnum = {
   id: 'id',
   inventoryId: 'inventoryId',
   user: 'user',
-  movement_date: 'movement_date',
+  movementDate: 'movementDate',
   reason: 'reason',
-  movement_type: 'movement_type',
+  movementType: 'movementType',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -231,11 +231,11 @@ exports.Prisma.StoreOrderByRelevanceFieldEnum = {
   zipCode: 'zipCode'
 };
 
-exports.Prisma.cityOrderByRelevanceFieldEnum = {
+exports.Prisma.CityOrderByRelevanceFieldEnum = {
   name: 'name'
 };
 
-exports.Prisma.DepatamentOrderByRelevanceFieldEnum = {
+exports.Prisma.DepartmentOrderByRelevanceFieldEnum = {
   name: 'name'
 };
 
@@ -247,15 +247,15 @@ exports.Prisma.CategoryOrderByRelevanceFieldEnum = {
 exports.Prisma.ProductOrderByRelevanceFieldEnum = {
   name: 'name',
   description: 'description',
-  dimensions_cm: 'dimensions_cm',
+  dimensionsCm: 'dimensionsCm',
   imageUrl: 'imageUrl',
-  bar_code: 'bar_code'
+  barCode: 'barCode'
 };
 
-exports.Prisma.historical_movementOrderByRelevanceFieldEnum = {
+exports.Prisma.HistoricalMovementOrderByRelevanceFieldEnum = {
   user: 'user',
   reason: 'reason',
-  movement_type: 'movement_type'
+  movementType: 'movementType'
 };
 exports.OrderStatus = exports.$Enums.OrderStatus = {
   PENDING: 'PENDING',
@@ -278,12 +278,12 @@ exports.Prisma.ModelName = {
   Order: 'Order',
   OrderItem: 'OrderItem',
   Store: 'Store',
-  city: 'city',
-  Depatament: 'Depatament',
+  City: 'City',
+  Department: 'Department',
   Category: 'Category',
   Product: 'Product',
   Inventory: 'Inventory',
-  historical_movement: 'historical_movement'
+  HistoricalMovement: 'HistoricalMovement'
 };
 
 /**

@@ -29,15 +29,15 @@ export type OrderItem = $Result.DefaultSelection<Prisma.$OrderItemPayload>
  */
 export type Store = $Result.DefaultSelection<Prisma.$StorePayload>
 /**
- * Model city
+ * Model City
  * 
  */
-export type city = $Result.DefaultSelection<Prisma.$cityPayload>
+export type City = $Result.DefaultSelection<Prisma.$CityPayload>
 /**
- * Model Depatament
+ * Model Department
  * 
  */
-export type Depatament = $Result.DefaultSelection<Prisma.$DepatamentPayload>
+export type Department = $Result.DefaultSelection<Prisma.$DepartmentPayload>
 /**
  * Model Category
  * 
@@ -54,10 +54,10 @@ export type Product = $Result.DefaultSelection<Prisma.$ProductPayload>
  */
 export type Inventory = $Result.DefaultSelection<Prisma.$InventoryPayload>
 /**
- * Model historical_movement
+ * Model HistoricalMovement
  * 
  */
-export type historical_movement = $Result.DefaultSelection<Prisma.$historical_movementPayload>
+export type HistoricalMovement = $Result.DefaultSelection<Prisma.$HistoricalMovementPayload>
 
 /**
  * Enums
@@ -258,24 +258,24 @@ export class PrismaClient<
   get store(): Prisma.StoreDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.city`: Exposes CRUD operations for the **city** model.
+   * `prisma.city`: Exposes CRUD operations for the **City** model.
     * Example usage:
     * ```ts
     * // Fetch zero or more Cities
     * const cities = await prisma.city.findMany()
     * ```
     */
-  get city(): Prisma.cityDelegate<ExtArgs, ClientOptions>;
+  get city(): Prisma.CityDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.depatament`: Exposes CRUD operations for the **Depatament** model.
+   * `prisma.department`: Exposes CRUD operations for the **Department** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Depataments
-    * const depataments = await prisma.depatament.findMany()
+    * // Fetch zero or more Departments
+    * const departments = await prisma.department.findMany()
     * ```
     */
-  get depatament(): Prisma.DepatamentDelegate<ExtArgs, ClientOptions>;
+  get department(): Prisma.DepartmentDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.category`: Exposes CRUD operations for the **Category** model.
@@ -308,14 +308,14 @@ export class PrismaClient<
   get inventory(): Prisma.InventoryDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.historical_movement`: Exposes CRUD operations for the **historical_movement** model.
+   * `prisma.historicalMovement`: Exposes CRUD operations for the **HistoricalMovement** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Historical_movements
-    * const historical_movements = await prisma.historical_movement.findMany()
+    * // Fetch zero or more HistoricalMovements
+    * const historicalMovements = await prisma.historicalMovement.findMany()
     * ```
     */
-  get historical_movement(): Prisma.historical_movementDelegate<ExtArgs, ClientOptions>;
+  get historicalMovement(): Prisma.HistoricalMovementDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -759,12 +759,12 @@ export namespace Prisma {
     Order: 'Order',
     OrderItem: 'OrderItem',
     Store: 'Store',
-    city: 'city',
-    Depatament: 'Depatament',
+    City: 'City',
+    Department: 'Department',
     Category: 'Category',
     Product: 'Product',
     Inventory: 'Inventory',
-    historical_movement: 'historical_movement'
+    HistoricalMovement: 'HistoricalMovement'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -783,7 +783,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "order" | "orderItem" | "store" | "city" | "depatament" | "category" | "product" | "inventory" | "historical_movement"
+      modelProps: "order" | "orderItem" | "store" | "city" | "department" | "category" | "product" | "inventory" | "historicalMovement"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -985,135 +985,135 @@ export namespace Prisma {
           }
         }
       }
-      city: {
-        payload: Prisma.$cityPayload<ExtArgs>
-        fields: Prisma.cityFieldRefs
+      City: {
+        payload: Prisma.$CityPayload<ExtArgs>
+        fields: Prisma.CityFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.cityFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$cityPayload> | null
+            args: Prisma.CityFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CityPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.cityFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$cityPayload>
+            args: Prisma.CityFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CityPayload>
           }
           findFirst: {
-            args: Prisma.cityFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$cityPayload> | null
+            args: Prisma.CityFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CityPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.cityFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$cityPayload>
+            args: Prisma.CityFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CityPayload>
           }
           findMany: {
-            args: Prisma.cityFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$cityPayload>[]
+            args: Prisma.CityFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CityPayload>[]
           }
           create: {
-            args: Prisma.cityCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$cityPayload>
+            args: Prisma.CityCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CityPayload>
           }
           createMany: {
-            args: Prisma.cityCreateManyArgs<ExtArgs>
+            args: Prisma.CityCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           delete: {
-            args: Prisma.cityDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$cityPayload>
+            args: Prisma.CityDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CityPayload>
           }
           update: {
-            args: Prisma.cityUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$cityPayload>
+            args: Prisma.CityUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CityPayload>
           }
           deleteMany: {
-            args: Prisma.cityDeleteManyArgs<ExtArgs>
+            args: Prisma.CityDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.cityUpdateManyArgs<ExtArgs>
+            args: Prisma.CityUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           upsert: {
-            args: Prisma.cityUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$cityPayload>
+            args: Prisma.CityUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CityPayload>
           }
           aggregate: {
             args: Prisma.CityAggregateArgs<ExtArgs>
             result: $Utils.Optional<AggregateCity>
           }
           groupBy: {
-            args: Prisma.cityGroupByArgs<ExtArgs>
+            args: Prisma.CityGroupByArgs<ExtArgs>
             result: $Utils.Optional<CityGroupByOutputType>[]
           }
           count: {
-            args: Prisma.cityCountArgs<ExtArgs>
+            args: Prisma.CityCountArgs<ExtArgs>
             result: $Utils.Optional<CityCountAggregateOutputType> | number
           }
         }
       }
-      Depatament: {
-        payload: Prisma.$DepatamentPayload<ExtArgs>
-        fields: Prisma.DepatamentFieldRefs
+      Department: {
+        payload: Prisma.$DepartmentPayload<ExtArgs>
+        fields: Prisma.DepartmentFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.DepatamentFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DepatamentPayload> | null
+            args: Prisma.DepartmentFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartmentPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.DepatamentFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DepatamentPayload>
+            args: Prisma.DepartmentFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartmentPayload>
           }
           findFirst: {
-            args: Prisma.DepatamentFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DepatamentPayload> | null
+            args: Prisma.DepartmentFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartmentPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.DepatamentFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DepatamentPayload>
+            args: Prisma.DepartmentFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartmentPayload>
           }
           findMany: {
-            args: Prisma.DepatamentFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DepatamentPayload>[]
+            args: Prisma.DepartmentFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartmentPayload>[]
           }
           create: {
-            args: Prisma.DepatamentCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DepatamentPayload>
+            args: Prisma.DepartmentCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartmentPayload>
           }
           createMany: {
-            args: Prisma.DepatamentCreateManyArgs<ExtArgs>
+            args: Prisma.DepartmentCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           delete: {
-            args: Prisma.DepatamentDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DepatamentPayload>
+            args: Prisma.DepartmentDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartmentPayload>
           }
           update: {
-            args: Prisma.DepatamentUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DepatamentPayload>
+            args: Prisma.DepartmentUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartmentPayload>
           }
           deleteMany: {
-            args: Prisma.DepatamentDeleteManyArgs<ExtArgs>
+            args: Prisma.DepartmentDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.DepatamentUpdateManyArgs<ExtArgs>
+            args: Prisma.DepartmentUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           upsert: {
-            args: Prisma.DepatamentUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DepatamentPayload>
+            args: Prisma.DepartmentUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartmentPayload>
           }
           aggregate: {
-            args: Prisma.DepatamentAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateDepatament>
+            args: Prisma.DepartmentAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDepartment>
           }
           groupBy: {
-            args: Prisma.DepatamentGroupByArgs<ExtArgs>
-            result: $Utils.Optional<DepatamentGroupByOutputType>[]
+            args: Prisma.DepartmentGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DepartmentGroupByOutputType>[]
           }
           count: {
-            args: Prisma.DepatamentCountArgs<ExtArgs>
-            result: $Utils.Optional<DepatamentCountAggregateOutputType> | number
+            args: Prisma.DepartmentCountArgs<ExtArgs>
+            result: $Utils.Optional<DepartmentCountAggregateOutputType> | number
           }
         }
       }
@@ -1315,69 +1315,69 @@ export namespace Prisma {
           }
         }
       }
-      historical_movement: {
-        payload: Prisma.$historical_movementPayload<ExtArgs>
-        fields: Prisma.historical_movementFieldRefs
+      HistoricalMovement: {
+        payload: Prisma.$HistoricalMovementPayload<ExtArgs>
+        fields: Prisma.HistoricalMovementFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.historical_movementFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$historical_movementPayload> | null
+            args: Prisma.HistoricalMovementFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HistoricalMovementPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.historical_movementFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$historical_movementPayload>
+            args: Prisma.HistoricalMovementFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HistoricalMovementPayload>
           }
           findFirst: {
-            args: Prisma.historical_movementFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$historical_movementPayload> | null
+            args: Prisma.HistoricalMovementFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HistoricalMovementPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.historical_movementFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$historical_movementPayload>
+            args: Prisma.HistoricalMovementFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HistoricalMovementPayload>
           }
           findMany: {
-            args: Prisma.historical_movementFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$historical_movementPayload>[]
+            args: Prisma.HistoricalMovementFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HistoricalMovementPayload>[]
           }
           create: {
-            args: Prisma.historical_movementCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$historical_movementPayload>
+            args: Prisma.HistoricalMovementCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HistoricalMovementPayload>
           }
           createMany: {
-            args: Prisma.historical_movementCreateManyArgs<ExtArgs>
+            args: Prisma.HistoricalMovementCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           delete: {
-            args: Prisma.historical_movementDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$historical_movementPayload>
+            args: Prisma.HistoricalMovementDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HistoricalMovementPayload>
           }
           update: {
-            args: Prisma.historical_movementUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$historical_movementPayload>
+            args: Prisma.HistoricalMovementUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HistoricalMovementPayload>
           }
           deleteMany: {
-            args: Prisma.historical_movementDeleteManyArgs<ExtArgs>
+            args: Prisma.HistoricalMovementDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.historical_movementUpdateManyArgs<ExtArgs>
+            args: Prisma.HistoricalMovementUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           upsert: {
-            args: Prisma.historical_movementUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$historical_movementPayload>
+            args: Prisma.HistoricalMovementUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HistoricalMovementPayload>
           }
           aggregate: {
-            args: Prisma.Historical_movementAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateHistorical_movement>
+            args: Prisma.HistoricalMovementAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateHistoricalMovement>
           }
           groupBy: {
-            args: Prisma.historical_movementGroupByArgs<ExtArgs>
-            result: $Utils.Optional<Historical_movementGroupByOutputType>[]
+            args: Prisma.HistoricalMovementGroupByArgs<ExtArgs>
+            result: $Utils.Optional<HistoricalMovementGroupByOutputType>[]
           }
           count: {
-            args: Prisma.historical_movementCountArgs<ExtArgs>
-            result: $Utils.Optional<Historical_movementCountAggregateOutputType> | number
+            args: Prisma.HistoricalMovementCountArgs<ExtArgs>
+            result: $Utils.Optional<HistoricalMovementCountAggregateOutputType> | number
           }
         }
       }
@@ -1468,12 +1468,12 @@ export namespace Prisma {
     order?: OrderOmit
     orderItem?: OrderItemOmit
     store?: StoreOmit
-    city?: cityOmit
-    depatament?: DepatamentOmit
+    city?: CityOmit
+    department?: DepartmentOmit
     category?: CategoryOmit
     product?: ProductOmit
     inventory?: InventoryOmit
-    historical_movement?: historical_movementOmit
+    historicalMovement?: HistoricalMovementOmit
   }
 
   /* Types for Logging */
@@ -1666,33 +1666,33 @@ export namespace Prisma {
 
 
   /**
-   * Count Type DepatamentCountOutputType
+   * Count Type DepartmentCountOutputType
    */
 
-  export type DepatamentCountOutputType = {
+  export type DepartmentCountOutputType = {
     cities: number
   }
 
-  export type DepatamentCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    cities?: boolean | DepatamentCountOutputTypeCountCitiesArgs
+  export type DepartmentCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    cities?: boolean | DepartmentCountOutputTypeCountCitiesArgs
   }
 
   // Custom InputTypes
   /**
-   * DepatamentCountOutputType without action
+   * DepartmentCountOutputType without action
    */
-  export type DepatamentCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DepartmentCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the DepatamentCountOutputType
+     * Select specific fields to fetch from the DepartmentCountOutputType
      */
-    select?: DepatamentCountOutputTypeSelect<ExtArgs> | null
+    select?: DepartmentCountOutputTypeSelect<ExtArgs> | null
   }
 
   /**
-   * DepatamentCountOutputType without action
+   * DepartmentCountOutputType without action
    */
-  export type DepatamentCountOutputTypeCountCitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: cityWhereInput
+  export type DepartmentCountOutputTypeCountCitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CityWhereInput
   }
 
 
@@ -1772,11 +1772,11 @@ export namespace Prisma {
    */
 
   export type InventoryCountOutputType = {
-    historical_movement: number
+    historicalMovement: number
   }
 
   export type InventoryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    historical_movement?: boolean | InventoryCountOutputTypeCountHistorical_movementArgs
+    historicalMovement?: boolean | InventoryCountOutputTypeCountHistoricalMovementArgs
   }
 
   // Custom InputTypes
@@ -1793,8 +1793,8 @@ export namespace Prisma {
   /**
    * InventoryCountOutputType without action
    */
-  export type InventoryCountOutputTypeCountHistorical_movementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: historical_movementWhereInput
+  export type InventoryCountOutputTypeCountHistoricalMovementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: HistoricalMovementWhereInput
   }
 
 
@@ -4144,7 +4144,7 @@ export namespace Prisma {
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    city?: boolean | cityDefaultArgs<ExtArgs>
+    city?: boolean | CityDefaultArgs<ExtArgs>
     orders?: boolean | Store$ordersArgs<ExtArgs>
     inventory?: boolean | Store$inventoryArgs<ExtArgs>
     _count?: boolean | StoreCountOutputTypeDefaultArgs<ExtArgs>
@@ -4168,7 +4168,7 @@ export namespace Prisma {
 
   export type StoreOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "address" | "latitude" | "longitude" | "cityId" | "capacity" | "zipCode" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["store"]>
   export type StoreInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    city?: boolean | cityDefaultArgs<ExtArgs>
+    city?: boolean | CityDefaultArgs<ExtArgs>
     orders?: boolean | Store$ordersArgs<ExtArgs>
     inventory?: boolean | Store$inventoryArgs<ExtArgs>
     _count?: boolean | StoreCountOutputTypeDefaultArgs<ExtArgs>
@@ -4177,7 +4177,7 @@ export namespace Prisma {
   export type $StorePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Store"
     objects: {
-      city: Prisma.$cityPayload<ExtArgs>
+      city: Prisma.$CityPayload<ExtArgs>
       orders: Prisma.$OrderPayload<ExtArgs>[]
       inventory: Prisma.$InventoryPayload<ExtArgs>[]
     }
@@ -4533,7 +4533,7 @@ export namespace Prisma {
    */
   export interface Prisma__StoreClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    city<T extends cityDefaultArgs<ExtArgs> = {}>(args?: Subset<T, cityDefaultArgs<ExtArgs>>): Prisma__cityClient<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    city<T extends CityDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CityDefaultArgs<ExtArgs>>): Prisma__CityClient<$Result.GetResult<Prisma.$CityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     orders<T extends Store$ordersArgs<ExtArgs> = {}>(args?: Subset<T, Store$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     inventory<T extends Store$inventoryArgs<ExtArgs> = {}>(args?: Subset<T, Store$inventoryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InventoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -4986,7 +4986,7 @@ export namespace Prisma {
 
 
   /**
-   * Model city
+   * Model City
    */
 
   export type AggregateCity = {
@@ -4999,96 +4999,96 @@ export namespace Prisma {
 
   export type CityAvgAggregateOutputType = {
     id: number | null
-    depatamentId: number | null
+    departmentId: number | null
   }
 
   export type CitySumAggregateOutputType = {
     id: number | null
-    depatamentId: number | null
+    departmentId: number | null
   }
 
   export type CityMinAggregateOutputType = {
     id: number | null
     name: string | null
-    depatamentId: number | null
+    departmentId: number | null
   }
 
   export type CityMaxAggregateOutputType = {
     id: number | null
     name: string | null
-    depatamentId: number | null
+    departmentId: number | null
   }
 
   export type CityCountAggregateOutputType = {
     id: number
     name: number
-    depatamentId: number
+    departmentId: number
     _all: number
   }
 
 
   export type CityAvgAggregateInputType = {
     id?: true
-    depatamentId?: true
+    departmentId?: true
   }
 
   export type CitySumAggregateInputType = {
     id?: true
-    depatamentId?: true
+    departmentId?: true
   }
 
   export type CityMinAggregateInputType = {
     id?: true
     name?: true
-    depatamentId?: true
+    departmentId?: true
   }
 
   export type CityMaxAggregateInputType = {
     id?: true
     name?: true
-    depatamentId?: true
+    departmentId?: true
   }
 
   export type CityCountAggregateInputType = {
     id?: true
     name?: true
-    depatamentId?: true
+    departmentId?: true
     _all?: true
   }
 
   export type CityAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which city to aggregate.
+     * Filter which City to aggregate.
      */
-    where?: cityWhereInput
+    where?: CityWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of cities to fetch.
+     * Determine the order of Cities to fetch.
      */
-    orderBy?: cityOrderByWithRelationInput | cityOrderByWithRelationInput[]
+    orderBy?: CityOrderByWithRelationInput | CityOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: cityWhereUniqueInput
+    cursor?: CityWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` cities from the position of the cursor.
+     * Take `±n` Cities from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` cities.
+     * Skip the first `n` Cities.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned cities
+     * Count returned Cities
     **/
     _count?: true | CityCountAggregateInputType
     /**
@@ -5128,11 +5128,11 @@ export namespace Prisma {
 
 
 
-  export type cityGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: cityWhereInput
-    orderBy?: cityOrderByWithAggregationInput | cityOrderByWithAggregationInput[]
+  export type CityGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CityWhereInput
+    orderBy?: CityOrderByWithAggregationInput | CityOrderByWithAggregationInput[]
     by: CityScalarFieldEnum[] | CityScalarFieldEnum
-    having?: cityScalarWhereWithAggregatesInput
+    having?: CityScalarWhereWithAggregatesInput
     take?: number
     skip?: number
     _count?: CityCountAggregateInputType | true
@@ -5145,7 +5145,7 @@ export namespace Prisma {
   export type CityGroupByOutputType = {
     id: number
     name: string
-    depatamentId: number
+    departmentId: number
     _count: CityCountAggregateOutputType | null
     _avg: CityAvgAggregateOutputType | null
     _sum: CitySumAggregateOutputType | null
@@ -5153,7 +5153,7 @@ export namespace Prisma {
     _max: CityMaxAggregateOutputType | null
   }
 
-  type GetCityGroupByPayload<T extends cityGroupByArgs> = Prisma.PrismaPromise<
+  type GetCityGroupByPayload<T extends CityGroupByArgs> = Prisma.PrismaPromise<
     Array<
       PickEnumerable<CityGroupByOutputType, T['by']> &
         {
@@ -5167,56 +5167,56 @@ export namespace Prisma {
     >
 
 
-  export type citySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type CitySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    depatamentId?: boolean
-    depatament?: boolean | DepatamentDefaultArgs<ExtArgs>
-    stores?: boolean | city$storesArgs<ExtArgs>
+    departmentId?: boolean
+    department?: boolean | DepartmentDefaultArgs<ExtArgs>
+    stores?: boolean | City$storesArgs<ExtArgs>
     _count?: boolean | CityCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["city"]>
 
 
 
-  export type citySelectScalar = {
+  export type CitySelectScalar = {
     id?: boolean
     name?: boolean
-    depatamentId?: boolean
+    departmentId?: boolean
   }
 
-  export type cityOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "depatamentId", ExtArgs["result"]["city"]>
-  export type cityInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    depatament?: boolean | DepatamentDefaultArgs<ExtArgs>
-    stores?: boolean | city$storesArgs<ExtArgs>
+  export type CityOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "departmentId", ExtArgs["result"]["city"]>
+  export type CityInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    department?: boolean | DepartmentDefaultArgs<ExtArgs>
+    stores?: boolean | City$storesArgs<ExtArgs>
     _count?: boolean | CityCountOutputTypeDefaultArgs<ExtArgs>
   }
 
-  export type $cityPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "city"
+  export type $CityPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "City"
     objects: {
-      depatament: Prisma.$DepatamentPayload<ExtArgs>
+      department: Prisma.$DepartmentPayload<ExtArgs>
       stores: Prisma.$StorePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       name: string
-      depatamentId: number
+      departmentId: number
     }, ExtArgs["result"]["city"]>
     composites: {}
   }
 
-  type cityGetPayload<S extends boolean | null | undefined | cityDefaultArgs> = $Result.GetResult<Prisma.$cityPayload, S>
+  type CityGetPayload<S extends boolean | null | undefined | CityDefaultArgs> = $Result.GetResult<Prisma.$CityPayload, S>
 
-  type cityCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<cityFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+  type CityCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CityFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
       select?: CityCountAggregateInputType | true
     }
 
-  export interface cityDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['city'], meta: { name: 'city' } }
+  export interface CityDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['City'], meta: { name: 'City' } }
     /**
      * Find zero or one City that matches the filter.
-     * @param {cityFindUniqueArgs} args - Arguments to find a City
+     * @param {CityFindUniqueArgs} args - Arguments to find a City
      * @example
      * // Get one City
      * const city = await prisma.city.findUnique({
@@ -5225,12 +5225,12 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends cityFindUniqueArgs>(args: SelectSubset<T, cityFindUniqueArgs<ExtArgs>>): Prisma__cityClient<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends CityFindUniqueArgs>(args: SelectSubset<T, CityFindUniqueArgs<ExtArgs>>): Prisma__CityClient<$Result.GetResult<Prisma.$CityPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find one City that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {cityFindUniqueOrThrowArgs} args - Arguments to find a City
+     * @param {CityFindUniqueOrThrowArgs} args - Arguments to find a City
      * @example
      * // Get one City
      * const city = await prisma.city.findUniqueOrThrow({
@@ -5239,13 +5239,13 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends cityFindUniqueOrThrowArgs>(args: SelectSubset<T, cityFindUniqueOrThrowArgs<ExtArgs>>): Prisma__cityClient<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends CityFindUniqueOrThrowArgs>(args: SelectSubset<T, CityFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CityClient<$Result.GetResult<Prisma.$CityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first City that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {cityFindFirstArgs} args - Arguments to find a City
+     * @param {CityFindFirstArgs} args - Arguments to find a City
      * @example
      * // Get one City
      * const city = await prisma.city.findFirst({
@@ -5254,14 +5254,14 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends cityFindFirstArgs>(args?: SelectSubset<T, cityFindFirstArgs<ExtArgs>>): Prisma__cityClient<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends CityFindFirstArgs>(args?: SelectSubset<T, CityFindFirstArgs<ExtArgs>>): Prisma__CityClient<$Result.GetResult<Prisma.$CityPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first City that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {cityFindFirstOrThrowArgs} args - Arguments to find a City
+     * @param {CityFindFirstOrThrowArgs} args - Arguments to find a City
      * @example
      * // Get one City
      * const city = await prisma.city.findFirstOrThrow({
@@ -5270,13 +5270,13 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends cityFindFirstOrThrowArgs>(args?: SelectSubset<T, cityFindFirstOrThrowArgs<ExtArgs>>): Prisma__cityClient<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends CityFindFirstOrThrowArgs>(args?: SelectSubset<T, CityFindFirstOrThrowArgs<ExtArgs>>): Prisma__CityClient<$Result.GetResult<Prisma.$CityPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find zero or more Cities that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {cityFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {CityFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all Cities
      * const cities = await prisma.city.findMany()
@@ -5288,11 +5288,11 @@ export namespace Prisma {
      * const cityWithIdOnly = await prisma.city.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends cityFindManyArgs>(args?: SelectSubset<T, cityFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends CityFindManyArgs>(args?: SelectSubset<T, CityFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
      * Create a City.
-     * @param {cityCreateArgs} args - Arguments to create a City.
+     * @param {CityCreateArgs} args - Arguments to create a City.
      * @example
      * // Create one City
      * const City = await prisma.city.create({
@@ -5302,11 +5302,11 @@ export namespace Prisma {
      * })
      * 
      */
-    create<T extends cityCreateArgs>(args: SelectSubset<T, cityCreateArgs<ExtArgs>>): Prisma__cityClient<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends CityCreateArgs>(args: SelectSubset<T, CityCreateArgs<ExtArgs>>): Prisma__CityClient<$Result.GetResult<Prisma.$CityPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Create many Cities.
-     * @param {cityCreateManyArgs} args - Arguments to create many Cities.
+     * @param {CityCreateManyArgs} args - Arguments to create many Cities.
      * @example
      * // Create many Cities
      * const city = await prisma.city.createMany({
@@ -5316,11 +5316,11 @@ export namespace Prisma {
      * })
      *     
      */
-    createMany<T extends cityCreateManyArgs>(args?: SelectSubset<T, cityCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends CityCreateManyArgs>(args?: SelectSubset<T, CityCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Delete a City.
-     * @param {cityDeleteArgs} args - Arguments to delete one City.
+     * @param {CityDeleteArgs} args - Arguments to delete one City.
      * @example
      * // Delete one City
      * const City = await prisma.city.delete({
@@ -5330,11 +5330,11 @@ export namespace Prisma {
      * })
      * 
      */
-    delete<T extends cityDeleteArgs>(args: SelectSubset<T, cityDeleteArgs<ExtArgs>>): Prisma__cityClient<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends CityDeleteArgs>(args: SelectSubset<T, CityDeleteArgs<ExtArgs>>): Prisma__CityClient<$Result.GetResult<Prisma.$CityPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Update one City.
-     * @param {cityUpdateArgs} args - Arguments to update one City.
+     * @param {CityUpdateArgs} args - Arguments to update one City.
      * @example
      * // Update one City
      * const city = await prisma.city.update({
@@ -5347,11 +5347,11 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends cityUpdateArgs>(args: SelectSubset<T, cityUpdateArgs<ExtArgs>>): Prisma__cityClient<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends CityUpdateArgs>(args: SelectSubset<T, CityUpdateArgs<ExtArgs>>): Prisma__CityClient<$Result.GetResult<Prisma.$CityPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Delete zero or more Cities.
-     * @param {cityDeleteManyArgs} args - Arguments to filter Cities to delete.
+     * @param {CityDeleteManyArgs} args - Arguments to filter Cities to delete.
      * @example
      * // Delete a few Cities
      * const { count } = await prisma.city.deleteMany({
@@ -5361,13 +5361,13 @@ export namespace Prisma {
      * })
      * 
      */
-    deleteMany<T extends cityDeleteManyArgs>(args?: SelectSubset<T, cityDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends CityDeleteManyArgs>(args?: SelectSubset<T, CityDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Cities.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {cityUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {CityUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
      * // Update many Cities
      * const city = await prisma.city.updateMany({
@@ -5380,11 +5380,11 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends cityUpdateManyArgs>(args: SelectSubset<T, cityUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends CityUpdateManyArgs>(args: SelectSubset<T, CityUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Create or update one City.
-     * @param {cityUpsertArgs} args - Arguments to update or create a City.
+     * @param {CityUpsertArgs} args - Arguments to update or create a City.
      * @example
      * // Update or create a City
      * const city = await prisma.city.upsert({
@@ -5399,14 +5399,14 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends cityUpsertArgs>(args: SelectSubset<T, cityUpsertArgs<ExtArgs>>): Prisma__cityClient<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends CityUpsertArgs>(args: SelectSubset<T, CityUpsertArgs<ExtArgs>>): Prisma__CityClient<$Result.GetResult<Prisma.$CityPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
      * Count the number of Cities.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {cityCountArgs} args - Arguments to filter Cities to count.
+     * @param {CityCountArgs} args - Arguments to filter Cities to count.
      * @example
      * // Count the number of Cities
      * const count = await prisma.city.count({
@@ -5415,8 +5415,8 @@ export namespace Prisma {
      *   }
      * })
     **/
-    count<T extends cityCountArgs>(
-      args?: Subset<T, cityCountArgs>,
+    count<T extends CityCountArgs>(
+      args?: Subset<T, CityCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
@@ -5455,7 +5455,7 @@ export namespace Prisma {
      * Group by City.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {cityGroupByArgs} args - Group by arguments.
+     * @param {CityGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -5470,14 +5470,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends cityGroupByArgs,
+      T extends CityGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: cityGroupByArgs['orderBy'] }
-        : { orderBy?: cityGroupByArgs['orderBy'] },
+        ? { orderBy: CityGroupByArgs['orderBy'] }
+        : { orderBy?: CityGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -5526,23 +5526,23 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, cityGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCityGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, CityGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCityGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the city model
+   * Fields of the City model
    */
-  readonly fields: cityFieldRefs;
+  readonly fields: CityFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for city.
+   * The delegate class that acts as a "Promise-like" for City.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__cityClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__CityClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    depatament<T extends DepatamentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DepatamentDefaultArgs<ExtArgs>>): Prisma__DepatamentClient<$Result.GetResult<Prisma.$DepatamentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    stores<T extends city$storesArgs<ExtArgs> = {}>(args?: Subset<T, city$storesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    department<T extends DepartmentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DepartmentDefaultArgs<ExtArgs>>): Prisma__DepartmentClient<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    stores<T extends City$storesArgs<ExtArgs> = {}>(args?: Subset<T, City$storesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5569,358 +5569,358 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the city model
+   * Fields of the City model
    */
-  interface cityFieldRefs {
-    readonly id: FieldRef<"city", 'Int'>
-    readonly name: FieldRef<"city", 'String'>
-    readonly depatamentId: FieldRef<"city", 'Int'>
+  interface CityFieldRefs {
+    readonly id: FieldRef<"City", 'Int'>
+    readonly name: FieldRef<"City", 'String'>
+    readonly departmentId: FieldRef<"City", 'Int'>
   }
     
 
   // Custom InputTypes
   /**
-   * city findUnique
+   * City findUnique
    */
-  export type cityFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CityFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the city
+     * Select specific fields to fetch from the City
      */
-    select?: citySelect<ExtArgs> | null
+    select?: CitySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the city
+     * Omit specific fields from the City
      */
-    omit?: cityOmit<ExtArgs> | null
+    omit?: CityOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: cityInclude<ExtArgs> | null
+    include?: CityInclude<ExtArgs> | null
     /**
-     * Filter, which city to fetch.
+     * Filter, which City to fetch.
      */
-    where: cityWhereUniqueInput
+    where: CityWhereUniqueInput
   }
 
   /**
-   * city findUniqueOrThrow
+   * City findUniqueOrThrow
    */
-  export type cityFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CityFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the city
+     * Select specific fields to fetch from the City
      */
-    select?: citySelect<ExtArgs> | null
+    select?: CitySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the city
+     * Omit specific fields from the City
      */
-    omit?: cityOmit<ExtArgs> | null
+    omit?: CityOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: cityInclude<ExtArgs> | null
+    include?: CityInclude<ExtArgs> | null
     /**
-     * Filter, which city to fetch.
+     * Filter, which City to fetch.
      */
-    where: cityWhereUniqueInput
+    where: CityWhereUniqueInput
   }
 
   /**
-   * city findFirst
+   * City findFirst
    */
-  export type cityFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CityFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the city
+     * Select specific fields to fetch from the City
      */
-    select?: citySelect<ExtArgs> | null
+    select?: CitySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the city
+     * Omit specific fields from the City
      */
-    omit?: cityOmit<ExtArgs> | null
+    omit?: CityOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: cityInclude<ExtArgs> | null
+    include?: CityInclude<ExtArgs> | null
     /**
-     * Filter, which city to fetch.
+     * Filter, which City to fetch.
      */
-    where?: cityWhereInput
+    where?: CityWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of cities to fetch.
+     * Determine the order of Cities to fetch.
      */
-    orderBy?: cityOrderByWithRelationInput | cityOrderByWithRelationInput[]
+    orderBy?: CityOrderByWithRelationInput | CityOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for cities.
+     * Sets the position for searching for Cities.
      */
-    cursor?: cityWhereUniqueInput
+    cursor?: CityWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` cities from the position of the cursor.
+     * Take `±n` Cities from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` cities.
+     * Skip the first `n` Cities.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of cities.
+     * Filter by unique combinations of Cities.
      */
     distinct?: CityScalarFieldEnum | CityScalarFieldEnum[]
   }
 
   /**
-   * city findFirstOrThrow
+   * City findFirstOrThrow
    */
-  export type cityFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CityFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the city
+     * Select specific fields to fetch from the City
      */
-    select?: citySelect<ExtArgs> | null
+    select?: CitySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the city
+     * Omit specific fields from the City
      */
-    omit?: cityOmit<ExtArgs> | null
+    omit?: CityOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: cityInclude<ExtArgs> | null
+    include?: CityInclude<ExtArgs> | null
     /**
-     * Filter, which city to fetch.
+     * Filter, which City to fetch.
      */
-    where?: cityWhereInput
+    where?: CityWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of cities to fetch.
+     * Determine the order of Cities to fetch.
      */
-    orderBy?: cityOrderByWithRelationInput | cityOrderByWithRelationInput[]
+    orderBy?: CityOrderByWithRelationInput | CityOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for cities.
+     * Sets the position for searching for Cities.
      */
-    cursor?: cityWhereUniqueInput
+    cursor?: CityWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` cities from the position of the cursor.
+     * Take `±n` Cities from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` cities.
+     * Skip the first `n` Cities.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of cities.
+     * Filter by unique combinations of Cities.
      */
     distinct?: CityScalarFieldEnum | CityScalarFieldEnum[]
   }
 
   /**
-   * city findMany
+   * City findMany
    */
-  export type cityFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CityFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the city
+     * Select specific fields to fetch from the City
      */
-    select?: citySelect<ExtArgs> | null
+    select?: CitySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the city
+     * Omit specific fields from the City
      */
-    omit?: cityOmit<ExtArgs> | null
+    omit?: CityOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: cityInclude<ExtArgs> | null
+    include?: CityInclude<ExtArgs> | null
     /**
-     * Filter, which cities to fetch.
+     * Filter, which Cities to fetch.
      */
-    where?: cityWhereInput
+    where?: CityWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of cities to fetch.
+     * Determine the order of Cities to fetch.
      */
-    orderBy?: cityOrderByWithRelationInput | cityOrderByWithRelationInput[]
+    orderBy?: CityOrderByWithRelationInput | CityOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing cities.
+     * Sets the position for listing Cities.
      */
-    cursor?: cityWhereUniqueInput
+    cursor?: CityWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` cities from the position of the cursor.
+     * Take `±n` Cities from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` cities.
+     * Skip the first `n` Cities.
      */
     skip?: number
     distinct?: CityScalarFieldEnum | CityScalarFieldEnum[]
   }
 
   /**
-   * city create
+   * City create
    */
-  export type cityCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CityCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the city
+     * Select specific fields to fetch from the City
      */
-    select?: citySelect<ExtArgs> | null
+    select?: CitySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the city
+     * Omit specific fields from the City
      */
-    omit?: cityOmit<ExtArgs> | null
+    omit?: CityOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: cityInclude<ExtArgs> | null
+    include?: CityInclude<ExtArgs> | null
     /**
-     * The data needed to create a city.
+     * The data needed to create a City.
      */
-    data: XOR<cityCreateInput, cityUncheckedCreateInput>
+    data: XOR<CityCreateInput, CityUncheckedCreateInput>
   }
 
   /**
-   * city createMany
+   * City createMany
    */
-  export type cityCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CityCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many cities.
+     * The data used to create many Cities.
      */
-    data: cityCreateManyInput | cityCreateManyInput[]
+    data: CityCreateManyInput | CityCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * city update
+   * City update
    */
-  export type cityUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CityUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the city
+     * Select specific fields to fetch from the City
      */
-    select?: citySelect<ExtArgs> | null
+    select?: CitySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the city
+     * Omit specific fields from the City
      */
-    omit?: cityOmit<ExtArgs> | null
+    omit?: CityOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: cityInclude<ExtArgs> | null
+    include?: CityInclude<ExtArgs> | null
     /**
-     * The data needed to update a city.
+     * The data needed to update a City.
      */
-    data: XOR<cityUpdateInput, cityUncheckedUpdateInput>
+    data: XOR<CityUpdateInput, CityUncheckedUpdateInput>
     /**
-     * Choose, which city to update.
+     * Choose, which City to update.
      */
-    where: cityWhereUniqueInput
+    where: CityWhereUniqueInput
   }
 
   /**
-   * city updateMany
+   * City updateMany
    */
-  export type cityUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CityUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update cities.
+     * The data used to update Cities.
      */
-    data: XOR<cityUpdateManyMutationInput, cityUncheckedUpdateManyInput>
+    data: XOR<CityUpdateManyMutationInput, CityUncheckedUpdateManyInput>
     /**
-     * Filter which cities to update
+     * Filter which Cities to update
      */
-    where?: cityWhereInput
+    where?: CityWhereInput
     /**
-     * Limit how many cities to update.
+     * Limit how many Cities to update.
      */
     limit?: number
   }
 
   /**
-   * city upsert
+   * City upsert
    */
-  export type cityUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CityUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the city
+     * Select specific fields to fetch from the City
      */
-    select?: citySelect<ExtArgs> | null
+    select?: CitySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the city
+     * Omit specific fields from the City
      */
-    omit?: cityOmit<ExtArgs> | null
+    omit?: CityOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: cityInclude<ExtArgs> | null
+    include?: CityInclude<ExtArgs> | null
     /**
-     * The filter to search for the city to update in case it exists.
+     * The filter to search for the City to update in case it exists.
      */
-    where: cityWhereUniqueInput
+    where: CityWhereUniqueInput
     /**
-     * In case the city found by the `where` argument doesn't exist, create a new city with this data.
+     * In case the City found by the `where` argument doesn't exist, create a new City with this data.
      */
-    create: XOR<cityCreateInput, cityUncheckedCreateInput>
+    create: XOR<CityCreateInput, CityUncheckedCreateInput>
     /**
-     * In case the city was found with the provided `where` argument, update it with this data.
+     * In case the City was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<cityUpdateInput, cityUncheckedUpdateInput>
+    update: XOR<CityUpdateInput, CityUncheckedUpdateInput>
   }
 
   /**
-   * city delete
+   * City delete
    */
-  export type cityDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CityDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the city
+     * Select specific fields to fetch from the City
      */
-    select?: citySelect<ExtArgs> | null
+    select?: CitySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the city
+     * Omit specific fields from the City
      */
-    omit?: cityOmit<ExtArgs> | null
+    omit?: CityOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: cityInclude<ExtArgs> | null
+    include?: CityInclude<ExtArgs> | null
     /**
-     * Filter which city to delete.
+     * Filter which City to delete.
      */
-    where: cityWhereUniqueInput
+    where: CityWhereUniqueInput
   }
 
   /**
-   * city deleteMany
+   * City deleteMany
    */
-  export type cityDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CityDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which cities to delete
+     * Filter which Cities to delete
      */
-    where?: cityWhereInput
+    where?: CityWhereInput
     /**
-     * Limit how many cities to delete.
+     * Limit how many Cities to delete.
      */
     limit?: number
   }
 
   /**
-   * city.stores
+   * City.stores
    */
-  export type city$storesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type City$storesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Store
      */
@@ -5942,360 +5942,360 @@ export namespace Prisma {
   }
 
   /**
-   * city without action
+   * City without action
    */
-  export type cityDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CityDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the city
+     * Select specific fields to fetch from the City
      */
-    select?: citySelect<ExtArgs> | null
+    select?: CitySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the city
+     * Omit specific fields from the City
      */
-    omit?: cityOmit<ExtArgs> | null
+    omit?: CityOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: cityInclude<ExtArgs> | null
+    include?: CityInclude<ExtArgs> | null
   }
 
 
   /**
-   * Model Depatament
+   * Model Department
    */
 
-  export type AggregateDepatament = {
-    _count: DepatamentCountAggregateOutputType | null
-    _avg: DepatamentAvgAggregateOutputType | null
-    _sum: DepatamentSumAggregateOutputType | null
-    _min: DepatamentMinAggregateOutputType | null
-    _max: DepatamentMaxAggregateOutputType | null
+  export type AggregateDepartment = {
+    _count: DepartmentCountAggregateOutputType | null
+    _avg: DepartmentAvgAggregateOutputType | null
+    _sum: DepartmentSumAggregateOutputType | null
+    _min: DepartmentMinAggregateOutputType | null
+    _max: DepartmentMaxAggregateOutputType | null
   }
 
-  export type DepatamentAvgAggregateOutputType = {
+  export type DepartmentAvgAggregateOutputType = {
     id: number | null
   }
 
-  export type DepatamentSumAggregateOutputType = {
+  export type DepartmentSumAggregateOutputType = {
     id: number | null
   }
 
-  export type DepatamentMinAggregateOutputType = {
-    id: number | null
-    name: string | null
-  }
-
-  export type DepatamentMaxAggregateOutputType = {
+  export type DepartmentMinAggregateOutputType = {
     id: number | null
     name: string | null
   }
 
-  export type DepatamentCountAggregateOutputType = {
+  export type DepartmentMaxAggregateOutputType = {
+    id: number | null
+    name: string | null
+  }
+
+  export type DepartmentCountAggregateOutputType = {
     id: number
     name: number
     _all: number
   }
 
 
-  export type DepatamentAvgAggregateInputType = {
+  export type DepartmentAvgAggregateInputType = {
     id?: true
   }
 
-  export type DepatamentSumAggregateInputType = {
+  export type DepartmentSumAggregateInputType = {
     id?: true
   }
 
-  export type DepatamentMinAggregateInputType = {
-    id?: true
-    name?: true
-  }
-
-  export type DepatamentMaxAggregateInputType = {
+  export type DepartmentMinAggregateInputType = {
     id?: true
     name?: true
   }
 
-  export type DepatamentCountAggregateInputType = {
+  export type DepartmentMaxAggregateInputType = {
+    id?: true
+    name?: true
+  }
+
+  export type DepartmentCountAggregateInputType = {
     id?: true
     name?: true
     _all?: true
   }
 
-  export type DepatamentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DepartmentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Depatament to aggregate.
+     * Filter which Department to aggregate.
      */
-    where?: DepatamentWhereInput
+    where?: DepartmentWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Depataments to fetch.
+     * Determine the order of Departments to fetch.
      */
-    orderBy?: DepatamentOrderByWithRelationInput | DepatamentOrderByWithRelationInput[]
+    orderBy?: DepartmentOrderByWithRelationInput | DepartmentOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: DepatamentWhereUniqueInput
+    cursor?: DepartmentWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Depataments from the position of the cursor.
+     * Take `±n` Departments from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Depataments.
+     * Skip the first `n` Departments.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned Depataments
+     * Count returned Departments
     **/
-    _count?: true | DepatamentCountAggregateInputType
+    _count?: true | DepartmentCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: DepatamentAvgAggregateInputType
+    _avg?: DepartmentAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: DepatamentSumAggregateInputType
+    _sum?: DepartmentSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: DepatamentMinAggregateInputType
+    _min?: DepartmentMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: DepatamentMaxAggregateInputType
+    _max?: DepartmentMaxAggregateInputType
   }
 
-  export type GetDepatamentAggregateType<T extends DepatamentAggregateArgs> = {
-        [P in keyof T & keyof AggregateDepatament]: P extends '_count' | 'count'
+  export type GetDepartmentAggregateType<T extends DepartmentAggregateArgs> = {
+        [P in keyof T & keyof AggregateDepartment]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateDepatament[P]>
-      : GetScalarType<T[P], AggregateDepatament[P]>
+        : GetScalarType<T[P], AggregateDepartment[P]>
+      : GetScalarType<T[P], AggregateDepartment[P]>
   }
 
 
 
 
-  export type DepatamentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: DepatamentWhereInput
-    orderBy?: DepatamentOrderByWithAggregationInput | DepatamentOrderByWithAggregationInput[]
-    by: DepatamentScalarFieldEnum[] | DepatamentScalarFieldEnum
-    having?: DepatamentScalarWhereWithAggregatesInput
+  export type DepartmentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DepartmentWhereInput
+    orderBy?: DepartmentOrderByWithAggregationInput | DepartmentOrderByWithAggregationInput[]
+    by: DepartmentScalarFieldEnum[] | DepartmentScalarFieldEnum
+    having?: DepartmentScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: DepatamentCountAggregateInputType | true
-    _avg?: DepatamentAvgAggregateInputType
-    _sum?: DepatamentSumAggregateInputType
-    _min?: DepatamentMinAggregateInputType
-    _max?: DepatamentMaxAggregateInputType
+    _count?: DepartmentCountAggregateInputType | true
+    _avg?: DepartmentAvgAggregateInputType
+    _sum?: DepartmentSumAggregateInputType
+    _min?: DepartmentMinAggregateInputType
+    _max?: DepartmentMaxAggregateInputType
   }
 
-  export type DepatamentGroupByOutputType = {
+  export type DepartmentGroupByOutputType = {
     id: number
     name: string
-    _count: DepatamentCountAggregateOutputType | null
-    _avg: DepatamentAvgAggregateOutputType | null
-    _sum: DepatamentSumAggregateOutputType | null
-    _min: DepatamentMinAggregateOutputType | null
-    _max: DepatamentMaxAggregateOutputType | null
+    _count: DepartmentCountAggregateOutputType | null
+    _avg: DepartmentAvgAggregateOutputType | null
+    _sum: DepartmentSumAggregateOutputType | null
+    _min: DepartmentMinAggregateOutputType | null
+    _max: DepartmentMaxAggregateOutputType | null
   }
 
-  type GetDepatamentGroupByPayload<T extends DepatamentGroupByArgs> = Prisma.PrismaPromise<
+  type GetDepartmentGroupByPayload<T extends DepartmentGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<DepatamentGroupByOutputType, T['by']> &
+      PickEnumerable<DepartmentGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof DepatamentGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof DepartmentGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], DepatamentGroupByOutputType[P]>
-            : GetScalarType<T[P], DepatamentGroupByOutputType[P]>
+              : GetScalarType<T[P], DepartmentGroupByOutputType[P]>
+            : GetScalarType<T[P], DepartmentGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type DepatamentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type DepartmentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    cities?: boolean | Depatament$citiesArgs<ExtArgs>
-    _count?: boolean | DepatamentCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["depatament"]>
+    cities?: boolean | Department$citiesArgs<ExtArgs>
+    _count?: boolean | DepartmentCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["department"]>
 
 
 
-  export type DepatamentSelectScalar = {
+  export type DepartmentSelectScalar = {
     id?: boolean
     name?: boolean
   }
 
-  export type DepatamentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name", ExtArgs["result"]["depatament"]>
-  export type DepatamentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    cities?: boolean | Depatament$citiesArgs<ExtArgs>
-    _count?: boolean | DepatamentCountOutputTypeDefaultArgs<ExtArgs>
+  export type DepartmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name", ExtArgs["result"]["department"]>
+  export type DepartmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    cities?: boolean | Department$citiesArgs<ExtArgs>
+    _count?: boolean | DepartmentCountOutputTypeDefaultArgs<ExtArgs>
   }
 
-  export type $DepatamentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Depatament"
+  export type $DepartmentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Department"
     objects: {
-      cities: Prisma.$cityPayload<ExtArgs>[]
+      cities: Prisma.$CityPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       name: string
-    }, ExtArgs["result"]["depatament"]>
+    }, ExtArgs["result"]["department"]>
     composites: {}
   }
 
-  type DepatamentGetPayload<S extends boolean | null | undefined | DepatamentDefaultArgs> = $Result.GetResult<Prisma.$DepatamentPayload, S>
+  type DepartmentGetPayload<S extends boolean | null | undefined | DepartmentDefaultArgs> = $Result.GetResult<Prisma.$DepartmentPayload, S>
 
-  type DepatamentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<DepatamentFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: DepatamentCountAggregateInputType | true
+  type DepartmentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DepartmentFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DepartmentCountAggregateInputType | true
     }
 
-  export interface DepatamentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Depatament'], meta: { name: 'Depatament' } }
+  export interface DepartmentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Department'], meta: { name: 'Department' } }
     /**
-     * Find zero or one Depatament that matches the filter.
-     * @param {DepatamentFindUniqueArgs} args - Arguments to find a Depatament
+     * Find zero or one Department that matches the filter.
+     * @param {DepartmentFindUniqueArgs} args - Arguments to find a Department
      * @example
-     * // Get one Depatament
-     * const depatament = await prisma.depatament.findUnique({
+     * // Get one Department
+     * const department = await prisma.department.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends DepatamentFindUniqueArgs>(args: SelectSubset<T, DepatamentFindUniqueArgs<ExtArgs>>): Prisma__DepatamentClient<$Result.GetResult<Prisma.$DepatamentPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends DepartmentFindUniqueArgs>(args: SelectSubset<T, DepartmentFindUniqueArgs<ExtArgs>>): Prisma__DepartmentClient<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one Depatament that matches the filter or throw an error with `error.code='P2025'`
+     * Find one Department that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {DepatamentFindUniqueOrThrowArgs} args - Arguments to find a Depatament
+     * @param {DepartmentFindUniqueOrThrowArgs} args - Arguments to find a Department
      * @example
-     * // Get one Depatament
-     * const depatament = await prisma.depatament.findUniqueOrThrow({
+     * // Get one Department
+     * const department = await prisma.department.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends DepatamentFindUniqueOrThrowArgs>(args: SelectSubset<T, DepatamentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DepatamentClient<$Result.GetResult<Prisma.$DepatamentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends DepartmentFindUniqueOrThrowArgs>(args: SelectSubset<T, DepartmentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DepartmentClient<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Depatament that matches the filter.
+     * Find the first Department that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {DepatamentFindFirstArgs} args - Arguments to find a Depatament
+     * @param {DepartmentFindFirstArgs} args - Arguments to find a Department
      * @example
-     * // Get one Depatament
-     * const depatament = await prisma.depatament.findFirst({
+     * // Get one Department
+     * const department = await prisma.department.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends DepatamentFindFirstArgs>(args?: SelectSubset<T, DepatamentFindFirstArgs<ExtArgs>>): Prisma__DepatamentClient<$Result.GetResult<Prisma.$DepatamentPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends DepartmentFindFirstArgs>(args?: SelectSubset<T, DepartmentFindFirstArgs<ExtArgs>>): Prisma__DepartmentClient<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Depatament that matches the filter or
+     * Find the first Department that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {DepatamentFindFirstOrThrowArgs} args - Arguments to find a Depatament
+     * @param {DepartmentFindFirstOrThrowArgs} args - Arguments to find a Department
      * @example
-     * // Get one Depatament
-     * const depatament = await prisma.depatament.findFirstOrThrow({
+     * // Get one Department
+     * const department = await prisma.department.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends DepatamentFindFirstOrThrowArgs>(args?: SelectSubset<T, DepatamentFindFirstOrThrowArgs<ExtArgs>>): Prisma__DepatamentClient<$Result.GetResult<Prisma.$DepatamentPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends DepartmentFindFirstOrThrowArgs>(args?: SelectSubset<T, DepartmentFindFirstOrThrowArgs<ExtArgs>>): Prisma__DepartmentClient<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more Depataments that matches the filter.
+     * Find zero or more Departments that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {DepatamentFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {DepartmentFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Depataments
-     * const depataments = await prisma.depatament.findMany()
+     * // Get all Departments
+     * const departments = await prisma.department.findMany()
      * 
-     * // Get first 10 Depataments
-     * const depataments = await prisma.depatament.findMany({ take: 10 })
+     * // Get first 10 Departments
+     * const departments = await prisma.department.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const depatamentWithIdOnly = await prisma.depatament.findMany({ select: { id: true } })
+     * const departmentWithIdOnly = await prisma.department.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends DepatamentFindManyArgs>(args?: SelectSubset<T, DepatamentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DepatamentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends DepartmentFindManyArgs>(args?: SelectSubset<T, DepartmentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a Depatament.
-     * @param {DepatamentCreateArgs} args - Arguments to create a Depatament.
+     * Create a Department.
+     * @param {DepartmentCreateArgs} args - Arguments to create a Department.
      * @example
-     * // Create one Depatament
-     * const Depatament = await prisma.depatament.create({
+     * // Create one Department
+     * const Department = await prisma.department.create({
      *   data: {
-     *     // ... data to create a Depatament
+     *     // ... data to create a Department
      *   }
      * })
      * 
      */
-    create<T extends DepatamentCreateArgs>(args: SelectSubset<T, DepatamentCreateArgs<ExtArgs>>): Prisma__DepatamentClient<$Result.GetResult<Prisma.$DepatamentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends DepartmentCreateArgs>(args: SelectSubset<T, DepartmentCreateArgs<ExtArgs>>): Prisma__DepartmentClient<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many Depataments.
-     * @param {DepatamentCreateManyArgs} args - Arguments to create many Depataments.
+     * Create many Departments.
+     * @param {DepartmentCreateManyArgs} args - Arguments to create many Departments.
      * @example
-     * // Create many Depataments
-     * const depatament = await prisma.depatament.createMany({
+     * // Create many Departments
+     * const department = await prisma.department.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends DepatamentCreateManyArgs>(args?: SelectSubset<T, DepatamentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends DepartmentCreateManyArgs>(args?: SelectSubset<T, DepartmentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Delete a Depatament.
-     * @param {DepatamentDeleteArgs} args - Arguments to delete one Depatament.
+     * Delete a Department.
+     * @param {DepartmentDeleteArgs} args - Arguments to delete one Department.
      * @example
-     * // Delete one Depatament
-     * const Depatament = await prisma.depatament.delete({
+     * // Delete one Department
+     * const Department = await prisma.department.delete({
      *   where: {
-     *     // ... filter to delete one Depatament
+     *     // ... filter to delete one Department
      *   }
      * })
      * 
      */
-    delete<T extends DepatamentDeleteArgs>(args: SelectSubset<T, DepatamentDeleteArgs<ExtArgs>>): Prisma__DepatamentClient<$Result.GetResult<Prisma.$DepatamentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends DepartmentDeleteArgs>(args: SelectSubset<T, DepartmentDeleteArgs<ExtArgs>>): Prisma__DepartmentClient<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one Depatament.
-     * @param {DepatamentUpdateArgs} args - Arguments to update one Depatament.
+     * Update one Department.
+     * @param {DepartmentUpdateArgs} args - Arguments to update one Department.
      * @example
-     * // Update one Depatament
-     * const depatament = await prisma.depatament.update({
+     * // Update one Department
+     * const department = await prisma.department.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -6305,30 +6305,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends DepatamentUpdateArgs>(args: SelectSubset<T, DepatamentUpdateArgs<ExtArgs>>): Prisma__DepatamentClient<$Result.GetResult<Prisma.$DepatamentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends DepartmentUpdateArgs>(args: SelectSubset<T, DepartmentUpdateArgs<ExtArgs>>): Prisma__DepartmentClient<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more Depataments.
-     * @param {DepatamentDeleteManyArgs} args - Arguments to filter Depataments to delete.
+     * Delete zero or more Departments.
+     * @param {DepartmentDeleteManyArgs} args - Arguments to filter Departments to delete.
      * @example
-     * // Delete a few Depataments
-     * const { count } = await prisma.depatament.deleteMany({
+     * // Delete a few Departments
+     * const { count } = await prisma.department.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends DepatamentDeleteManyArgs>(args?: SelectSubset<T, DepatamentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends DepartmentDeleteManyArgs>(args?: SelectSubset<T, DepartmentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Depataments.
+     * Update zero or more Departments.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {DepatamentUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {DepartmentUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Depataments
-     * const depatament = await prisma.depatament.updateMany({
+     * // Update many Departments
+     * const department = await prisma.department.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -6338,56 +6338,56 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends DepatamentUpdateManyArgs>(args: SelectSubset<T, DepatamentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends DepartmentUpdateManyArgs>(args: SelectSubset<T, DepartmentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create or update one Depatament.
-     * @param {DepatamentUpsertArgs} args - Arguments to update or create a Depatament.
+     * Create or update one Department.
+     * @param {DepartmentUpsertArgs} args - Arguments to update or create a Department.
      * @example
-     * // Update or create a Depatament
-     * const depatament = await prisma.depatament.upsert({
+     * // Update or create a Department
+     * const department = await prisma.department.upsert({
      *   create: {
-     *     // ... data to create a Depatament
+     *     // ... data to create a Department
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Depatament we want to update
+     *     // ... the filter for the Department we want to update
      *   }
      * })
      */
-    upsert<T extends DepatamentUpsertArgs>(args: SelectSubset<T, DepatamentUpsertArgs<ExtArgs>>): Prisma__DepatamentClient<$Result.GetResult<Prisma.$DepatamentPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends DepartmentUpsertArgs>(args: SelectSubset<T, DepartmentUpsertArgs<ExtArgs>>): Prisma__DepartmentClient<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of Depataments.
+     * Count the number of Departments.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {DepatamentCountArgs} args - Arguments to filter Depataments to count.
+     * @param {DepartmentCountArgs} args - Arguments to filter Departments to count.
      * @example
-     * // Count the number of Depataments
-     * const count = await prisma.depatament.count({
+     * // Count the number of Departments
+     * const count = await prisma.department.count({
      *   where: {
-     *     // ... the filter for the Depataments we want to count
+     *     // ... the filter for the Departments we want to count
      *   }
      * })
     **/
-    count<T extends DepatamentCountArgs>(
-      args?: Subset<T, DepatamentCountArgs>,
+    count<T extends DepartmentCountArgs>(
+      args?: Subset<T, DepartmentCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], DepatamentCountAggregateOutputType>
+          : GetScalarType<T['select'], DepartmentCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Depatament.
+     * Allows you to perform aggregations operations on a Department.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {DepatamentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {DepartmentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -6407,13 +6407,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends DepatamentAggregateArgs>(args: Subset<T, DepatamentAggregateArgs>): Prisma.PrismaPromise<GetDepatamentAggregateType<T>>
+    aggregate<T extends DepartmentAggregateArgs>(args: Subset<T, DepartmentAggregateArgs>): Prisma.PrismaPromise<GetDepartmentAggregateType<T>>
 
     /**
-     * Group by Depatament.
+     * Group by Department.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {DepatamentGroupByArgs} args - Group by arguments.
+     * @param {DepartmentGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -6428,14 +6428,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends DepatamentGroupByArgs,
+      T extends DepartmentGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: DepatamentGroupByArgs['orderBy'] }
-        : { orderBy?: DepatamentGroupByArgs['orderBy'] },
+        ? { orderBy: DepartmentGroupByArgs['orderBy'] }
+        : { orderBy?: DepartmentGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -6484,22 +6484,22 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, DepatamentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDepatamentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, DepartmentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDepartmentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the Depatament model
+   * Fields of the Department model
    */
-  readonly fields: DepatamentFieldRefs;
+  readonly fields: DepartmentFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for Depatament.
+   * The delegate class that acts as a "Promise-like" for Department.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__DepatamentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__DepartmentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    cities<T extends Depatament$citiesArgs<ExtArgs> = {}>(args?: Subset<T, Depatament$citiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$cityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    cities<T extends Department$citiesArgs<ExtArgs> = {}>(args?: Subset<T, Department$citiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6526,393 +6526,393 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the Depatament model
+   * Fields of the Department model
    */
-  interface DepatamentFieldRefs {
-    readonly id: FieldRef<"Depatament", 'Int'>
-    readonly name: FieldRef<"Depatament", 'String'>
+  interface DepartmentFieldRefs {
+    readonly id: FieldRef<"Department", 'Int'>
+    readonly name: FieldRef<"Department", 'String'>
   }
     
 
   // Custom InputTypes
   /**
-   * Depatament findUnique
+   * Department findUnique
    */
-  export type DepatamentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DepartmentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Depatament
+     * Select specific fields to fetch from the Department
      */
-    select?: DepatamentSelect<ExtArgs> | null
+    select?: DepartmentSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Depatament
+     * Omit specific fields from the Department
      */
-    omit?: DepatamentOmit<ExtArgs> | null
+    omit?: DepartmentOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: DepatamentInclude<ExtArgs> | null
+    include?: DepartmentInclude<ExtArgs> | null
     /**
-     * Filter, which Depatament to fetch.
+     * Filter, which Department to fetch.
      */
-    where: DepatamentWhereUniqueInput
+    where: DepartmentWhereUniqueInput
   }
 
   /**
-   * Depatament findUniqueOrThrow
+   * Department findUniqueOrThrow
    */
-  export type DepatamentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DepartmentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Depatament
+     * Select specific fields to fetch from the Department
      */
-    select?: DepatamentSelect<ExtArgs> | null
+    select?: DepartmentSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Depatament
+     * Omit specific fields from the Department
      */
-    omit?: DepatamentOmit<ExtArgs> | null
+    omit?: DepartmentOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: DepatamentInclude<ExtArgs> | null
+    include?: DepartmentInclude<ExtArgs> | null
     /**
-     * Filter, which Depatament to fetch.
+     * Filter, which Department to fetch.
      */
-    where: DepatamentWhereUniqueInput
+    where: DepartmentWhereUniqueInput
   }
 
   /**
-   * Depatament findFirst
+   * Department findFirst
    */
-  export type DepatamentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DepartmentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Depatament
+     * Select specific fields to fetch from the Department
      */
-    select?: DepatamentSelect<ExtArgs> | null
+    select?: DepartmentSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Depatament
+     * Omit specific fields from the Department
      */
-    omit?: DepatamentOmit<ExtArgs> | null
+    omit?: DepartmentOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: DepatamentInclude<ExtArgs> | null
+    include?: DepartmentInclude<ExtArgs> | null
     /**
-     * Filter, which Depatament to fetch.
+     * Filter, which Department to fetch.
      */
-    where?: DepatamentWhereInput
+    where?: DepartmentWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Depataments to fetch.
+     * Determine the order of Departments to fetch.
      */
-    orderBy?: DepatamentOrderByWithRelationInput | DepatamentOrderByWithRelationInput[]
+    orderBy?: DepartmentOrderByWithRelationInput | DepartmentOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Depataments.
+     * Sets the position for searching for Departments.
      */
-    cursor?: DepatamentWhereUniqueInput
+    cursor?: DepartmentWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Depataments from the position of the cursor.
+     * Take `±n` Departments from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Depataments.
+     * Skip the first `n` Departments.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Depataments.
+     * Filter by unique combinations of Departments.
      */
-    distinct?: DepatamentScalarFieldEnum | DepatamentScalarFieldEnum[]
+    distinct?: DepartmentScalarFieldEnum | DepartmentScalarFieldEnum[]
   }
 
   /**
-   * Depatament findFirstOrThrow
+   * Department findFirstOrThrow
    */
-  export type DepatamentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DepartmentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Depatament
+     * Select specific fields to fetch from the Department
      */
-    select?: DepatamentSelect<ExtArgs> | null
+    select?: DepartmentSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Depatament
+     * Omit specific fields from the Department
      */
-    omit?: DepatamentOmit<ExtArgs> | null
+    omit?: DepartmentOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: DepatamentInclude<ExtArgs> | null
+    include?: DepartmentInclude<ExtArgs> | null
     /**
-     * Filter, which Depatament to fetch.
+     * Filter, which Department to fetch.
      */
-    where?: DepatamentWhereInput
+    where?: DepartmentWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Depataments to fetch.
+     * Determine the order of Departments to fetch.
      */
-    orderBy?: DepatamentOrderByWithRelationInput | DepatamentOrderByWithRelationInput[]
+    orderBy?: DepartmentOrderByWithRelationInput | DepartmentOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Depataments.
+     * Sets the position for searching for Departments.
      */
-    cursor?: DepatamentWhereUniqueInput
+    cursor?: DepartmentWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Depataments from the position of the cursor.
+     * Take `±n` Departments from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Depataments.
+     * Skip the first `n` Departments.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Depataments.
+     * Filter by unique combinations of Departments.
      */
-    distinct?: DepatamentScalarFieldEnum | DepatamentScalarFieldEnum[]
+    distinct?: DepartmentScalarFieldEnum | DepartmentScalarFieldEnum[]
   }
 
   /**
-   * Depatament findMany
+   * Department findMany
    */
-  export type DepatamentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DepartmentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Depatament
+     * Select specific fields to fetch from the Department
      */
-    select?: DepatamentSelect<ExtArgs> | null
+    select?: DepartmentSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Depatament
+     * Omit specific fields from the Department
      */
-    omit?: DepatamentOmit<ExtArgs> | null
+    omit?: DepartmentOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: DepatamentInclude<ExtArgs> | null
+    include?: DepartmentInclude<ExtArgs> | null
     /**
-     * Filter, which Depataments to fetch.
+     * Filter, which Departments to fetch.
      */
-    where?: DepatamentWhereInput
+    where?: DepartmentWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Depataments to fetch.
+     * Determine the order of Departments to fetch.
      */
-    orderBy?: DepatamentOrderByWithRelationInput | DepatamentOrderByWithRelationInput[]
+    orderBy?: DepartmentOrderByWithRelationInput | DepartmentOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing Depataments.
+     * Sets the position for listing Departments.
      */
-    cursor?: DepatamentWhereUniqueInput
+    cursor?: DepartmentWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Depataments from the position of the cursor.
+     * Take `±n` Departments from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Depataments.
+     * Skip the first `n` Departments.
      */
     skip?: number
-    distinct?: DepatamentScalarFieldEnum | DepatamentScalarFieldEnum[]
+    distinct?: DepartmentScalarFieldEnum | DepartmentScalarFieldEnum[]
   }
 
   /**
-   * Depatament create
+   * Department create
    */
-  export type DepatamentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DepartmentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Depatament
+     * Select specific fields to fetch from the Department
      */
-    select?: DepatamentSelect<ExtArgs> | null
+    select?: DepartmentSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Depatament
+     * Omit specific fields from the Department
      */
-    omit?: DepatamentOmit<ExtArgs> | null
+    omit?: DepartmentOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: DepatamentInclude<ExtArgs> | null
+    include?: DepartmentInclude<ExtArgs> | null
     /**
-     * The data needed to create a Depatament.
+     * The data needed to create a Department.
      */
-    data: XOR<DepatamentCreateInput, DepatamentUncheckedCreateInput>
+    data: XOR<DepartmentCreateInput, DepartmentUncheckedCreateInput>
   }
 
   /**
-   * Depatament createMany
+   * Department createMany
    */
-  export type DepatamentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DepartmentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many Depataments.
+     * The data used to create many Departments.
      */
-    data: DepatamentCreateManyInput | DepatamentCreateManyInput[]
+    data: DepartmentCreateManyInput | DepartmentCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * Depatament update
+   * Department update
    */
-  export type DepatamentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DepartmentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Depatament
+     * Select specific fields to fetch from the Department
      */
-    select?: DepatamentSelect<ExtArgs> | null
+    select?: DepartmentSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Depatament
+     * Omit specific fields from the Department
      */
-    omit?: DepatamentOmit<ExtArgs> | null
+    omit?: DepartmentOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: DepatamentInclude<ExtArgs> | null
+    include?: DepartmentInclude<ExtArgs> | null
     /**
-     * The data needed to update a Depatament.
+     * The data needed to update a Department.
      */
-    data: XOR<DepatamentUpdateInput, DepatamentUncheckedUpdateInput>
+    data: XOR<DepartmentUpdateInput, DepartmentUncheckedUpdateInput>
     /**
-     * Choose, which Depatament to update.
+     * Choose, which Department to update.
      */
-    where: DepatamentWhereUniqueInput
+    where: DepartmentWhereUniqueInput
   }
 
   /**
-   * Depatament updateMany
+   * Department updateMany
    */
-  export type DepatamentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DepartmentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update Depataments.
+     * The data used to update Departments.
      */
-    data: XOR<DepatamentUpdateManyMutationInput, DepatamentUncheckedUpdateManyInput>
+    data: XOR<DepartmentUpdateManyMutationInput, DepartmentUncheckedUpdateManyInput>
     /**
-     * Filter which Depataments to update
+     * Filter which Departments to update
      */
-    where?: DepatamentWhereInput
+    where?: DepartmentWhereInput
     /**
-     * Limit how many Depataments to update.
+     * Limit how many Departments to update.
      */
     limit?: number
   }
 
   /**
-   * Depatament upsert
+   * Department upsert
    */
-  export type DepatamentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DepartmentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Depatament
+     * Select specific fields to fetch from the Department
      */
-    select?: DepatamentSelect<ExtArgs> | null
+    select?: DepartmentSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Depatament
+     * Omit specific fields from the Department
      */
-    omit?: DepatamentOmit<ExtArgs> | null
+    omit?: DepartmentOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: DepatamentInclude<ExtArgs> | null
+    include?: DepartmentInclude<ExtArgs> | null
     /**
-     * The filter to search for the Depatament to update in case it exists.
+     * The filter to search for the Department to update in case it exists.
      */
-    where: DepatamentWhereUniqueInput
+    where: DepartmentWhereUniqueInput
     /**
-     * In case the Depatament found by the `where` argument doesn't exist, create a new Depatament with this data.
+     * In case the Department found by the `where` argument doesn't exist, create a new Department with this data.
      */
-    create: XOR<DepatamentCreateInput, DepatamentUncheckedCreateInput>
+    create: XOR<DepartmentCreateInput, DepartmentUncheckedCreateInput>
     /**
-     * In case the Depatament was found with the provided `where` argument, update it with this data.
+     * In case the Department was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<DepatamentUpdateInput, DepatamentUncheckedUpdateInput>
+    update: XOR<DepartmentUpdateInput, DepartmentUncheckedUpdateInput>
   }
 
   /**
-   * Depatament delete
+   * Department delete
    */
-  export type DepatamentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DepartmentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Depatament
+     * Select specific fields to fetch from the Department
      */
-    select?: DepatamentSelect<ExtArgs> | null
+    select?: DepartmentSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Depatament
+     * Omit specific fields from the Department
      */
-    omit?: DepatamentOmit<ExtArgs> | null
+    omit?: DepartmentOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: DepatamentInclude<ExtArgs> | null
+    include?: DepartmentInclude<ExtArgs> | null
     /**
-     * Filter which Depatament to delete.
+     * Filter which Department to delete.
      */
-    where: DepatamentWhereUniqueInput
+    where: DepartmentWhereUniqueInput
   }
 
   /**
-   * Depatament deleteMany
+   * Department deleteMany
    */
-  export type DepatamentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DepartmentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Depataments to delete
+     * Filter which Departments to delete
      */
-    where?: DepatamentWhereInput
+    where?: DepartmentWhereInput
     /**
-     * Limit how many Depataments to delete.
+     * Limit how many Departments to delete.
      */
     limit?: number
   }
 
   /**
-   * Depatament.cities
+   * Department.cities
    */
-  export type Depatament$citiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Department$citiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the city
+     * Select specific fields to fetch from the City
      */
-    select?: citySelect<ExtArgs> | null
+    select?: CitySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the city
+     * Omit specific fields from the City
      */
-    omit?: cityOmit<ExtArgs> | null
+    omit?: CityOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: cityInclude<ExtArgs> | null
-    where?: cityWhereInput
-    orderBy?: cityOrderByWithRelationInput | cityOrderByWithRelationInput[]
-    cursor?: cityWhereUniqueInput
+    include?: CityInclude<ExtArgs> | null
+    where?: CityWhereInput
+    orderBy?: CityOrderByWithRelationInput | CityOrderByWithRelationInput[]
+    cursor?: CityWhereUniqueInput
     take?: number
     skip?: number
     distinct?: CityScalarFieldEnum | CityScalarFieldEnum[]
   }
 
   /**
-   * Depatament without action
+   * Department without action
    */
-  export type DepatamentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DepartmentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Depatament
+     * Select specific fields to fetch from the Department
      */
-    select?: DepatamentSelect<ExtArgs> | null
+    select?: DepartmentSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Depatament
+     * Omit specific fields from the Department
      */
-    omit?: DepatamentOmit<ExtArgs> | null
+    omit?: DepartmentOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: DepatamentInclude<ExtArgs> | null
+    include?: DepartmentInclude<ExtArgs> | null
   }
 
 
@@ -7921,14 +7921,14 @@ export namespace Prisma {
     id: number | null
     categoryId: number | null
     unitPrice: number | null
-    wight: number | null
+    weight: number | null
   }
 
   export type ProductSumAggregateOutputType = {
     id: number | null
     categoryId: number | null
     unitPrice: number | null
-    wight: number | null
+    weight: number | null
   }
 
   export type ProductMinAggregateOutputType = {
@@ -7937,13 +7937,13 @@ export namespace Prisma {
     description: string | null
     categoryId: number | null
     unitPrice: number | null
-    wight: number | null
-    is_fragile: boolean | null
-    dimensions_cm: string | null
+    weight: number | null
+    isFragile: boolean | null
+    dimensionsCm: string | null
     imageUrl: string | null
-    bar_code: string | null
-    required_refrigeration: boolean | null
-    date_of_expiration: Date | null
+    barCode: string | null
+    requiredRefrigeration: boolean | null
+    dateOfExpiration: Date | null
     status: $Enums.statusProduct | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -7955,13 +7955,13 @@ export namespace Prisma {
     description: string | null
     categoryId: number | null
     unitPrice: number | null
-    wight: number | null
-    is_fragile: boolean | null
-    dimensions_cm: string | null
+    weight: number | null
+    isFragile: boolean | null
+    dimensionsCm: string | null
     imageUrl: string | null
-    bar_code: string | null
-    required_refrigeration: boolean | null
-    date_of_expiration: Date | null
+    barCode: string | null
+    requiredRefrigeration: boolean | null
+    dateOfExpiration: Date | null
     status: $Enums.statusProduct | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -7973,13 +7973,13 @@ export namespace Prisma {
     description: number
     categoryId: number
     unitPrice: number
-    wight: number
-    is_fragile: number
-    dimensions_cm: number
+    weight: number
+    isFragile: number
+    dimensionsCm: number
     imageUrl: number
-    bar_code: number
-    required_refrigeration: number
-    date_of_expiration: number
+    barCode: number
+    requiredRefrigeration: number
+    dateOfExpiration: number
     status: number
     createdAt: number
     updatedAt: number
@@ -7991,14 +7991,14 @@ export namespace Prisma {
     id?: true
     categoryId?: true
     unitPrice?: true
-    wight?: true
+    weight?: true
   }
 
   export type ProductSumAggregateInputType = {
     id?: true
     categoryId?: true
     unitPrice?: true
-    wight?: true
+    weight?: true
   }
 
   export type ProductMinAggregateInputType = {
@@ -8007,13 +8007,13 @@ export namespace Prisma {
     description?: true
     categoryId?: true
     unitPrice?: true
-    wight?: true
-    is_fragile?: true
-    dimensions_cm?: true
+    weight?: true
+    isFragile?: true
+    dimensionsCm?: true
     imageUrl?: true
-    bar_code?: true
-    required_refrigeration?: true
-    date_of_expiration?: true
+    barCode?: true
+    requiredRefrigeration?: true
+    dateOfExpiration?: true
     status?: true
     createdAt?: true
     updatedAt?: true
@@ -8025,13 +8025,13 @@ export namespace Prisma {
     description?: true
     categoryId?: true
     unitPrice?: true
-    wight?: true
-    is_fragile?: true
-    dimensions_cm?: true
+    weight?: true
+    isFragile?: true
+    dimensionsCm?: true
     imageUrl?: true
-    bar_code?: true
-    required_refrigeration?: true
-    date_of_expiration?: true
+    barCode?: true
+    requiredRefrigeration?: true
+    dateOfExpiration?: true
     status?: true
     createdAt?: true
     updatedAt?: true
@@ -8043,13 +8043,13 @@ export namespace Prisma {
     description?: true
     categoryId?: true
     unitPrice?: true
-    wight?: true
-    is_fragile?: true
-    dimensions_cm?: true
+    weight?: true
+    isFragile?: true
+    dimensionsCm?: true
     imageUrl?: true
-    bar_code?: true
-    required_refrigeration?: true
-    date_of_expiration?: true
+    barCode?: true
+    requiredRefrigeration?: true
+    dateOfExpiration?: true
     status?: true
     createdAt?: true
     updatedAt?: true
@@ -8148,13 +8148,13 @@ export namespace Prisma {
     description: string
     categoryId: number
     unitPrice: number
-    wight: number
-    is_fragile: boolean
-    dimensions_cm: string
+    weight: number
+    isFragile: boolean
+    dimensionsCm: string
     imageUrl: string
-    bar_code: string
-    required_refrigeration: boolean
-    date_of_expiration: Date
+    barCode: string
+    requiredRefrigeration: boolean
+    dateOfExpiration: Date
     status: $Enums.statusProduct
     createdAt: Date
     updatedAt: Date
@@ -8185,13 +8185,13 @@ export namespace Prisma {
     description?: boolean
     categoryId?: boolean
     unitPrice?: boolean
-    wight?: boolean
-    is_fragile?: boolean
-    dimensions_cm?: boolean
+    weight?: boolean
+    isFragile?: boolean
+    dimensionsCm?: boolean
     imageUrl?: boolean
-    bar_code?: boolean
-    required_refrigeration?: boolean
-    date_of_expiration?: boolean
+    barCode?: boolean
+    requiredRefrigeration?: boolean
+    dateOfExpiration?: boolean
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -8209,19 +8209,19 @@ export namespace Prisma {
     description?: boolean
     categoryId?: boolean
     unitPrice?: boolean
-    wight?: boolean
-    is_fragile?: boolean
-    dimensions_cm?: boolean
+    weight?: boolean
+    isFragile?: boolean
+    dimensionsCm?: boolean
     imageUrl?: boolean
-    bar_code?: boolean
-    required_refrigeration?: boolean
-    date_of_expiration?: boolean
+    barCode?: boolean
+    requiredRefrigeration?: boolean
+    dateOfExpiration?: boolean
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "categoryId" | "unitPrice" | "wight" | "is_fragile" | "dimensions_cm" | "imageUrl" | "bar_code" | "required_refrigeration" | "date_of_expiration" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
+  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "categoryId" | "unitPrice" | "weight" | "isFragile" | "dimensionsCm" | "imageUrl" | "barCode" | "requiredRefrigeration" | "dateOfExpiration" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
   export type ProductInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     category?: boolean | CategoryDefaultArgs<ExtArgs>
     inventory?: boolean | Product$inventoryArgs<ExtArgs>
@@ -8242,13 +8242,13 @@ export namespace Prisma {
       description: string
       categoryId: number
       unitPrice: number
-      wight: number
-      is_fragile: boolean
-      dimensions_cm: string
+      weight: number
+      isFragile: boolean
+      dimensionsCm: string
       imageUrl: string
-      bar_code: string
-      required_refrigeration: boolean
-      date_of_expiration: Date
+      barCode: string
+      requiredRefrigeration: boolean
+      dateOfExpiration: Date
       status: $Enums.statusProduct
       createdAt: Date
       updatedAt: Date
@@ -8629,13 +8629,13 @@ export namespace Prisma {
     readonly description: FieldRef<"Product", 'String'>
     readonly categoryId: FieldRef<"Product", 'Int'>
     readonly unitPrice: FieldRef<"Product", 'Float'>
-    readonly wight: FieldRef<"Product", 'Float'>
-    readonly is_fragile: FieldRef<"Product", 'Boolean'>
-    readonly dimensions_cm: FieldRef<"Product", 'String'>
+    readonly weight: FieldRef<"Product", 'Float'>
+    readonly isFragile: FieldRef<"Product", 'Boolean'>
+    readonly dimensionsCm: FieldRef<"Product", 'String'>
     readonly imageUrl: FieldRef<"Product", 'String'>
-    readonly bar_code: FieldRef<"Product", 'String'>
-    readonly required_refrigeration: FieldRef<"Product", 'Boolean'>
-    readonly date_of_expiration: FieldRef<"Product", 'DateTime'>
+    readonly barCode: FieldRef<"Product", 'String'>
+    readonly requiredRefrigeration: FieldRef<"Product", 'Boolean'>
+    readonly dateOfExpiration: FieldRef<"Product", 'DateTime'>
     readonly status: FieldRef<"Product", 'statusProduct'>
     readonly createdAt: FieldRef<"Product", 'DateTime'>
     readonly updatedAt: FieldRef<"Product", 'DateTime'>
@@ -9064,25 +9064,25 @@ export namespace Prisma {
     id: number | null
     productId: number | null
     storeId: number | null
-    available_quantity: number | null
-    minimum_threshold: number | null
+    availableQuantity: number | null
+    minimumThreshold: number | null
   }
 
   export type InventorySumAggregateOutputType = {
     id: number | null
     productId: number | null
     storeId: number | null
-    available_quantity: number | null
-    minimum_threshold: number | null
+    availableQuantity: number | null
+    minimumThreshold: number | null
   }
 
   export type InventoryMinAggregateOutputType = {
     id: number | null
     productId: number | null
     storeId: number | null
-    available_quantity: number | null
-    minimum_threshold: number | null
-    last_reset_date: Date | null
+    availableQuantity: number | null
+    minimumThreshold: number | null
+    lastResetDate: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -9091,9 +9091,9 @@ export namespace Prisma {
     id: number | null
     productId: number | null
     storeId: number | null
-    available_quantity: number | null
-    minimum_threshold: number | null
-    last_reset_date: Date | null
+    availableQuantity: number | null
+    minimumThreshold: number | null
+    lastResetDate: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -9102,9 +9102,9 @@ export namespace Prisma {
     id: number
     productId: number
     storeId: number
-    available_quantity: number
-    minimum_threshold: number
-    last_reset_date: number
+    availableQuantity: number
+    minimumThreshold: number
+    lastResetDate: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -9115,25 +9115,25 @@ export namespace Prisma {
     id?: true
     productId?: true
     storeId?: true
-    available_quantity?: true
-    minimum_threshold?: true
+    availableQuantity?: true
+    minimumThreshold?: true
   }
 
   export type InventorySumAggregateInputType = {
     id?: true
     productId?: true
     storeId?: true
-    available_quantity?: true
-    minimum_threshold?: true
+    availableQuantity?: true
+    minimumThreshold?: true
   }
 
   export type InventoryMinAggregateInputType = {
     id?: true
     productId?: true
     storeId?: true
-    available_quantity?: true
-    minimum_threshold?: true
-    last_reset_date?: true
+    availableQuantity?: true
+    minimumThreshold?: true
+    lastResetDate?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -9142,9 +9142,9 @@ export namespace Prisma {
     id?: true
     productId?: true
     storeId?: true
-    available_quantity?: true
-    minimum_threshold?: true
-    last_reset_date?: true
+    availableQuantity?: true
+    minimumThreshold?: true
+    lastResetDate?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -9153,9 +9153,9 @@ export namespace Prisma {
     id?: true
     productId?: true
     storeId?: true
-    available_quantity?: true
-    minimum_threshold?: true
-    last_reset_date?: true
+    availableQuantity?: true
+    minimumThreshold?: true
+    lastResetDate?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -9251,9 +9251,9 @@ export namespace Prisma {
     id: number
     productId: number
     storeId: number
-    available_quantity: number
-    minimum_threshold: number
-    last_reset_date: Date
+    availableQuantity: number
+    minimumThreshold: number
+    lastResetDate: Date
     createdAt: Date
     updatedAt: Date
     _count: InventoryCountAggregateOutputType | null
@@ -9281,14 +9281,14 @@ export namespace Prisma {
     id?: boolean
     productId?: boolean
     storeId?: boolean
-    available_quantity?: boolean
-    minimum_threshold?: boolean
-    last_reset_date?: boolean
+    availableQuantity?: boolean
+    minimumThreshold?: boolean
+    lastResetDate?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     product?: boolean | ProductDefaultArgs<ExtArgs>
     store?: boolean | StoreDefaultArgs<ExtArgs>
-    historical_movement?: boolean | Inventory$historical_movementArgs<ExtArgs>
+    historicalMovement?: boolean | Inventory$historicalMovementArgs<ExtArgs>
     _count?: boolean | InventoryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["inventory"]>
 
@@ -9298,18 +9298,18 @@ export namespace Prisma {
     id?: boolean
     productId?: boolean
     storeId?: boolean
-    available_quantity?: boolean
-    minimum_threshold?: boolean
-    last_reset_date?: boolean
+    availableQuantity?: boolean
+    minimumThreshold?: boolean
+    lastResetDate?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type InventoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "productId" | "storeId" | "available_quantity" | "minimum_threshold" | "last_reset_date" | "createdAt" | "updatedAt", ExtArgs["result"]["inventory"]>
+  export type InventoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "productId" | "storeId" | "availableQuantity" | "minimumThreshold" | "lastResetDate" | "createdAt" | "updatedAt", ExtArgs["result"]["inventory"]>
   export type InventoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     product?: boolean | ProductDefaultArgs<ExtArgs>
     store?: boolean | StoreDefaultArgs<ExtArgs>
-    historical_movement?: boolean | Inventory$historical_movementArgs<ExtArgs>
+    historicalMovement?: boolean | Inventory$historicalMovementArgs<ExtArgs>
     _count?: boolean | InventoryCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -9318,15 +9318,15 @@ export namespace Prisma {
     objects: {
       product: Prisma.$ProductPayload<ExtArgs>
       store: Prisma.$StorePayload<ExtArgs>
-      historical_movement: Prisma.$historical_movementPayload<ExtArgs>[]
+      historicalMovement: Prisma.$HistoricalMovementPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       productId: number
       storeId: number
-      available_quantity: number
-      minimum_threshold: number
-      last_reset_date: Date
+      availableQuantity: number
+      minimumThreshold: number
+      lastResetDate: Date
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["inventory"]>
@@ -9671,7 +9671,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     product<T extends ProductDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProductDefaultArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     store<T extends StoreDefaultArgs<ExtArgs> = {}>(args?: Subset<T, StoreDefaultArgs<ExtArgs>>): Prisma__StoreClient<$Result.GetResult<Prisma.$StorePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    historical_movement<T extends Inventory$historical_movementArgs<ExtArgs> = {}>(args?: Subset<T, Inventory$historical_movementArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$historical_movementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    historicalMovement<T extends Inventory$historicalMovementArgs<ExtArgs> = {}>(args?: Subset<T, Inventory$historicalMovementArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HistoricalMovementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9704,9 +9704,9 @@ export namespace Prisma {
     readonly id: FieldRef<"Inventory", 'Int'>
     readonly productId: FieldRef<"Inventory", 'Int'>
     readonly storeId: FieldRef<"Inventory", 'Int'>
-    readonly available_quantity: FieldRef<"Inventory", 'Int'>
-    readonly minimum_threshold: FieldRef<"Inventory", 'Int'>
-    readonly last_reset_date: FieldRef<"Inventory", 'DateTime'>
+    readonly availableQuantity: FieldRef<"Inventory", 'Int'>
+    readonly minimumThreshold: FieldRef<"Inventory", 'Int'>
+    readonly lastResetDate: FieldRef<"Inventory", 'DateTime'>
     readonly createdAt: FieldRef<"Inventory", 'DateTime'>
     readonly updatedAt: FieldRef<"Inventory", 'DateTime'>
   }
@@ -10052,27 +10052,27 @@ export namespace Prisma {
   }
 
   /**
-   * Inventory.historical_movement
+   * Inventory.historicalMovement
    */
-  export type Inventory$historical_movementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Inventory$historicalMovementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the historical_movement
+     * Select specific fields to fetch from the HistoricalMovement
      */
-    select?: historical_movementSelect<ExtArgs> | null
+    select?: HistoricalMovementSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the historical_movement
+     * Omit specific fields from the HistoricalMovement
      */
-    omit?: historical_movementOmit<ExtArgs> | null
+    omit?: HistoricalMovementOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: historical_movementInclude<ExtArgs> | null
-    where?: historical_movementWhereInput
-    orderBy?: historical_movementOrderByWithRelationInput | historical_movementOrderByWithRelationInput[]
-    cursor?: historical_movementWhereUniqueInput
+    include?: HistoricalMovementInclude<ExtArgs> | null
+    where?: HistoricalMovementWhereInput
+    orderBy?: HistoricalMovementOrderByWithRelationInput | HistoricalMovementOrderByWithRelationInput[]
+    cursor?: HistoricalMovementWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: Historical_movementScalarFieldEnum | Historical_movementScalarFieldEnum[]
+    distinct?: HistoricalMovementScalarFieldEnum | HistoricalMovementScalarFieldEnum[]
   }
 
   /**
@@ -10095,254 +10095,254 @@ export namespace Prisma {
 
 
   /**
-   * Model historical_movement
+   * Model HistoricalMovement
    */
 
-  export type AggregateHistorical_movement = {
-    _count: Historical_movementCountAggregateOutputType | null
-    _avg: Historical_movementAvgAggregateOutputType | null
-    _sum: Historical_movementSumAggregateOutputType | null
-    _min: Historical_movementMinAggregateOutputType | null
-    _max: Historical_movementMaxAggregateOutputType | null
+  export type AggregateHistoricalMovement = {
+    _count: HistoricalMovementCountAggregateOutputType | null
+    _avg: HistoricalMovementAvgAggregateOutputType | null
+    _sum: HistoricalMovementSumAggregateOutputType | null
+    _min: HistoricalMovementMinAggregateOutputType | null
+    _max: HistoricalMovementMaxAggregateOutputType | null
   }
 
-  export type Historical_movementAvgAggregateOutputType = {
+  export type HistoricalMovementAvgAggregateOutputType = {
     id: number | null
     inventoryId: number | null
   }
 
-  export type Historical_movementSumAggregateOutputType = {
+  export type HistoricalMovementSumAggregateOutputType = {
     id: number | null
     inventoryId: number | null
   }
 
-  export type Historical_movementMinAggregateOutputType = {
+  export type HistoricalMovementMinAggregateOutputType = {
     id: number | null
     inventoryId: number | null
     user: string | null
-    movement_date: Date | null
+    movementDate: Date | null
     reason: string | null
-    movement_type: string | null
+    movementType: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
-  export type Historical_movementMaxAggregateOutputType = {
+  export type HistoricalMovementMaxAggregateOutputType = {
     id: number | null
     inventoryId: number | null
     user: string | null
-    movement_date: Date | null
+    movementDate: Date | null
     reason: string | null
-    movement_type: string | null
+    movementType: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
-  export type Historical_movementCountAggregateOutputType = {
+  export type HistoricalMovementCountAggregateOutputType = {
     id: number
     inventoryId: number
     user: number
-    movement_date: number
+    movementDate: number
     reason: number
-    movement_type: number
+    movementType: number
     createdAt: number
     updatedAt: number
     _all: number
   }
 
 
-  export type Historical_movementAvgAggregateInputType = {
+  export type HistoricalMovementAvgAggregateInputType = {
     id?: true
     inventoryId?: true
   }
 
-  export type Historical_movementSumAggregateInputType = {
+  export type HistoricalMovementSumAggregateInputType = {
     id?: true
     inventoryId?: true
   }
 
-  export type Historical_movementMinAggregateInputType = {
+  export type HistoricalMovementMinAggregateInputType = {
     id?: true
     inventoryId?: true
     user?: true
-    movement_date?: true
+    movementDate?: true
     reason?: true
-    movement_type?: true
+    movementType?: true
     createdAt?: true
     updatedAt?: true
   }
 
-  export type Historical_movementMaxAggregateInputType = {
+  export type HistoricalMovementMaxAggregateInputType = {
     id?: true
     inventoryId?: true
     user?: true
-    movement_date?: true
+    movementDate?: true
     reason?: true
-    movement_type?: true
+    movementType?: true
     createdAt?: true
     updatedAt?: true
   }
 
-  export type Historical_movementCountAggregateInputType = {
+  export type HistoricalMovementCountAggregateInputType = {
     id?: true
     inventoryId?: true
     user?: true
-    movement_date?: true
+    movementDate?: true
     reason?: true
-    movement_type?: true
+    movementType?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
   }
 
-  export type Historical_movementAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type HistoricalMovementAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which historical_movement to aggregate.
+     * Filter which HistoricalMovement to aggregate.
      */
-    where?: historical_movementWhereInput
+    where?: HistoricalMovementWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of historical_movements to fetch.
+     * Determine the order of HistoricalMovements to fetch.
      */
-    orderBy?: historical_movementOrderByWithRelationInput | historical_movementOrderByWithRelationInput[]
+    orderBy?: HistoricalMovementOrderByWithRelationInput | HistoricalMovementOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: historical_movementWhereUniqueInput
+    cursor?: HistoricalMovementWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` historical_movements from the position of the cursor.
+     * Take `±n` HistoricalMovements from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` historical_movements.
+     * Skip the first `n` HistoricalMovements.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned historical_movements
+     * Count returned HistoricalMovements
     **/
-    _count?: true | Historical_movementCountAggregateInputType
+    _count?: true | HistoricalMovementCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: Historical_movementAvgAggregateInputType
+    _avg?: HistoricalMovementAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: Historical_movementSumAggregateInputType
+    _sum?: HistoricalMovementSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: Historical_movementMinAggregateInputType
+    _min?: HistoricalMovementMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: Historical_movementMaxAggregateInputType
+    _max?: HistoricalMovementMaxAggregateInputType
   }
 
-  export type GetHistorical_movementAggregateType<T extends Historical_movementAggregateArgs> = {
-        [P in keyof T & keyof AggregateHistorical_movement]: P extends '_count' | 'count'
+  export type GetHistoricalMovementAggregateType<T extends HistoricalMovementAggregateArgs> = {
+        [P in keyof T & keyof AggregateHistoricalMovement]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateHistorical_movement[P]>
-      : GetScalarType<T[P], AggregateHistorical_movement[P]>
+        : GetScalarType<T[P], AggregateHistoricalMovement[P]>
+      : GetScalarType<T[P], AggregateHistoricalMovement[P]>
   }
 
 
 
 
-  export type historical_movementGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: historical_movementWhereInput
-    orderBy?: historical_movementOrderByWithAggregationInput | historical_movementOrderByWithAggregationInput[]
-    by: Historical_movementScalarFieldEnum[] | Historical_movementScalarFieldEnum
-    having?: historical_movementScalarWhereWithAggregatesInput
+  export type HistoricalMovementGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: HistoricalMovementWhereInput
+    orderBy?: HistoricalMovementOrderByWithAggregationInput | HistoricalMovementOrderByWithAggregationInput[]
+    by: HistoricalMovementScalarFieldEnum[] | HistoricalMovementScalarFieldEnum
+    having?: HistoricalMovementScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: Historical_movementCountAggregateInputType | true
-    _avg?: Historical_movementAvgAggregateInputType
-    _sum?: Historical_movementSumAggregateInputType
-    _min?: Historical_movementMinAggregateInputType
-    _max?: Historical_movementMaxAggregateInputType
+    _count?: HistoricalMovementCountAggregateInputType | true
+    _avg?: HistoricalMovementAvgAggregateInputType
+    _sum?: HistoricalMovementSumAggregateInputType
+    _min?: HistoricalMovementMinAggregateInputType
+    _max?: HistoricalMovementMaxAggregateInputType
   }
 
-  export type Historical_movementGroupByOutputType = {
+  export type HistoricalMovementGroupByOutputType = {
     id: number
     inventoryId: number
     user: string
-    movement_date: Date
+    movementDate: Date
     reason: string
-    movement_type: string
+    movementType: string
     createdAt: Date
     updatedAt: Date
-    _count: Historical_movementCountAggregateOutputType | null
-    _avg: Historical_movementAvgAggregateOutputType | null
-    _sum: Historical_movementSumAggregateOutputType | null
-    _min: Historical_movementMinAggregateOutputType | null
-    _max: Historical_movementMaxAggregateOutputType | null
+    _count: HistoricalMovementCountAggregateOutputType | null
+    _avg: HistoricalMovementAvgAggregateOutputType | null
+    _sum: HistoricalMovementSumAggregateOutputType | null
+    _min: HistoricalMovementMinAggregateOutputType | null
+    _max: HistoricalMovementMaxAggregateOutputType | null
   }
 
-  type GetHistorical_movementGroupByPayload<T extends historical_movementGroupByArgs> = Prisma.PrismaPromise<
+  type GetHistoricalMovementGroupByPayload<T extends HistoricalMovementGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<Historical_movementGroupByOutputType, T['by']> &
+      PickEnumerable<HistoricalMovementGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof Historical_movementGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof HistoricalMovementGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], Historical_movementGroupByOutputType[P]>
-            : GetScalarType<T[P], Historical_movementGroupByOutputType[P]>
+              : GetScalarType<T[P], HistoricalMovementGroupByOutputType[P]>
+            : GetScalarType<T[P], HistoricalMovementGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type historical_movementSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type HistoricalMovementSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     inventoryId?: boolean
     user?: boolean
-    movement_date?: boolean
+    movementDate?: boolean
     reason?: boolean
-    movement_type?: boolean
+    movementType?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     inventory?: boolean | InventoryDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["historical_movement"]>
+  }, ExtArgs["result"]["historicalMovement"]>
 
 
 
-  export type historical_movementSelectScalar = {
+  export type HistoricalMovementSelectScalar = {
     id?: boolean
     inventoryId?: boolean
     user?: boolean
-    movement_date?: boolean
+    movementDate?: boolean
     reason?: boolean
-    movement_type?: boolean
+    movementType?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type historical_movementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "inventoryId" | "user" | "movement_date" | "reason" | "movement_type" | "createdAt" | "updatedAt", ExtArgs["result"]["historical_movement"]>
-  export type historical_movementInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type HistoricalMovementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "inventoryId" | "user" | "movementDate" | "reason" | "movementType" | "createdAt" | "updatedAt", ExtArgs["result"]["historicalMovement"]>
+  export type HistoricalMovementInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     inventory?: boolean | InventoryDefaultArgs<ExtArgs>
   }
 
-  export type $historical_movementPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "historical_movement"
+  export type $HistoricalMovementPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "HistoricalMovement"
     objects: {
       inventory: Prisma.$InventoryPayload<ExtArgs>
     }
@@ -10350,148 +10350,148 @@ export namespace Prisma {
       id: number
       inventoryId: number
       user: string
-      movement_date: Date
+      movementDate: Date
       reason: string
-      movement_type: string
+      movementType: string
       createdAt: Date
       updatedAt: Date
-    }, ExtArgs["result"]["historical_movement"]>
+    }, ExtArgs["result"]["historicalMovement"]>
     composites: {}
   }
 
-  type historical_movementGetPayload<S extends boolean | null | undefined | historical_movementDefaultArgs> = $Result.GetResult<Prisma.$historical_movementPayload, S>
+  type HistoricalMovementGetPayload<S extends boolean | null | undefined | HistoricalMovementDefaultArgs> = $Result.GetResult<Prisma.$HistoricalMovementPayload, S>
 
-  type historical_movementCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<historical_movementFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: Historical_movementCountAggregateInputType | true
+  type HistoricalMovementCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<HistoricalMovementFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: HistoricalMovementCountAggregateInputType | true
     }
 
-  export interface historical_movementDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['historical_movement'], meta: { name: 'historical_movement' } }
+  export interface HistoricalMovementDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['HistoricalMovement'], meta: { name: 'HistoricalMovement' } }
     /**
-     * Find zero or one Historical_movement that matches the filter.
-     * @param {historical_movementFindUniqueArgs} args - Arguments to find a Historical_movement
+     * Find zero or one HistoricalMovement that matches the filter.
+     * @param {HistoricalMovementFindUniqueArgs} args - Arguments to find a HistoricalMovement
      * @example
-     * // Get one Historical_movement
-     * const historical_movement = await prisma.historical_movement.findUnique({
+     * // Get one HistoricalMovement
+     * const historicalMovement = await prisma.historicalMovement.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends historical_movementFindUniqueArgs>(args: SelectSubset<T, historical_movementFindUniqueArgs<ExtArgs>>): Prisma__historical_movementClient<$Result.GetResult<Prisma.$historical_movementPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends HistoricalMovementFindUniqueArgs>(args: SelectSubset<T, HistoricalMovementFindUniqueArgs<ExtArgs>>): Prisma__HistoricalMovementClient<$Result.GetResult<Prisma.$HistoricalMovementPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one Historical_movement that matches the filter or throw an error with `error.code='P2025'`
+     * Find one HistoricalMovement that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {historical_movementFindUniqueOrThrowArgs} args - Arguments to find a Historical_movement
+     * @param {HistoricalMovementFindUniqueOrThrowArgs} args - Arguments to find a HistoricalMovement
      * @example
-     * // Get one Historical_movement
-     * const historical_movement = await prisma.historical_movement.findUniqueOrThrow({
+     * // Get one HistoricalMovement
+     * const historicalMovement = await prisma.historicalMovement.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends historical_movementFindUniqueOrThrowArgs>(args: SelectSubset<T, historical_movementFindUniqueOrThrowArgs<ExtArgs>>): Prisma__historical_movementClient<$Result.GetResult<Prisma.$historical_movementPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends HistoricalMovementFindUniqueOrThrowArgs>(args: SelectSubset<T, HistoricalMovementFindUniqueOrThrowArgs<ExtArgs>>): Prisma__HistoricalMovementClient<$Result.GetResult<Prisma.$HistoricalMovementPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Historical_movement that matches the filter.
+     * Find the first HistoricalMovement that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {historical_movementFindFirstArgs} args - Arguments to find a Historical_movement
+     * @param {HistoricalMovementFindFirstArgs} args - Arguments to find a HistoricalMovement
      * @example
-     * // Get one Historical_movement
-     * const historical_movement = await prisma.historical_movement.findFirst({
+     * // Get one HistoricalMovement
+     * const historicalMovement = await prisma.historicalMovement.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends historical_movementFindFirstArgs>(args?: SelectSubset<T, historical_movementFindFirstArgs<ExtArgs>>): Prisma__historical_movementClient<$Result.GetResult<Prisma.$historical_movementPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends HistoricalMovementFindFirstArgs>(args?: SelectSubset<T, HistoricalMovementFindFirstArgs<ExtArgs>>): Prisma__HistoricalMovementClient<$Result.GetResult<Prisma.$HistoricalMovementPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Historical_movement that matches the filter or
+     * Find the first HistoricalMovement that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {historical_movementFindFirstOrThrowArgs} args - Arguments to find a Historical_movement
+     * @param {HistoricalMovementFindFirstOrThrowArgs} args - Arguments to find a HistoricalMovement
      * @example
-     * // Get one Historical_movement
-     * const historical_movement = await prisma.historical_movement.findFirstOrThrow({
+     * // Get one HistoricalMovement
+     * const historicalMovement = await prisma.historicalMovement.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends historical_movementFindFirstOrThrowArgs>(args?: SelectSubset<T, historical_movementFindFirstOrThrowArgs<ExtArgs>>): Prisma__historical_movementClient<$Result.GetResult<Prisma.$historical_movementPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends HistoricalMovementFindFirstOrThrowArgs>(args?: SelectSubset<T, HistoricalMovementFindFirstOrThrowArgs<ExtArgs>>): Prisma__HistoricalMovementClient<$Result.GetResult<Prisma.$HistoricalMovementPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more Historical_movements that matches the filter.
+     * Find zero or more HistoricalMovements that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {historical_movementFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {HistoricalMovementFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Historical_movements
-     * const historical_movements = await prisma.historical_movement.findMany()
+     * // Get all HistoricalMovements
+     * const historicalMovements = await prisma.historicalMovement.findMany()
      * 
-     * // Get first 10 Historical_movements
-     * const historical_movements = await prisma.historical_movement.findMany({ take: 10 })
+     * // Get first 10 HistoricalMovements
+     * const historicalMovements = await prisma.historicalMovement.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const historical_movementWithIdOnly = await prisma.historical_movement.findMany({ select: { id: true } })
+     * const historicalMovementWithIdOnly = await prisma.historicalMovement.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends historical_movementFindManyArgs>(args?: SelectSubset<T, historical_movementFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$historical_movementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends HistoricalMovementFindManyArgs>(args?: SelectSubset<T, HistoricalMovementFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HistoricalMovementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a Historical_movement.
-     * @param {historical_movementCreateArgs} args - Arguments to create a Historical_movement.
+     * Create a HistoricalMovement.
+     * @param {HistoricalMovementCreateArgs} args - Arguments to create a HistoricalMovement.
      * @example
-     * // Create one Historical_movement
-     * const Historical_movement = await prisma.historical_movement.create({
+     * // Create one HistoricalMovement
+     * const HistoricalMovement = await prisma.historicalMovement.create({
      *   data: {
-     *     // ... data to create a Historical_movement
+     *     // ... data to create a HistoricalMovement
      *   }
      * })
      * 
      */
-    create<T extends historical_movementCreateArgs>(args: SelectSubset<T, historical_movementCreateArgs<ExtArgs>>): Prisma__historical_movementClient<$Result.GetResult<Prisma.$historical_movementPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends HistoricalMovementCreateArgs>(args: SelectSubset<T, HistoricalMovementCreateArgs<ExtArgs>>): Prisma__HistoricalMovementClient<$Result.GetResult<Prisma.$HistoricalMovementPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many Historical_movements.
-     * @param {historical_movementCreateManyArgs} args - Arguments to create many Historical_movements.
+     * Create many HistoricalMovements.
+     * @param {HistoricalMovementCreateManyArgs} args - Arguments to create many HistoricalMovements.
      * @example
-     * // Create many Historical_movements
-     * const historical_movement = await prisma.historical_movement.createMany({
+     * // Create many HistoricalMovements
+     * const historicalMovement = await prisma.historicalMovement.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends historical_movementCreateManyArgs>(args?: SelectSubset<T, historical_movementCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends HistoricalMovementCreateManyArgs>(args?: SelectSubset<T, HistoricalMovementCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Delete a Historical_movement.
-     * @param {historical_movementDeleteArgs} args - Arguments to delete one Historical_movement.
+     * Delete a HistoricalMovement.
+     * @param {HistoricalMovementDeleteArgs} args - Arguments to delete one HistoricalMovement.
      * @example
-     * // Delete one Historical_movement
-     * const Historical_movement = await prisma.historical_movement.delete({
+     * // Delete one HistoricalMovement
+     * const HistoricalMovement = await prisma.historicalMovement.delete({
      *   where: {
-     *     // ... filter to delete one Historical_movement
+     *     // ... filter to delete one HistoricalMovement
      *   }
      * })
      * 
      */
-    delete<T extends historical_movementDeleteArgs>(args: SelectSubset<T, historical_movementDeleteArgs<ExtArgs>>): Prisma__historical_movementClient<$Result.GetResult<Prisma.$historical_movementPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends HistoricalMovementDeleteArgs>(args: SelectSubset<T, HistoricalMovementDeleteArgs<ExtArgs>>): Prisma__HistoricalMovementClient<$Result.GetResult<Prisma.$HistoricalMovementPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one Historical_movement.
-     * @param {historical_movementUpdateArgs} args - Arguments to update one Historical_movement.
+     * Update one HistoricalMovement.
+     * @param {HistoricalMovementUpdateArgs} args - Arguments to update one HistoricalMovement.
      * @example
-     * // Update one Historical_movement
-     * const historical_movement = await prisma.historical_movement.update({
+     * // Update one HistoricalMovement
+     * const historicalMovement = await prisma.historicalMovement.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -10501,30 +10501,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends historical_movementUpdateArgs>(args: SelectSubset<T, historical_movementUpdateArgs<ExtArgs>>): Prisma__historical_movementClient<$Result.GetResult<Prisma.$historical_movementPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends HistoricalMovementUpdateArgs>(args: SelectSubset<T, HistoricalMovementUpdateArgs<ExtArgs>>): Prisma__HistoricalMovementClient<$Result.GetResult<Prisma.$HistoricalMovementPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more Historical_movements.
-     * @param {historical_movementDeleteManyArgs} args - Arguments to filter Historical_movements to delete.
+     * Delete zero or more HistoricalMovements.
+     * @param {HistoricalMovementDeleteManyArgs} args - Arguments to filter HistoricalMovements to delete.
      * @example
-     * // Delete a few Historical_movements
-     * const { count } = await prisma.historical_movement.deleteMany({
+     * // Delete a few HistoricalMovements
+     * const { count } = await prisma.historicalMovement.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends historical_movementDeleteManyArgs>(args?: SelectSubset<T, historical_movementDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends HistoricalMovementDeleteManyArgs>(args?: SelectSubset<T, HistoricalMovementDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Historical_movements.
+     * Update zero or more HistoricalMovements.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {historical_movementUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {HistoricalMovementUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Historical_movements
-     * const historical_movement = await prisma.historical_movement.updateMany({
+     * // Update many HistoricalMovements
+     * const historicalMovement = await prisma.historicalMovement.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -10534,56 +10534,56 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends historical_movementUpdateManyArgs>(args: SelectSubset<T, historical_movementUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends HistoricalMovementUpdateManyArgs>(args: SelectSubset<T, HistoricalMovementUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create or update one Historical_movement.
-     * @param {historical_movementUpsertArgs} args - Arguments to update or create a Historical_movement.
+     * Create or update one HistoricalMovement.
+     * @param {HistoricalMovementUpsertArgs} args - Arguments to update or create a HistoricalMovement.
      * @example
-     * // Update or create a Historical_movement
-     * const historical_movement = await prisma.historical_movement.upsert({
+     * // Update or create a HistoricalMovement
+     * const historicalMovement = await prisma.historicalMovement.upsert({
      *   create: {
-     *     // ... data to create a Historical_movement
+     *     // ... data to create a HistoricalMovement
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Historical_movement we want to update
+     *     // ... the filter for the HistoricalMovement we want to update
      *   }
      * })
      */
-    upsert<T extends historical_movementUpsertArgs>(args: SelectSubset<T, historical_movementUpsertArgs<ExtArgs>>): Prisma__historical_movementClient<$Result.GetResult<Prisma.$historical_movementPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends HistoricalMovementUpsertArgs>(args: SelectSubset<T, HistoricalMovementUpsertArgs<ExtArgs>>): Prisma__HistoricalMovementClient<$Result.GetResult<Prisma.$HistoricalMovementPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of Historical_movements.
+     * Count the number of HistoricalMovements.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {historical_movementCountArgs} args - Arguments to filter Historical_movements to count.
+     * @param {HistoricalMovementCountArgs} args - Arguments to filter HistoricalMovements to count.
      * @example
-     * // Count the number of Historical_movements
-     * const count = await prisma.historical_movement.count({
+     * // Count the number of HistoricalMovements
+     * const count = await prisma.historicalMovement.count({
      *   where: {
-     *     // ... the filter for the Historical_movements we want to count
+     *     // ... the filter for the HistoricalMovements we want to count
      *   }
      * })
     **/
-    count<T extends historical_movementCountArgs>(
-      args?: Subset<T, historical_movementCountArgs>,
+    count<T extends HistoricalMovementCountArgs>(
+      args?: Subset<T, HistoricalMovementCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], Historical_movementCountAggregateOutputType>
+          : GetScalarType<T['select'], HistoricalMovementCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Historical_movement.
+     * Allows you to perform aggregations operations on a HistoricalMovement.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {Historical_movementAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {HistoricalMovementAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -10603,13 +10603,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends Historical_movementAggregateArgs>(args: Subset<T, Historical_movementAggregateArgs>): Prisma.PrismaPromise<GetHistorical_movementAggregateType<T>>
+    aggregate<T extends HistoricalMovementAggregateArgs>(args: Subset<T, HistoricalMovementAggregateArgs>): Prisma.PrismaPromise<GetHistoricalMovementAggregateType<T>>
 
     /**
-     * Group by Historical_movement.
+     * Group by HistoricalMovement.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {historical_movementGroupByArgs} args - Group by arguments.
+     * @param {HistoricalMovementGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -10624,14 +10624,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends historical_movementGroupByArgs,
+      T extends HistoricalMovementGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: historical_movementGroupByArgs['orderBy'] }
-        : { orderBy?: historical_movementGroupByArgs['orderBy'] },
+        ? { orderBy: HistoricalMovementGroupByArgs['orderBy'] }
+        : { orderBy?: HistoricalMovementGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -10680,20 +10680,20 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, historical_movementGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetHistorical_movementGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, HistoricalMovementGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetHistoricalMovementGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the historical_movement model
+   * Fields of the HistoricalMovement model
    */
-  readonly fields: historical_movementFieldRefs;
+  readonly fields: HistoricalMovementFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for historical_movement.
+   * The delegate class that acts as a "Promise-like" for HistoricalMovement.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__historical_movementClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__HistoricalMovementClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     inventory<T extends InventoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, InventoryDefaultArgs<ExtArgs>>): Prisma__InventoryClient<$Result.GetResult<Prisma.$InventoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
@@ -10722,375 +10722,375 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the historical_movement model
+   * Fields of the HistoricalMovement model
    */
-  interface historical_movementFieldRefs {
-    readonly id: FieldRef<"historical_movement", 'Int'>
-    readonly inventoryId: FieldRef<"historical_movement", 'Int'>
-    readonly user: FieldRef<"historical_movement", 'String'>
-    readonly movement_date: FieldRef<"historical_movement", 'DateTime'>
-    readonly reason: FieldRef<"historical_movement", 'String'>
-    readonly movement_type: FieldRef<"historical_movement", 'String'>
-    readonly createdAt: FieldRef<"historical_movement", 'DateTime'>
-    readonly updatedAt: FieldRef<"historical_movement", 'DateTime'>
+  interface HistoricalMovementFieldRefs {
+    readonly id: FieldRef<"HistoricalMovement", 'Int'>
+    readonly inventoryId: FieldRef<"HistoricalMovement", 'Int'>
+    readonly user: FieldRef<"HistoricalMovement", 'String'>
+    readonly movementDate: FieldRef<"HistoricalMovement", 'DateTime'>
+    readonly reason: FieldRef<"HistoricalMovement", 'String'>
+    readonly movementType: FieldRef<"HistoricalMovement", 'String'>
+    readonly createdAt: FieldRef<"HistoricalMovement", 'DateTime'>
+    readonly updatedAt: FieldRef<"HistoricalMovement", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * historical_movement findUnique
+   * HistoricalMovement findUnique
    */
-  export type historical_movementFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type HistoricalMovementFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the historical_movement
+     * Select specific fields to fetch from the HistoricalMovement
      */
-    select?: historical_movementSelect<ExtArgs> | null
+    select?: HistoricalMovementSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the historical_movement
+     * Omit specific fields from the HistoricalMovement
      */
-    omit?: historical_movementOmit<ExtArgs> | null
+    omit?: HistoricalMovementOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: historical_movementInclude<ExtArgs> | null
+    include?: HistoricalMovementInclude<ExtArgs> | null
     /**
-     * Filter, which historical_movement to fetch.
+     * Filter, which HistoricalMovement to fetch.
      */
-    where: historical_movementWhereUniqueInput
+    where: HistoricalMovementWhereUniqueInput
   }
 
   /**
-   * historical_movement findUniqueOrThrow
+   * HistoricalMovement findUniqueOrThrow
    */
-  export type historical_movementFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type HistoricalMovementFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the historical_movement
+     * Select specific fields to fetch from the HistoricalMovement
      */
-    select?: historical_movementSelect<ExtArgs> | null
+    select?: HistoricalMovementSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the historical_movement
+     * Omit specific fields from the HistoricalMovement
      */
-    omit?: historical_movementOmit<ExtArgs> | null
+    omit?: HistoricalMovementOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: historical_movementInclude<ExtArgs> | null
+    include?: HistoricalMovementInclude<ExtArgs> | null
     /**
-     * Filter, which historical_movement to fetch.
+     * Filter, which HistoricalMovement to fetch.
      */
-    where: historical_movementWhereUniqueInput
+    where: HistoricalMovementWhereUniqueInput
   }
 
   /**
-   * historical_movement findFirst
+   * HistoricalMovement findFirst
    */
-  export type historical_movementFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type HistoricalMovementFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the historical_movement
+     * Select specific fields to fetch from the HistoricalMovement
      */
-    select?: historical_movementSelect<ExtArgs> | null
+    select?: HistoricalMovementSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the historical_movement
+     * Omit specific fields from the HistoricalMovement
      */
-    omit?: historical_movementOmit<ExtArgs> | null
+    omit?: HistoricalMovementOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: historical_movementInclude<ExtArgs> | null
+    include?: HistoricalMovementInclude<ExtArgs> | null
     /**
-     * Filter, which historical_movement to fetch.
+     * Filter, which HistoricalMovement to fetch.
      */
-    where?: historical_movementWhereInput
+    where?: HistoricalMovementWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of historical_movements to fetch.
+     * Determine the order of HistoricalMovements to fetch.
      */
-    orderBy?: historical_movementOrderByWithRelationInput | historical_movementOrderByWithRelationInput[]
+    orderBy?: HistoricalMovementOrderByWithRelationInput | HistoricalMovementOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for historical_movements.
+     * Sets the position for searching for HistoricalMovements.
      */
-    cursor?: historical_movementWhereUniqueInput
+    cursor?: HistoricalMovementWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` historical_movements from the position of the cursor.
+     * Take `±n` HistoricalMovements from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` historical_movements.
+     * Skip the first `n` HistoricalMovements.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of historical_movements.
+     * Filter by unique combinations of HistoricalMovements.
      */
-    distinct?: Historical_movementScalarFieldEnum | Historical_movementScalarFieldEnum[]
+    distinct?: HistoricalMovementScalarFieldEnum | HistoricalMovementScalarFieldEnum[]
   }
 
   /**
-   * historical_movement findFirstOrThrow
+   * HistoricalMovement findFirstOrThrow
    */
-  export type historical_movementFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type HistoricalMovementFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the historical_movement
+     * Select specific fields to fetch from the HistoricalMovement
      */
-    select?: historical_movementSelect<ExtArgs> | null
+    select?: HistoricalMovementSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the historical_movement
+     * Omit specific fields from the HistoricalMovement
      */
-    omit?: historical_movementOmit<ExtArgs> | null
+    omit?: HistoricalMovementOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: historical_movementInclude<ExtArgs> | null
+    include?: HistoricalMovementInclude<ExtArgs> | null
     /**
-     * Filter, which historical_movement to fetch.
+     * Filter, which HistoricalMovement to fetch.
      */
-    where?: historical_movementWhereInput
+    where?: HistoricalMovementWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of historical_movements to fetch.
+     * Determine the order of HistoricalMovements to fetch.
      */
-    orderBy?: historical_movementOrderByWithRelationInput | historical_movementOrderByWithRelationInput[]
+    orderBy?: HistoricalMovementOrderByWithRelationInput | HistoricalMovementOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for historical_movements.
+     * Sets the position for searching for HistoricalMovements.
      */
-    cursor?: historical_movementWhereUniqueInput
+    cursor?: HistoricalMovementWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` historical_movements from the position of the cursor.
+     * Take `±n` HistoricalMovements from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` historical_movements.
+     * Skip the first `n` HistoricalMovements.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of historical_movements.
+     * Filter by unique combinations of HistoricalMovements.
      */
-    distinct?: Historical_movementScalarFieldEnum | Historical_movementScalarFieldEnum[]
+    distinct?: HistoricalMovementScalarFieldEnum | HistoricalMovementScalarFieldEnum[]
   }
 
   /**
-   * historical_movement findMany
+   * HistoricalMovement findMany
    */
-  export type historical_movementFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type HistoricalMovementFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the historical_movement
+     * Select specific fields to fetch from the HistoricalMovement
      */
-    select?: historical_movementSelect<ExtArgs> | null
+    select?: HistoricalMovementSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the historical_movement
+     * Omit specific fields from the HistoricalMovement
      */
-    omit?: historical_movementOmit<ExtArgs> | null
+    omit?: HistoricalMovementOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: historical_movementInclude<ExtArgs> | null
+    include?: HistoricalMovementInclude<ExtArgs> | null
     /**
-     * Filter, which historical_movements to fetch.
+     * Filter, which HistoricalMovements to fetch.
      */
-    where?: historical_movementWhereInput
+    where?: HistoricalMovementWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of historical_movements to fetch.
+     * Determine the order of HistoricalMovements to fetch.
      */
-    orderBy?: historical_movementOrderByWithRelationInput | historical_movementOrderByWithRelationInput[]
+    orderBy?: HistoricalMovementOrderByWithRelationInput | HistoricalMovementOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing historical_movements.
+     * Sets the position for listing HistoricalMovements.
      */
-    cursor?: historical_movementWhereUniqueInput
+    cursor?: HistoricalMovementWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` historical_movements from the position of the cursor.
+     * Take `±n` HistoricalMovements from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` historical_movements.
+     * Skip the first `n` HistoricalMovements.
      */
     skip?: number
-    distinct?: Historical_movementScalarFieldEnum | Historical_movementScalarFieldEnum[]
+    distinct?: HistoricalMovementScalarFieldEnum | HistoricalMovementScalarFieldEnum[]
   }
 
   /**
-   * historical_movement create
+   * HistoricalMovement create
    */
-  export type historical_movementCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type HistoricalMovementCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the historical_movement
+     * Select specific fields to fetch from the HistoricalMovement
      */
-    select?: historical_movementSelect<ExtArgs> | null
+    select?: HistoricalMovementSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the historical_movement
+     * Omit specific fields from the HistoricalMovement
      */
-    omit?: historical_movementOmit<ExtArgs> | null
+    omit?: HistoricalMovementOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: historical_movementInclude<ExtArgs> | null
+    include?: HistoricalMovementInclude<ExtArgs> | null
     /**
-     * The data needed to create a historical_movement.
+     * The data needed to create a HistoricalMovement.
      */
-    data: XOR<historical_movementCreateInput, historical_movementUncheckedCreateInput>
+    data: XOR<HistoricalMovementCreateInput, HistoricalMovementUncheckedCreateInput>
   }
 
   /**
-   * historical_movement createMany
+   * HistoricalMovement createMany
    */
-  export type historical_movementCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type HistoricalMovementCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many historical_movements.
+     * The data used to create many HistoricalMovements.
      */
-    data: historical_movementCreateManyInput | historical_movementCreateManyInput[]
+    data: HistoricalMovementCreateManyInput | HistoricalMovementCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * historical_movement update
+   * HistoricalMovement update
    */
-  export type historical_movementUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type HistoricalMovementUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the historical_movement
+     * Select specific fields to fetch from the HistoricalMovement
      */
-    select?: historical_movementSelect<ExtArgs> | null
+    select?: HistoricalMovementSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the historical_movement
+     * Omit specific fields from the HistoricalMovement
      */
-    omit?: historical_movementOmit<ExtArgs> | null
+    omit?: HistoricalMovementOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: historical_movementInclude<ExtArgs> | null
+    include?: HistoricalMovementInclude<ExtArgs> | null
     /**
-     * The data needed to update a historical_movement.
+     * The data needed to update a HistoricalMovement.
      */
-    data: XOR<historical_movementUpdateInput, historical_movementUncheckedUpdateInput>
+    data: XOR<HistoricalMovementUpdateInput, HistoricalMovementUncheckedUpdateInput>
     /**
-     * Choose, which historical_movement to update.
+     * Choose, which HistoricalMovement to update.
      */
-    where: historical_movementWhereUniqueInput
+    where: HistoricalMovementWhereUniqueInput
   }
 
   /**
-   * historical_movement updateMany
+   * HistoricalMovement updateMany
    */
-  export type historical_movementUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type HistoricalMovementUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update historical_movements.
+     * The data used to update HistoricalMovements.
      */
-    data: XOR<historical_movementUpdateManyMutationInput, historical_movementUncheckedUpdateManyInput>
+    data: XOR<HistoricalMovementUpdateManyMutationInput, HistoricalMovementUncheckedUpdateManyInput>
     /**
-     * Filter which historical_movements to update
+     * Filter which HistoricalMovements to update
      */
-    where?: historical_movementWhereInput
+    where?: HistoricalMovementWhereInput
     /**
-     * Limit how many historical_movements to update.
+     * Limit how many HistoricalMovements to update.
      */
     limit?: number
   }
 
   /**
-   * historical_movement upsert
+   * HistoricalMovement upsert
    */
-  export type historical_movementUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type HistoricalMovementUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the historical_movement
+     * Select specific fields to fetch from the HistoricalMovement
      */
-    select?: historical_movementSelect<ExtArgs> | null
+    select?: HistoricalMovementSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the historical_movement
+     * Omit specific fields from the HistoricalMovement
      */
-    omit?: historical_movementOmit<ExtArgs> | null
+    omit?: HistoricalMovementOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: historical_movementInclude<ExtArgs> | null
+    include?: HistoricalMovementInclude<ExtArgs> | null
     /**
-     * The filter to search for the historical_movement to update in case it exists.
+     * The filter to search for the HistoricalMovement to update in case it exists.
      */
-    where: historical_movementWhereUniqueInput
+    where: HistoricalMovementWhereUniqueInput
     /**
-     * In case the historical_movement found by the `where` argument doesn't exist, create a new historical_movement with this data.
+     * In case the HistoricalMovement found by the `where` argument doesn't exist, create a new HistoricalMovement with this data.
      */
-    create: XOR<historical_movementCreateInput, historical_movementUncheckedCreateInput>
+    create: XOR<HistoricalMovementCreateInput, HistoricalMovementUncheckedCreateInput>
     /**
-     * In case the historical_movement was found with the provided `where` argument, update it with this data.
+     * In case the HistoricalMovement was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<historical_movementUpdateInput, historical_movementUncheckedUpdateInput>
+    update: XOR<HistoricalMovementUpdateInput, HistoricalMovementUncheckedUpdateInput>
   }
 
   /**
-   * historical_movement delete
+   * HistoricalMovement delete
    */
-  export type historical_movementDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type HistoricalMovementDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the historical_movement
+     * Select specific fields to fetch from the HistoricalMovement
      */
-    select?: historical_movementSelect<ExtArgs> | null
+    select?: HistoricalMovementSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the historical_movement
+     * Omit specific fields from the HistoricalMovement
      */
-    omit?: historical_movementOmit<ExtArgs> | null
+    omit?: HistoricalMovementOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: historical_movementInclude<ExtArgs> | null
+    include?: HistoricalMovementInclude<ExtArgs> | null
     /**
-     * Filter which historical_movement to delete.
+     * Filter which HistoricalMovement to delete.
      */
-    where: historical_movementWhereUniqueInput
+    where: HistoricalMovementWhereUniqueInput
   }
 
   /**
-   * historical_movement deleteMany
+   * HistoricalMovement deleteMany
    */
-  export type historical_movementDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type HistoricalMovementDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which historical_movements to delete
+     * Filter which HistoricalMovements to delete
      */
-    where?: historical_movementWhereInput
+    where?: HistoricalMovementWhereInput
     /**
-     * Limit how many historical_movements to delete.
+     * Limit how many HistoricalMovements to delete.
      */
     limit?: number
   }
 
   /**
-   * historical_movement without action
+   * HistoricalMovement without action
    */
-  export type historical_movementDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type HistoricalMovementDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the historical_movement
+     * Select specific fields to fetch from the HistoricalMovement
      */
-    select?: historical_movementSelect<ExtArgs> | null
+    select?: HistoricalMovementSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the historical_movement
+     * Omit specific fields from the HistoricalMovement
      */
-    omit?: historical_movementOmit<ExtArgs> | null
+    omit?: HistoricalMovementOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: historical_movementInclude<ExtArgs> | null
+    include?: HistoricalMovementInclude<ExtArgs> | null
   }
 
 
@@ -11158,18 +11158,18 @@ export namespace Prisma {
   export const CityScalarFieldEnum: {
     id: 'id',
     name: 'name',
-    depatamentId: 'depatamentId'
+    departmentId: 'departmentId'
   };
 
   export type CityScalarFieldEnum = (typeof CityScalarFieldEnum)[keyof typeof CityScalarFieldEnum]
 
 
-  export const DepatamentScalarFieldEnum: {
+  export const DepartmentScalarFieldEnum: {
     id: 'id',
     name: 'name'
   };
 
-  export type DepatamentScalarFieldEnum = (typeof DepatamentScalarFieldEnum)[keyof typeof DepatamentScalarFieldEnum]
+  export type DepartmentScalarFieldEnum = (typeof DepartmentScalarFieldEnum)[keyof typeof DepartmentScalarFieldEnum]
 
 
   export const CategoryScalarFieldEnum: {
@@ -11189,13 +11189,13 @@ export namespace Prisma {
     description: 'description',
     categoryId: 'categoryId',
     unitPrice: 'unitPrice',
-    wight: 'wight',
-    is_fragile: 'is_fragile',
-    dimensions_cm: 'dimensions_cm',
+    weight: 'weight',
+    isFragile: 'isFragile',
+    dimensionsCm: 'dimensionsCm',
     imageUrl: 'imageUrl',
-    bar_code: 'bar_code',
-    required_refrigeration: 'required_refrigeration',
-    date_of_expiration: 'date_of_expiration',
+    barCode: 'barCode',
+    requiredRefrigeration: 'requiredRefrigeration',
+    dateOfExpiration: 'dateOfExpiration',
     status: 'status',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -11208,9 +11208,9 @@ export namespace Prisma {
     id: 'id',
     productId: 'productId',
     storeId: 'storeId',
-    available_quantity: 'available_quantity',
-    minimum_threshold: 'minimum_threshold',
-    last_reset_date: 'last_reset_date',
+    availableQuantity: 'availableQuantity',
+    minimumThreshold: 'minimumThreshold',
+    lastResetDate: 'lastResetDate',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -11218,18 +11218,18 @@ export namespace Prisma {
   export type InventoryScalarFieldEnum = (typeof InventoryScalarFieldEnum)[keyof typeof InventoryScalarFieldEnum]
 
 
-  export const Historical_movementScalarFieldEnum: {
+  export const HistoricalMovementScalarFieldEnum: {
     id: 'id',
     inventoryId: 'inventoryId',
     user: 'user',
-    movement_date: 'movement_date',
+    movementDate: 'movementDate',
     reason: 'reason',
-    movement_type: 'movement_type',
+    movementType: 'movementType',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
 
-  export type Historical_movementScalarFieldEnum = (typeof Historical_movementScalarFieldEnum)[keyof typeof Historical_movementScalarFieldEnum]
+  export type HistoricalMovementScalarFieldEnum = (typeof HistoricalMovementScalarFieldEnum)[keyof typeof HistoricalMovementScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -11258,18 +11258,18 @@ export namespace Prisma {
   export type StoreOrderByRelevanceFieldEnum = (typeof StoreOrderByRelevanceFieldEnum)[keyof typeof StoreOrderByRelevanceFieldEnum]
 
 
-  export const cityOrderByRelevanceFieldEnum: {
+  export const CityOrderByRelevanceFieldEnum: {
     name: 'name'
   };
 
-  export type cityOrderByRelevanceFieldEnum = (typeof cityOrderByRelevanceFieldEnum)[keyof typeof cityOrderByRelevanceFieldEnum]
+  export type CityOrderByRelevanceFieldEnum = (typeof CityOrderByRelevanceFieldEnum)[keyof typeof CityOrderByRelevanceFieldEnum]
 
 
-  export const DepatamentOrderByRelevanceFieldEnum: {
+  export const DepartmentOrderByRelevanceFieldEnum: {
     name: 'name'
   };
 
-  export type DepatamentOrderByRelevanceFieldEnum = (typeof DepatamentOrderByRelevanceFieldEnum)[keyof typeof DepatamentOrderByRelevanceFieldEnum]
+  export type DepartmentOrderByRelevanceFieldEnum = (typeof DepartmentOrderByRelevanceFieldEnum)[keyof typeof DepartmentOrderByRelevanceFieldEnum]
 
 
   export const CategoryOrderByRelevanceFieldEnum: {
@@ -11283,21 +11283,21 @@ export namespace Prisma {
   export const ProductOrderByRelevanceFieldEnum: {
     name: 'name',
     description: 'description',
-    dimensions_cm: 'dimensions_cm',
+    dimensionsCm: 'dimensionsCm',
     imageUrl: 'imageUrl',
-    bar_code: 'bar_code'
+    barCode: 'barCode'
   };
 
   export type ProductOrderByRelevanceFieldEnum = (typeof ProductOrderByRelevanceFieldEnum)[keyof typeof ProductOrderByRelevanceFieldEnum]
 
 
-  export const historical_movementOrderByRelevanceFieldEnum: {
+  export const HistoricalMovementOrderByRelevanceFieldEnum: {
     user: 'user',
     reason: 'reason',
-    movement_type: 'movement_type'
+    movementType: 'movementType'
   };
 
-  export type historical_movementOrderByRelevanceFieldEnum = (typeof historical_movementOrderByRelevanceFieldEnum)[keyof typeof historical_movementOrderByRelevanceFieldEnum]
+  export type HistoricalMovementOrderByRelevanceFieldEnum = (typeof HistoricalMovementOrderByRelevanceFieldEnum)[keyof typeof HistoricalMovementOrderByRelevanceFieldEnum]
 
 
   /**
@@ -11540,7 +11540,7 @@ export namespace Prisma {
     status?: EnumstatusStoreFilter<"Store"> | $Enums.statusStore
     createdAt?: DateTimeFilter<"Store"> | Date | string
     updatedAt?: DateTimeFilter<"Store"> | Date | string
-    city?: XOR<CityScalarRelationFilter, cityWhereInput>
+    city?: XOR<CityScalarRelationFilter, CityWhereInput>
     orders?: OrderListRelationFilter
     inventory?: InventoryListRelationFilter
   }
@@ -11557,7 +11557,7 @@ export namespace Prisma {
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    city?: cityOrderByWithRelationInput
+    city?: CityOrderByWithRelationInput
     orders?: OrderOrderByRelationAggregateInput
     inventory?: InventoryOrderByRelationAggregateInput
     _relevance?: StoreOrderByRelevanceInput
@@ -11578,7 +11578,7 @@ export namespace Prisma {
     status?: EnumstatusStoreFilter<"Store"> | $Enums.statusStore
     createdAt?: DateTimeFilter<"Store"> | Date | string
     updatedAt?: DateTimeFilter<"Store"> | Date | string
-    city?: XOR<CityScalarRelationFilter, cityWhereInput>
+    city?: XOR<CityScalarRelationFilter, CityWhereInput>
     orders?: OrderListRelationFilter
     inventory?: InventoryListRelationFilter
   }, "id">
@@ -11619,98 +11619,98 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Store"> | Date | string
   }
 
-  export type cityWhereInput = {
-    AND?: cityWhereInput | cityWhereInput[]
-    OR?: cityWhereInput[]
-    NOT?: cityWhereInput | cityWhereInput[]
-    id?: IntFilter<"city"> | number
-    name?: StringFilter<"city"> | string
-    depatamentId?: IntFilter<"city"> | number
-    depatament?: XOR<DepatamentScalarRelationFilter, DepatamentWhereInput>
+  export type CityWhereInput = {
+    AND?: CityWhereInput | CityWhereInput[]
+    OR?: CityWhereInput[]
+    NOT?: CityWhereInput | CityWhereInput[]
+    id?: IntFilter<"City"> | number
+    name?: StringFilter<"City"> | string
+    departmentId?: IntFilter<"City"> | number
+    department?: XOR<DepartmentScalarRelationFilter, DepartmentWhereInput>
     stores?: StoreListRelationFilter
   }
 
-  export type cityOrderByWithRelationInput = {
+  export type CityOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
-    depatamentId?: SortOrder
-    depatament?: DepatamentOrderByWithRelationInput
+    departmentId?: SortOrder
+    department?: DepartmentOrderByWithRelationInput
     stores?: StoreOrderByRelationAggregateInput
-    _relevance?: cityOrderByRelevanceInput
+    _relevance?: CityOrderByRelevanceInput
   }
 
-  export type cityWhereUniqueInput = Prisma.AtLeast<{
+  export type CityWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    AND?: cityWhereInput | cityWhereInput[]
-    OR?: cityWhereInput[]
-    NOT?: cityWhereInput | cityWhereInput[]
-    name?: StringFilter<"city"> | string
-    depatamentId?: IntFilter<"city"> | number
-    depatament?: XOR<DepatamentScalarRelationFilter, DepatamentWhereInput>
+    AND?: CityWhereInput | CityWhereInput[]
+    OR?: CityWhereInput[]
+    NOT?: CityWhereInput | CityWhereInput[]
+    name?: StringFilter<"City"> | string
+    departmentId?: IntFilter<"City"> | number
+    department?: XOR<DepartmentScalarRelationFilter, DepartmentWhereInput>
     stores?: StoreListRelationFilter
   }, "id">
 
-  export type cityOrderByWithAggregationInput = {
+  export type CityOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
-    depatamentId?: SortOrder
-    _count?: cityCountOrderByAggregateInput
-    _avg?: cityAvgOrderByAggregateInput
-    _max?: cityMaxOrderByAggregateInput
-    _min?: cityMinOrderByAggregateInput
-    _sum?: citySumOrderByAggregateInput
+    departmentId?: SortOrder
+    _count?: CityCountOrderByAggregateInput
+    _avg?: CityAvgOrderByAggregateInput
+    _max?: CityMaxOrderByAggregateInput
+    _min?: CityMinOrderByAggregateInput
+    _sum?: CitySumOrderByAggregateInput
   }
 
-  export type cityScalarWhereWithAggregatesInput = {
-    AND?: cityScalarWhereWithAggregatesInput | cityScalarWhereWithAggregatesInput[]
-    OR?: cityScalarWhereWithAggregatesInput[]
-    NOT?: cityScalarWhereWithAggregatesInput | cityScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"city"> | number
-    name?: StringWithAggregatesFilter<"city"> | string
-    depatamentId?: IntWithAggregatesFilter<"city"> | number
+  export type CityScalarWhereWithAggregatesInput = {
+    AND?: CityScalarWhereWithAggregatesInput | CityScalarWhereWithAggregatesInput[]
+    OR?: CityScalarWhereWithAggregatesInput[]
+    NOT?: CityScalarWhereWithAggregatesInput | CityScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"City"> | number
+    name?: StringWithAggregatesFilter<"City"> | string
+    departmentId?: IntWithAggregatesFilter<"City"> | number
   }
 
-  export type DepatamentWhereInput = {
-    AND?: DepatamentWhereInput | DepatamentWhereInput[]
-    OR?: DepatamentWhereInput[]
-    NOT?: DepatamentWhereInput | DepatamentWhereInput[]
-    id?: IntFilter<"Depatament"> | number
-    name?: StringFilter<"Depatament"> | string
+  export type DepartmentWhereInput = {
+    AND?: DepartmentWhereInput | DepartmentWhereInput[]
+    OR?: DepartmentWhereInput[]
+    NOT?: DepartmentWhereInput | DepartmentWhereInput[]
+    id?: IntFilter<"Department"> | number
+    name?: StringFilter<"Department"> | string
     cities?: CityListRelationFilter
   }
 
-  export type DepatamentOrderByWithRelationInput = {
+  export type DepartmentOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
-    cities?: cityOrderByRelationAggregateInput
-    _relevance?: DepatamentOrderByRelevanceInput
+    cities?: CityOrderByRelationAggregateInput
+    _relevance?: DepartmentOrderByRelevanceInput
   }
 
-  export type DepatamentWhereUniqueInput = Prisma.AtLeast<{
+  export type DepartmentWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    AND?: DepatamentWhereInput | DepatamentWhereInput[]
-    OR?: DepatamentWhereInput[]
-    NOT?: DepatamentWhereInput | DepatamentWhereInput[]
-    name?: StringFilter<"Depatament"> | string
+    AND?: DepartmentWhereInput | DepartmentWhereInput[]
+    OR?: DepartmentWhereInput[]
+    NOT?: DepartmentWhereInput | DepartmentWhereInput[]
+    name?: StringFilter<"Department"> | string
     cities?: CityListRelationFilter
   }, "id">
 
-  export type DepatamentOrderByWithAggregationInput = {
+  export type DepartmentOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
-    _count?: DepatamentCountOrderByAggregateInput
-    _avg?: DepatamentAvgOrderByAggregateInput
-    _max?: DepatamentMaxOrderByAggregateInput
-    _min?: DepatamentMinOrderByAggregateInput
-    _sum?: DepatamentSumOrderByAggregateInput
+    _count?: DepartmentCountOrderByAggregateInput
+    _avg?: DepartmentAvgOrderByAggregateInput
+    _max?: DepartmentMaxOrderByAggregateInput
+    _min?: DepartmentMinOrderByAggregateInput
+    _sum?: DepartmentSumOrderByAggregateInput
   }
 
-  export type DepatamentScalarWhereWithAggregatesInput = {
-    AND?: DepatamentScalarWhereWithAggregatesInput | DepatamentScalarWhereWithAggregatesInput[]
-    OR?: DepatamentScalarWhereWithAggregatesInput[]
-    NOT?: DepatamentScalarWhereWithAggregatesInput | DepatamentScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"Depatament"> | number
-    name?: StringWithAggregatesFilter<"Depatament"> | string
+  export type DepartmentScalarWhereWithAggregatesInput = {
+    AND?: DepartmentScalarWhereWithAggregatesInput | DepartmentScalarWhereWithAggregatesInput[]
+    OR?: DepartmentScalarWhereWithAggregatesInput[]
+    NOT?: DepartmentScalarWhereWithAggregatesInput | DepartmentScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Department"> | number
+    name?: StringWithAggregatesFilter<"Department"> | string
   }
 
   export type CategoryWhereInput = {
@@ -11780,13 +11780,13 @@ export namespace Prisma {
     description?: StringFilter<"Product"> | string
     categoryId?: IntFilter<"Product"> | number
     unitPrice?: FloatFilter<"Product"> | number
-    wight?: FloatFilter<"Product"> | number
-    is_fragile?: BoolFilter<"Product"> | boolean
-    dimensions_cm?: StringFilter<"Product"> | string
+    weight?: FloatFilter<"Product"> | number
+    isFragile?: BoolFilter<"Product"> | boolean
+    dimensionsCm?: StringFilter<"Product"> | string
     imageUrl?: StringFilter<"Product"> | string
-    bar_code?: StringFilter<"Product"> | string
-    required_refrigeration?: BoolFilter<"Product"> | boolean
-    date_of_expiration?: DateTimeFilter<"Product"> | Date | string
+    barCode?: StringFilter<"Product"> | string
+    requiredRefrigeration?: BoolFilter<"Product"> | boolean
+    dateOfExpiration?: DateTimeFilter<"Product"> | Date | string
     status?: EnumstatusProductFilter<"Product"> | $Enums.statusProduct
     createdAt?: DateTimeFilter<"Product"> | Date | string
     updatedAt?: DateTimeFilter<"Product"> | Date | string
@@ -11801,13 +11801,13 @@ export namespace Prisma {
     description?: SortOrder
     categoryId?: SortOrder
     unitPrice?: SortOrder
-    wight?: SortOrder
-    is_fragile?: SortOrder
-    dimensions_cm?: SortOrder
+    weight?: SortOrder
+    isFragile?: SortOrder
+    dimensionsCm?: SortOrder
     imageUrl?: SortOrder
-    bar_code?: SortOrder
-    required_refrigeration?: SortOrder
-    date_of_expiration?: SortOrder
+    barCode?: SortOrder
+    requiredRefrigeration?: SortOrder
+    dateOfExpiration?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -11826,13 +11826,13 @@ export namespace Prisma {
     description?: StringFilter<"Product"> | string
     categoryId?: IntFilter<"Product"> | number
     unitPrice?: FloatFilter<"Product"> | number
-    wight?: FloatFilter<"Product"> | number
-    is_fragile?: BoolFilter<"Product"> | boolean
-    dimensions_cm?: StringFilter<"Product"> | string
+    weight?: FloatFilter<"Product"> | number
+    isFragile?: BoolFilter<"Product"> | boolean
+    dimensionsCm?: StringFilter<"Product"> | string
     imageUrl?: StringFilter<"Product"> | string
-    bar_code?: StringFilter<"Product"> | string
-    required_refrigeration?: BoolFilter<"Product"> | boolean
-    date_of_expiration?: DateTimeFilter<"Product"> | Date | string
+    barCode?: StringFilter<"Product"> | string
+    requiredRefrigeration?: BoolFilter<"Product"> | boolean
+    dateOfExpiration?: DateTimeFilter<"Product"> | Date | string
     status?: EnumstatusProductFilter<"Product"> | $Enums.statusProduct
     createdAt?: DateTimeFilter<"Product"> | Date | string
     updatedAt?: DateTimeFilter<"Product"> | Date | string
@@ -11847,13 +11847,13 @@ export namespace Prisma {
     description?: SortOrder
     categoryId?: SortOrder
     unitPrice?: SortOrder
-    wight?: SortOrder
-    is_fragile?: SortOrder
-    dimensions_cm?: SortOrder
+    weight?: SortOrder
+    isFragile?: SortOrder
+    dimensionsCm?: SortOrder
     imageUrl?: SortOrder
-    bar_code?: SortOrder
-    required_refrigeration?: SortOrder
-    date_of_expiration?: SortOrder
+    barCode?: SortOrder
+    requiredRefrigeration?: SortOrder
+    dateOfExpiration?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -11873,13 +11873,13 @@ export namespace Prisma {
     description?: StringWithAggregatesFilter<"Product"> | string
     categoryId?: IntWithAggregatesFilter<"Product"> | number
     unitPrice?: FloatWithAggregatesFilter<"Product"> | number
-    wight?: FloatWithAggregatesFilter<"Product"> | number
-    is_fragile?: BoolWithAggregatesFilter<"Product"> | boolean
-    dimensions_cm?: StringWithAggregatesFilter<"Product"> | string
+    weight?: FloatWithAggregatesFilter<"Product"> | number
+    isFragile?: BoolWithAggregatesFilter<"Product"> | boolean
+    dimensionsCm?: StringWithAggregatesFilter<"Product"> | string
     imageUrl?: StringWithAggregatesFilter<"Product"> | string
-    bar_code?: StringWithAggregatesFilter<"Product"> | string
-    required_refrigeration?: BoolWithAggregatesFilter<"Product"> | boolean
-    date_of_expiration?: DateTimeWithAggregatesFilter<"Product"> | Date | string
+    barCode?: StringWithAggregatesFilter<"Product"> | string
+    requiredRefrigeration?: BoolWithAggregatesFilter<"Product"> | boolean
+    dateOfExpiration?: DateTimeWithAggregatesFilter<"Product"> | Date | string
     status?: EnumstatusProductWithAggregatesFilter<"Product"> | $Enums.statusProduct
     createdAt?: DateTimeWithAggregatesFilter<"Product"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Product"> | Date | string
@@ -11892,28 +11892,28 @@ export namespace Prisma {
     id?: IntFilter<"Inventory"> | number
     productId?: IntFilter<"Inventory"> | number
     storeId?: IntFilter<"Inventory"> | number
-    available_quantity?: IntFilter<"Inventory"> | number
-    minimum_threshold?: IntFilter<"Inventory"> | number
-    last_reset_date?: DateTimeFilter<"Inventory"> | Date | string
+    availableQuantity?: IntFilter<"Inventory"> | number
+    minimumThreshold?: IntFilter<"Inventory"> | number
+    lastResetDate?: DateTimeFilter<"Inventory"> | Date | string
     createdAt?: DateTimeFilter<"Inventory"> | Date | string
     updatedAt?: DateTimeFilter<"Inventory"> | Date | string
     product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
     store?: XOR<StoreScalarRelationFilter, StoreWhereInput>
-    historical_movement?: Historical_movementListRelationFilter
+    historicalMovement?: HistoricalMovementListRelationFilter
   }
 
   export type InventoryOrderByWithRelationInput = {
     id?: SortOrder
     productId?: SortOrder
     storeId?: SortOrder
-    available_quantity?: SortOrder
-    minimum_threshold?: SortOrder
-    last_reset_date?: SortOrder
+    availableQuantity?: SortOrder
+    minimumThreshold?: SortOrder
+    lastResetDate?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     product?: ProductOrderByWithRelationInput
     store?: StoreOrderByWithRelationInput
-    historical_movement?: historical_movementOrderByRelationAggregateInput
+    historicalMovement?: HistoricalMovementOrderByRelationAggregateInput
   }
 
   export type InventoryWhereUniqueInput = Prisma.AtLeast<{
@@ -11923,23 +11923,23 @@ export namespace Prisma {
     NOT?: InventoryWhereInput | InventoryWhereInput[]
     productId?: IntFilter<"Inventory"> | number
     storeId?: IntFilter<"Inventory"> | number
-    available_quantity?: IntFilter<"Inventory"> | number
-    minimum_threshold?: IntFilter<"Inventory"> | number
-    last_reset_date?: DateTimeFilter<"Inventory"> | Date | string
+    availableQuantity?: IntFilter<"Inventory"> | number
+    minimumThreshold?: IntFilter<"Inventory"> | number
+    lastResetDate?: DateTimeFilter<"Inventory"> | Date | string
     createdAt?: DateTimeFilter<"Inventory"> | Date | string
     updatedAt?: DateTimeFilter<"Inventory"> | Date | string
     product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
     store?: XOR<StoreScalarRelationFilter, StoreWhereInput>
-    historical_movement?: Historical_movementListRelationFilter
+    historicalMovement?: HistoricalMovementListRelationFilter
   }, "id">
 
   export type InventoryOrderByWithAggregationInput = {
     id?: SortOrder
     productId?: SortOrder
     storeId?: SortOrder
-    available_quantity?: SortOrder
-    minimum_threshold?: SortOrder
-    last_reset_date?: SortOrder
+    availableQuantity?: SortOrder
+    minimumThreshold?: SortOrder
+    lastResetDate?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: InventoryCountOrderByAggregateInput
@@ -11956,84 +11956,84 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Inventory"> | number
     productId?: IntWithAggregatesFilter<"Inventory"> | number
     storeId?: IntWithAggregatesFilter<"Inventory"> | number
-    available_quantity?: IntWithAggregatesFilter<"Inventory"> | number
-    minimum_threshold?: IntWithAggregatesFilter<"Inventory"> | number
-    last_reset_date?: DateTimeWithAggregatesFilter<"Inventory"> | Date | string
+    availableQuantity?: IntWithAggregatesFilter<"Inventory"> | number
+    minimumThreshold?: IntWithAggregatesFilter<"Inventory"> | number
+    lastResetDate?: DateTimeWithAggregatesFilter<"Inventory"> | Date | string
     createdAt?: DateTimeWithAggregatesFilter<"Inventory"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Inventory"> | Date | string
   }
 
-  export type historical_movementWhereInput = {
-    AND?: historical_movementWhereInput | historical_movementWhereInput[]
-    OR?: historical_movementWhereInput[]
-    NOT?: historical_movementWhereInput | historical_movementWhereInput[]
-    id?: IntFilter<"historical_movement"> | number
-    inventoryId?: IntFilter<"historical_movement"> | number
-    user?: StringFilter<"historical_movement"> | string
-    movement_date?: DateTimeFilter<"historical_movement"> | Date | string
-    reason?: StringFilter<"historical_movement"> | string
-    movement_type?: StringFilter<"historical_movement"> | string
-    createdAt?: DateTimeFilter<"historical_movement"> | Date | string
-    updatedAt?: DateTimeFilter<"historical_movement"> | Date | string
+  export type HistoricalMovementWhereInput = {
+    AND?: HistoricalMovementWhereInput | HistoricalMovementWhereInput[]
+    OR?: HistoricalMovementWhereInput[]
+    NOT?: HistoricalMovementWhereInput | HistoricalMovementWhereInput[]
+    id?: IntFilter<"HistoricalMovement"> | number
+    inventoryId?: IntFilter<"HistoricalMovement"> | number
+    user?: StringFilter<"HistoricalMovement"> | string
+    movementDate?: DateTimeFilter<"HistoricalMovement"> | Date | string
+    reason?: StringFilter<"HistoricalMovement"> | string
+    movementType?: StringFilter<"HistoricalMovement"> | string
+    createdAt?: DateTimeFilter<"HistoricalMovement"> | Date | string
+    updatedAt?: DateTimeFilter<"HistoricalMovement"> | Date | string
     inventory?: XOR<InventoryScalarRelationFilter, InventoryWhereInput>
   }
 
-  export type historical_movementOrderByWithRelationInput = {
+  export type HistoricalMovementOrderByWithRelationInput = {
     id?: SortOrder
     inventoryId?: SortOrder
     user?: SortOrder
-    movement_date?: SortOrder
+    movementDate?: SortOrder
     reason?: SortOrder
-    movement_type?: SortOrder
+    movementType?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     inventory?: InventoryOrderByWithRelationInput
-    _relevance?: historical_movementOrderByRelevanceInput
+    _relevance?: HistoricalMovementOrderByRelevanceInput
   }
 
-  export type historical_movementWhereUniqueInput = Prisma.AtLeast<{
+  export type HistoricalMovementWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    AND?: historical_movementWhereInput | historical_movementWhereInput[]
-    OR?: historical_movementWhereInput[]
-    NOT?: historical_movementWhereInput | historical_movementWhereInput[]
-    inventoryId?: IntFilter<"historical_movement"> | number
-    user?: StringFilter<"historical_movement"> | string
-    movement_date?: DateTimeFilter<"historical_movement"> | Date | string
-    reason?: StringFilter<"historical_movement"> | string
-    movement_type?: StringFilter<"historical_movement"> | string
-    createdAt?: DateTimeFilter<"historical_movement"> | Date | string
-    updatedAt?: DateTimeFilter<"historical_movement"> | Date | string
+    AND?: HistoricalMovementWhereInput | HistoricalMovementWhereInput[]
+    OR?: HistoricalMovementWhereInput[]
+    NOT?: HistoricalMovementWhereInput | HistoricalMovementWhereInput[]
+    inventoryId?: IntFilter<"HistoricalMovement"> | number
+    user?: StringFilter<"HistoricalMovement"> | string
+    movementDate?: DateTimeFilter<"HistoricalMovement"> | Date | string
+    reason?: StringFilter<"HistoricalMovement"> | string
+    movementType?: StringFilter<"HistoricalMovement"> | string
+    createdAt?: DateTimeFilter<"HistoricalMovement"> | Date | string
+    updatedAt?: DateTimeFilter<"HistoricalMovement"> | Date | string
     inventory?: XOR<InventoryScalarRelationFilter, InventoryWhereInput>
   }, "id">
 
-  export type historical_movementOrderByWithAggregationInput = {
+  export type HistoricalMovementOrderByWithAggregationInput = {
     id?: SortOrder
     inventoryId?: SortOrder
     user?: SortOrder
-    movement_date?: SortOrder
+    movementDate?: SortOrder
     reason?: SortOrder
-    movement_type?: SortOrder
+    movementType?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    _count?: historical_movementCountOrderByAggregateInput
-    _avg?: historical_movementAvgOrderByAggregateInput
-    _max?: historical_movementMaxOrderByAggregateInput
-    _min?: historical_movementMinOrderByAggregateInput
-    _sum?: historical_movementSumOrderByAggregateInput
+    _count?: HistoricalMovementCountOrderByAggregateInput
+    _avg?: HistoricalMovementAvgOrderByAggregateInput
+    _max?: HistoricalMovementMaxOrderByAggregateInput
+    _min?: HistoricalMovementMinOrderByAggregateInput
+    _sum?: HistoricalMovementSumOrderByAggregateInput
   }
 
-  export type historical_movementScalarWhereWithAggregatesInput = {
-    AND?: historical_movementScalarWhereWithAggregatesInput | historical_movementScalarWhereWithAggregatesInput[]
-    OR?: historical_movementScalarWhereWithAggregatesInput[]
-    NOT?: historical_movementScalarWhereWithAggregatesInput | historical_movementScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"historical_movement"> | number
-    inventoryId?: IntWithAggregatesFilter<"historical_movement"> | number
-    user?: StringWithAggregatesFilter<"historical_movement"> | string
-    movement_date?: DateTimeWithAggregatesFilter<"historical_movement"> | Date | string
-    reason?: StringWithAggregatesFilter<"historical_movement"> | string
-    movement_type?: StringWithAggregatesFilter<"historical_movement"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"historical_movement"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"historical_movement"> | Date | string
+  export type HistoricalMovementScalarWhereWithAggregatesInput = {
+    AND?: HistoricalMovementScalarWhereWithAggregatesInput | HistoricalMovementScalarWhereWithAggregatesInput[]
+    OR?: HistoricalMovementScalarWhereWithAggregatesInput[]
+    NOT?: HistoricalMovementScalarWhereWithAggregatesInput | HistoricalMovementScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"HistoricalMovement"> | number
+    inventoryId?: IntWithAggregatesFilter<"HistoricalMovement"> | number
+    user?: StringWithAggregatesFilter<"HistoricalMovement"> | string
+    movementDate?: DateTimeWithAggregatesFilter<"HistoricalMovement"> | Date | string
+    reason?: StringWithAggregatesFilter<"HistoricalMovement"> | string
+    movementType?: StringWithAggregatesFilter<"HistoricalMovement"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"HistoricalMovement"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"HistoricalMovement"> | Date | string
   }
 
   export type OrderCreateInput = {
@@ -12209,7 +12209,7 @@ export namespace Prisma {
     status?: $Enums.statusStore
     createdAt?: Date | string
     updatedAt?: Date | string
-    city: cityCreateNestedOneWithoutStoresInput
+    city: CityCreateNestedOneWithoutStoresInput
     orders?: OrderCreateNestedManyWithoutStoreInput
     inventory?: InventoryCreateNestedManyWithoutStoreInput
   }
@@ -12240,7 +12240,7 @@ export namespace Prisma {
     status?: EnumstatusStoreFieldUpdateOperationsInput | $Enums.statusStore
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    city?: cityUpdateOneRequiredWithoutStoresNestedInput
+    city?: CityUpdateOneRequiredWithoutStoresNestedInput
     orders?: OrderUpdateManyWithoutStoreNestedInput
     inventory?: InventoryUpdateManyWithoutStoreNestedInput
   }
@@ -12301,80 +12301,80 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type cityCreateInput = {
+  export type CityCreateInput = {
     name: string
-    depatament: DepatamentCreateNestedOneWithoutCitiesInput
+    department: DepartmentCreateNestedOneWithoutCitiesInput
     stores?: StoreCreateNestedManyWithoutCityInput
   }
 
-  export type cityUncheckedCreateInput = {
+  export type CityUncheckedCreateInput = {
     id?: number
     name: string
-    depatamentId: number
+    departmentId: number
     stores?: StoreUncheckedCreateNestedManyWithoutCityInput
   }
 
-  export type cityUpdateInput = {
+  export type CityUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
-    depatament?: DepatamentUpdateOneRequiredWithoutCitiesNestedInput
+    department?: DepartmentUpdateOneRequiredWithoutCitiesNestedInput
     stores?: StoreUpdateManyWithoutCityNestedInput
   }
 
-  export type cityUncheckedUpdateInput = {
+  export type CityUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    depatamentId?: IntFieldUpdateOperationsInput | number
+    departmentId?: IntFieldUpdateOperationsInput | number
     stores?: StoreUncheckedUpdateManyWithoutCityNestedInput
   }
 
-  export type cityCreateManyInput = {
+  export type CityCreateManyInput = {
     id?: number
     name: string
-    depatamentId: number
+    departmentId: number
   }
 
-  export type cityUpdateManyMutationInput = {
+  export type CityUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
   }
 
-  export type cityUncheckedUpdateManyInput = {
+  export type CityUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    depatamentId?: IntFieldUpdateOperationsInput | number
+    departmentId?: IntFieldUpdateOperationsInput | number
   }
 
-  export type DepatamentCreateInput = {
+  export type DepartmentCreateInput = {
     name: string
-    cities?: cityCreateNestedManyWithoutDepatamentInput
+    cities?: CityCreateNestedManyWithoutDepartmentInput
   }
 
-  export type DepatamentUncheckedCreateInput = {
+  export type DepartmentUncheckedCreateInput = {
     id?: number
     name: string
-    cities?: cityUncheckedCreateNestedManyWithoutDepatamentInput
+    cities?: CityUncheckedCreateNestedManyWithoutDepartmentInput
   }
 
-  export type DepatamentUpdateInput = {
+  export type DepartmentUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
-    cities?: cityUpdateManyWithoutDepatamentNestedInput
+    cities?: CityUpdateManyWithoutDepartmentNestedInput
   }
 
-  export type DepatamentUncheckedUpdateInput = {
+  export type DepartmentUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    cities?: cityUncheckedUpdateManyWithoutDepatamentNestedInput
+    cities?: CityUncheckedUpdateManyWithoutDepartmentNestedInput
   }
 
-  export type DepatamentCreateManyInput = {
+  export type DepartmentCreateManyInput = {
     id?: number
     name: string
   }
 
-  export type DepatamentUpdateManyMutationInput = {
+  export type DepartmentUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
   }
 
-  export type DepatamentUncheckedUpdateManyInput = {
+  export type DepartmentUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
   }
@@ -12440,13 +12440,13 @@ export namespace Prisma {
     name: string
     description: string
     unitPrice: number
-    wight: number
-    is_fragile: boolean
-    dimensions_cm: string
+    weight: number
+    isFragile: boolean
+    dimensionsCm: string
     imageUrl: string
-    bar_code: string
-    required_refrigeration: boolean
-    date_of_expiration: Date | string
+    barCode: string
+    requiredRefrigeration: boolean
+    dateOfExpiration: Date | string
     status?: $Enums.statusProduct
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -12461,13 +12461,13 @@ export namespace Prisma {
     description: string
     categoryId: number
     unitPrice: number
-    wight: number
-    is_fragile: boolean
-    dimensions_cm: string
+    weight: number
+    isFragile: boolean
+    dimensionsCm: string
     imageUrl: string
-    bar_code: string
-    required_refrigeration: boolean
-    date_of_expiration: Date | string
+    barCode: string
+    requiredRefrigeration: boolean
+    dateOfExpiration: Date | string
     status?: $Enums.statusProduct
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -12479,13 +12479,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     unitPrice?: FloatFieldUpdateOperationsInput | number
-    wight?: FloatFieldUpdateOperationsInput | number
-    is_fragile?: BoolFieldUpdateOperationsInput | boolean
-    dimensions_cm?: StringFieldUpdateOperationsInput | string
+    weight?: FloatFieldUpdateOperationsInput | number
+    isFragile?: BoolFieldUpdateOperationsInput | boolean
+    dimensionsCm?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
-    bar_code?: StringFieldUpdateOperationsInput | string
-    required_refrigeration?: BoolFieldUpdateOperationsInput | boolean
-    date_of_expiration?: DateTimeFieldUpdateOperationsInput | Date | string
+    barCode?: StringFieldUpdateOperationsInput | string
+    requiredRefrigeration?: BoolFieldUpdateOperationsInput | boolean
+    dateOfExpiration?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumstatusProductFieldUpdateOperationsInput | $Enums.statusProduct
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12500,13 +12500,13 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     categoryId?: IntFieldUpdateOperationsInput | number
     unitPrice?: FloatFieldUpdateOperationsInput | number
-    wight?: FloatFieldUpdateOperationsInput | number
-    is_fragile?: BoolFieldUpdateOperationsInput | boolean
-    dimensions_cm?: StringFieldUpdateOperationsInput | string
+    weight?: FloatFieldUpdateOperationsInput | number
+    isFragile?: BoolFieldUpdateOperationsInput | boolean
+    dimensionsCm?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
-    bar_code?: StringFieldUpdateOperationsInput | string
-    required_refrigeration?: BoolFieldUpdateOperationsInput | boolean
-    date_of_expiration?: DateTimeFieldUpdateOperationsInput | Date | string
+    barCode?: StringFieldUpdateOperationsInput | string
+    requiredRefrigeration?: BoolFieldUpdateOperationsInput | boolean
+    dateOfExpiration?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumstatusProductFieldUpdateOperationsInput | $Enums.statusProduct
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12520,13 +12520,13 @@ export namespace Prisma {
     description: string
     categoryId: number
     unitPrice: number
-    wight: number
-    is_fragile: boolean
-    dimensions_cm: string
+    weight: number
+    isFragile: boolean
+    dimensionsCm: string
     imageUrl: string
-    bar_code: string
-    required_refrigeration: boolean
-    date_of_expiration: Date | string
+    barCode: string
+    requiredRefrigeration: boolean
+    dateOfExpiration: Date | string
     status?: $Enums.statusProduct
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -12536,13 +12536,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     unitPrice?: FloatFieldUpdateOperationsInput | number
-    wight?: FloatFieldUpdateOperationsInput | number
-    is_fragile?: BoolFieldUpdateOperationsInput | boolean
-    dimensions_cm?: StringFieldUpdateOperationsInput | string
+    weight?: FloatFieldUpdateOperationsInput | number
+    isFragile?: BoolFieldUpdateOperationsInput | boolean
+    dimensionsCm?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
-    bar_code?: StringFieldUpdateOperationsInput | string
-    required_refrigeration?: BoolFieldUpdateOperationsInput | boolean
-    date_of_expiration?: DateTimeFieldUpdateOperationsInput | Date | string
+    barCode?: StringFieldUpdateOperationsInput | string
+    requiredRefrigeration?: BoolFieldUpdateOperationsInput | boolean
+    dateOfExpiration?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumstatusProductFieldUpdateOperationsInput | $Enums.statusProduct
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12554,79 +12554,79 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     categoryId?: IntFieldUpdateOperationsInput | number
     unitPrice?: FloatFieldUpdateOperationsInput | number
-    wight?: FloatFieldUpdateOperationsInput | number
-    is_fragile?: BoolFieldUpdateOperationsInput | boolean
-    dimensions_cm?: StringFieldUpdateOperationsInput | string
+    weight?: FloatFieldUpdateOperationsInput | number
+    isFragile?: BoolFieldUpdateOperationsInput | boolean
+    dimensionsCm?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
-    bar_code?: StringFieldUpdateOperationsInput | string
-    required_refrigeration?: BoolFieldUpdateOperationsInput | boolean
-    date_of_expiration?: DateTimeFieldUpdateOperationsInput | Date | string
+    barCode?: StringFieldUpdateOperationsInput | string
+    requiredRefrigeration?: BoolFieldUpdateOperationsInput | boolean
+    dateOfExpiration?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumstatusProductFieldUpdateOperationsInput | $Enums.statusProduct
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type InventoryCreateInput = {
-    available_quantity: number
-    minimum_threshold: number
-    last_reset_date: Date | string
+    availableQuantity: number
+    minimumThreshold: number
+    lastResetDate: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
     product: ProductCreateNestedOneWithoutInventoryInput
     store: StoreCreateNestedOneWithoutInventoryInput
-    historical_movement?: historical_movementCreateNestedManyWithoutInventoryInput
+    historicalMovement?: HistoricalMovementCreateNestedManyWithoutInventoryInput
   }
 
   export type InventoryUncheckedCreateInput = {
     id?: number
     productId: number
     storeId: number
-    available_quantity: number
-    minimum_threshold: number
-    last_reset_date: Date | string
+    availableQuantity: number
+    minimumThreshold: number
+    lastResetDate: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
-    historical_movement?: historical_movementUncheckedCreateNestedManyWithoutInventoryInput
+    historicalMovement?: HistoricalMovementUncheckedCreateNestedManyWithoutInventoryInput
   }
 
   export type InventoryUpdateInput = {
-    available_quantity?: IntFieldUpdateOperationsInput | number
-    minimum_threshold?: IntFieldUpdateOperationsInput | number
-    last_reset_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    availableQuantity?: IntFieldUpdateOperationsInput | number
+    minimumThreshold?: IntFieldUpdateOperationsInput | number
+    lastResetDate?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     product?: ProductUpdateOneRequiredWithoutInventoryNestedInput
     store?: StoreUpdateOneRequiredWithoutInventoryNestedInput
-    historical_movement?: historical_movementUpdateManyWithoutInventoryNestedInput
+    historicalMovement?: HistoricalMovementUpdateManyWithoutInventoryNestedInput
   }
 
   export type InventoryUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     productId?: IntFieldUpdateOperationsInput | number
     storeId?: IntFieldUpdateOperationsInput | number
-    available_quantity?: IntFieldUpdateOperationsInput | number
-    minimum_threshold?: IntFieldUpdateOperationsInput | number
-    last_reset_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    availableQuantity?: IntFieldUpdateOperationsInput | number
+    minimumThreshold?: IntFieldUpdateOperationsInput | number
+    lastResetDate?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    historical_movement?: historical_movementUncheckedUpdateManyWithoutInventoryNestedInput
+    historicalMovement?: HistoricalMovementUncheckedUpdateManyWithoutInventoryNestedInput
   }
 
   export type InventoryCreateManyInput = {
     id?: number
     productId: number
     storeId: number
-    available_quantity: number
-    minimum_threshold: number
-    last_reset_date: Date | string
+    availableQuantity: number
+    minimumThreshold: number
+    lastResetDate: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type InventoryUpdateManyMutationInput = {
-    available_quantity?: IntFieldUpdateOperationsInput | number
-    minimum_threshold?: IntFieldUpdateOperationsInput | number
-    last_reset_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    availableQuantity?: IntFieldUpdateOperationsInput | number
+    minimumThreshold?: IntFieldUpdateOperationsInput | number
+    lastResetDate?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12635,82 +12635,82 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     productId?: IntFieldUpdateOperationsInput | number
     storeId?: IntFieldUpdateOperationsInput | number
-    available_quantity?: IntFieldUpdateOperationsInput | number
-    minimum_threshold?: IntFieldUpdateOperationsInput | number
-    last_reset_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    availableQuantity?: IntFieldUpdateOperationsInput | number
+    minimumThreshold?: IntFieldUpdateOperationsInput | number
+    lastResetDate?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type historical_movementCreateInput = {
+  export type HistoricalMovementCreateInput = {
     user: string
-    movement_date: Date | string
+    movementDate: Date | string
     reason: string
-    movement_type: string
+    movementType: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    inventory: InventoryCreateNestedOneWithoutHistorical_movementInput
+    inventory: InventoryCreateNestedOneWithoutHistoricalMovementInput
   }
 
-  export type historical_movementUncheckedCreateInput = {
+  export type HistoricalMovementUncheckedCreateInput = {
     id?: number
     inventoryId: number
     user: string
-    movement_date: Date | string
+    movementDate: Date | string
     reason: string
-    movement_type: string
+    movementType: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type historical_movementUpdateInput = {
+  export type HistoricalMovementUpdateInput = {
     user?: StringFieldUpdateOperationsInput | string
-    movement_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    movementDate?: DateTimeFieldUpdateOperationsInput | Date | string
     reason?: StringFieldUpdateOperationsInput | string
-    movement_type?: StringFieldUpdateOperationsInput | string
+    movementType?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    inventory?: InventoryUpdateOneRequiredWithoutHistorical_movementNestedInput
+    inventory?: InventoryUpdateOneRequiredWithoutHistoricalMovementNestedInput
   }
 
-  export type historical_movementUncheckedUpdateInput = {
+  export type HistoricalMovementUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     inventoryId?: IntFieldUpdateOperationsInput | number
     user?: StringFieldUpdateOperationsInput | string
-    movement_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    movementDate?: DateTimeFieldUpdateOperationsInput | Date | string
     reason?: StringFieldUpdateOperationsInput | string
-    movement_type?: StringFieldUpdateOperationsInput | string
+    movementType?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type historical_movementCreateManyInput = {
+  export type HistoricalMovementCreateManyInput = {
     id?: number
     inventoryId: number
     user: string
-    movement_date: Date | string
+    movementDate: Date | string
     reason: string
-    movement_type: string
+    movementType: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type historical_movementUpdateManyMutationInput = {
+  export type HistoricalMovementUpdateManyMutationInput = {
     user?: StringFieldUpdateOperationsInput | string
-    movement_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    movementDate?: DateTimeFieldUpdateOperationsInput | Date | string
     reason?: StringFieldUpdateOperationsInput | string
-    movement_type?: StringFieldUpdateOperationsInput | string
+    movementType?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type historical_movementUncheckedUpdateManyInput = {
+  export type HistoricalMovementUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     inventoryId?: IntFieldUpdateOperationsInput | number
     user?: StringFieldUpdateOperationsInput | string
-    movement_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    movementDate?: DateTimeFieldUpdateOperationsInput | Date | string
     reason?: StringFieldUpdateOperationsInput | string
-    movement_type?: StringFieldUpdateOperationsInput | string
+    movementType?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12987,8 +12987,8 @@ export namespace Prisma {
   }
 
   export type CityScalarRelationFilter = {
-    is?: cityWhereInput
-    isNot?: cityWhereInput
+    is?: CityWhereInput
+    isNot?: CityWhereInput
   }
 
   export type OrderListRelationFilter = {
@@ -13085,9 +13085,9 @@ export namespace Prisma {
     _max?: NestedEnumstatusStoreFilter<$PrismaModel>
   }
 
-  export type DepatamentScalarRelationFilter = {
-    is?: DepatamentWhereInput
-    isNot?: DepatamentWhereInput
+  export type DepartmentScalarRelationFilter = {
+    is?: DepartmentWhereInput
+    isNot?: DepartmentWhereInput
   }
 
   export type StoreListRelationFilter = {
@@ -13100,76 +13100,76 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type cityOrderByRelevanceInput = {
-    fields: cityOrderByRelevanceFieldEnum | cityOrderByRelevanceFieldEnum[]
+  export type CityOrderByRelevanceInput = {
+    fields: CityOrderByRelevanceFieldEnum | CityOrderByRelevanceFieldEnum[]
     sort: SortOrder
     search: string
   }
 
-  export type cityCountOrderByAggregateInput = {
+  export type CityCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    depatamentId?: SortOrder
+    departmentId?: SortOrder
   }
 
-  export type cityAvgOrderByAggregateInput = {
+  export type CityAvgOrderByAggregateInput = {
     id?: SortOrder
-    depatamentId?: SortOrder
+    departmentId?: SortOrder
   }
 
-  export type cityMaxOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    depatamentId?: SortOrder
-  }
-
-  export type cityMinOrderByAggregateInput = {
+  export type CityMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    depatamentId?: SortOrder
+    departmentId?: SortOrder
   }
 
-  export type citySumOrderByAggregateInput = {
+  export type CityMinOrderByAggregateInput = {
     id?: SortOrder
-    depatamentId?: SortOrder
+    name?: SortOrder
+    departmentId?: SortOrder
+  }
+
+  export type CitySumOrderByAggregateInput = {
+    id?: SortOrder
+    departmentId?: SortOrder
   }
 
   export type CityListRelationFilter = {
-    every?: cityWhereInput
-    some?: cityWhereInput
-    none?: cityWhereInput
+    every?: CityWhereInput
+    some?: CityWhereInput
+    none?: CityWhereInput
   }
 
-  export type cityOrderByRelationAggregateInput = {
+  export type CityOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type DepatamentOrderByRelevanceInput = {
-    fields: DepatamentOrderByRelevanceFieldEnum | DepatamentOrderByRelevanceFieldEnum[]
+  export type DepartmentOrderByRelevanceInput = {
+    fields: DepartmentOrderByRelevanceFieldEnum | DepartmentOrderByRelevanceFieldEnum[]
     sort: SortOrder
     search: string
   }
 
-  export type DepatamentCountOrderByAggregateInput = {
+  export type DepartmentCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
   }
 
-  export type DepatamentAvgOrderByAggregateInput = {
+  export type DepartmentAvgOrderByAggregateInput = {
     id?: SortOrder
   }
 
-  export type DepatamentMaxOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-  }
-
-  export type DepatamentMinOrderByAggregateInput = {
+  export type DepartmentMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
   }
 
-  export type DepatamentSumOrderByAggregateInput = {
+  export type DepartmentMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type DepartmentSumOrderByAggregateInput = {
     id?: SortOrder
   }
 
@@ -13250,13 +13250,13 @@ export namespace Prisma {
     description?: SortOrder
     categoryId?: SortOrder
     unitPrice?: SortOrder
-    wight?: SortOrder
-    is_fragile?: SortOrder
-    dimensions_cm?: SortOrder
+    weight?: SortOrder
+    isFragile?: SortOrder
+    dimensionsCm?: SortOrder
     imageUrl?: SortOrder
-    bar_code?: SortOrder
-    required_refrigeration?: SortOrder
-    date_of_expiration?: SortOrder
+    barCode?: SortOrder
+    requiredRefrigeration?: SortOrder
+    dateOfExpiration?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -13266,7 +13266,7 @@ export namespace Prisma {
     id?: SortOrder
     categoryId?: SortOrder
     unitPrice?: SortOrder
-    wight?: SortOrder
+    weight?: SortOrder
   }
 
   export type ProductMaxOrderByAggregateInput = {
@@ -13275,13 +13275,13 @@ export namespace Prisma {
     description?: SortOrder
     categoryId?: SortOrder
     unitPrice?: SortOrder
-    wight?: SortOrder
-    is_fragile?: SortOrder
-    dimensions_cm?: SortOrder
+    weight?: SortOrder
+    isFragile?: SortOrder
+    dimensionsCm?: SortOrder
     imageUrl?: SortOrder
-    bar_code?: SortOrder
-    required_refrigeration?: SortOrder
-    date_of_expiration?: SortOrder
+    barCode?: SortOrder
+    requiredRefrigeration?: SortOrder
+    dateOfExpiration?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -13293,13 +13293,13 @@ export namespace Prisma {
     description?: SortOrder
     categoryId?: SortOrder
     unitPrice?: SortOrder
-    wight?: SortOrder
-    is_fragile?: SortOrder
-    dimensions_cm?: SortOrder
+    weight?: SortOrder
+    isFragile?: SortOrder
+    dimensionsCm?: SortOrder
     imageUrl?: SortOrder
-    bar_code?: SortOrder
-    required_refrigeration?: SortOrder
-    date_of_expiration?: SortOrder
+    barCode?: SortOrder
+    requiredRefrigeration?: SortOrder
+    dateOfExpiration?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -13309,7 +13309,7 @@ export namespace Prisma {
     id?: SortOrder
     categoryId?: SortOrder
     unitPrice?: SortOrder
-    wight?: SortOrder
+    weight?: SortOrder
   }
 
   export type BoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -13330,13 +13330,13 @@ export namespace Prisma {
     _max?: NestedEnumstatusProductFilter<$PrismaModel>
   }
 
-  export type Historical_movementListRelationFilter = {
-    every?: historical_movementWhereInput
-    some?: historical_movementWhereInput
-    none?: historical_movementWhereInput
+  export type HistoricalMovementListRelationFilter = {
+    every?: HistoricalMovementWhereInput
+    some?: HistoricalMovementWhereInput
+    none?: HistoricalMovementWhereInput
   }
 
-  export type historical_movementOrderByRelationAggregateInput = {
+  export type HistoricalMovementOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -13344,9 +13344,9 @@ export namespace Prisma {
     id?: SortOrder
     productId?: SortOrder
     storeId?: SortOrder
-    available_quantity?: SortOrder
-    minimum_threshold?: SortOrder
-    last_reset_date?: SortOrder
+    availableQuantity?: SortOrder
+    minimumThreshold?: SortOrder
+    lastResetDate?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -13355,17 +13355,17 @@ export namespace Prisma {
     id?: SortOrder
     productId?: SortOrder
     storeId?: SortOrder
-    available_quantity?: SortOrder
-    minimum_threshold?: SortOrder
+    availableQuantity?: SortOrder
+    minimumThreshold?: SortOrder
   }
 
   export type InventoryMaxOrderByAggregateInput = {
     id?: SortOrder
     productId?: SortOrder
     storeId?: SortOrder
-    available_quantity?: SortOrder
-    minimum_threshold?: SortOrder
-    last_reset_date?: SortOrder
+    availableQuantity?: SortOrder
+    minimumThreshold?: SortOrder
+    lastResetDate?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -13374,9 +13374,9 @@ export namespace Prisma {
     id?: SortOrder
     productId?: SortOrder
     storeId?: SortOrder
-    available_quantity?: SortOrder
-    minimum_threshold?: SortOrder
-    last_reset_date?: SortOrder
+    availableQuantity?: SortOrder
+    minimumThreshold?: SortOrder
+    lastResetDate?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -13385,8 +13385,8 @@ export namespace Prisma {
     id?: SortOrder
     productId?: SortOrder
     storeId?: SortOrder
-    available_quantity?: SortOrder
-    minimum_threshold?: SortOrder
+    availableQuantity?: SortOrder
+    minimumThreshold?: SortOrder
   }
 
   export type InventoryScalarRelationFilter = {
@@ -13394,51 +13394,51 @@ export namespace Prisma {
     isNot?: InventoryWhereInput
   }
 
-  export type historical_movementOrderByRelevanceInput = {
-    fields: historical_movementOrderByRelevanceFieldEnum | historical_movementOrderByRelevanceFieldEnum[]
+  export type HistoricalMovementOrderByRelevanceInput = {
+    fields: HistoricalMovementOrderByRelevanceFieldEnum | HistoricalMovementOrderByRelevanceFieldEnum[]
     sort: SortOrder
     search: string
   }
 
-  export type historical_movementCountOrderByAggregateInput = {
+  export type HistoricalMovementCountOrderByAggregateInput = {
     id?: SortOrder
     inventoryId?: SortOrder
     user?: SortOrder
-    movement_date?: SortOrder
+    movementDate?: SortOrder
     reason?: SortOrder
-    movement_type?: SortOrder
+    movementType?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
-  export type historical_movementAvgOrderByAggregateInput = {
+  export type HistoricalMovementAvgOrderByAggregateInput = {
     id?: SortOrder
     inventoryId?: SortOrder
   }
 
-  export type historical_movementMaxOrderByAggregateInput = {
+  export type HistoricalMovementMaxOrderByAggregateInput = {
     id?: SortOrder
     inventoryId?: SortOrder
     user?: SortOrder
-    movement_date?: SortOrder
+    movementDate?: SortOrder
     reason?: SortOrder
-    movement_type?: SortOrder
+    movementType?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
-  export type historical_movementMinOrderByAggregateInput = {
+  export type HistoricalMovementMinOrderByAggregateInput = {
     id?: SortOrder
     inventoryId?: SortOrder
     user?: SortOrder
-    movement_date?: SortOrder
+    movementDate?: SortOrder
     reason?: SortOrder
-    movement_type?: SortOrder
+    movementType?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
-  export type historical_movementSumOrderByAggregateInput = {
+  export type HistoricalMovementSumOrderByAggregateInput = {
     id?: SortOrder
     inventoryId?: SortOrder
   }
@@ -13555,10 +13555,10 @@ export namespace Prisma {
     update?: XOR<XOR<ProductUpdateToOneWithWhereWithoutOrderItemsInput, ProductUpdateWithoutOrderItemsInput>, ProductUncheckedUpdateWithoutOrderItemsInput>
   }
 
-  export type cityCreateNestedOneWithoutStoresInput = {
-    create?: XOR<cityCreateWithoutStoresInput, cityUncheckedCreateWithoutStoresInput>
-    connectOrCreate?: cityCreateOrConnectWithoutStoresInput
-    connect?: cityWhereUniqueInput
+  export type CityCreateNestedOneWithoutStoresInput = {
+    create?: XOR<CityCreateWithoutStoresInput, CityUncheckedCreateWithoutStoresInput>
+    connectOrCreate?: CityCreateOrConnectWithoutStoresInput
+    connect?: CityWhereUniqueInput
   }
 
   export type OrderCreateNestedManyWithoutStoreInput = {
@@ -13593,12 +13593,12 @@ export namespace Prisma {
     set?: $Enums.statusStore
   }
 
-  export type cityUpdateOneRequiredWithoutStoresNestedInput = {
-    create?: XOR<cityCreateWithoutStoresInput, cityUncheckedCreateWithoutStoresInput>
-    connectOrCreate?: cityCreateOrConnectWithoutStoresInput
-    upsert?: cityUpsertWithoutStoresInput
-    connect?: cityWhereUniqueInput
-    update?: XOR<XOR<cityUpdateToOneWithWhereWithoutStoresInput, cityUpdateWithoutStoresInput>, cityUncheckedUpdateWithoutStoresInput>
+  export type CityUpdateOneRequiredWithoutStoresNestedInput = {
+    create?: XOR<CityCreateWithoutStoresInput, CityUncheckedCreateWithoutStoresInput>
+    connectOrCreate?: CityCreateOrConnectWithoutStoresInput
+    upsert?: CityUpsertWithoutStoresInput
+    connect?: CityWhereUniqueInput
+    update?: XOR<XOR<CityUpdateToOneWithWhereWithoutStoresInput, CityUpdateWithoutStoresInput>, CityUncheckedUpdateWithoutStoresInput>
   }
 
   export type OrderUpdateManyWithoutStoreNestedInput = {
@@ -13657,10 +13657,10 @@ export namespace Prisma {
     deleteMany?: InventoryScalarWhereInput | InventoryScalarWhereInput[]
   }
 
-  export type DepatamentCreateNestedOneWithoutCitiesInput = {
-    create?: XOR<DepatamentCreateWithoutCitiesInput, DepatamentUncheckedCreateWithoutCitiesInput>
-    connectOrCreate?: DepatamentCreateOrConnectWithoutCitiesInput
-    connect?: DepatamentWhereUniqueInput
+  export type DepartmentCreateNestedOneWithoutCitiesInput = {
+    create?: XOR<DepartmentCreateWithoutCitiesInput, DepartmentUncheckedCreateWithoutCitiesInput>
+    connectOrCreate?: DepartmentCreateOrConnectWithoutCitiesInput
+    connect?: DepartmentWhereUniqueInput
   }
 
   export type StoreCreateNestedManyWithoutCityInput = {
@@ -13677,12 +13677,12 @@ export namespace Prisma {
     connect?: StoreWhereUniqueInput | StoreWhereUniqueInput[]
   }
 
-  export type DepatamentUpdateOneRequiredWithoutCitiesNestedInput = {
-    create?: XOR<DepatamentCreateWithoutCitiesInput, DepatamentUncheckedCreateWithoutCitiesInput>
-    connectOrCreate?: DepatamentCreateOrConnectWithoutCitiesInput
-    upsert?: DepatamentUpsertWithoutCitiesInput
-    connect?: DepatamentWhereUniqueInput
-    update?: XOR<XOR<DepatamentUpdateToOneWithWhereWithoutCitiesInput, DepatamentUpdateWithoutCitiesInput>, DepatamentUncheckedUpdateWithoutCitiesInput>
+  export type DepartmentUpdateOneRequiredWithoutCitiesNestedInput = {
+    create?: XOR<DepartmentCreateWithoutCitiesInput, DepartmentUncheckedCreateWithoutCitiesInput>
+    connectOrCreate?: DepartmentCreateOrConnectWithoutCitiesInput
+    upsert?: DepartmentUpsertWithoutCitiesInput
+    connect?: DepartmentWhereUniqueInput
+    update?: XOR<XOR<DepartmentUpdateToOneWithWhereWithoutCitiesInput, DepartmentUpdateWithoutCitiesInput>, DepartmentUncheckedUpdateWithoutCitiesInput>
   }
 
   export type StoreUpdateManyWithoutCityNestedInput = {
@@ -13713,46 +13713,46 @@ export namespace Prisma {
     deleteMany?: StoreScalarWhereInput | StoreScalarWhereInput[]
   }
 
-  export type cityCreateNestedManyWithoutDepatamentInput = {
-    create?: XOR<cityCreateWithoutDepatamentInput, cityUncheckedCreateWithoutDepatamentInput> | cityCreateWithoutDepatamentInput[] | cityUncheckedCreateWithoutDepatamentInput[]
-    connectOrCreate?: cityCreateOrConnectWithoutDepatamentInput | cityCreateOrConnectWithoutDepatamentInput[]
-    createMany?: cityCreateManyDepatamentInputEnvelope
-    connect?: cityWhereUniqueInput | cityWhereUniqueInput[]
+  export type CityCreateNestedManyWithoutDepartmentInput = {
+    create?: XOR<CityCreateWithoutDepartmentInput, CityUncheckedCreateWithoutDepartmentInput> | CityCreateWithoutDepartmentInput[] | CityUncheckedCreateWithoutDepartmentInput[]
+    connectOrCreate?: CityCreateOrConnectWithoutDepartmentInput | CityCreateOrConnectWithoutDepartmentInput[]
+    createMany?: CityCreateManyDepartmentInputEnvelope
+    connect?: CityWhereUniqueInput | CityWhereUniqueInput[]
   }
 
-  export type cityUncheckedCreateNestedManyWithoutDepatamentInput = {
-    create?: XOR<cityCreateWithoutDepatamentInput, cityUncheckedCreateWithoutDepatamentInput> | cityCreateWithoutDepatamentInput[] | cityUncheckedCreateWithoutDepatamentInput[]
-    connectOrCreate?: cityCreateOrConnectWithoutDepatamentInput | cityCreateOrConnectWithoutDepatamentInput[]
-    createMany?: cityCreateManyDepatamentInputEnvelope
-    connect?: cityWhereUniqueInput | cityWhereUniqueInput[]
+  export type CityUncheckedCreateNestedManyWithoutDepartmentInput = {
+    create?: XOR<CityCreateWithoutDepartmentInput, CityUncheckedCreateWithoutDepartmentInput> | CityCreateWithoutDepartmentInput[] | CityUncheckedCreateWithoutDepartmentInput[]
+    connectOrCreate?: CityCreateOrConnectWithoutDepartmentInput | CityCreateOrConnectWithoutDepartmentInput[]
+    createMany?: CityCreateManyDepartmentInputEnvelope
+    connect?: CityWhereUniqueInput | CityWhereUniqueInput[]
   }
 
-  export type cityUpdateManyWithoutDepatamentNestedInput = {
-    create?: XOR<cityCreateWithoutDepatamentInput, cityUncheckedCreateWithoutDepatamentInput> | cityCreateWithoutDepatamentInput[] | cityUncheckedCreateWithoutDepatamentInput[]
-    connectOrCreate?: cityCreateOrConnectWithoutDepatamentInput | cityCreateOrConnectWithoutDepatamentInput[]
-    upsert?: cityUpsertWithWhereUniqueWithoutDepatamentInput | cityUpsertWithWhereUniqueWithoutDepatamentInput[]
-    createMany?: cityCreateManyDepatamentInputEnvelope
-    set?: cityWhereUniqueInput | cityWhereUniqueInput[]
-    disconnect?: cityWhereUniqueInput | cityWhereUniqueInput[]
-    delete?: cityWhereUniqueInput | cityWhereUniqueInput[]
-    connect?: cityWhereUniqueInput | cityWhereUniqueInput[]
-    update?: cityUpdateWithWhereUniqueWithoutDepatamentInput | cityUpdateWithWhereUniqueWithoutDepatamentInput[]
-    updateMany?: cityUpdateManyWithWhereWithoutDepatamentInput | cityUpdateManyWithWhereWithoutDepatamentInput[]
-    deleteMany?: cityScalarWhereInput | cityScalarWhereInput[]
+  export type CityUpdateManyWithoutDepartmentNestedInput = {
+    create?: XOR<CityCreateWithoutDepartmentInput, CityUncheckedCreateWithoutDepartmentInput> | CityCreateWithoutDepartmentInput[] | CityUncheckedCreateWithoutDepartmentInput[]
+    connectOrCreate?: CityCreateOrConnectWithoutDepartmentInput | CityCreateOrConnectWithoutDepartmentInput[]
+    upsert?: CityUpsertWithWhereUniqueWithoutDepartmentInput | CityUpsertWithWhereUniqueWithoutDepartmentInput[]
+    createMany?: CityCreateManyDepartmentInputEnvelope
+    set?: CityWhereUniqueInput | CityWhereUniqueInput[]
+    disconnect?: CityWhereUniqueInput | CityWhereUniqueInput[]
+    delete?: CityWhereUniqueInput | CityWhereUniqueInput[]
+    connect?: CityWhereUniqueInput | CityWhereUniqueInput[]
+    update?: CityUpdateWithWhereUniqueWithoutDepartmentInput | CityUpdateWithWhereUniqueWithoutDepartmentInput[]
+    updateMany?: CityUpdateManyWithWhereWithoutDepartmentInput | CityUpdateManyWithWhereWithoutDepartmentInput[]
+    deleteMany?: CityScalarWhereInput | CityScalarWhereInput[]
   }
 
-  export type cityUncheckedUpdateManyWithoutDepatamentNestedInput = {
-    create?: XOR<cityCreateWithoutDepatamentInput, cityUncheckedCreateWithoutDepatamentInput> | cityCreateWithoutDepatamentInput[] | cityUncheckedCreateWithoutDepatamentInput[]
-    connectOrCreate?: cityCreateOrConnectWithoutDepatamentInput | cityCreateOrConnectWithoutDepatamentInput[]
-    upsert?: cityUpsertWithWhereUniqueWithoutDepatamentInput | cityUpsertWithWhereUniqueWithoutDepatamentInput[]
-    createMany?: cityCreateManyDepatamentInputEnvelope
-    set?: cityWhereUniqueInput | cityWhereUniqueInput[]
-    disconnect?: cityWhereUniqueInput | cityWhereUniqueInput[]
-    delete?: cityWhereUniqueInput | cityWhereUniqueInput[]
-    connect?: cityWhereUniqueInput | cityWhereUniqueInput[]
-    update?: cityUpdateWithWhereUniqueWithoutDepatamentInput | cityUpdateWithWhereUniqueWithoutDepatamentInput[]
-    updateMany?: cityUpdateManyWithWhereWithoutDepatamentInput | cityUpdateManyWithWhereWithoutDepatamentInput[]
-    deleteMany?: cityScalarWhereInput | cityScalarWhereInput[]
+  export type CityUncheckedUpdateManyWithoutDepartmentNestedInput = {
+    create?: XOR<CityCreateWithoutDepartmentInput, CityUncheckedCreateWithoutDepartmentInput> | CityCreateWithoutDepartmentInput[] | CityUncheckedCreateWithoutDepartmentInput[]
+    connectOrCreate?: CityCreateOrConnectWithoutDepartmentInput | CityCreateOrConnectWithoutDepartmentInput[]
+    upsert?: CityUpsertWithWhereUniqueWithoutDepartmentInput | CityUpsertWithWhereUniqueWithoutDepartmentInput[]
+    createMany?: CityCreateManyDepartmentInputEnvelope
+    set?: CityWhereUniqueInput | CityWhereUniqueInput[]
+    disconnect?: CityWhereUniqueInput | CityWhereUniqueInput[]
+    delete?: CityWhereUniqueInput | CityWhereUniqueInput[]
+    connect?: CityWhereUniqueInput | CityWhereUniqueInput[]
+    update?: CityUpdateWithWhereUniqueWithoutDepartmentInput | CityUpdateWithWhereUniqueWithoutDepartmentInput[]
+    updateMany?: CityUpdateManyWithWhereWithoutDepartmentInput | CityUpdateManyWithWhereWithoutDepartmentInput[]
+    deleteMany?: CityScalarWhereInput | CityScalarWhereInput[]
   }
 
   export type ProductCreateNestedManyWithoutCategoryInput = {
@@ -13915,18 +13915,18 @@ export namespace Prisma {
     connect?: StoreWhereUniqueInput
   }
 
-  export type historical_movementCreateNestedManyWithoutInventoryInput = {
-    create?: XOR<historical_movementCreateWithoutInventoryInput, historical_movementUncheckedCreateWithoutInventoryInput> | historical_movementCreateWithoutInventoryInput[] | historical_movementUncheckedCreateWithoutInventoryInput[]
-    connectOrCreate?: historical_movementCreateOrConnectWithoutInventoryInput | historical_movementCreateOrConnectWithoutInventoryInput[]
-    createMany?: historical_movementCreateManyInventoryInputEnvelope
-    connect?: historical_movementWhereUniqueInput | historical_movementWhereUniqueInput[]
+  export type HistoricalMovementCreateNestedManyWithoutInventoryInput = {
+    create?: XOR<HistoricalMovementCreateWithoutInventoryInput, HistoricalMovementUncheckedCreateWithoutInventoryInput> | HistoricalMovementCreateWithoutInventoryInput[] | HistoricalMovementUncheckedCreateWithoutInventoryInput[]
+    connectOrCreate?: HistoricalMovementCreateOrConnectWithoutInventoryInput | HistoricalMovementCreateOrConnectWithoutInventoryInput[]
+    createMany?: HistoricalMovementCreateManyInventoryInputEnvelope
+    connect?: HistoricalMovementWhereUniqueInput | HistoricalMovementWhereUniqueInput[]
   }
 
-  export type historical_movementUncheckedCreateNestedManyWithoutInventoryInput = {
-    create?: XOR<historical_movementCreateWithoutInventoryInput, historical_movementUncheckedCreateWithoutInventoryInput> | historical_movementCreateWithoutInventoryInput[] | historical_movementUncheckedCreateWithoutInventoryInput[]
-    connectOrCreate?: historical_movementCreateOrConnectWithoutInventoryInput | historical_movementCreateOrConnectWithoutInventoryInput[]
-    createMany?: historical_movementCreateManyInventoryInputEnvelope
-    connect?: historical_movementWhereUniqueInput | historical_movementWhereUniqueInput[]
+  export type HistoricalMovementUncheckedCreateNestedManyWithoutInventoryInput = {
+    create?: XOR<HistoricalMovementCreateWithoutInventoryInput, HistoricalMovementUncheckedCreateWithoutInventoryInput> | HistoricalMovementCreateWithoutInventoryInput[] | HistoricalMovementUncheckedCreateWithoutInventoryInput[]
+    connectOrCreate?: HistoricalMovementCreateOrConnectWithoutInventoryInput | HistoricalMovementCreateOrConnectWithoutInventoryInput[]
+    createMany?: HistoricalMovementCreateManyInventoryInputEnvelope
+    connect?: HistoricalMovementWhereUniqueInput | HistoricalMovementWhereUniqueInput[]
   }
 
   export type ProductUpdateOneRequiredWithoutInventoryNestedInput = {
@@ -13945,46 +13945,46 @@ export namespace Prisma {
     update?: XOR<XOR<StoreUpdateToOneWithWhereWithoutInventoryInput, StoreUpdateWithoutInventoryInput>, StoreUncheckedUpdateWithoutInventoryInput>
   }
 
-  export type historical_movementUpdateManyWithoutInventoryNestedInput = {
-    create?: XOR<historical_movementCreateWithoutInventoryInput, historical_movementUncheckedCreateWithoutInventoryInput> | historical_movementCreateWithoutInventoryInput[] | historical_movementUncheckedCreateWithoutInventoryInput[]
-    connectOrCreate?: historical_movementCreateOrConnectWithoutInventoryInput | historical_movementCreateOrConnectWithoutInventoryInput[]
-    upsert?: historical_movementUpsertWithWhereUniqueWithoutInventoryInput | historical_movementUpsertWithWhereUniqueWithoutInventoryInput[]
-    createMany?: historical_movementCreateManyInventoryInputEnvelope
-    set?: historical_movementWhereUniqueInput | historical_movementWhereUniqueInput[]
-    disconnect?: historical_movementWhereUniqueInput | historical_movementWhereUniqueInput[]
-    delete?: historical_movementWhereUniqueInput | historical_movementWhereUniqueInput[]
-    connect?: historical_movementWhereUniqueInput | historical_movementWhereUniqueInput[]
-    update?: historical_movementUpdateWithWhereUniqueWithoutInventoryInput | historical_movementUpdateWithWhereUniqueWithoutInventoryInput[]
-    updateMany?: historical_movementUpdateManyWithWhereWithoutInventoryInput | historical_movementUpdateManyWithWhereWithoutInventoryInput[]
-    deleteMany?: historical_movementScalarWhereInput | historical_movementScalarWhereInput[]
+  export type HistoricalMovementUpdateManyWithoutInventoryNestedInput = {
+    create?: XOR<HistoricalMovementCreateWithoutInventoryInput, HistoricalMovementUncheckedCreateWithoutInventoryInput> | HistoricalMovementCreateWithoutInventoryInput[] | HistoricalMovementUncheckedCreateWithoutInventoryInput[]
+    connectOrCreate?: HistoricalMovementCreateOrConnectWithoutInventoryInput | HistoricalMovementCreateOrConnectWithoutInventoryInput[]
+    upsert?: HistoricalMovementUpsertWithWhereUniqueWithoutInventoryInput | HistoricalMovementUpsertWithWhereUniqueWithoutInventoryInput[]
+    createMany?: HistoricalMovementCreateManyInventoryInputEnvelope
+    set?: HistoricalMovementWhereUniqueInput | HistoricalMovementWhereUniqueInput[]
+    disconnect?: HistoricalMovementWhereUniqueInput | HistoricalMovementWhereUniqueInput[]
+    delete?: HistoricalMovementWhereUniqueInput | HistoricalMovementWhereUniqueInput[]
+    connect?: HistoricalMovementWhereUniqueInput | HistoricalMovementWhereUniqueInput[]
+    update?: HistoricalMovementUpdateWithWhereUniqueWithoutInventoryInput | HistoricalMovementUpdateWithWhereUniqueWithoutInventoryInput[]
+    updateMany?: HistoricalMovementUpdateManyWithWhereWithoutInventoryInput | HistoricalMovementUpdateManyWithWhereWithoutInventoryInput[]
+    deleteMany?: HistoricalMovementScalarWhereInput | HistoricalMovementScalarWhereInput[]
   }
 
-  export type historical_movementUncheckedUpdateManyWithoutInventoryNestedInput = {
-    create?: XOR<historical_movementCreateWithoutInventoryInput, historical_movementUncheckedCreateWithoutInventoryInput> | historical_movementCreateWithoutInventoryInput[] | historical_movementUncheckedCreateWithoutInventoryInput[]
-    connectOrCreate?: historical_movementCreateOrConnectWithoutInventoryInput | historical_movementCreateOrConnectWithoutInventoryInput[]
-    upsert?: historical_movementUpsertWithWhereUniqueWithoutInventoryInput | historical_movementUpsertWithWhereUniqueWithoutInventoryInput[]
-    createMany?: historical_movementCreateManyInventoryInputEnvelope
-    set?: historical_movementWhereUniqueInput | historical_movementWhereUniqueInput[]
-    disconnect?: historical_movementWhereUniqueInput | historical_movementWhereUniqueInput[]
-    delete?: historical_movementWhereUniqueInput | historical_movementWhereUniqueInput[]
-    connect?: historical_movementWhereUniqueInput | historical_movementWhereUniqueInput[]
-    update?: historical_movementUpdateWithWhereUniqueWithoutInventoryInput | historical_movementUpdateWithWhereUniqueWithoutInventoryInput[]
-    updateMany?: historical_movementUpdateManyWithWhereWithoutInventoryInput | historical_movementUpdateManyWithWhereWithoutInventoryInput[]
-    deleteMany?: historical_movementScalarWhereInput | historical_movementScalarWhereInput[]
+  export type HistoricalMovementUncheckedUpdateManyWithoutInventoryNestedInput = {
+    create?: XOR<HistoricalMovementCreateWithoutInventoryInput, HistoricalMovementUncheckedCreateWithoutInventoryInput> | HistoricalMovementCreateWithoutInventoryInput[] | HistoricalMovementUncheckedCreateWithoutInventoryInput[]
+    connectOrCreate?: HistoricalMovementCreateOrConnectWithoutInventoryInput | HistoricalMovementCreateOrConnectWithoutInventoryInput[]
+    upsert?: HistoricalMovementUpsertWithWhereUniqueWithoutInventoryInput | HistoricalMovementUpsertWithWhereUniqueWithoutInventoryInput[]
+    createMany?: HistoricalMovementCreateManyInventoryInputEnvelope
+    set?: HistoricalMovementWhereUniqueInput | HistoricalMovementWhereUniqueInput[]
+    disconnect?: HistoricalMovementWhereUniqueInput | HistoricalMovementWhereUniqueInput[]
+    delete?: HistoricalMovementWhereUniqueInput | HistoricalMovementWhereUniqueInput[]
+    connect?: HistoricalMovementWhereUniqueInput | HistoricalMovementWhereUniqueInput[]
+    update?: HistoricalMovementUpdateWithWhereUniqueWithoutInventoryInput | HistoricalMovementUpdateWithWhereUniqueWithoutInventoryInput[]
+    updateMany?: HistoricalMovementUpdateManyWithWhereWithoutInventoryInput | HistoricalMovementUpdateManyWithWhereWithoutInventoryInput[]
+    deleteMany?: HistoricalMovementScalarWhereInput | HistoricalMovementScalarWhereInput[]
   }
 
-  export type InventoryCreateNestedOneWithoutHistorical_movementInput = {
-    create?: XOR<InventoryCreateWithoutHistorical_movementInput, InventoryUncheckedCreateWithoutHistorical_movementInput>
-    connectOrCreate?: InventoryCreateOrConnectWithoutHistorical_movementInput
+  export type InventoryCreateNestedOneWithoutHistoricalMovementInput = {
+    create?: XOR<InventoryCreateWithoutHistoricalMovementInput, InventoryUncheckedCreateWithoutHistoricalMovementInput>
+    connectOrCreate?: InventoryCreateOrConnectWithoutHistoricalMovementInput
     connect?: InventoryWhereUniqueInput
   }
 
-  export type InventoryUpdateOneRequiredWithoutHistorical_movementNestedInput = {
-    create?: XOR<InventoryCreateWithoutHistorical_movementInput, InventoryUncheckedCreateWithoutHistorical_movementInput>
-    connectOrCreate?: InventoryCreateOrConnectWithoutHistorical_movementInput
-    upsert?: InventoryUpsertWithoutHistorical_movementInput
+  export type InventoryUpdateOneRequiredWithoutHistoricalMovementNestedInput = {
+    create?: XOR<InventoryCreateWithoutHistoricalMovementInput, InventoryUncheckedCreateWithoutHistoricalMovementInput>
+    connectOrCreate?: InventoryCreateOrConnectWithoutHistoricalMovementInput
+    upsert?: InventoryUpsertWithoutHistoricalMovementInput
     connect?: InventoryWhereUniqueInput
-    update?: XOR<XOR<InventoryUpdateToOneWithWhereWithoutHistorical_movementInput, InventoryUpdateWithoutHistorical_movementInput>, InventoryUncheckedUpdateWithoutHistorical_movementInput>
+    update?: XOR<XOR<InventoryUpdateToOneWithWhereWithoutHistoricalMovementInput, InventoryUpdateWithoutHistoricalMovementInput>, InventoryUncheckedUpdateWithoutHistoricalMovementInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -14173,7 +14173,7 @@ export namespace Prisma {
     status?: $Enums.statusStore
     createdAt?: Date | string
     updatedAt?: Date | string
-    city: cityCreateNestedOneWithoutStoresInput
+    city: CityCreateNestedOneWithoutStoresInput
     inventory?: InventoryCreateNestedManyWithoutStoreInput
   }
 
@@ -14245,7 +14245,7 @@ export namespace Prisma {
     status?: EnumstatusStoreFieldUpdateOperationsInput | $Enums.statusStore
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    city?: cityUpdateOneRequiredWithoutStoresNestedInput
+    city?: CityUpdateOneRequiredWithoutStoresNestedInput
     inventory?: InventoryUpdateManyWithoutStoreNestedInput
   }
 
@@ -14329,13 +14329,13 @@ export namespace Prisma {
     name: string
     description: string
     unitPrice: number
-    wight: number
-    is_fragile: boolean
-    dimensions_cm: string
+    weight: number
+    isFragile: boolean
+    dimensionsCm: string
     imageUrl: string
-    bar_code: string
-    required_refrigeration: boolean
-    date_of_expiration: Date | string
+    barCode: string
+    requiredRefrigeration: boolean
+    dateOfExpiration: Date | string
     status?: $Enums.statusProduct
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -14349,13 +14349,13 @@ export namespace Prisma {
     description: string
     categoryId: number
     unitPrice: number
-    wight: number
-    is_fragile: boolean
-    dimensions_cm: string
+    weight: number
+    isFragile: boolean
+    dimensionsCm: string
     imageUrl: string
-    bar_code: string
-    required_refrigeration: boolean
-    date_of_expiration: Date | string
+    barCode: string
+    requiredRefrigeration: boolean
+    dateOfExpiration: Date | string
     status?: $Enums.statusProduct
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -14420,13 +14420,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     unitPrice?: FloatFieldUpdateOperationsInput | number
-    wight?: FloatFieldUpdateOperationsInput | number
-    is_fragile?: BoolFieldUpdateOperationsInput | boolean
-    dimensions_cm?: StringFieldUpdateOperationsInput | string
+    weight?: FloatFieldUpdateOperationsInput | number
+    isFragile?: BoolFieldUpdateOperationsInput | boolean
+    dimensionsCm?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
-    bar_code?: StringFieldUpdateOperationsInput | string
-    required_refrigeration?: BoolFieldUpdateOperationsInput | boolean
-    date_of_expiration?: DateTimeFieldUpdateOperationsInput | Date | string
+    barCode?: StringFieldUpdateOperationsInput | string
+    requiredRefrigeration?: BoolFieldUpdateOperationsInput | boolean
+    dateOfExpiration?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumstatusProductFieldUpdateOperationsInput | $Enums.statusProduct
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14440,33 +14440,33 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     categoryId?: IntFieldUpdateOperationsInput | number
     unitPrice?: FloatFieldUpdateOperationsInput | number
-    wight?: FloatFieldUpdateOperationsInput | number
-    is_fragile?: BoolFieldUpdateOperationsInput | boolean
-    dimensions_cm?: StringFieldUpdateOperationsInput | string
+    weight?: FloatFieldUpdateOperationsInput | number
+    isFragile?: BoolFieldUpdateOperationsInput | boolean
+    dimensionsCm?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
-    bar_code?: StringFieldUpdateOperationsInput | string
-    required_refrigeration?: BoolFieldUpdateOperationsInput | boolean
-    date_of_expiration?: DateTimeFieldUpdateOperationsInput | Date | string
+    barCode?: StringFieldUpdateOperationsInput | string
+    requiredRefrigeration?: BoolFieldUpdateOperationsInput | boolean
+    dateOfExpiration?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumstatusProductFieldUpdateOperationsInput | $Enums.statusProduct
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inventory?: InventoryUncheckedUpdateManyWithoutProductNestedInput
   }
 
-  export type cityCreateWithoutStoresInput = {
+  export type CityCreateWithoutStoresInput = {
     name: string
-    depatament: DepatamentCreateNestedOneWithoutCitiesInput
+    department: DepartmentCreateNestedOneWithoutCitiesInput
   }
 
-  export type cityUncheckedCreateWithoutStoresInput = {
+  export type CityUncheckedCreateWithoutStoresInput = {
     id?: number
     name: string
-    depatamentId: number
+    departmentId: number
   }
 
-  export type cityCreateOrConnectWithoutStoresInput = {
-    where: cityWhereUniqueInput
-    create: XOR<cityCreateWithoutStoresInput, cityUncheckedCreateWithoutStoresInput>
+  export type CityCreateOrConnectWithoutStoresInput = {
+    where: CityWhereUniqueInput
+    create: XOR<CityCreateWithoutStoresInput, CityUncheckedCreateWithoutStoresInput>
   }
 
   export type OrderCreateWithoutStoreInput = {
@@ -14507,24 +14507,24 @@ export namespace Prisma {
   }
 
   export type InventoryCreateWithoutStoreInput = {
-    available_quantity: number
-    minimum_threshold: number
-    last_reset_date: Date | string
+    availableQuantity: number
+    minimumThreshold: number
+    lastResetDate: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
     product: ProductCreateNestedOneWithoutInventoryInput
-    historical_movement?: historical_movementCreateNestedManyWithoutInventoryInput
+    historicalMovement?: HistoricalMovementCreateNestedManyWithoutInventoryInput
   }
 
   export type InventoryUncheckedCreateWithoutStoreInput = {
     id?: number
     productId: number
-    available_quantity: number
-    minimum_threshold: number
-    last_reset_date: Date | string
+    availableQuantity: number
+    minimumThreshold: number
+    lastResetDate: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
-    historical_movement?: historical_movementUncheckedCreateNestedManyWithoutInventoryInput
+    historicalMovement?: HistoricalMovementUncheckedCreateNestedManyWithoutInventoryInput
   }
 
   export type InventoryCreateOrConnectWithoutStoreInput = {
@@ -14537,26 +14537,26 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type cityUpsertWithoutStoresInput = {
-    update: XOR<cityUpdateWithoutStoresInput, cityUncheckedUpdateWithoutStoresInput>
-    create: XOR<cityCreateWithoutStoresInput, cityUncheckedCreateWithoutStoresInput>
-    where?: cityWhereInput
+  export type CityUpsertWithoutStoresInput = {
+    update: XOR<CityUpdateWithoutStoresInput, CityUncheckedUpdateWithoutStoresInput>
+    create: XOR<CityCreateWithoutStoresInput, CityUncheckedCreateWithoutStoresInput>
+    where?: CityWhereInput
   }
 
-  export type cityUpdateToOneWithWhereWithoutStoresInput = {
-    where?: cityWhereInput
-    data: XOR<cityUpdateWithoutStoresInput, cityUncheckedUpdateWithoutStoresInput>
+  export type CityUpdateToOneWithWhereWithoutStoresInput = {
+    where?: CityWhereInput
+    data: XOR<CityUpdateWithoutStoresInput, CityUncheckedUpdateWithoutStoresInput>
   }
 
-  export type cityUpdateWithoutStoresInput = {
+  export type CityUpdateWithoutStoresInput = {
     name?: StringFieldUpdateOperationsInput | string
-    depatament?: DepatamentUpdateOneRequiredWithoutCitiesNestedInput
+    department?: DepartmentUpdateOneRequiredWithoutCitiesNestedInput
   }
 
-  export type cityUncheckedUpdateWithoutStoresInput = {
+  export type CityUncheckedUpdateWithoutStoresInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    depatamentId?: IntFieldUpdateOperationsInput | number
+    departmentId?: IntFieldUpdateOperationsInput | number
   }
 
   export type OrderUpsertWithWhereUniqueWithoutStoreInput = {
@@ -14615,25 +14615,25 @@ export namespace Prisma {
     id?: IntFilter<"Inventory"> | number
     productId?: IntFilter<"Inventory"> | number
     storeId?: IntFilter<"Inventory"> | number
-    available_quantity?: IntFilter<"Inventory"> | number
-    minimum_threshold?: IntFilter<"Inventory"> | number
-    last_reset_date?: DateTimeFilter<"Inventory"> | Date | string
+    availableQuantity?: IntFilter<"Inventory"> | number
+    minimumThreshold?: IntFilter<"Inventory"> | number
+    lastResetDate?: DateTimeFilter<"Inventory"> | Date | string
     createdAt?: DateTimeFilter<"Inventory"> | Date | string
     updatedAt?: DateTimeFilter<"Inventory"> | Date | string
   }
 
-  export type DepatamentCreateWithoutCitiesInput = {
+  export type DepartmentCreateWithoutCitiesInput = {
     name: string
   }
 
-  export type DepatamentUncheckedCreateWithoutCitiesInput = {
+  export type DepartmentUncheckedCreateWithoutCitiesInput = {
     id?: number
     name: string
   }
 
-  export type DepatamentCreateOrConnectWithoutCitiesInput = {
-    where: DepatamentWhereUniqueInput
-    create: XOR<DepatamentCreateWithoutCitiesInput, DepatamentUncheckedCreateWithoutCitiesInput>
+  export type DepartmentCreateOrConnectWithoutCitiesInput = {
+    where: DepartmentWhereUniqueInput
+    create: XOR<DepartmentCreateWithoutCitiesInput, DepartmentUncheckedCreateWithoutCitiesInput>
   }
 
   export type StoreCreateWithoutCityInput = {
@@ -14675,22 +14675,22 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type DepatamentUpsertWithoutCitiesInput = {
-    update: XOR<DepatamentUpdateWithoutCitiesInput, DepatamentUncheckedUpdateWithoutCitiesInput>
-    create: XOR<DepatamentCreateWithoutCitiesInput, DepatamentUncheckedCreateWithoutCitiesInput>
-    where?: DepatamentWhereInput
+  export type DepartmentUpsertWithoutCitiesInput = {
+    update: XOR<DepartmentUpdateWithoutCitiesInput, DepartmentUncheckedUpdateWithoutCitiesInput>
+    create: XOR<DepartmentCreateWithoutCitiesInput, DepartmentUncheckedCreateWithoutCitiesInput>
+    where?: DepartmentWhereInput
   }
 
-  export type DepatamentUpdateToOneWithWhereWithoutCitiesInput = {
-    where?: DepatamentWhereInput
-    data: XOR<DepatamentUpdateWithoutCitiesInput, DepatamentUncheckedUpdateWithoutCitiesInput>
+  export type DepartmentUpdateToOneWithWhereWithoutCitiesInput = {
+    where?: DepartmentWhereInput
+    data: XOR<DepartmentUpdateWithoutCitiesInput, DepartmentUncheckedUpdateWithoutCitiesInput>
   }
 
-  export type DepatamentUpdateWithoutCitiesInput = {
+  export type DepartmentUpdateWithoutCitiesInput = {
     name?: StringFieldUpdateOperationsInput | string
   }
 
-  export type DepatamentUncheckedUpdateWithoutCitiesInput = {
+  export type DepartmentUncheckedUpdateWithoutCitiesInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
   }
@@ -14728,63 +14728,63 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Store"> | Date | string
   }
 
-  export type cityCreateWithoutDepatamentInput = {
+  export type CityCreateWithoutDepartmentInput = {
     name: string
     stores?: StoreCreateNestedManyWithoutCityInput
   }
 
-  export type cityUncheckedCreateWithoutDepatamentInput = {
+  export type CityUncheckedCreateWithoutDepartmentInput = {
     id?: number
     name: string
     stores?: StoreUncheckedCreateNestedManyWithoutCityInput
   }
 
-  export type cityCreateOrConnectWithoutDepatamentInput = {
-    where: cityWhereUniqueInput
-    create: XOR<cityCreateWithoutDepatamentInput, cityUncheckedCreateWithoutDepatamentInput>
+  export type CityCreateOrConnectWithoutDepartmentInput = {
+    where: CityWhereUniqueInput
+    create: XOR<CityCreateWithoutDepartmentInput, CityUncheckedCreateWithoutDepartmentInput>
   }
 
-  export type cityCreateManyDepatamentInputEnvelope = {
-    data: cityCreateManyDepatamentInput | cityCreateManyDepatamentInput[]
+  export type CityCreateManyDepartmentInputEnvelope = {
+    data: CityCreateManyDepartmentInput | CityCreateManyDepartmentInput[]
     skipDuplicates?: boolean
   }
 
-  export type cityUpsertWithWhereUniqueWithoutDepatamentInput = {
-    where: cityWhereUniqueInput
-    update: XOR<cityUpdateWithoutDepatamentInput, cityUncheckedUpdateWithoutDepatamentInput>
-    create: XOR<cityCreateWithoutDepatamentInput, cityUncheckedCreateWithoutDepatamentInput>
+  export type CityUpsertWithWhereUniqueWithoutDepartmentInput = {
+    where: CityWhereUniqueInput
+    update: XOR<CityUpdateWithoutDepartmentInput, CityUncheckedUpdateWithoutDepartmentInput>
+    create: XOR<CityCreateWithoutDepartmentInput, CityUncheckedCreateWithoutDepartmentInput>
   }
 
-  export type cityUpdateWithWhereUniqueWithoutDepatamentInput = {
-    where: cityWhereUniqueInput
-    data: XOR<cityUpdateWithoutDepatamentInput, cityUncheckedUpdateWithoutDepatamentInput>
+  export type CityUpdateWithWhereUniqueWithoutDepartmentInput = {
+    where: CityWhereUniqueInput
+    data: XOR<CityUpdateWithoutDepartmentInput, CityUncheckedUpdateWithoutDepartmentInput>
   }
 
-  export type cityUpdateManyWithWhereWithoutDepatamentInput = {
-    where: cityScalarWhereInput
-    data: XOR<cityUpdateManyMutationInput, cityUncheckedUpdateManyWithoutDepatamentInput>
+  export type CityUpdateManyWithWhereWithoutDepartmentInput = {
+    where: CityScalarWhereInput
+    data: XOR<CityUpdateManyMutationInput, CityUncheckedUpdateManyWithoutDepartmentInput>
   }
 
-  export type cityScalarWhereInput = {
-    AND?: cityScalarWhereInput | cityScalarWhereInput[]
-    OR?: cityScalarWhereInput[]
-    NOT?: cityScalarWhereInput | cityScalarWhereInput[]
-    id?: IntFilter<"city"> | number
-    name?: StringFilter<"city"> | string
-    depatamentId?: IntFilter<"city"> | number
+  export type CityScalarWhereInput = {
+    AND?: CityScalarWhereInput | CityScalarWhereInput[]
+    OR?: CityScalarWhereInput[]
+    NOT?: CityScalarWhereInput | CityScalarWhereInput[]
+    id?: IntFilter<"City"> | number
+    name?: StringFilter<"City"> | string
+    departmentId?: IntFilter<"City"> | number
   }
 
   export type ProductCreateWithoutCategoryInput = {
     name: string
     description: string
     unitPrice: number
-    wight: number
-    is_fragile: boolean
-    dimensions_cm: string
+    weight: number
+    isFragile: boolean
+    dimensionsCm: string
     imageUrl: string
-    bar_code: string
-    required_refrigeration: boolean
-    date_of_expiration: Date | string
+    barCode: string
+    requiredRefrigeration: boolean
+    dateOfExpiration: Date | string
     status?: $Enums.statusProduct
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -14797,13 +14797,13 @@ export namespace Prisma {
     name: string
     description: string
     unitPrice: number
-    wight: number
-    is_fragile: boolean
-    dimensions_cm: string
+    weight: number
+    isFragile: boolean
+    dimensionsCm: string
     imageUrl: string
-    bar_code: string
-    required_refrigeration: boolean
-    date_of_expiration: Date | string
+    barCode: string
+    requiredRefrigeration: boolean
+    dateOfExpiration: Date | string
     status?: $Enums.statusProduct
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -14846,13 +14846,13 @@ export namespace Prisma {
     description?: StringFilter<"Product"> | string
     categoryId?: IntFilter<"Product"> | number
     unitPrice?: FloatFilter<"Product"> | number
-    wight?: FloatFilter<"Product"> | number
-    is_fragile?: BoolFilter<"Product"> | boolean
-    dimensions_cm?: StringFilter<"Product"> | string
+    weight?: FloatFilter<"Product"> | number
+    isFragile?: BoolFilter<"Product"> | boolean
+    dimensionsCm?: StringFilter<"Product"> | string
     imageUrl?: StringFilter<"Product"> | string
-    bar_code?: StringFilter<"Product"> | string
-    required_refrigeration?: BoolFilter<"Product"> | boolean
-    date_of_expiration?: DateTimeFilter<"Product"> | Date | string
+    barCode?: StringFilter<"Product"> | string
+    requiredRefrigeration?: BoolFilter<"Product"> | boolean
+    dateOfExpiration?: DateTimeFilter<"Product"> | Date | string
     status?: EnumstatusProductFilter<"Product"> | $Enums.statusProduct
     createdAt?: DateTimeFilter<"Product"> | Date | string
     updatedAt?: DateTimeFilter<"Product"> | Date | string
@@ -14879,24 +14879,24 @@ export namespace Prisma {
   }
 
   export type InventoryCreateWithoutProductInput = {
-    available_quantity: number
-    minimum_threshold: number
-    last_reset_date: Date | string
+    availableQuantity: number
+    minimumThreshold: number
+    lastResetDate: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
     store: StoreCreateNestedOneWithoutInventoryInput
-    historical_movement?: historical_movementCreateNestedManyWithoutInventoryInput
+    historicalMovement?: HistoricalMovementCreateNestedManyWithoutInventoryInput
   }
 
   export type InventoryUncheckedCreateWithoutProductInput = {
     id?: number
     storeId: number
-    available_quantity: number
-    minimum_threshold: number
-    last_reset_date: Date | string
+    availableQuantity: number
+    minimumThreshold: number
+    lastResetDate: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
-    historical_movement?: historical_movementUncheckedCreateNestedManyWithoutInventoryInput
+    historicalMovement?: HistoricalMovementUncheckedCreateNestedManyWithoutInventoryInput
   }
 
   export type InventoryCreateOrConnectWithoutProductInput = {
@@ -14998,13 +14998,13 @@ export namespace Prisma {
     name: string
     description: string
     unitPrice: number
-    wight: number
-    is_fragile: boolean
-    dimensions_cm: string
+    weight: number
+    isFragile: boolean
+    dimensionsCm: string
     imageUrl: string
-    bar_code: string
-    required_refrigeration: boolean
-    date_of_expiration: Date | string
+    barCode: string
+    requiredRefrigeration: boolean
+    dateOfExpiration: Date | string
     status?: $Enums.statusProduct
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -15018,13 +15018,13 @@ export namespace Prisma {
     description: string
     categoryId: number
     unitPrice: number
-    wight: number
-    is_fragile: boolean
-    dimensions_cm: string
+    weight: number
+    isFragile: boolean
+    dimensionsCm: string
     imageUrl: string
-    bar_code: string
-    required_refrigeration: boolean
-    date_of_expiration: Date | string
+    barCode: string
+    requiredRefrigeration: boolean
+    dateOfExpiration: Date | string
     status?: $Enums.statusProduct
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -15046,7 +15046,7 @@ export namespace Prisma {
     status?: $Enums.statusStore
     createdAt?: Date | string
     updatedAt?: Date | string
-    city: cityCreateNestedOneWithoutStoresInput
+    city: CityCreateNestedOneWithoutStoresInput
     orders?: OrderCreateNestedManyWithoutStoreInput
   }
 
@@ -15070,32 +15070,32 @@ export namespace Prisma {
     create: XOR<StoreCreateWithoutInventoryInput, StoreUncheckedCreateWithoutInventoryInput>
   }
 
-  export type historical_movementCreateWithoutInventoryInput = {
+  export type HistoricalMovementCreateWithoutInventoryInput = {
     user: string
-    movement_date: Date | string
+    movementDate: Date | string
     reason: string
-    movement_type: string
+    movementType: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type historical_movementUncheckedCreateWithoutInventoryInput = {
+  export type HistoricalMovementUncheckedCreateWithoutInventoryInput = {
     id?: number
     user: string
-    movement_date: Date | string
+    movementDate: Date | string
     reason: string
-    movement_type: string
+    movementType: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type historical_movementCreateOrConnectWithoutInventoryInput = {
-    where: historical_movementWhereUniqueInput
-    create: XOR<historical_movementCreateWithoutInventoryInput, historical_movementUncheckedCreateWithoutInventoryInput>
+  export type HistoricalMovementCreateOrConnectWithoutInventoryInput = {
+    where: HistoricalMovementWhereUniqueInput
+    create: XOR<HistoricalMovementCreateWithoutInventoryInput, HistoricalMovementUncheckedCreateWithoutInventoryInput>
   }
 
-  export type historical_movementCreateManyInventoryInputEnvelope = {
-    data: historical_movementCreateManyInventoryInput | historical_movementCreateManyInventoryInput[]
+  export type HistoricalMovementCreateManyInventoryInputEnvelope = {
+    data: HistoricalMovementCreateManyInventoryInput | HistoricalMovementCreateManyInventoryInput[]
     skipDuplicates?: boolean
   }
 
@@ -15114,13 +15114,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     unitPrice?: FloatFieldUpdateOperationsInput | number
-    wight?: FloatFieldUpdateOperationsInput | number
-    is_fragile?: BoolFieldUpdateOperationsInput | boolean
-    dimensions_cm?: StringFieldUpdateOperationsInput | string
+    weight?: FloatFieldUpdateOperationsInput | number
+    isFragile?: BoolFieldUpdateOperationsInput | boolean
+    dimensionsCm?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
-    bar_code?: StringFieldUpdateOperationsInput | string
-    required_refrigeration?: BoolFieldUpdateOperationsInput | boolean
-    date_of_expiration?: DateTimeFieldUpdateOperationsInput | Date | string
+    barCode?: StringFieldUpdateOperationsInput | string
+    requiredRefrigeration?: BoolFieldUpdateOperationsInput | boolean
+    dateOfExpiration?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumstatusProductFieldUpdateOperationsInput | $Enums.statusProduct
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15134,13 +15134,13 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     categoryId?: IntFieldUpdateOperationsInput | number
     unitPrice?: FloatFieldUpdateOperationsInput | number
-    wight?: FloatFieldUpdateOperationsInput | number
-    is_fragile?: BoolFieldUpdateOperationsInput | boolean
-    dimensions_cm?: StringFieldUpdateOperationsInput | string
+    weight?: FloatFieldUpdateOperationsInput | number
+    isFragile?: BoolFieldUpdateOperationsInput | boolean
+    dimensionsCm?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
-    bar_code?: StringFieldUpdateOperationsInput | string
-    required_refrigeration?: BoolFieldUpdateOperationsInput | boolean
-    date_of_expiration?: DateTimeFieldUpdateOperationsInput | Date | string
+    barCode?: StringFieldUpdateOperationsInput | string
+    requiredRefrigeration?: BoolFieldUpdateOperationsInput | boolean
+    dateOfExpiration?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumstatusProductFieldUpdateOperationsInput | $Enums.statusProduct
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15168,7 +15168,7 @@ export namespace Prisma {
     status?: EnumstatusStoreFieldUpdateOperationsInput | $Enums.statusStore
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    city?: cityUpdateOneRequiredWithoutStoresNestedInput
+    city?: CityUpdateOneRequiredWithoutStoresNestedInput
     orders?: OrderUpdateManyWithoutStoreNestedInput
   }
 
@@ -15187,90 +15187,90 @@ export namespace Prisma {
     orders?: OrderUncheckedUpdateManyWithoutStoreNestedInput
   }
 
-  export type historical_movementUpsertWithWhereUniqueWithoutInventoryInput = {
-    where: historical_movementWhereUniqueInput
-    update: XOR<historical_movementUpdateWithoutInventoryInput, historical_movementUncheckedUpdateWithoutInventoryInput>
-    create: XOR<historical_movementCreateWithoutInventoryInput, historical_movementUncheckedCreateWithoutInventoryInput>
+  export type HistoricalMovementUpsertWithWhereUniqueWithoutInventoryInput = {
+    where: HistoricalMovementWhereUniqueInput
+    update: XOR<HistoricalMovementUpdateWithoutInventoryInput, HistoricalMovementUncheckedUpdateWithoutInventoryInput>
+    create: XOR<HistoricalMovementCreateWithoutInventoryInput, HistoricalMovementUncheckedCreateWithoutInventoryInput>
   }
 
-  export type historical_movementUpdateWithWhereUniqueWithoutInventoryInput = {
-    where: historical_movementWhereUniqueInput
-    data: XOR<historical_movementUpdateWithoutInventoryInput, historical_movementUncheckedUpdateWithoutInventoryInput>
+  export type HistoricalMovementUpdateWithWhereUniqueWithoutInventoryInput = {
+    where: HistoricalMovementWhereUniqueInput
+    data: XOR<HistoricalMovementUpdateWithoutInventoryInput, HistoricalMovementUncheckedUpdateWithoutInventoryInput>
   }
 
-  export type historical_movementUpdateManyWithWhereWithoutInventoryInput = {
-    where: historical_movementScalarWhereInput
-    data: XOR<historical_movementUpdateManyMutationInput, historical_movementUncheckedUpdateManyWithoutInventoryInput>
+  export type HistoricalMovementUpdateManyWithWhereWithoutInventoryInput = {
+    where: HistoricalMovementScalarWhereInput
+    data: XOR<HistoricalMovementUpdateManyMutationInput, HistoricalMovementUncheckedUpdateManyWithoutInventoryInput>
   }
 
-  export type historical_movementScalarWhereInput = {
-    AND?: historical_movementScalarWhereInput | historical_movementScalarWhereInput[]
-    OR?: historical_movementScalarWhereInput[]
-    NOT?: historical_movementScalarWhereInput | historical_movementScalarWhereInput[]
-    id?: IntFilter<"historical_movement"> | number
-    inventoryId?: IntFilter<"historical_movement"> | number
-    user?: StringFilter<"historical_movement"> | string
-    movement_date?: DateTimeFilter<"historical_movement"> | Date | string
-    reason?: StringFilter<"historical_movement"> | string
-    movement_type?: StringFilter<"historical_movement"> | string
-    createdAt?: DateTimeFilter<"historical_movement"> | Date | string
-    updatedAt?: DateTimeFilter<"historical_movement"> | Date | string
+  export type HistoricalMovementScalarWhereInput = {
+    AND?: HistoricalMovementScalarWhereInput | HistoricalMovementScalarWhereInput[]
+    OR?: HistoricalMovementScalarWhereInput[]
+    NOT?: HistoricalMovementScalarWhereInput | HistoricalMovementScalarWhereInput[]
+    id?: IntFilter<"HistoricalMovement"> | number
+    inventoryId?: IntFilter<"HistoricalMovement"> | number
+    user?: StringFilter<"HistoricalMovement"> | string
+    movementDate?: DateTimeFilter<"HistoricalMovement"> | Date | string
+    reason?: StringFilter<"HistoricalMovement"> | string
+    movementType?: StringFilter<"HistoricalMovement"> | string
+    createdAt?: DateTimeFilter<"HistoricalMovement"> | Date | string
+    updatedAt?: DateTimeFilter<"HistoricalMovement"> | Date | string
   }
 
-  export type InventoryCreateWithoutHistorical_movementInput = {
-    available_quantity: number
-    minimum_threshold: number
-    last_reset_date: Date | string
+  export type InventoryCreateWithoutHistoricalMovementInput = {
+    availableQuantity: number
+    minimumThreshold: number
+    lastResetDate: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
     product: ProductCreateNestedOneWithoutInventoryInput
     store: StoreCreateNestedOneWithoutInventoryInput
   }
 
-  export type InventoryUncheckedCreateWithoutHistorical_movementInput = {
+  export type InventoryUncheckedCreateWithoutHistoricalMovementInput = {
     id?: number
     productId: number
     storeId: number
-    available_quantity: number
-    minimum_threshold: number
-    last_reset_date: Date | string
+    availableQuantity: number
+    minimumThreshold: number
+    lastResetDate: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type InventoryCreateOrConnectWithoutHistorical_movementInput = {
+  export type InventoryCreateOrConnectWithoutHistoricalMovementInput = {
     where: InventoryWhereUniqueInput
-    create: XOR<InventoryCreateWithoutHistorical_movementInput, InventoryUncheckedCreateWithoutHistorical_movementInput>
+    create: XOR<InventoryCreateWithoutHistoricalMovementInput, InventoryUncheckedCreateWithoutHistoricalMovementInput>
   }
 
-  export type InventoryUpsertWithoutHistorical_movementInput = {
-    update: XOR<InventoryUpdateWithoutHistorical_movementInput, InventoryUncheckedUpdateWithoutHistorical_movementInput>
-    create: XOR<InventoryCreateWithoutHistorical_movementInput, InventoryUncheckedCreateWithoutHistorical_movementInput>
+  export type InventoryUpsertWithoutHistoricalMovementInput = {
+    update: XOR<InventoryUpdateWithoutHistoricalMovementInput, InventoryUncheckedUpdateWithoutHistoricalMovementInput>
+    create: XOR<InventoryCreateWithoutHistoricalMovementInput, InventoryUncheckedCreateWithoutHistoricalMovementInput>
     where?: InventoryWhereInput
   }
 
-  export type InventoryUpdateToOneWithWhereWithoutHistorical_movementInput = {
+  export type InventoryUpdateToOneWithWhereWithoutHistoricalMovementInput = {
     where?: InventoryWhereInput
-    data: XOR<InventoryUpdateWithoutHistorical_movementInput, InventoryUncheckedUpdateWithoutHistorical_movementInput>
+    data: XOR<InventoryUpdateWithoutHistoricalMovementInput, InventoryUncheckedUpdateWithoutHistoricalMovementInput>
   }
 
-  export type InventoryUpdateWithoutHistorical_movementInput = {
-    available_quantity?: IntFieldUpdateOperationsInput | number
-    minimum_threshold?: IntFieldUpdateOperationsInput | number
-    last_reset_date?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type InventoryUpdateWithoutHistoricalMovementInput = {
+    availableQuantity?: IntFieldUpdateOperationsInput | number
+    minimumThreshold?: IntFieldUpdateOperationsInput | number
+    lastResetDate?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     product?: ProductUpdateOneRequiredWithoutInventoryNestedInput
     store?: StoreUpdateOneRequiredWithoutInventoryNestedInput
   }
 
-  export type InventoryUncheckedUpdateWithoutHistorical_movementInput = {
+  export type InventoryUncheckedUpdateWithoutHistoricalMovementInput = {
     id?: IntFieldUpdateOperationsInput | number
     productId?: IntFieldUpdateOperationsInput | number
     storeId?: IntFieldUpdateOperationsInput | number
-    available_quantity?: IntFieldUpdateOperationsInput | number
-    minimum_threshold?: IntFieldUpdateOperationsInput | number
-    last_reset_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    availableQuantity?: IntFieldUpdateOperationsInput | number
+    minimumThreshold?: IntFieldUpdateOperationsInput | number
+    lastResetDate?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -15326,9 +15326,9 @@ export namespace Prisma {
   export type InventoryCreateManyStoreInput = {
     id?: number
     productId: number
-    available_quantity: number
-    minimum_threshold: number
-    last_reset_date: Date | string
+    availableQuantity: number
+    minimumThreshold: number
+    lastResetDate: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -15374,32 +15374,32 @@ export namespace Prisma {
   }
 
   export type InventoryUpdateWithoutStoreInput = {
-    available_quantity?: IntFieldUpdateOperationsInput | number
-    minimum_threshold?: IntFieldUpdateOperationsInput | number
-    last_reset_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    availableQuantity?: IntFieldUpdateOperationsInput | number
+    minimumThreshold?: IntFieldUpdateOperationsInput | number
+    lastResetDate?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     product?: ProductUpdateOneRequiredWithoutInventoryNestedInput
-    historical_movement?: historical_movementUpdateManyWithoutInventoryNestedInput
+    historicalMovement?: HistoricalMovementUpdateManyWithoutInventoryNestedInput
   }
 
   export type InventoryUncheckedUpdateWithoutStoreInput = {
     id?: IntFieldUpdateOperationsInput | number
     productId?: IntFieldUpdateOperationsInput | number
-    available_quantity?: IntFieldUpdateOperationsInput | number
-    minimum_threshold?: IntFieldUpdateOperationsInput | number
-    last_reset_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    availableQuantity?: IntFieldUpdateOperationsInput | number
+    minimumThreshold?: IntFieldUpdateOperationsInput | number
+    lastResetDate?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    historical_movement?: historical_movementUncheckedUpdateManyWithoutInventoryNestedInput
+    historicalMovement?: HistoricalMovementUncheckedUpdateManyWithoutInventoryNestedInput
   }
 
   export type InventoryUncheckedUpdateManyWithoutStoreInput = {
     id?: IntFieldUpdateOperationsInput | number
     productId?: IntFieldUpdateOperationsInput | number
-    available_quantity?: IntFieldUpdateOperationsInput | number
-    minimum_threshold?: IntFieldUpdateOperationsInput | number
-    last_reset_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    availableQuantity?: IntFieldUpdateOperationsInput | number
+    minimumThreshold?: IntFieldUpdateOperationsInput | number
+    lastResetDate?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -15459,23 +15459,23 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type cityCreateManyDepatamentInput = {
+  export type CityCreateManyDepartmentInput = {
     id?: number
     name: string
   }
 
-  export type cityUpdateWithoutDepatamentInput = {
+  export type CityUpdateWithoutDepartmentInput = {
     name?: StringFieldUpdateOperationsInput | string
     stores?: StoreUpdateManyWithoutCityNestedInput
   }
 
-  export type cityUncheckedUpdateWithoutDepatamentInput = {
+  export type CityUncheckedUpdateWithoutDepartmentInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     stores?: StoreUncheckedUpdateManyWithoutCityNestedInput
   }
 
-  export type cityUncheckedUpdateManyWithoutDepatamentInput = {
+  export type CityUncheckedUpdateManyWithoutDepartmentInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
   }
@@ -15485,13 +15485,13 @@ export namespace Prisma {
     name: string
     description: string
     unitPrice: number
-    wight: number
-    is_fragile: boolean
-    dimensions_cm: string
+    weight: number
+    isFragile: boolean
+    dimensionsCm: string
     imageUrl: string
-    bar_code: string
-    required_refrigeration: boolean
-    date_of_expiration: Date | string
+    barCode: string
+    requiredRefrigeration: boolean
+    dateOfExpiration: Date | string
     status?: $Enums.statusProduct
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -15501,13 +15501,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     unitPrice?: FloatFieldUpdateOperationsInput | number
-    wight?: FloatFieldUpdateOperationsInput | number
-    is_fragile?: BoolFieldUpdateOperationsInput | boolean
-    dimensions_cm?: StringFieldUpdateOperationsInput | string
+    weight?: FloatFieldUpdateOperationsInput | number
+    isFragile?: BoolFieldUpdateOperationsInput | boolean
+    dimensionsCm?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
-    bar_code?: StringFieldUpdateOperationsInput | string
-    required_refrigeration?: BoolFieldUpdateOperationsInput | boolean
-    date_of_expiration?: DateTimeFieldUpdateOperationsInput | Date | string
+    barCode?: StringFieldUpdateOperationsInput | string
+    requiredRefrigeration?: BoolFieldUpdateOperationsInput | boolean
+    dateOfExpiration?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumstatusProductFieldUpdateOperationsInput | $Enums.statusProduct
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15520,13 +15520,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     unitPrice?: FloatFieldUpdateOperationsInput | number
-    wight?: FloatFieldUpdateOperationsInput | number
-    is_fragile?: BoolFieldUpdateOperationsInput | boolean
-    dimensions_cm?: StringFieldUpdateOperationsInput | string
+    weight?: FloatFieldUpdateOperationsInput | number
+    isFragile?: BoolFieldUpdateOperationsInput | boolean
+    dimensionsCm?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
-    bar_code?: StringFieldUpdateOperationsInput | string
-    required_refrigeration?: BoolFieldUpdateOperationsInput | boolean
-    date_of_expiration?: DateTimeFieldUpdateOperationsInput | Date | string
+    barCode?: StringFieldUpdateOperationsInput | string
+    requiredRefrigeration?: BoolFieldUpdateOperationsInput | boolean
+    dateOfExpiration?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumstatusProductFieldUpdateOperationsInput | $Enums.statusProduct
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15539,13 +15539,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     unitPrice?: FloatFieldUpdateOperationsInput | number
-    wight?: FloatFieldUpdateOperationsInput | number
-    is_fragile?: BoolFieldUpdateOperationsInput | boolean
-    dimensions_cm?: StringFieldUpdateOperationsInput | string
+    weight?: FloatFieldUpdateOperationsInput | number
+    isFragile?: BoolFieldUpdateOperationsInput | boolean
+    dimensionsCm?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
-    bar_code?: StringFieldUpdateOperationsInput | string
-    required_refrigeration?: BoolFieldUpdateOperationsInput | boolean
-    date_of_expiration?: DateTimeFieldUpdateOperationsInput | Date | string
+    barCode?: StringFieldUpdateOperationsInput | string
+    requiredRefrigeration?: BoolFieldUpdateOperationsInput | boolean
+    dateOfExpiration?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumstatusProductFieldUpdateOperationsInput | $Enums.statusProduct
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15554,9 +15554,9 @@ export namespace Prisma {
   export type InventoryCreateManyProductInput = {
     id?: number
     storeId: number
-    available_quantity: number
-    minimum_threshold: number
-    last_reset_date: Date | string
+    availableQuantity: number
+    minimumThreshold: number
+    lastResetDate: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -15571,32 +15571,32 @@ export namespace Prisma {
   }
 
   export type InventoryUpdateWithoutProductInput = {
-    available_quantity?: IntFieldUpdateOperationsInput | number
-    minimum_threshold?: IntFieldUpdateOperationsInput | number
-    last_reset_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    availableQuantity?: IntFieldUpdateOperationsInput | number
+    minimumThreshold?: IntFieldUpdateOperationsInput | number
+    lastResetDate?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     store?: StoreUpdateOneRequiredWithoutInventoryNestedInput
-    historical_movement?: historical_movementUpdateManyWithoutInventoryNestedInput
+    historicalMovement?: HistoricalMovementUpdateManyWithoutInventoryNestedInput
   }
 
   export type InventoryUncheckedUpdateWithoutProductInput = {
     id?: IntFieldUpdateOperationsInput | number
     storeId?: IntFieldUpdateOperationsInput | number
-    available_quantity?: IntFieldUpdateOperationsInput | number
-    minimum_threshold?: IntFieldUpdateOperationsInput | number
-    last_reset_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    availableQuantity?: IntFieldUpdateOperationsInput | number
+    minimumThreshold?: IntFieldUpdateOperationsInput | number
+    lastResetDate?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    historical_movement?: historical_movementUncheckedUpdateManyWithoutInventoryNestedInput
+    historicalMovement?: HistoricalMovementUncheckedUpdateManyWithoutInventoryNestedInput
   }
 
   export type InventoryUncheckedUpdateManyWithoutProductInput = {
     id?: IntFieldUpdateOperationsInput | number
     storeId?: IntFieldUpdateOperationsInput | number
-    available_quantity?: IntFieldUpdateOperationsInput | number
-    minimum_threshold?: IntFieldUpdateOperationsInput | number
-    last_reset_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    availableQuantity?: IntFieldUpdateOperationsInput | number
+    minimumThreshold?: IntFieldUpdateOperationsInput | number
+    lastResetDate?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -15627,41 +15627,41 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type historical_movementCreateManyInventoryInput = {
+  export type HistoricalMovementCreateManyInventoryInput = {
     id?: number
     user: string
-    movement_date: Date | string
+    movementDate: Date | string
     reason: string
-    movement_type: string
+    movementType: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type historical_movementUpdateWithoutInventoryInput = {
+  export type HistoricalMovementUpdateWithoutInventoryInput = {
     user?: StringFieldUpdateOperationsInput | string
-    movement_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    movementDate?: DateTimeFieldUpdateOperationsInput | Date | string
     reason?: StringFieldUpdateOperationsInput | string
-    movement_type?: StringFieldUpdateOperationsInput | string
+    movementType?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type historical_movementUncheckedUpdateWithoutInventoryInput = {
+  export type HistoricalMovementUncheckedUpdateWithoutInventoryInput = {
     id?: IntFieldUpdateOperationsInput | number
     user?: StringFieldUpdateOperationsInput | string
-    movement_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    movementDate?: DateTimeFieldUpdateOperationsInput | Date | string
     reason?: StringFieldUpdateOperationsInput | string
-    movement_type?: StringFieldUpdateOperationsInput | string
+    movementType?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type historical_movementUncheckedUpdateManyWithoutInventoryInput = {
+  export type HistoricalMovementUncheckedUpdateManyWithoutInventoryInput = {
     id?: IntFieldUpdateOperationsInput | number
     user?: StringFieldUpdateOperationsInput | string
-    movement_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    movementDate?: DateTimeFieldUpdateOperationsInput | Date | string
     reason?: StringFieldUpdateOperationsInput | string
-    movement_type?: StringFieldUpdateOperationsInput | string
+    movementType?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

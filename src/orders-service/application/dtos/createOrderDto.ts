@@ -1,11 +1,9 @@
-import { ArrayMinSize, IsArray, IsInt, IsNotEmpty, IsOptional, Min } from 'class-validator';
+import { ArrayMinSize, IsArray, IsInt, IsNotEmpty, Min } from 'class-validator';
 import { IsEnum, IsString, IsNumber, IsLatitude, IsLongitude } from 'class-validator';
 import { OrderItem } from '../../../orderItem-service/domain/entity/orderItem';
 import { OrderStatus } from "../../../shared/enums/orderStatus.enum";
 
 export class CreateOrderDto {
-    id!: number;
-
     @IsNotEmpty({ message: 'Store ID is required' })
     storeId!: number;
 
@@ -18,7 +16,6 @@ export class CreateOrderDto {
     customerId!: string;
 
     @IsEnum(OrderStatus, { message: 'Invalid order status' })
-    @IsOptional()
     status!: OrderStatus;
 
     @IsNumber({}, { message: 'Total amount must be a number' })

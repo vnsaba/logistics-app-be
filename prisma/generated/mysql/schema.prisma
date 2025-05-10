@@ -61,7 +61,7 @@ model Store {
   latitude  Float
   longitude Float
   cityId    Int
-  city      city        @relation(fields: [cityId], references: [id])
+  city      City        @relation(fields: [cityId], references: [id])
   capacity  Int
   zipCode   String
   status    statusStore @default(ACTIVE)
@@ -71,18 +71,18 @@ model Store {
   inventory Inventory[]
 }
 
-model city {
+model City {
   id           Int        @id @default(autoincrement())
   name         String
-  depatamentId Int
-  depatament   Depatament @relation(fields: [depatamentId], references: [id])
+  departmentId Int
+  department   Department @relation(fields: [departmentId], references: [id])
   stores       Store[]
 }
 
-model Depatament {
+model Department {
   id     Int    @id @default(autoincrement())
   name   String
-  cities city[]
+  cities City[]
 }
 
 model Category {
@@ -95,48 +95,48 @@ model Category {
 }
 
 model Product {
-  id                     Int           @id @default(autoincrement())
-  name                   String
-  description            String
-  categoryId             Int
-  category               Category      @relation(fields: [categoryId], references: [id])
-  unitPrice              Float
-  wight                  Float
-  is_fragile             Boolean
-  dimensions_cm          String
-  imageUrl               String
-  bar_code               String
-  required_refrigeration Boolean
-  date_of_expiration     DateTime
-  status                 statusProduct @default(ACTIVE)
-  createdAt              DateTime      @default(now())
-  updatedAt              DateTime      @updatedAt
-  inventory              Inventory[]
-  orderItems             OrderItem[]
+  id                    Int           @id @default(autoincrement())
+  name                  String
+  description           String
+  categoryId            Int
+  category              Category      @relation(fields: [categoryId], references: [id])
+  unitPrice             Float
+  weight                Float
+  isFragile             Boolean
+  dimensionsCm          String
+  imageUrl              String
+  barCode               String
+  requiredRefrigeration Boolean
+  dateOfExpiration      DateTime
+  status                statusProduct @default(ACTIVE)
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+  inventory             Inventory[]
+  orderItems            OrderItem[]
 }
 
 model Inventory {
-  id                  Int                   @id @default(autoincrement())
-  productId           Int
-  product             Product               @relation(fields: [productId], references: [id])
-  storeId             Int
-  store               Store                 @relation(fields: [storeId], references: [id])
-  available_quantity  Int
-  minimum_threshold   Int
-  last_reset_date     DateTime
-  createdAt           DateTime              @default(now())
-  updatedAt           DateTime              @updatedAt
-  historical_movement historical_movement[]
+  id                 Int                  @id @default(autoincrement())
+  productId          Int
+  product            Product              @relation(fields: [productId], references: [id])
+  storeId            Int
+  store              Store                @relation(fields: [storeId], references: [id])
+  availableQuantity  Int
+  minimumThreshold   Int
+  lastResetDate      DateTime
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  historicalMovement HistoricalMovement[]
 }
 
-model historical_movement {
-  id            Int       @id @default(autoincrement())
-  inventoryId   Int
-  inventory     Inventory @relation(fields: [inventoryId], references: [id])
-  user          String
-  movement_date DateTime
-  reason        String
-  movement_type String
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+model HistoricalMovement {
+  id           Int       @id @default(autoincrement())
+  inventoryId  Int
+  inventory    Inventory @relation(fields: [inventoryId], references: [id])
+  user         String
+  movementDate DateTime
+  reason       String
+  movementType String
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
 }

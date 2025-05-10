@@ -1,5 +1,3 @@
-
-
 export class Store{
     constructor(
         public id: number,

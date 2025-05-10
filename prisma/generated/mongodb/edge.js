@@ -135,7 +135,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\Usuario\\Desktop\\logistics-app-be\\generated\\mongodb",
+      "value": "C:\\Users\\Usuario\\Desktop\\logistics-app-be\\prisma\\generated\\mongodb",
       "fromEnvVar": null
     },
     "config": {
@@ -153,10 +153,10 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": "../../.env",
-    "schemaEnvPath": "../../.env"
+    "rootEnvPath": "../../../.env",
+    "schemaEnvPath": "../../../.env"
   },
-  "relativePath": "../../prisma/mongoDB",
+  "relativePath": "../../mongoDB",
   "clientVersion": "6.6.0",
   "engineVersion": "f676762280b54cd07c770017ed3711ddde35f37a",
   "datasourceNames": [
@@ -172,8 +172,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../../generated/mongodb\"\n}\n\ndatasource db {\n  provider = \"mongodb\"\n  url      = env(\"MONGO_DB_URL\")\n}\n\ntype Permission {\n  id       String\n  name     String\n  resource String\n  action   String\n}\n\nmodel Role {\n  id          String       @id @default(auto()) @map(\"_id\") @db.ObjectId\n  name        String       @unique\n  description String\n  permissions Permission[]\n  User        User[]\n\n  @@map(\"roles\")\n}\n\nmodel User {\n  id                      String    @id @default(auto()) @map(\"_id\") @db.ObjectId\n  fullname                String\n  email                   String    @unique\n  phone                   String\n  current_password        String\n  roleId                  String    @db.ObjectId\n  role                    Role      @relation(fields: [roleId], references: [id])\n  status                  Status    @default(PENDING)\n  created_at              DateTime\n  updated_at              DateTime\n  verificationCode        String?\n  verificationCodeExpires DateTime?\n  twoFactorCode           String?\n  twoFactorExpires        DateTime?\n  resetPasswordToken      String?\n\n  @@map(\"users\")\n}\n\nenum Status {\n  ACTIVE\n  INACTIVE\n  PENDING\n}\n",
-  "inlineSchemaHash": "55b25be95b7fbdd80cd921973ffa3171f703f5d6cc132626c6fb32fee35fa9b9",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/mongodb\"\n}\n\ndatasource db {\n  provider = \"mongodb\"\n  url      = env(\"MONGO_DB_URL\")\n}\n\ntype Permission {\n  id       String\n  name     String\n  resource String\n  action   String\n}\n\nmodel Role {\n  id          String       @id @default(auto()) @map(\"_id\") @db.ObjectId\n  name        String       @unique\n  description String\n  permissions Permission[]\n  User        User[]\n\n  @@map(\"roles\")\n}\n\nmodel User {\n  id                      String    @id @default(auto()) @map(\"_id\") @db.ObjectId\n  fullname                String\n  email                   String    @unique\n  phone                   String\n  current_password        String\n  roleId                  String    @db.ObjectId\n  role                    Role      @relation(fields: [roleId], references: [id])\n  status                  Status    @default(PENDING)\n  created_at              DateTime\n  updated_at              DateTime\n  verificationCode        String?\n  verificationCodeExpires DateTime?\n  twoFactorCode           String?\n  twoFactorExpires        DateTime?\n  resetPasswordToken      String?\n\n  @@map(\"users\")\n}\n\nenum Status {\n  ACTIVE\n  INACTIVE\n  PENDING\n}\n",
+  "inlineSchemaHash": "513fb0f4ce38bee27b0301718d9c78884811da415cd22f648ca84efdf71d678b",
   "copyEngine": true
 }
 config.dirname = '/'

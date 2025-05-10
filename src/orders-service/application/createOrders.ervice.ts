@@ -2,12 +2,12 @@
 import { OrderInterface } from "../domain/interface/order.interface";
 import { CreateOrderDto } from "./dtos/createOrderDto";
 import { Order } from "../domain/entity/order";
-import { IUStoreRepository } from "../../store-service/domain/interface/store.interface";
+import { IStoreRepository } from "../../store-service/domain/interfaces/store.interface";
 
 export class CreateOrderService {
     constructor(
         private readonly orderRepository: OrderInterface,
-        private readonly storeRepository: IUStoreRepository,
+        private readonly storeRepository: IStoreRepository,
         // private readonly orderItemRepository: IUOrderItemRepository,
     ) { }
 

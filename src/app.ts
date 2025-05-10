@@ -2,6 +2,7 @@ import express, { Response as ExResponse, Request as ExRequest, urlencoded, json
 import { RegisterRoutes } from '../build/routes';
 import swaggerUi from "swagger-ui-express";
 import { ValidateError } from "tsoa";
+import cors from "cors";
 
 // src/app.ts
 
@@ -23,6 +24,7 @@ app.use(
   })
 );
 app.use(json());
+app.use(cors());
 
 // Register routes
 RegisterRoutes(app);
