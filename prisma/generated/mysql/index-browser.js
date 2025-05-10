@@ -136,7 +136,7 @@ exports.Prisma.OrderItemScalarFieldEnum = {
   orderId: 'orderId',
   productId: 'productId',
   quantity: 'quantity',
-  unit_price: 'unit_price',
+  unitPrice: 'unitPrice',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -179,7 +179,7 @@ exports.Prisma.ProductScalarFieldEnum = {
   name: 'name',
   description: 'description',
   categoryId: 'categoryId',
-  unit_price: 'unit_price',
+  unitPrice: 'unitPrice',
   wight: 'wight',
   is_fragile: 'is_fragile',
   dimensions_cm: 'dimensions_cm',
@@ -259,7 +259,7 @@ exports.Prisma.historical_movementOrderByRelevanceFieldEnum = {
 };
 exports.OrderStatus = exports.$Enums.OrderStatus = {
   PENDING: 'PENDING',
-  IN_PROFRESS: 'IN_PROFRESS',
+  IN_PROGRESS: 'IN_PROGRESS',
   CANCELED: 'CANCELED',
   COMPLETED: 'COMPLETED'
 };

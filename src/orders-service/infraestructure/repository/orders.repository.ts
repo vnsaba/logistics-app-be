@@ -1,29 +1,38 @@
 import { Order } from "src/orders-service/domain/entity/order";
 import { OrderInterface } from "src/orders-service/domain/interface/order.interface";
-import { PrismaClient } from '../../../../prisma/generated/mysql'
-const prisma = new PrismaClient();
+import { CreateOrderDto } from "src/orders-service/application/dtos/createOrderDto";
+import { UpdateOrderDto } from "src/orders-service/application/dtos/updateOrderDto";
+import { prismaMysql } from "../../../../prisma/index";
+import { OrderStatus } from "../../../shared/enums/orderStatus.enum";
 
 export class OrdersRepository implements OrderInterface {
-    
-    async create(order: Order): Promise<Order> {
-        return await prisma.order.create({
+
+    async create(order: CreateOrderDto): Promise<Order> {
+        return await prismaMysql.order.create({
             data: {
                 storeId: order.storeId,
                 deliveryId: order.deliveryId,
                 customerId: order.customerId,
-                status: order.status,
+                status: "PENDING",
                 totalAmount: order.totalAmount,
                 latitude: order.latitude,
                 longitude: order.longitude,
                 address: order.address,
                 createdAt: new Date(),
                 updatedAt: new Date(),
+                orderItems: {
+                    create: order.items.map((item) => ({
+                        productId: item.productId,
+                        quantity: item.quantity,
+                        unitPrice: item.unitPrice,
+                    })),
+                },
             },
         })
     }
 
     async findById(id: string): Promise<Order> {
-        return await prisma.order.findUnique({
+        return await prismaMysql.order.findUnique({
             where: { id: Number(id) },
         }).then((order) => {
             if (!order) {
@@ -32,25 +41,42 @@ export class OrdersRepository implements OrderInterface {
             return order;
         })
     }
+
     findAll(): Promise<Order[]> {
-        return prisma.order.findMany()
+        return prismaMysql.order.findMany()
     }
-    update(id: string, order: Partial<Order> ): Promise<Order> {
-        return prisma.order.update({
-            where: {id:Number(id)},
-            data:{
-                status: order.status, 
-                deliveryId: order.deliveryId, 
-                totalAmount: order.totalAmount, 
-                latitude: order.latitude, 
+
+    async update(id: string, order: UpdateOrderDto): Promise<Order> {
+        return await prismaMysql.order.update({
+            where: { id: Number(id) },
+            data: {
+                status: order.status,
+                deliveryId: order.deliveryId,
+                totalAmount: order.totalAmount,
+                latitude: order.latitude,
                 longitude: order.longitude,
-                address: order.address, 
-                updatedAt: new Date(), 
+                address: order.address,
+                updatedAt: new Date(),
             }
         })
     }
-    delete(id: string): Promise<void> {
-        throw new Error("Method not implemented.");
-    }
 
+    // async cancelOrder(id: string): Promise<void> {
+    //     return await prismaMysql.order.update({
+    //         where: { id: Number(id) },
+    //         data: {
+    //             status: "CANCELED",
+    //             updatedAt: new Date(),
+    //         },
+    //     }).then(() => {
+    //         return;
+    //     });
+    // }
+
+    async updateStatus(id: string, status: OrderStatus): Promise<Order> {
+        return await prismaMysql.order.update({
+            where: { id: Number(id) },
+            data: { status: status  }
+        });
+    }
 }

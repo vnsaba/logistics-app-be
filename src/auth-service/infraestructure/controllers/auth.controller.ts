@@ -7,6 +7,7 @@ import {
   Request,
   Middlewares,
   Query,
+  Response
 } from "tsoa";
 import { UserRepository } from "../../../user-service/infraestructure/repository/user.repository";
 import { User } from "../../../user-service/domain/entity/user";
@@ -27,6 +28,7 @@ import { authMiddleware } from "../../../middleware/auth.midlleware";
 import { AdminSignUpService } from "../../application/adminSignUp.service";
 import { HttpError } from "../../../shared/errors/HttpError";
 import { ValidationError } from "../../../shared/domain/interfaces/validationError";
+import { CreateUserDto } from "../../../user-service/application/dtos/createUserDto";
 
 interface VerificationResponse {
   message: string;
@@ -91,16 +93,45 @@ export class AuthController extends Controller {
     );
   }
 
+  // @SuccessResponse("201", "Created")
+  // @Post("register")
+  // public async createUser(
+  //   @Body()
+  //   requestBody: CreateUserDto
+  // ): Promise<{ message: string; errors?: ValidationError[]; user?: User }> {
+  //   try {
+  //     const { fullname, email, current_password, phone } = requestBody;
+  //     const user = await this.signUpService.signUp(
+  //       fullname,
+  //       email,
+  //       current_password,
+  //       phone
+  //     );
+  //     this.setStatus(201);
+  //     return { message: "Usuario registrado exitosamente", user };
+  //   } catch (error) {
+  //     if (error instanceof HttpError) {
+  //       this.setStatus(error.statusCode);
+  //       try {
+  //         const errors = JSON.parse(error.message); // Intenta parsear los errores si es un array
+  //         return { message: "Errores de validación", errors };
+  //       } catch {
+  //         return { message: error.message }; // Si no es un array, devuelve el mensaje directamente
+  //       }
+  //     } else {
+  //       this.setStatus(500);
+  //       return { message: "Error interno del servidor." };
+  //     }
+  //   }
+  // }
+
   @SuccessResponse("201", "Created")
+  @Response<ValidationError[]>(422, "Validation Failed")
+  @Response<{ message: string }>(500, "Internal Server Error")
   @Post("register")
   public async createUser(
     @Body()
-    requestBody: {
-      fullname: string;
-      email: string;
-      current_password: string;
-      phone: string;
-    }
+    requestBody: CreateUserDto
   ): Promise<{ message: string; errors?: ValidationError[]; user?: User }> {
     try {
       const { fullname, email, current_password, phone } = requestBody;
@@ -127,6 +158,7 @@ export class AuthController extends Controller {
       }
     }
   }
+
 
   @SuccessResponse("200", "OK")
   @Post("forgot-password")

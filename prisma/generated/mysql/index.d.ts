@@ -65,7 +65,7 @@ export type historical_movement = $Result.DefaultSelection<Prisma.$historical_mo
 export namespace $Enums {
   export const OrderStatus: {
   PENDING: 'PENDING',
-  IN_PROFRESS: 'IN_PROFRESS',
+  IN_PROGRESS: 'IN_PROGRESS',
   CANCELED: 'CANCELED',
   COMPLETED: 'COMPLETED'
 };
@@ -2894,7 +2894,7 @@ export namespace Prisma {
     orderId: number | null
     productId: number | null
     quantity: number | null
-    unit_price: number | null
+    unitPrice: number | null
   }
 
   export type OrderItemSumAggregateOutputType = {
@@ -2902,7 +2902,7 @@ export namespace Prisma {
     orderId: number | null
     productId: number | null
     quantity: number | null
-    unit_price: number | null
+    unitPrice: number | null
   }
 
   export type OrderItemMinAggregateOutputType = {
@@ -2910,7 +2910,7 @@ export namespace Prisma {
     orderId: number | null
     productId: number | null
     quantity: number | null
-    unit_price: number | null
+    unitPrice: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -2920,7 +2920,7 @@ export namespace Prisma {
     orderId: number | null
     productId: number | null
     quantity: number | null
-    unit_price: number | null
+    unitPrice: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -2930,7 +2930,7 @@ export namespace Prisma {
     orderId: number
     productId: number
     quantity: number
-    unit_price: number
+    unitPrice: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -2942,7 +2942,7 @@ export namespace Prisma {
     orderId?: true
     productId?: true
     quantity?: true
-    unit_price?: true
+    unitPrice?: true
   }
 
   export type OrderItemSumAggregateInputType = {
@@ -2950,7 +2950,7 @@ export namespace Prisma {
     orderId?: true
     productId?: true
     quantity?: true
-    unit_price?: true
+    unitPrice?: true
   }
 
   export type OrderItemMinAggregateInputType = {
@@ -2958,7 +2958,7 @@ export namespace Prisma {
     orderId?: true
     productId?: true
     quantity?: true
-    unit_price?: true
+    unitPrice?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -2968,7 +2968,7 @@ export namespace Prisma {
     orderId?: true
     productId?: true
     quantity?: true
-    unit_price?: true
+    unitPrice?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -2978,7 +2978,7 @@ export namespace Prisma {
     orderId?: true
     productId?: true
     quantity?: true
-    unit_price?: true
+    unitPrice?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -3075,7 +3075,7 @@ export namespace Prisma {
     orderId: number
     productId: number
     quantity: number
-    unit_price: number
+    unitPrice: number
     createdAt: Date
     updatedAt: Date
     _count: OrderItemCountAggregateOutputType | null
@@ -3104,7 +3104,7 @@ export namespace Prisma {
     orderId?: boolean
     productId?: boolean
     quantity?: boolean
-    unit_price?: boolean
+    unitPrice?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     order?: boolean | OrderDefaultArgs<ExtArgs>
@@ -3118,12 +3118,12 @@ export namespace Prisma {
     orderId?: boolean
     productId?: boolean
     quantity?: boolean
-    unit_price?: boolean
+    unitPrice?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type OrderItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "orderId" | "productId" | "quantity" | "unit_price" | "createdAt" | "updatedAt", ExtArgs["result"]["orderItem"]>
+  export type OrderItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "orderId" | "productId" | "quantity" | "unitPrice" | "createdAt" | "updatedAt", ExtArgs["result"]["orderItem"]>
   export type OrderItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     order?: boolean | OrderDefaultArgs<ExtArgs>
     product?: boolean | ProductDefaultArgs<ExtArgs>
@@ -3140,7 +3140,7 @@ export namespace Prisma {
       orderId: number
       productId: number
       quantity: number
-      unit_price: number
+      unitPrice: number
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["orderItem"]>
@@ -3518,7 +3518,7 @@ export namespace Prisma {
     readonly orderId: FieldRef<"OrderItem", 'Int'>
     readonly productId: FieldRef<"OrderItem", 'Int'>
     readonly quantity: FieldRef<"OrderItem", 'Int'>
-    readonly unit_price: FieldRef<"OrderItem", 'Float'>
+    readonly unitPrice: FieldRef<"OrderItem", 'Float'>
     readonly createdAt: FieldRef<"OrderItem", 'DateTime'>
     readonly updatedAt: FieldRef<"OrderItem", 'DateTime'>
   }
@@ -7920,14 +7920,14 @@ export namespace Prisma {
   export type ProductAvgAggregateOutputType = {
     id: number | null
     categoryId: number | null
-    unit_price: number | null
+    unitPrice: number | null
     wight: number | null
   }
 
   export type ProductSumAggregateOutputType = {
     id: number | null
     categoryId: number | null
-    unit_price: number | null
+    unitPrice: number | null
     wight: number | null
   }
 
@@ -7936,7 +7936,7 @@ export namespace Prisma {
     name: string | null
     description: string | null
     categoryId: number | null
-    unit_price: number | null
+    unitPrice: number | null
     wight: number | null
     is_fragile: boolean | null
     dimensions_cm: string | null
@@ -7954,7 +7954,7 @@ export namespace Prisma {
     name: string | null
     description: string | null
     categoryId: number | null
-    unit_price: number | null
+    unitPrice: number | null
     wight: number | null
     is_fragile: boolean | null
     dimensions_cm: string | null
@@ -7972,7 +7972,7 @@ export namespace Prisma {
     name: number
     description: number
     categoryId: number
-    unit_price: number
+    unitPrice: number
     wight: number
     is_fragile: number
     dimensions_cm: number
@@ -7990,14 +7990,14 @@ export namespace Prisma {
   export type ProductAvgAggregateInputType = {
     id?: true
     categoryId?: true
-    unit_price?: true
+    unitPrice?: true
     wight?: true
   }
 
   export type ProductSumAggregateInputType = {
     id?: true
     categoryId?: true
-    unit_price?: true
+    unitPrice?: true
     wight?: true
   }
 
@@ -8006,7 +8006,7 @@ export namespace Prisma {
     name?: true
     description?: true
     categoryId?: true
-    unit_price?: true
+    unitPrice?: true
     wight?: true
     is_fragile?: true
     dimensions_cm?: true
@@ -8024,7 +8024,7 @@ export namespace Prisma {
     name?: true
     description?: true
     categoryId?: true
-    unit_price?: true
+    unitPrice?: true
     wight?: true
     is_fragile?: true
     dimensions_cm?: true
@@ -8042,7 +8042,7 @@ export namespace Prisma {
     name?: true
     description?: true
     categoryId?: true
-    unit_price?: true
+    unitPrice?: true
     wight?: true
     is_fragile?: true
     dimensions_cm?: true
@@ -8147,7 +8147,7 @@ export namespace Prisma {
     name: string
     description: string
     categoryId: number
-    unit_price: number
+    unitPrice: number
     wight: number
     is_fragile: boolean
     dimensions_cm: string
@@ -8184,7 +8184,7 @@ export namespace Prisma {
     name?: boolean
     description?: boolean
     categoryId?: boolean
-    unit_price?: boolean
+    unitPrice?: boolean
     wight?: boolean
     is_fragile?: boolean
     dimensions_cm?: boolean
@@ -8208,7 +8208,7 @@ export namespace Prisma {
     name?: boolean
     description?: boolean
     categoryId?: boolean
-    unit_price?: boolean
+    unitPrice?: boolean
     wight?: boolean
     is_fragile?: boolean
     dimensions_cm?: boolean
@@ -8221,7 +8221,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "categoryId" | "unit_price" | "wight" | "is_fragile" | "dimensions_cm" | "imageUrl" | "bar_code" | "required_refrigeration" | "date_of_expiration" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
+  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "categoryId" | "unitPrice" | "wight" | "is_fragile" | "dimensions_cm" | "imageUrl" | "bar_code" | "required_refrigeration" | "date_of_expiration" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
   export type ProductInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     category?: boolean | CategoryDefaultArgs<ExtArgs>
     inventory?: boolean | Product$inventoryArgs<ExtArgs>
@@ -8241,7 +8241,7 @@ export namespace Prisma {
       name: string
       description: string
       categoryId: number
-      unit_price: number
+      unitPrice: number
       wight: number
       is_fragile: boolean
       dimensions_cm: string
@@ -8628,7 +8628,7 @@ export namespace Prisma {
     readonly name: FieldRef<"Product", 'String'>
     readonly description: FieldRef<"Product", 'String'>
     readonly categoryId: FieldRef<"Product", 'Int'>
-    readonly unit_price: FieldRef<"Product", 'Float'>
+    readonly unitPrice: FieldRef<"Product", 'Float'>
     readonly wight: FieldRef<"Product", 'Float'>
     readonly is_fragile: FieldRef<"Product", 'Boolean'>
     readonly dimensions_cm: FieldRef<"Product", 'String'>
@@ -11130,7 +11130,7 @@ export namespace Prisma {
     orderId: 'orderId',
     productId: 'productId',
     quantity: 'quantity',
-    unit_price: 'unit_price',
+    unitPrice: 'unitPrice',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -11188,7 +11188,7 @@ export namespace Prisma {
     name: 'name',
     description: 'description',
     categoryId: 'categoryId',
-    unit_price: 'unit_price',
+    unitPrice: 'unitPrice',
     wight: 'wight',
     is_fragile: 'is_fragile',
     dimensions_cm: 'dimensions_cm',
@@ -11463,7 +11463,7 @@ export namespace Prisma {
     orderId?: IntFilter<"OrderItem"> | number
     productId?: IntFilter<"OrderItem"> | number
     quantity?: IntFilter<"OrderItem"> | number
-    unit_price?: FloatFilter<"OrderItem"> | number
+    unitPrice?: FloatFilter<"OrderItem"> | number
     createdAt?: DateTimeFilter<"OrderItem"> | Date | string
     updatedAt?: DateTimeFilter<"OrderItem"> | Date | string
     order?: XOR<OrderScalarRelationFilter, OrderWhereInput>
@@ -11475,7 +11475,7 @@ export namespace Prisma {
     orderId?: SortOrder
     productId?: SortOrder
     quantity?: SortOrder
-    unit_price?: SortOrder
+    unitPrice?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     order?: OrderOrderByWithRelationInput
@@ -11490,7 +11490,7 @@ export namespace Prisma {
     orderId?: IntFilter<"OrderItem"> | number
     productId?: IntFilter<"OrderItem"> | number
     quantity?: IntFilter<"OrderItem"> | number
-    unit_price?: FloatFilter<"OrderItem"> | number
+    unitPrice?: FloatFilter<"OrderItem"> | number
     createdAt?: DateTimeFilter<"OrderItem"> | Date | string
     updatedAt?: DateTimeFilter<"OrderItem"> | Date | string
     order?: XOR<OrderScalarRelationFilter, OrderWhereInput>
@@ -11502,7 +11502,7 @@ export namespace Prisma {
     orderId?: SortOrder
     productId?: SortOrder
     quantity?: SortOrder
-    unit_price?: SortOrder
+    unitPrice?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: OrderItemCountOrderByAggregateInput
@@ -11520,7 +11520,7 @@ export namespace Prisma {
     orderId?: IntWithAggregatesFilter<"OrderItem"> | number
     productId?: IntWithAggregatesFilter<"OrderItem"> | number
     quantity?: IntWithAggregatesFilter<"OrderItem"> | number
-    unit_price?: FloatWithAggregatesFilter<"OrderItem"> | number
+    unitPrice?: FloatWithAggregatesFilter<"OrderItem"> | number
     createdAt?: DateTimeWithAggregatesFilter<"OrderItem"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"OrderItem"> | Date | string
   }
@@ -11779,7 +11779,7 @@ export namespace Prisma {
     name?: StringFilter<"Product"> | string
     description?: StringFilter<"Product"> | string
     categoryId?: IntFilter<"Product"> | number
-    unit_price?: FloatFilter<"Product"> | number
+    unitPrice?: FloatFilter<"Product"> | number
     wight?: FloatFilter<"Product"> | number
     is_fragile?: BoolFilter<"Product"> | boolean
     dimensions_cm?: StringFilter<"Product"> | string
@@ -11800,7 +11800,7 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrder
     categoryId?: SortOrder
-    unit_price?: SortOrder
+    unitPrice?: SortOrder
     wight?: SortOrder
     is_fragile?: SortOrder
     dimensions_cm?: SortOrder
@@ -11825,7 +11825,7 @@ export namespace Prisma {
     name?: StringFilter<"Product"> | string
     description?: StringFilter<"Product"> | string
     categoryId?: IntFilter<"Product"> | number
-    unit_price?: FloatFilter<"Product"> | number
+    unitPrice?: FloatFilter<"Product"> | number
     wight?: FloatFilter<"Product"> | number
     is_fragile?: BoolFilter<"Product"> | boolean
     dimensions_cm?: StringFilter<"Product"> | string
@@ -11846,7 +11846,7 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrder
     categoryId?: SortOrder
-    unit_price?: SortOrder
+    unitPrice?: SortOrder
     wight?: SortOrder
     is_fragile?: SortOrder
     dimensions_cm?: SortOrder
@@ -11872,7 +11872,7 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"Product"> | string
     description?: StringWithAggregatesFilter<"Product"> | string
     categoryId?: IntWithAggregatesFilter<"Product"> | number
-    unit_price?: FloatWithAggregatesFilter<"Product"> | number
+    unitPrice?: FloatWithAggregatesFilter<"Product"> | number
     wight?: FloatWithAggregatesFilter<"Product"> | number
     is_fragile?: BoolWithAggregatesFilter<"Product"> | boolean
     dimensions_cm?: StringWithAggregatesFilter<"Product"> | string
@@ -12136,7 +12136,7 @@ export namespace Prisma {
 
   export type OrderItemCreateInput = {
     quantity: number
-    unit_price: number
+    unitPrice: number
     createdAt?: Date | string
     updatedAt?: Date | string
     order: OrderCreateNestedOneWithoutOrderItemsInput
@@ -12148,14 +12148,14 @@ export namespace Prisma {
     orderId: number
     productId: number
     quantity: number
-    unit_price: number
+    unitPrice: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type OrderItemUpdateInput = {
     quantity?: IntFieldUpdateOperationsInput | number
-    unit_price?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     order?: OrderUpdateOneRequiredWithoutOrderItemsNestedInput
@@ -12167,7 +12167,7 @@ export namespace Prisma {
     orderId?: IntFieldUpdateOperationsInput | number
     productId?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
-    unit_price?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12177,14 +12177,14 @@ export namespace Prisma {
     orderId: number
     productId: number
     quantity: number
-    unit_price: number
+    unitPrice: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type OrderItemUpdateManyMutationInput = {
     quantity?: IntFieldUpdateOperationsInput | number
-    unit_price?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12194,7 +12194,7 @@ export namespace Prisma {
     orderId?: IntFieldUpdateOperationsInput | number
     productId?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
-    unit_price?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12439,7 +12439,7 @@ export namespace Prisma {
   export type ProductCreateInput = {
     name: string
     description: string
-    unit_price: number
+    unitPrice: number
     wight: number
     is_fragile: boolean
     dimensions_cm: string
@@ -12460,7 +12460,7 @@ export namespace Prisma {
     name: string
     description: string
     categoryId: number
-    unit_price: number
+    unitPrice: number
     wight: number
     is_fragile: boolean
     dimensions_cm: string
@@ -12478,7 +12478,7 @@ export namespace Prisma {
   export type ProductUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    unit_price?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
     wight?: FloatFieldUpdateOperationsInput | number
     is_fragile?: BoolFieldUpdateOperationsInput | boolean
     dimensions_cm?: StringFieldUpdateOperationsInput | string
@@ -12499,7 +12499,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     categoryId?: IntFieldUpdateOperationsInput | number
-    unit_price?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
     wight?: FloatFieldUpdateOperationsInput | number
     is_fragile?: BoolFieldUpdateOperationsInput | boolean
     dimensions_cm?: StringFieldUpdateOperationsInput | string
@@ -12519,7 +12519,7 @@ export namespace Prisma {
     name: string
     description: string
     categoryId: number
-    unit_price: number
+    unitPrice: number
     wight: number
     is_fragile: boolean
     dimensions_cm: string
@@ -12535,7 +12535,7 @@ export namespace Prisma {
   export type ProductUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    unit_price?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
     wight?: FloatFieldUpdateOperationsInput | number
     is_fragile?: BoolFieldUpdateOperationsInput | boolean
     dimensions_cm?: StringFieldUpdateOperationsInput | string
@@ -12553,7 +12553,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     categoryId?: IntFieldUpdateOperationsInput | number
-    unit_price?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
     wight?: FloatFieldUpdateOperationsInput | number
     is_fragile?: BoolFieldUpdateOperationsInput | boolean
     dimensions_cm?: StringFieldUpdateOperationsInput | string
@@ -12938,7 +12938,7 @@ export namespace Prisma {
     orderId?: SortOrder
     productId?: SortOrder
     quantity?: SortOrder
-    unit_price?: SortOrder
+    unitPrice?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -12948,7 +12948,7 @@ export namespace Prisma {
     orderId?: SortOrder
     productId?: SortOrder
     quantity?: SortOrder
-    unit_price?: SortOrder
+    unitPrice?: SortOrder
   }
 
   export type OrderItemMaxOrderByAggregateInput = {
@@ -12956,7 +12956,7 @@ export namespace Prisma {
     orderId?: SortOrder
     productId?: SortOrder
     quantity?: SortOrder
-    unit_price?: SortOrder
+    unitPrice?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -12966,7 +12966,7 @@ export namespace Prisma {
     orderId?: SortOrder
     productId?: SortOrder
     quantity?: SortOrder
-    unit_price?: SortOrder
+    unitPrice?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -12976,7 +12976,7 @@ export namespace Prisma {
     orderId?: SortOrder
     productId?: SortOrder
     quantity?: SortOrder
-    unit_price?: SortOrder
+    unitPrice?: SortOrder
   }
 
   export type EnumstatusStoreFilter<$PrismaModel = never> = {
@@ -13249,7 +13249,7 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrder
     categoryId?: SortOrder
-    unit_price?: SortOrder
+    unitPrice?: SortOrder
     wight?: SortOrder
     is_fragile?: SortOrder
     dimensions_cm?: SortOrder
@@ -13265,7 +13265,7 @@ export namespace Prisma {
   export type ProductAvgOrderByAggregateInput = {
     id?: SortOrder
     categoryId?: SortOrder
-    unit_price?: SortOrder
+    unitPrice?: SortOrder
     wight?: SortOrder
   }
 
@@ -13274,7 +13274,7 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrder
     categoryId?: SortOrder
-    unit_price?: SortOrder
+    unitPrice?: SortOrder
     wight?: SortOrder
     is_fragile?: SortOrder
     dimensions_cm?: SortOrder
@@ -13292,7 +13292,7 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrder
     categoryId?: SortOrder
-    unit_price?: SortOrder
+    unitPrice?: SortOrder
     wight?: SortOrder
     is_fragile?: SortOrder
     dimensions_cm?: SortOrder
@@ -13308,7 +13308,7 @@ export namespace Prisma {
   export type ProductSumOrderByAggregateInput = {
     id?: SortOrder
     categoryId?: SortOrder
-    unit_price?: SortOrder
+    unitPrice?: SortOrder
     wight?: SortOrder
   }
 
@@ -14199,7 +14199,7 @@ export namespace Prisma {
 
   export type OrderItemCreateWithoutOrderInput = {
     quantity: number
-    unit_price: number
+    unitPrice: number
     createdAt?: Date | string
     updatedAt?: Date | string
     product: ProductCreateNestedOneWithoutOrderItemsInput
@@ -14209,7 +14209,7 @@ export namespace Prisma {
     id?: number
     productId: number
     quantity: number
-    unit_price: number
+    unitPrice: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -14288,7 +14288,7 @@ export namespace Prisma {
     orderId?: IntFilter<"OrderItem"> | number
     productId?: IntFilter<"OrderItem"> | number
     quantity?: IntFilter<"OrderItem"> | number
-    unit_price?: FloatFilter<"OrderItem"> | number
+    unitPrice?: FloatFilter<"OrderItem"> | number
     createdAt?: DateTimeFilter<"OrderItem"> | Date | string
     updatedAt?: DateTimeFilter<"OrderItem"> | Date | string
   }
@@ -14328,7 +14328,7 @@ export namespace Prisma {
   export type ProductCreateWithoutOrderItemsInput = {
     name: string
     description: string
-    unit_price: number
+    unitPrice: number
     wight: number
     is_fragile: boolean
     dimensions_cm: string
@@ -14348,7 +14348,7 @@ export namespace Prisma {
     name: string
     description: string
     categoryId: number
-    unit_price: number
+    unitPrice: number
     wight: number
     is_fragile: boolean
     dimensions_cm: string
@@ -14419,7 +14419,7 @@ export namespace Prisma {
   export type ProductUpdateWithoutOrderItemsInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    unit_price?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
     wight?: FloatFieldUpdateOperationsInput | number
     is_fragile?: BoolFieldUpdateOperationsInput | boolean
     dimensions_cm?: StringFieldUpdateOperationsInput | string
@@ -14439,7 +14439,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     categoryId?: IntFieldUpdateOperationsInput | number
-    unit_price?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
     wight?: FloatFieldUpdateOperationsInput | number
     is_fragile?: BoolFieldUpdateOperationsInput | boolean
     dimensions_cm?: StringFieldUpdateOperationsInput | string
@@ -14777,7 +14777,7 @@ export namespace Prisma {
   export type ProductCreateWithoutCategoryInput = {
     name: string
     description: string
-    unit_price: number
+    unitPrice: number
     wight: number
     is_fragile: boolean
     dimensions_cm: string
@@ -14796,7 +14796,7 @@ export namespace Prisma {
     id?: number
     name: string
     description: string
-    unit_price: number
+    unitPrice: number
     wight: number
     is_fragile: boolean
     dimensions_cm: string
@@ -14845,7 +14845,7 @@ export namespace Prisma {
     name?: StringFilter<"Product"> | string
     description?: StringFilter<"Product"> | string
     categoryId?: IntFilter<"Product"> | number
-    unit_price?: FloatFilter<"Product"> | number
+    unitPrice?: FloatFilter<"Product"> | number
     wight?: FloatFilter<"Product"> | number
     is_fragile?: BoolFilter<"Product"> | boolean
     dimensions_cm?: StringFilter<"Product"> | string
@@ -14911,7 +14911,7 @@ export namespace Prisma {
 
   export type OrderItemCreateWithoutProductInput = {
     quantity: number
-    unit_price: number
+    unitPrice: number
     createdAt?: Date | string
     updatedAt?: Date | string
     order: OrderCreateNestedOneWithoutOrderItemsInput
@@ -14921,7 +14921,7 @@ export namespace Prisma {
     id?: number
     orderId: number
     quantity: number
-    unit_price: number
+    unitPrice: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -14997,7 +14997,7 @@ export namespace Prisma {
   export type ProductCreateWithoutInventoryInput = {
     name: string
     description: string
-    unit_price: number
+    unitPrice: number
     wight: number
     is_fragile: boolean
     dimensions_cm: string
@@ -15017,7 +15017,7 @@ export namespace Prisma {
     name: string
     description: string
     categoryId: number
-    unit_price: number
+    unitPrice: number
     wight: number
     is_fragile: boolean
     dimensions_cm: string
@@ -15113,7 +15113,7 @@ export namespace Prisma {
   export type ProductUpdateWithoutInventoryInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    unit_price?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
     wight?: FloatFieldUpdateOperationsInput | number
     is_fragile?: BoolFieldUpdateOperationsInput | boolean
     dimensions_cm?: StringFieldUpdateOperationsInput | string
@@ -15133,7 +15133,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     categoryId?: IntFieldUpdateOperationsInput | number
-    unit_price?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
     wight?: FloatFieldUpdateOperationsInput | number
     is_fragile?: BoolFieldUpdateOperationsInput | boolean
     dimensions_cm?: StringFieldUpdateOperationsInput | string
@@ -15279,14 +15279,14 @@ export namespace Prisma {
     id?: number
     productId: number
     quantity: number
-    unit_price: number
+    unitPrice: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type OrderItemUpdateWithoutOrderInput = {
     quantity?: IntFieldUpdateOperationsInput | number
-    unit_price?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     product?: ProductUpdateOneRequiredWithoutOrderItemsNestedInput
@@ -15296,7 +15296,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     productId?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
-    unit_price?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -15305,7 +15305,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     productId?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
-    unit_price?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -15484,7 +15484,7 @@ export namespace Prisma {
     id?: number
     name: string
     description: string
-    unit_price: number
+    unitPrice: number
     wight: number
     is_fragile: boolean
     dimensions_cm: string
@@ -15500,7 +15500,7 @@ export namespace Prisma {
   export type ProductUpdateWithoutCategoryInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    unit_price?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
     wight?: FloatFieldUpdateOperationsInput | number
     is_fragile?: BoolFieldUpdateOperationsInput | boolean
     dimensions_cm?: StringFieldUpdateOperationsInput | string
@@ -15519,7 +15519,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    unit_price?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
     wight?: FloatFieldUpdateOperationsInput | number
     is_fragile?: BoolFieldUpdateOperationsInput | boolean
     dimensions_cm?: StringFieldUpdateOperationsInput | string
@@ -15538,7 +15538,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    unit_price?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
     wight?: FloatFieldUpdateOperationsInput | number
     is_fragile?: BoolFieldUpdateOperationsInput | boolean
     dimensions_cm?: StringFieldUpdateOperationsInput | string
@@ -15565,7 +15565,7 @@ export namespace Prisma {
     id?: number
     orderId: number
     quantity: number
-    unit_price: number
+    unitPrice: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -15603,7 +15603,7 @@ export namespace Prisma {
 
   export type OrderItemUpdateWithoutProductInput = {
     quantity?: IntFieldUpdateOperationsInput | number
-    unit_price?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     order?: OrderUpdateOneRequiredWithoutOrderItemsNestedInput
@@ -15613,7 +15613,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     orderId?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
-    unit_price?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -15622,7 +15622,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     orderId?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
-    unit_price?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

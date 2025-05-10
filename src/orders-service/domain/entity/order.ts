@@ -5,7 +5,7 @@ export class Order {
         public storeId: number,
         public deliveryId: string,
         public customerId: string,
-        public status: 'PENDING' | 'IN_PROFRESS' | 'CANCELED' | 'COMPLETED', // Ajustar el tipo
+        public status: 'PENDING' | 'IN_PROGRESS' | 'CANCELED' | 'COMPLETED', 
         public totalAmount: number,
         public latitude: number,
         public longitude: number,
