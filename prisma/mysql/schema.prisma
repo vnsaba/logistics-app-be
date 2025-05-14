@@ -1,11 +1,11 @@
 generator client {
-  provider = "prisma-client-js"
-  output   = "../generated/mysql"
+    provider = "prisma-client-js"
+    output   = "../generated/mysql"
 }
 
 datasource db {
     provider = "mysql"
-    url = env("MYSQL_DB_URL")
+    url      = env("MYSQL_DB_URL")
 }
 
 enum OrderStatus {
@@ -26,67 +26,66 @@ enum statusProduct {
 }
 
 model Order {
-  id          Int      @id @default(autoincrement()) 
-  storeId     Int
-  store     Store    @relation(fields: [storeId], references: [id])         
-  deliveryId  String    
-  customerId String
-  status      OrderStatus @default(PENDING)
-  totalAmount Float
-  latitude    Float
-  longitude   Float
-  address     String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  orderItems  OrderItem[]
+    id          Int         @id @default(autoincrement())
+    storeId     Int
+    store       Store       @relation(fields: [storeId], references: [id])
+    deliveryId  String
+    customerId  String
+    status      OrderStatus @default(PENDING)
+    totalAmount Float
+    latitude    Float
+    longitude   Float
+    address     String
+    createdAt   DateTime    @default(now())
+    updatedAt   DateTime    @updatedAt
+    orderItems  OrderItem[]
 }
 
 model OrderItem {
-  id          Int      @id @default(autoincrement()) 
-  orderId     Int
-  order       Order    @relation(fields: [orderId], references: [id]) 
-  productId   Int
-  product     Product  @relation(fields: [productId], references: [id])
-  quantity    Int
-  unit_price  Float
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+    id         Int      @id @default(autoincrement())
+    orderId    Int
+    order      Order    @relation(fields: [orderId], references: [id])
+    productId  Int
+    product    Product  @relation(fields: [productId], references: [id])
+    quantity   Int
+    unit_price Float
+    createdAt  DateTime @default(now())
+    updatedAt  DateTime @updatedAt
 }
 
 model Store {
-    id          Int      @id @default(autoincrement()) 
-    name        String
-    address     String
-    latitude    Float
-    longitude   Float
-    cityId      Int
-    city        City      @relation(fields: [cityId], references: [id])   
-    capacity    Int
-    zipCode     String
-    status      statusStore @default(ACTIVE)
-    createdAt   DateTime @default(now())
-    updatedAt   DateTime @updatedAt
-    orders Order[] 
+    id        Int         @id @default(autoincrement())
+    name      String
+    address   String
+    latitude  Float
+    longitude Float
+    cityId    Int
+    city      City        @relation(fields: [cityId], references: [id])
+    capacity  Int
+    zipCode   String
+    status    statusStore @default(ACTIVE)
+    createdAt DateTime    @default(now())
+    updatedAt DateTime    @updatedAt
+    orders    Order[]
     inventory Inventory[]
 }
 
 model City {
-    id          Int      @id @default(autoincrement()) 
-    name        String
+    id           Int        @id @default(autoincrement())
+    name         String
     departmentId Int
-    department  Department @relation(fields: [departmentId], references: [id])
-    stores Store[]
+    department   Department @relation(fields: [departmentId], references: [id])
+    stores       Store[]
 }
 
-
 model Department {
-    id          Int      @id @default(autoincrement()) 
-    name        String
+    id     Int    @id @default(autoincrement())
+    name   String
     cities City[]
 }
 
 model Category {
-    id          Int      @id @default(autoincrement()) 
+    id          Int       @id @default(autoincrement())
     name        String
     description String
     createdAt   DateTime  @default(now())
@@ -95,48 +94,48 @@ model Category {
 }
 
 model Product {
-    id          Int      @id @default(autoincrement()) 
-    name        String
-    description String
-    categoryId  Int
-    category    Category @relation(fields: [categoryId], references: [id])
-    unit_price  Float
-    weight       Float
-    isFragile  Boolean
-    dimensionsCm String
-    imageUrl       String
-    barCode     String
+    id                    Int           @id @default(autoincrement())
+    name                  String
+    description           String
+    categoryId            Int
+    category              Category      @relation(fields: [categoryId], references: [id])
+    unitPrice             Float
+    weight                Float
+    isFragile             Boolean
+    dimensionsCm          String
+    imageUrl              String
+    barCode               String        @unique
     requiredRefrigeration Boolean
-    dateOfExpiration DateTime
-    status      statusProduct @default(ACTIVE)
-    createdAt   DateTime  @default(now())
-    updatedAt   DateTime  @updatedAt
-    inventory Inventory[]
-    orderItems OrderItem[]
+    dateOfExpiration      DateTime
+    status                statusProduct @default(ACTIVE)
+    createdAt             DateTime      @default(now())
+    updatedAt             DateTime      @updatedAt
+    inventory             Inventory[]
+    orderItems            OrderItem[]
 }
 
 model Inventory {
-    id          Int      @id @default(autoincrement()) 
-    productId   Int
-    product     Product  @relation(fields: [productId], references: [id])
-    storeId     Int
-    store       Store    @relation(fields: [storeId], references: [id])
-    availableQuantity    Int
-    minimumThreshold     Int
+    id                 Int                  @id @default(autoincrement())
+    productId          Int
+    product            Product              @relation(fields: [productId], references: [id])
+    storeId            Int
+    store              Store                @relation(fields: [storeId], references: [id])
+    availableQuantity  Int
+    minimumThreshold   Int
     lastResetDate      DateTime
-    createdAt   DateTime  @default(now())
-    updatedAt   DateTime  @updatedAt
+    createdAt          DateTime             @default(now())
+    updatedAt          DateTime             @updatedAt
     historicalMovement HistoricalMovement[]
 }
 
 model HistoricalMovement {
-    id          Int      @id @default(autoincrement()) 
+    id           Int       @id @default(autoincrement())
     inventoryId  Int
-    inventory   Inventory @relation(fields: [inventoryId], references: [id])
-    user      String
+    inventory    Inventory @relation(fields: [inventoryId], references: [id])
+    user         String
     movementDate DateTime
-    reason     String
+    reason       String
     movementType String
-    createdAt   DateTime  @default(now())
-    updatedAt   DateTime  @updatedAt
+    createdAt    DateTime  @default(now())
+    updatedAt    DateTime  @updatedAt
 }
