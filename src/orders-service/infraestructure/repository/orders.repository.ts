@@ -31,7 +31,7 @@ export class OrdersRepository implements OrderInterface {
         })
     }
 
-    async findById(id: string): Promise<Order> {
+    async findById(id: number): Promise<Order> {
         return await prismaMysql.order.findUnique({
             where: { id: Number(id) },
         }).then((order) => {

@@ -1,9 +1,9 @@
-import { OrderItem } from "prisma/generated/mysql";
+import{OrderItem} from '../entity/orderItem';
 
-export interface IUOrderItemRepository {
-    findById(id: string): Promise<OrderItem | null>;
-    create(orderItem: OrderItem): Promise<OrderItem>;
+export interface IOrderItemRepository {
+    findById(id: number): Promise<OrderItem | null>;
+    // create(orderItem: OrderItem): Promise<OrderItem>;
     update(orderItem: OrderItem): Promise<OrderItem>;
-    delete(id: string): Promise<void>;
-    getByOrderId(orderId: string): Promise<OrderItem[]>;
+    delete(id: number): Promise<void>;
+    getByOrderId(orderId: number): Promise<OrderItem[]>;
 }

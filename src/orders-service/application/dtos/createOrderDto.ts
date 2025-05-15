@@ -1,7 +1,8 @@
 import { ArrayMinSize, IsArray, IsInt, IsNotEmpty, Min } from 'class-validator';
 import { IsEnum, IsString, IsNumber, IsLatitude, IsLongitude } from 'class-validator';
-import { OrderItem } from '../../../orderItem-service/domain/entity/orderItem';
+// import { OrderItem } from '../../../orderItem-service/domain/entity/orderItem';
 import { OrderStatus } from "../../../shared/enums/orderStatus.enum";
+import { CreateOrderItemDto } from '../../../orderItem-service/application/dtos/createOrderItemDto';
 
 export class CreateOrderDto {
     @IsNotEmpty({ message: 'Store ID is required' })
@@ -38,6 +39,6 @@ export class CreateOrderDto {
 
     @IsArray({ message: 'Items must be an array' })
     @ArrayMinSize(1, { message: 'At least one item is required' })
-    items!: OrderItem[];
+    items!: CreateOrderItemDto[];
 }
 

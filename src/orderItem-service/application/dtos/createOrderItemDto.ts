@@ -1,12 +1,6 @@
 
 export interface CreateOrderItemDto {
-    /**
-     * @isInt Must be an integer
-     * @IsNotEmpty Order ID cannot be empty
-     * @minimum 1 Order ID cannot be empty
-     */
-    orderId: number;
-  
+
     /**
      * @isInt Must be an integer
      * @IsntEmpty Product ID cannot be empty
