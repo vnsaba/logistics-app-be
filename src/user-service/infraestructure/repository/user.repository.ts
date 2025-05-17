@@ -117,4 +117,34 @@ export class UserRepository implements IUserRepository {
 
     return users;
   }
+
+  public async findByDeliveryId(id: string): Promise<User | null> {
+    const user = await prisma.user.findUnique({
+      where: { id },
+      include: {
+        role: true,
+      },
+    });
+
+    // Validar que el usuario existe y que su rol es 'delivery'
+    if (!user || !user.role || user.role.name !== 'delivery') {
+      return null;
+    }
+    return user;
+  }
+
+  public async findByClientId(id: string): Promise<User | null> {
+    const user = await prisma.user.findUnique({
+      where: { id },
+      include: {
+        role: true,
+      },
+    });
+
+    if (!user || !user.role || user.role.name !== 'client') {
+      return null;
+    }
+    return user;
+  }
+
 }

@@ -5,7 +5,9 @@ import { CreateOrderService } from '../../application/createOrders.ervice';
 import { OrdersRepository } from "../repository/orders.repository";
 import { StoreRepository } from "../../../store-service/infraestructure/repository/store.repository";
 // import { OrderItemRepository } from "../../../orderItem-service/infraestructure/repository/orderItem.repository";
-import { ProductsRepository } from '../../../products-service/infraestructure/repository/products.repository';
+import { ProductRepository } from '../../../product-service/infraestructure/repository/product.repository';
+import { GoogleMapsGeocodingService } from '../../../shared/infraestructure/geocoding';
+import { UserRepository } from "../../../user-service/infraestructure/repository/user.repository";
 
 interface ErrorResponse {
     status: number;
@@ -19,16 +21,18 @@ export class OrdersController extends Controller {
     private readonly createOrderService: CreateOrderService;
     private readonly storeRepository: StoreRepository;
     private readonly orderRepository: OrdersRepository;
-    // private readonly orderItemRepository: OrderItemRepository
-    private readonly productsRepository: ProductsRepository;
+    private readonly productsRepository: ProductRepository;
+    private readonly geocodingService: GoogleMapsGeocodingService;
+    private readonly userSRepository: UserRepository
 
     constructor() {
         super();
         this.orderRepository = new OrdersRepository();
         this.storeRepository = new StoreRepository();
-        // this.orderItemRepository = new OrderItemRepository();
-        this.productsRepository = new ProductsRepository();
-        this.createOrderService = new CreateOrderService(this.orderRepository, this.storeRepository, this.productsRepository );
+        this.productsRepository = new ProductRepository();
+        this.geocodingService = new GoogleMapsGeocodingService(process.env.GEOCODING_API as string);
+        this.userSRepository = new UserRepository();
+        this.createOrderService = new CreateOrderService(this.orderRepository, this.storeRepository, this.productsRepository, this.geocodingService, this.userSRepository);
     }
 
     //FALTA PROTEGER LA RUTA, PORQUE SOLO ES CUANDO EL USUARIO INICIA SESION

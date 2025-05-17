@@ -1,6 +1,5 @@
-import { ArrayMinSize, IsArray, IsInt, IsNotEmpty, Min } from 'class-validator';
+import { ArrayMinSize, IsArray, IsNotEmpty, Min, MinLength } from 'class-validator';
 import { IsEnum, IsString, IsNumber, IsLatitude, IsLongitude } from 'class-validator';
-// import { OrderItem } from '../../../orderItem-service/domain/entity/orderItem';
 import { OrderStatus } from "../../../shared/enums/orderStatus.enum";
 import { CreateOrderItemDto } from '../../../orderItem-service/application/dtos/createOrderItemDto';
 
@@ -21,7 +20,6 @@ export class CreateOrderDto {
 
     @IsNumber({}, { message: 'Total amount must be a number' })
     @IsNotEmpty({ message: 'Total amount is required' })
-    @IsInt({ message: 'Total amount must be an integer' })
     @Min(0, { message: 'Total amount must be at least 0' })
     totalAmount!: number;
 
@@ -35,6 +33,7 @@ export class CreateOrderDto {
 
     @IsString({ message: 'Address must be a string' })
     @IsNotEmpty({ message: 'Address is required' })
+    @MinLength(10, { message: 'Address is too short' })
     address!: string;
 
     @IsArray({ message: 'Items must be an array' })
