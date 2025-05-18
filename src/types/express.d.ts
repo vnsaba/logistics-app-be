@@ -1,6 +1,15 @@
 // src/types/express.d.ts
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Request } from 'express';
+import { Request as ExpressRequest } from "express";
+
+export interface AuthenticatedRequest extends ExpressRequest {
+  user?: {
+    id?: string;
+    email?: string;
+    // otros campos si los necesitas
+  };
+}
 
 interface UserPayload {
   email?: string;

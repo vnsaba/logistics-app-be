@@ -6,7 +6,7 @@ export class Inventory {
     public storeId: number,
     public availableQuantity: number,
     public minimumThreshold: number,
-    public lastResetDate: Date,
+    public lastResetDate: Date, 
     public createdAt?: Date,
     public updatedAt?: Date,
     id?: number
@@ -39,7 +39,7 @@ export class Inventory {
       data.storeId!,
       data.availableQuantity ?? 0,
       data.minimumThreshold ?? 0,
-      data.lastResetDate ? new Date(data.lastResetDate) : new Date(),
+      data.lastResetDate ? new Date(data.lastResetDate) : new Date(), 
       data.createdAt,
       data.updatedAt,
       data.id

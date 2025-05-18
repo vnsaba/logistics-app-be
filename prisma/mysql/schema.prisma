@@ -25,6 +25,12 @@ enum statusProduct {
     INACTIVE
 }
 
+enum MovementType {
+  IN
+  OUT
+  ADJUSTMENT
+}
+
 model Order {
     id          Int         @id @default(autoincrement())
     storeId     Int
@@ -129,13 +135,13 @@ model Inventory {
 }
 
 model HistoricalMovement {
-    id           Int       @id @default(autoincrement())
-    inventoryId  Int
-    inventory    Inventory @relation(fields: [inventoryId], references: [id])
-    user         String
-    movementDate DateTime
-    reason       String
-    movementType String
-    createdAt    DateTime  @default(now())
-    updatedAt    DateTime  @updatedAt
+  id           Int          @id @default(autoincrement())
+  inventoryId  Int
+  inventory    Inventory    @relation(fields: [inventoryId], references: [id])
+  user         String
+  movementDate DateTime
+  reason       String
+  movementType MovementType 
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
 }
