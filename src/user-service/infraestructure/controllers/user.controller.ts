@@ -1,9 +1,10 @@
-import { Route, Controller, Get, Security } from 'tsoa';
+import { Route, Controller, Get, Security, Tags } from 'tsoa';
 import { UserService } from '../../application/user.service';
 import { UserRepository } from '../repository/user.repository';
 import { UserRole, User as UserType } from '../../../../types/auth/index';
 
 @Route('users')
+@Tags('User')
 export class UserController extends Controller {
   private readonly userService: UserService;
 
