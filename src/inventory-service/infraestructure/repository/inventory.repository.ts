@@ -5,6 +5,7 @@ import { Inventory } from '../../domain/entity/inventory';
 const prisma = new PrismaClient();
 
 export class InventoryRepository implements IInventoryRepository {
+
   async create(inventory: Inventory): Promise<Inventory> {
     const created = await prisma.inventory.create({
       data: {

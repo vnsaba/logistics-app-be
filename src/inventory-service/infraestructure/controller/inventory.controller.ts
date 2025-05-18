@@ -4,18 +4,22 @@ import {
   Tags,
   Post,
   Get,
-  Put,
   Delete,
-  Body,
   Path,
-} from 'tsoa';
+  Middlewares,
+  Body,
+  Request,
+} from "tsoa";
 
-import { Inventory } from '../../domain/entity/inventory';
-import { InventoryService } from '../../application/inventory.service';
-import { InventoryRepository } from '../repository/inventory.repository';
+import { authMiddleware } from "../../../middleware/auth.midlleware";
+import { Inventory } from "../../domain/entity/inventory";
+import { InventoryService } from "../../application/inventory.service";
+import { InventoryRepository } from "../repository/inventory.repository";
+import { AuthenticatedRequest } from "../../../types/express.d";
+import { CreateInventoryDto } from "../dto/create-inventory.dto";
 
-@Route('inventories')
-@Tags('Inventory')
+@Route("inventories")
+@Tags("Inventory")
 export class InventoryController extends Controller {
   private readonly inventoryService: InventoryService;
 
@@ -25,25 +29,36 @@ export class InventoryController extends Controller {
     this.inventoryService = new InventoryService(repository);
   }
 
-  @Post()
-  public async createInventory(@Body() body: Inventory): Promise<Inventory> {
-    return await this.inventoryService.create(body);
+  @Post("create-or-update")
+  @Middlewares([authMiddleware])
+  public async createOrUpdateInventory(
+    @Body() inventoryData: CreateInventoryDto,
+    @Request() req: AuthenticatedRequest
+  ): Promise<Inventory> {
+    const userId = req.user?.id;
+
+    if (!userId) {
+      this.setStatus(401);
+      throw new Error(
+        "Usuario no autenticado (información del usuario no encontrada en el token)."
+      );
+    }
+
+    const inventory = await this.inventoryService.createOrUpdate(
+      inventoryData,
+      userId
+    );
+
+    this.setStatus(201);
+    return inventory;
   }
 
-  @Get('{id}')
+  @Get("{id}")
   public async getInventoryById(@Path() id: number): Promise<Inventory | null> {
     return await this.inventoryService.getById(id);
   }
 
-  @Put('{id}')
-  public async updateInventory(
-    @Path() id: number,
-    @Body() body: Partial<Inventory>
-  ): Promise<Inventory> {
-    return await this.inventoryService.update(id, body);
-  }
-
-  @Delete('{id}')
+  @Delete("{id}")
   public async deleteInventory(@Path() id: number): Promise<void> {
     await this.inventoryService.delete(id);
   }
@@ -53,8 +68,10 @@ export class InventoryController extends Controller {
     return await this.inventoryService.getAll();
   }
 
-  @Get('store/{storeId}')
-  public async getInventoryByStore(@Path() storeId: number): Promise<Inventory[]> {
+  @Get("store/{storeId}")
+  public async getInventoryByStore(
+    @Path() storeId: number
+  ): Promise<Inventory[]> {
     return await this.inventoryService.getByStore(storeId);
   }
 }
