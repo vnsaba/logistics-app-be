@@ -7,6 +7,7 @@ import {
   Request,
   Middlewares,
   Query,
+  Tags,
 } from "tsoa";
 import { UserRepository } from "../../../user-service/infraestructure/repository/user.repository";
 import { User } from "../../../user-service/domain/entity/user";
@@ -33,6 +34,8 @@ interface VerificationResponse {
 }
 
 @Route("auth")
+@Tags('Auth')
+
 export class AuthController extends Controller {
   private readonly signUpService: SignUpService;
   private readonly requestPasswordService: EmailResetPasswordService;
