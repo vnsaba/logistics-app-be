@@ -4,6 +4,7 @@ export class Product {
   constructor(
     public name: string,
     public description: string,
+    public sku: string,
     public categoryId: number,
     public unitPrice: number,
     public weight: number,
@@ -29,7 +30,9 @@ export class Product {
         "Product description must be between 10 and 500 characters."
       );
     }
-
+    if (!sku.trim() || sku.length < 3 || sku.length > 20) {
+      throw new Error("SKU must be between 3 and 20 characters.");
+    }
     if (categoryId <= 0) {
       throw new Error("Category ID must be a positive number.");
     }
@@ -86,6 +89,7 @@ export class Product {
     return new Product(
       data.name!,
       data.description!,
+      data.sku!,
       data.categoryId!,
       data.unitPrice!,
       data.weight!,

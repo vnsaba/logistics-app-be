@@ -7,4 +7,5 @@ export interface IStoreRepository {
   update(id: number, data: Partial<Store>): Promise<Store>;
   delete(id: number): Promise<void>;
   findAll(): Promise<Store[]>;
+  findByAddress(address: string): Promise<Store | null>;
 }

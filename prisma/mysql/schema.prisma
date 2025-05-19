@@ -26,9 +26,9 @@ enum statusProduct {
 }
 
 enum MovementType {
-  IN
-  OUT
-  ADJUSTMENT
+    IN
+    OUT
+    ADJUSTMENT
 }
 
 model Order {
@@ -60,20 +60,21 @@ model OrderItem {
 }
 
 model Store {
-    id        Int         @id @default(autoincrement())
-    name      String      @unique
-    address   String      @unique
-    latitude  Float
-    longitude Float
-    cityId    Int
-    city      City        @relation(fields: [cityId], references: [id])
-    capacity  Int
-    zipCode   String
-    status    statusStore @default(ACTIVE)
-    createdAt DateTime    @default(now())
-    updatedAt DateTime    @updatedAt
-    orders    Order[]
-    inventory Inventory[]
+    id         Int         @id @default(autoincrement())
+    id_almacen String      @unique
+    name       String      @unique
+    address    String      @unique
+    latitude   Float
+    longitude  Float
+    cityId     Int
+    city       City        @relation(fields: [cityId], references: [id])
+    capacity   Int
+    zipCode    Float
+    status     statusStore @default(ACTIVE)
+    createdAt  DateTime    @default(now())
+    updatedAt  DateTime    @updatedAt
+    orders     Order[]
+    inventory  Inventory[]
 }
 
 model City {
@@ -104,6 +105,7 @@ model Product {
     id                    Int           @id @default(autoincrement())
     name                  String
     description           String
+    sku                   String
     categoryId            Int
     category              Category      @relation(fields: [categoryId], references: [id])
     unitPrice             Float
@@ -136,13 +138,13 @@ model Inventory {
 }
 
 model HistoricalMovement {
-  id           Int          @id @default(autoincrement())
-  inventoryId  Int
-  inventory    Inventory    @relation(fields: [inventoryId], references: [id])
-  user         String
-  movementDate DateTime
-  reason       String
-  movementType MovementType 
-  createdAt    DateTime     @default(now())
-  updatedAt    DateTime     @updatedAt
+    id           Int          @id @default(autoincrement())
+    inventoryId  Int
+    inventory    Inventory    @relation(fields: [inventoryId], references: [id])
+    user         String
+    movementDate DateTime
+    reason       String
+    movementType MovementType
+    createdAt    DateTime     @default(now())
+    updatedAt    DateTime     @updatedAt
 }
