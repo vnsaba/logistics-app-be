@@ -32,21 +32,25 @@ describe('ResetPasswordService', () => {
   const hashedPassword = 'hashedNewSecurePass1!';
 
   beforeEach(() => {
-    mockUserRepo = {
-      getByEmail: jest.fn(),
-      updatePassword: jest.fn(),
-      clearResetToken: jest.fn(),
-      // Métodos no usados directamente en estas pruebas, pero necesarios para el mock
-      findById: jest.fn(),
-      createUser: jest.fn(),
-      updateUser: jest.fn(),
-      deleteUser: jest.fn(),
-      updateResetPasswordToken: jest.fn(),
-      updateTwoFactor: jest.fn(),
-      clearTwoFactor: jest.fn(),
-      getAllUsers: jest.fn(),
-    } as jest.Mocked<IUserRepository>;
-
+  mockUserRepo = {
+    getByEmail: jest.fn(),
+    updatePassword: jest.fn(),
+    clearResetToken: jest.fn(),
+    findById: jest.fn(),
+    createUser: jest.fn(),
+    updateUser: jest.fn(),
+    deleteUser: jest.fn(),
+    updateResetPasswordToken: jest.fn(),
+    updateTwoFactor: jest.fn(),
+    clearTwoFactor: jest.fn(),
+    getAllUsers: jest.fn(),
+    // Agrega los que faltan según tu interfaz:
+    createMany: jest.fn(),
+    findByEmails: jest.fn(),
+    getEmailById: jest.fn(),
+  } as jest.Mocked<IUserRepository>;
+  // ...
+});
     mockTokenManager = {
       verifyToken: jest.fn(),
       generateToken: jest.fn(), // Mock necesario para la interfaz
