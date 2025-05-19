@@ -1,3 +1,4 @@
+import { Product } from '../../../product-service/domain/entity/product';
 import { Inventory } from '../entity/inventory';
 
 export interface IInventoryRepository {
@@ -8,4 +9,5 @@ export interface IInventoryRepository {
   delete(id: number): Promise<void>;
   findAll(): Promise<Inventory[]>;  
   findByStore(storeId: number): Promise<Inventory[]>; 
+  findProductByProductId(id: number): Promise<Product | null>; // Método para encontrar un producto por su ID
 }

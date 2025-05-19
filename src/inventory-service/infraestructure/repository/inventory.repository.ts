@@ -1,11 +1,11 @@
-import { PrismaClient } from '../../../../prisma/generated/mysql';
-import { IInventoryRepository } from '../../domain/interfaces/inventory.interface';
-import { Inventory } from '../../domain/entity/inventory';
+import { PrismaClient } from "../../../../prisma/generated/mysql";
+import { IInventoryRepository } from "../../domain/interfaces/inventory.interface";
+import { Inventory } from "../../domain/entity/inventory";
+import { Product } from "../../../product-service/domain/entity/product";
 
 const prisma = new PrismaClient();
 
 export class InventoryRepository implements IInventoryRepository {
-
   async create(inventory: Inventory): Promise<Inventory> {
     const created = await prisma.inventory.create({
       data: {
@@ -24,8 +24,13 @@ export class InventoryRepository implements IInventoryRepository {
     return inventory ? Inventory.createFrom(inventory) : null;
   }
 
-  async findByProductAndStore(productId: number, storeId: number): Promise<Inventory | null> {
-    const inventory = await prisma.inventory.findFirst({ where: { productId, storeId } });
+  async findByProductAndStore(
+    productId: number,
+    storeId: number
+  ): Promise<Inventory | null> {
+    const inventory = await prisma.inventory.findFirst({
+      where: { productId, storeId },
+    });
     return inventory ? Inventory.createFrom(inventory) : null;
   }
 
@@ -43,17 +48,29 @@ export class InventoryRepository implements IInventoryRepository {
 
   async findAll(): Promise<Inventory[]> {
     const inventories = await prisma.inventory.findMany();
-    return inventories.map(i => Inventory.createFrom(i));
+    return inventories.map((i) => Inventory.createFrom(i));
   }
 
   async findByStore(storeId: number): Promise<Inventory[]> {
     const inventories = await prisma.inventory.findMany({
-      where: { storeId }, 
+      where: { storeId },
       include: {
         product: true, // Incluye la relación con Product si es necesario
       },
     });
 
-    return inventories.map(i => Inventory.createFrom(i));
+    return inventories.map((i) => Inventory.createFrom(i));
+  }
+
+  async findProductByProductId(productId: number): Promise<Product | null> {
+    const inventory = await prisma.inventory.findFirst({
+      where: { productId },
+      include: {
+        product: true, // Incluye el producto relacionado
+      },
+    });
+    return inventory && inventory.product
+      ? Product.createFrom(inventory.product)
+      : null;
   }
 }

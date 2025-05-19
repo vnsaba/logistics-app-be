@@ -13,4 +13,5 @@ export interface IUserRepository {
   updateTwoFactor(id: string, code: string, expires: Date): Promise<void>
   clearTwoFactor(id: string): Promise<void>;
   getAllUsers(): Promise<Omit<UserType, 'current_password'>[]>
+  getEmailById(id: string): Promise<string | null>;
 }
