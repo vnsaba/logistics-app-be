@@ -26,28 +26,6 @@ export class InventoryService {
       storeRepository
     );
     this.inventoryRepository = inventoryRepository;
-  }
-
-  async createOrUpdate(
-    inventoryData: CreateInventoryDto,
-    userId: string
-  ): Promise<Inventory> {
-    const existingInventory =
-      await this.inventoryRepository.findByProductAndStore(
-        inventoryData.productId,
-        inventoryData.storeId
-      );
-
-    if (existingInventory && existingInventory.id) {
-      // Si el inventario ya existe, actualizamos la cantidad disponible
-      return this.updateInventory(
-        existingInventory.id,
-        inventoryData.availableQuantity,
-        userId
-      );
-    } else {
-      // Si no existe, lo creamos
-      return this.createInventory(inventoryData, userId);
     }
   }
 
@@ -92,6 +70,7 @@ export class InventoryService {
       );
     }
 
+
     return updatedInventory;
   }
 
@@ -114,6 +93,7 @@ export class InventoryService {
     // Ahora sí, registra el movimiento histórico usando el id seguro
     await this.historicalMovementRepository.create({
       inventoryId: inventory.id,
+
       userId: userId,
       reason: "Initial stock entry",
       movementType: "IN",
