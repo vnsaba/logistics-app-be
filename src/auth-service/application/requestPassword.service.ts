@@ -34,9 +34,11 @@ export class EmailResetPasswordService {
         if (!token) {
             throw new Error('Error generating token');
         }
+
+        const { FRONT_PORT, FRONT_HOST } = process.env;
         
         await this.userRepository.updateResetPasswordToken(user.email, token);
-        const resetLink = ` http://localhost:${process.env.PORT}/auth/reset-password?token=${token}`;
+        const resetLink = `http://${FRONT_HOST}:${FRONT_PORT}/reset-password?token=${token}`;
         await this.emailSender.sendEmail({
             to: email,
             subject: "Reset Password",

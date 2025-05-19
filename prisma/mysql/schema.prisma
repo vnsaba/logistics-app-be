@@ -25,49 +25,69 @@ enum statusProduct {
     INACTIVE
 }
 
+enum MovementType {
+    IN
+    OUT
+    ADJUSTMENT
+}
+
 model Order {
     id          Int         @id @default(autoincrement())
-    storeId     Int
-    store       Store       @relation(fields: [storeId], references: [id])
-    deliveryId  String
     customerId  String
     status      OrderStatus @default(PENDING)
-    totalAmount Float
+    totalAmount Float //sum de subordenes
     latitude    Float
     longitude   Float
     address     String
     createdAt   DateTime    @default(now())
     updatedAt   DateTime    @updatedAt
-    orderItems  OrderItem[]
+    subOrders   SubOrders[]
+}
+
+model SubOrders {
+    id        Int      @id @default(autoincrement())
+    orderId   Int
+    order     Order    @relation(fields: [orderId], references: [id])
+    storeId   Int
+    store     Store    @relation(fields: [storeId], references: [id])
+    deliveryId String
+    status    OrderStatus @default(PENDING)
+    subTotal Float
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    orderItems OrderItem[]
 }
 
 model OrderItem {
-    id         Int      @id @default(autoincrement())
-    orderId    Int
-    order      Order    @relation(fields: [orderId], references: [id])
-    productId  Int
-    product    Product  @relation(fields: [productId], references: [id])
-    quantity   Int
-    unit_price Float
-    createdAt  DateTime @default(now())
-    updatedAt  DateTime @updatedAt
+    id        Int      @id @default(autoincrement())
+    subOrderId Int
+    subOrder   SubOrders @relation(fields: [subOrderId], references: [id])
+    productId Int
+    product   Product  @relation(fields: [productId], references: [id])
+    quantity  Int
+    unitPrice Float
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 }
 
+
 model Store {
-    id        Int         @id @default(autoincrement())
-    name      String
-    address   String
-    latitude  Float
-    longitude Float
-    cityId    Int
-    city      City        @relation(fields: [cityId], references: [id])
-    capacity  Int
-    zipCode   String
-    status    statusStore @default(ACTIVE)
-    createdAt DateTime    @default(now())
-    updatedAt DateTime    @updatedAt
-    orders    Order[]
-    inventory Inventory[]
+    id         Int         @id @default(autoincrement())
+    id_almacen String      @unique
+    name       String      @unique
+    address    String      @unique
+    latitude   Float
+    longitude  Float
+    cityId     Int
+    city       City        @relation(fields: [cityId], references: [id])
+    capacity   Int
+    zipCode    Float
+    status     statusStore @default(ACTIVE)
+    createdAt  DateTime    @default(now())
+    updatedAt  DateTime    @updatedAt
+    inventory  Inventory[]
+    SubOrders  SubOrders[]
+    @@index([name])
 }
 
 model City {
@@ -76,6 +96,9 @@ model City {
     departmentId Int
     department   Department @relation(fields: [departmentId], references: [id])
     stores       Store[]
+
+    @@index([name, departmentId])
+    @@index([departmentId])
 }
 
 model Department {
@@ -86,8 +109,9 @@ model Department {
 
 model Category {
     id          Int       @id @default(autoincrement())
-    name        String
+    name        String    @unique
     description String
+    isActive    Boolean
     createdAt   DateTime  @default(now())
     updatedAt   DateTime  @updatedAt
     products    Product[]
@@ -95,8 +119,11 @@ model Category {
 
 model Product {
     id                    Int           @id @default(autoincrement())
+    id_producto           String        @unique
+    id_proveedor          String
     name                  String
     description           String
+    sku                   String
     categoryId            Int
     category              Category      @relation(fields: [categoryId], references: [id])
     unitPrice             Float
@@ -104,7 +131,7 @@ model Product {
     isFragile             Boolean
     dimensionsCm          String
     imageUrl              String
-    barCode               String        @unique
+    barCode               String
     requiredRefrigeration Boolean
     dateOfExpiration      DateTime
     status                statusProduct @default(ACTIVE)
@@ -112,6 +139,10 @@ model Product {
     updatedAt             DateTime      @updatedAt
     inventory             Inventory[]
     orderItems            OrderItem[]
+
+    @@index([categoryId])
+    @@index([name])
+    @@index([status])
 }
 
 model Inventory {
@@ -126,16 +157,20 @@ model Inventory {
     createdAt          DateTime             @default(now())
     updatedAt          DateTime             @updatedAt
     historicalMovement HistoricalMovement[]
+
+    @@unique([productId, storeId])
 }
 
 model HistoricalMovement {
-    id           Int       @id @default(autoincrement())
+    id           Int          @id @default(autoincrement())
     inventoryId  Int
-    inventory    Inventory @relation(fields: [inventoryId], references: [id])
+    inventory    Inventory    @relation(fields: [inventoryId], references: [id])
     user         String
     movementDate DateTime
     reason       String
-    movementType String
-    createdAt    DateTime  @default(now())
-    updatedAt    DateTime  @updatedAt
+    movementType MovementType
+    createdAt    DateTime     @default(now())
+    updatedAt    DateTime     @updatedAt
+
+    @@index([inventoryId])
 }

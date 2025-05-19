@@ -1,10 +1,9 @@
 import { FileReaderInterface } from '../domain/interfaces/fileReader.interface';
 import { Readable } from 'stream';
 import csv from 'csv-parser';
+import iconv from 'iconv-lite';  
 
-export class MulterFileReader
-  implements FileReaderInterface<Express.Multer.File>
-{
+export class MulterFileReader implements FileReaderInterface<Express.Multer.File> {
   async read<T>({
     file,
     separator = ',',
@@ -16,16 +15,15 @@ export class MulterFileReader
 
     const stream = Readable.from(file.buffer);
 
-    return await new Promise<{ data: T[]; error?: string }>(
-      (resolve, reject) => {
-        stream
-          .pipe(csv({ separator }))
-          .on('data', data => {
-            results.push(data);
-          })
-          .on('end', () => resolve({ data: results }))
-          .on('error', err => reject({ data: [], error: err }));
-      }
-    );
+    return await new Promise<{ data: T[]; error?: string }>((resolve, reject) => {
+      stream
+        .pipe(iconv.decodeStream('utf-8')) 
+        .pipe(csv({ separator }))
+        .on('data', (data) => {
+          results.push(data);
+        })
+        .on('end', () => resolve({ data: results }))
+        .on('error', (err) => reject({ data: [], error: err.message }));
+    });
   }
 }
