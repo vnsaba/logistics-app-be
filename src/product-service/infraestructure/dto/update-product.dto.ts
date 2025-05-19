@@ -1,4 +1,6 @@
 export interface UpdateProductDto {
+  id_producto?: string;
+  id_proveedor?: string;
   name?: string;
   description?: string;
   categoryId?: number;

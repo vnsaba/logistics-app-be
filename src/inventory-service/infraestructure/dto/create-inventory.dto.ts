@@ -3,4 +3,5 @@ export interface CreateInventoryDto {
   storeId: number;
   availableQuantity: number;
   minimumThreshold: number;
+  lastRestockDate: Date;
 }

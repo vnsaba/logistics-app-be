@@ -1,13 +1,26 @@
-import { User } from '../../domain/entity/user';
-import { User as UserType } from '../../../../types/auth/index';
-import { PrismaClient } from '../../../../prisma/generated/mongodb';
+import { User } from "../../domain/entity/user";
+import { User as UserType } from "../../../../types/auth/index";
+import { PrismaClient } from "../../../../prisma/generated/mongodb";
 const prisma = new PrismaClient();
-import { IUserRepository } from '../../domain/interfaces/user.interface';
+import { IUserRepository } from "../../domain/interfaces/user.interface";
 
 export class UserRepository implements IUserRepository {
   async findById(id: string): Promise<User | null> {
     const user = await prisma.user.findUnique({ where: { id } });
     return user;
+  }
+
+  public async createMany(users: User[]): Promise<(User | null)[]> {
+    return await Promise.all(
+      users.map(async (user) => {
+        try {
+          return await this.createUser(user);
+        } catch (e) {
+          console.error(`Error inserting user ${user.email}:`, e);
+          return null;
+        }
+      })
+    );
   }
 
   public async createUser(userData: User): Promise<User> {
@@ -19,13 +32,13 @@ export class UserRepository implements IUserRepository {
         phone: userData.phone,
         roleId: userData.roleId,
         status: userData.status,
-        created_at: new Date(),
-        updated_at: new Date(),
-        resetPasswordToken: null,
-        twoFactorCode: null,
-        twoFactorExpires: null,
-        verificationCode: userData.verificationCode,
-        verificationCodeExpires: userData.verificationCodeExpires,
+        created_at: userData.created_at ?? new Date(),
+        updated_at: userData.updated_at ?? new Date(),
+        resetPasswordToken: userData.resetPasswordToken ?? null,
+        verificationCode: userData.verificationCode ?? null,
+        verificationCodeExpires: userData.verificationCodeExpires ?? null,
+        twoFactorCode: userData.twoFactorCode ?? null,
+        twoFactorExpires: userData.twoFactorExpires ?? null,
       },
     });
   }
@@ -104,7 +117,7 @@ export class UserRepository implements IUserRepository {
     });
   }
 
-  public async getAllUsers(): Promise<Omit<UserType, 'current_password'>[]> {
+  public async getAllUsers(): Promise<Omit<UserType, "current_password">[]> {
     const users = await prisma.user.findMany({
       omit: {
         current_password: true,
@@ -115,5 +128,13 @@ export class UserRepository implements IUserRepository {
     });
 
     return users;
+  }
+
+  async findByEmails(emails: string[]): Promise<User[]> {
+    return await prisma.user.findMany({
+      where: {
+        email: { in: emails },
+      },
+    });
   }
 }

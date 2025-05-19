@@ -1,6 +1,6 @@
 import { Route, Controller, Post, Get, Put, Delete, Path, Body, UploadedFile, Tags } from 'tsoa';
 import { StoreService } from '../../application/store.service';
-import { UploadStoreService } from '../../application/upload.service';
+import { UploadStoreService } from '../../application/uploadStore.service';
 import { StoreRepository } from '../repository/store.repository';
 import { MulterFileReader } from '../../../shared/infraestructure/multerFileReader';
 import { CreateStoreDto } from '../dto/create-store.dto';
