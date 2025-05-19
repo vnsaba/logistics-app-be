@@ -1,17 +1,17 @@
 import { Order } from "../../domain/entity/order";
 import { IOrderRepository } from "../../domain/interface/order.interface";
-import { CreateOrderDto, OrderWithSubOrdersDto } from "../../application/dtos/orderDto";
+import { CreateOrderResponseDto, OrderWithSubOrdersDto } from "../../application/dtos/orderDto";
 import { UpdateOrderDto } from "../../application/dtos/updateOrderDto";
 import { prismaMysql } from "../../../../prisma/index";
 import { OrderStatus } from "../../../shared/enums/orderStatus.enum";
 
 export class OrdersRepository implements IOrderRepository {
 
-    async create(order: CreateOrderDto): Promise<Order> {
+    async create(order: CreateOrderResponseDto): Promise<Order> {
         return await prismaMysql.order.create({
             data: {
                 customerId: order.customerId,
-                status: "PENDING",
+                status: OrderStatus.PENDING,
                 totalAmount: order.totalAmount,
                 latitude: order.latitude,
                 longitude: order.longitude,
@@ -20,14 +20,14 @@ export class OrdersRepository implements IOrderRepository {
                 updatedAt: new Date(),
                 subOrders: {
                     create: order.subOrders.map((subOrder) => ({
+                        deliveryId: subOrder.deliveryId,
+                        status: OrderStatus.PENDING,
+                        subTotal: subOrder.subTotal,
+                        createdAt: new Date(),
+                        updatedAt: new Date(),
                         store: {
                             connect: { id: subOrder.storeId }
                         },
-                        deliveryId: subOrder.deliveryId!,
-                        status: subOrder.status,
-                        subTotal: subOrder.subTotal!,
-                        createdAt: new Date(),
-                        updatedAt: new Date(),
                         orderItems: {
                             create: subOrder.orderItems.map((item) => ({
                                 productId: item.productId,

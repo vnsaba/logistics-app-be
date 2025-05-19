@@ -90,7 +90,7 @@ async function main() {
     )
   )
 
-  console.log('🌱 Seed con permisos embebidos completado.')
+  console.log(' Seed con permisos embebidos completado.')
 }
 
 main()

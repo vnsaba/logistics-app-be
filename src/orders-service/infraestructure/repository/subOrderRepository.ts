@@ -35,6 +35,23 @@ export class SubOrderRepository implements ISubOrderRepository {
         });
     }
 
+    async findByOrderIdWithItems(id: number): Promise<SubOrderInterface[]> {
+        return await prismaMysql.subOrders.findMany({
+            where: { orderId: id },
+            include: {
+                orderItems: true,
+                store: true,
+            }
+        }).then((subOrders) => {
+            return subOrders.map((subOrder) => ({
+                ...subOrder,
+                status: subOrder.status as OrderStatus | undefined
+            })) as SubOrderInterface[];
+        }).catch((error) => {
+            throw new Error(`Error finding suborders: ${error}`);
+        });
+    }
+
     async findByIdWithItems(id: number): Promise<SubOrderInterface> {
         return await prismaMysql.subOrders.findUnique({
             where: { id: id },

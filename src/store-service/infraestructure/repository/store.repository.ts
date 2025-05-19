@@ -15,6 +15,7 @@ export class StoreRepository implements IStoreRepository {
   public async create(store: Store): Promise<Store> {
     const created = await prisma.store.create({
       data: {
+        id_almacen: store.id_almacen,
         name: store.name,
         address: store.address,
         cityId: store.cityId,

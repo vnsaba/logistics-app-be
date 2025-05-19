@@ -26,9 +26,9 @@ enum statusProduct {
 }
 
 enum MovementType {
-  IN
-  OUT
-  ADJUSTMENT
+    IN
+    OUT
+    ADJUSTMENT
 }
 
 model Order {
@@ -42,49 +42,53 @@ model Order {
     createdAt   DateTime    @default(now())
     updatedAt   DateTime    @updatedAt
     subOrders   SubOrders[]
+    Store       Store?      @relation(fields: [storeId], references: [id])
+    storeId     Int?
 }
 
 model SubOrders {
-    id        Int      @id @default(autoincrement())
-    orderId   Int
-    order     Order    @relation(fields: [orderId], references: [id])
-    storeId   Int
-    store     Store    @relation(fields: [storeId], references: [id])
+    id         Int         @id @default(autoincrement())
+    orderId    Int
+    order      Order       @relation(fields: [orderId], references: [id])
+    storeId    Int
+    store      Store       @relation(fields: [storeId], references: [id])
     deliveryId String
-    status    OrderStatus @default(PENDING)
-    subTotal Float
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+    status     OrderStatus @default(PENDING)
+    subTotal   Float
+    createdAt  DateTime    @default(now())
+    updatedAt  DateTime    @updatedAt
     orderItems OrderItem[]
 }
 
 model OrderItem {
-    id        Int      @id @default(autoincrement())
+    id         Int       @id @default(autoincrement())
     subOrderId Int
     subOrder   SubOrders @relation(fields: [subOrderId], references: [id])
-    productId Int
-    product   Product  @relation(fields: [productId], references: [id])
-    quantity  Int
-    unitPrice Float
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+    productId  Int
+    product    Product   @relation(fields: [productId], references: [id])
+    quantity   Int
+    unitPrice  Float
+    createdAt  DateTime  @default(now())
+    updatedAt  DateTime  @updatedAt
 }
 
 model Store {
-    id        Int         @id @default(autoincrement())
-    name      String      @unique
-    address   String      @unique
-    latitude  Float
-    longitude Float
-    cityId    Int
-    city      City        @relation(fields: [cityId], references: [id])
-    capacity  Int
-    zipCode   Float
-    status    statusStore @default(ACTIVE)
-    createdAt DateTime    @default(now())
-    updatedAt DateTime    @updatedAt
-    subOrders SubOrders[]
-    inventory Inventory[]
+    id         Int         @id @default(autoincrement())
+    id_almacen String      @unique
+    name       String      @unique
+    address    String      @unique
+    latitude   Float
+    longitude  Float
+    cityId     Int
+    city       City        @relation(fields: [cityId], references: [id])
+    capacity   Int
+    zipCode    Float
+    status     statusStore @default(ACTIVE)
+    createdAt  DateTime    @default(now())
+    updatedAt  DateTime    @updatedAt
+    orders     Order[]
+    inventory  Inventory[]
+    SubOrders  SubOrders[]
 }
 
 model City {
@@ -113,8 +117,11 @@ model Category {
 
 model Product {
     id                    Int           @id @default(autoincrement())
+    id_producto           String        @unique
+    id_proveedor          String
     name                  String
     description           String
+    sku                   String
     categoryId            Int
     category              Category      @relation(fields: [categoryId], references: [id])
     unitPrice             Float
@@ -122,7 +129,7 @@ model Product {
     isFragile             Boolean
     dimensionsCm          String
     imageUrl              String
-    barCode               String        @unique
+    barCode               String
     requiredRefrigeration Boolean
     dateOfExpiration      DateTime
     status                statusProduct @default(ACTIVE)
@@ -147,13 +154,13 @@ model Inventory {
 }
 
 model HistoricalMovement {
-  id           Int          @id @default(autoincrement())
-  inventoryId  Int
-  inventory    Inventory    @relation(fields: [inventoryId], references: [id])
-  user         String
-  movementDate DateTime
-  reason       String
-  movementType MovementType 
-  createdAt    DateTime     @default(now())
-  updatedAt    DateTime     @updatedAt
+    id           Int          @id @default(autoincrement())
+    inventoryId  Int
+    inventory    Inventory    @relation(fields: [inventoryId], references: [id])
+    user         String
+    movementDate DateTime
+    reason       String
+    movementType MovementType
+    createdAt    DateTime     @default(now())
+    updatedAt    DateTime     @updatedAt
 }

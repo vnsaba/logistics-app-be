@@ -7,7 +7,6 @@ export class GoogleMapsGeocodingService implements GeocodingService {
     constructor(private readonly apikey: string) {}
 
     async geocode(address: string): Promise<{ latitude: number; longitude: number; }> {
-        console.log('apikey:', this.apikey);
         try {
             const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json`, {
                 params: {
@@ -21,7 +20,6 @@ export class GoogleMapsGeocodingService implements GeocodingService {
             }
 
             const location = response.data.results[0].geometry.location;
-            console.log('Geocoding result:', location);
             return {
                 latitude: location.lat,
                 longitude: location.lng

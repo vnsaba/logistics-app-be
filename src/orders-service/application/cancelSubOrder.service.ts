@@ -43,7 +43,7 @@ export class CancelSubOrderService {
         }
 
         // 3. Actualizar repartidor
-        const delivery = await this.userRepository.findById(sub.deliveryId!);
+        const delivery = await this.userRepository.findById(sub.deliveryId);
         if (!delivery) throw new Error("Delivery not found");
         if (delivery.activeOrders! > 0) {
             await this.userRepository.updateActiveOrders(delivery.id!, delivery.activeOrders! - 1);

@@ -16,60 +16,55 @@ export class OrderInfoService {
         private readonly orderRepository: IOrderRepository,
     ) { }
 
-    async getOrderInfo(clientId: string): Promise<SubOrderInfoDto[] > {
+    async getOrderInfo(clientId: string): Promise<SubOrderInfoDto[]> {
         const user = await this.userRepository.findById(clientId);
-        if (!user) {
-            throw new Error("User not found");
-        }
+        if (!user) throw new Error("User not found");
 
-        // Obtener todas las órdenes del cliente
         const orders = await this.orderRepository.findByClientId(clientId);
-        if (!orders || orders.length === 0) {
-            throw new Error("No orders found for this user");
-        }
+        if (!orders || orders.length === 0) throw new Error("No orders found for this user");
 
         const subOrderInfoList: SubOrderInfoDto[] = [];
 
         for (const order of orders) {
-            // Obtener subórdenes asociadas a la orden
-            const subOrders = await this.subOrderRepository.findByIdWithItems(order.id);
-            if (!subOrders) {
-                throw new Error("No suborders found for this order");
-            }
+            // 🟡 Obtener TODAS las subórdenes de la orden
+            const subOrders = await this.subOrderRepository.findByOrderIdWithItems(order.id);
 
-            const store = await this.storeRepository.findById(subOrders.storeId);
-            const delivery = await this.userRepository.findById(subOrders.deliveryId);
+            for (const subOrder of subOrders) {
+                const store = await this.storeRepository.findById(subOrder.storeId);
+                const delivery = await this.userRepository.findById(subOrder.deliveryId);
 
-            const products: ProductOrderInfoDto[] = [];
+                const products: ProductOrderInfoDto[] = [];
 
-            for (const item of subOrders.orderItems) {
-                const product = await this.productRepository.findById(item.productId);
-                if (!product) continue;
+                for (const item of subOrder.orderItems) {
+                    const product = await this.productRepository.findById(item.productId);
+                    if (!product) continue;
 
-                products.push({
-                    id: product.id!,
-                    name: product.name,
-                    unitPrice: item.unitPrice,
-                    quantity: item.quantity,
-                    total: item.unitPrice * item.quantity,
+                    products.push({
+                        id: product.id!,
+                        name: product.name,
+                        unitPrice: item.unitPrice,
+                        quantity: item.quantity,
+                        total: item.unitPrice * item.quantity,
+                    });
+                }
+
+                subOrderInfoList.push({
+                    id: order.id,
+                    subOrderId: subOrder.id,
+                    status: subOrder.status,
+                    totalAmount: subOrder.subTotal,
+                    storeName: store?.name || "Tienda no encontrada",
+                    createdAt: subOrder.createdAt,
+                    delivery: {
+                        id: delivery?.id || "",
+                        fullName: delivery?.fullname || "Sin nombre",
+                        phone: delivery?.phone || "Sin teléfono",
+                    },
+                    products,
                 });
             }
-
-            subOrderInfoList.push({
-                id: order.id,
-                subOrderId: subOrders.id,
-                status: subOrders.status,
-                totalAmount: subOrders.subTotal,
-                storeName: store?.name || "Tienda no encontrada",
-                createdAt: subOrders.createdAt,
-                delivery: {
-                    id: delivery?.id || "",
-                    fullName: delivery?.fullname || "Sin nombre",
-                    phone: delivery?.phone || "Sin teléfono",
-                },
-                products,
-            });
         }
+
         return subOrderInfoList;
     }
 }

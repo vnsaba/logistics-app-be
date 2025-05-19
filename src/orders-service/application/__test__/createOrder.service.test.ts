@@ -1,6 +1,6 @@
 // __tests__/create-order.service.spec.ts
-import { CreateOrderService } from '../src/orders-service/application/createOrders.ervice';
-import { OrderStatus } from '../src/shared/enums/orderStatus.enum';
+import { CreateOrderService } from '../createOrders.ervice';
+import { OrderStatus } from '../../../shared/enums/orderStatus.enum';
 
 const mockOrderRepository = {
     create: jest.fn(),

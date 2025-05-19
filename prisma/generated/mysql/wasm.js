@@ -129,7 +129,8 @@ exports.Prisma.OrderScalarFieldEnum = {
   longitude: 'longitude',
   address: 'address',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  storeId: 'storeId'
 };
 
 exports.Prisma.SubOrdersScalarFieldEnum = {
@@ -155,6 +156,7 @@ exports.Prisma.OrderItemScalarFieldEnum = {
 
 exports.Prisma.StoreScalarFieldEnum = {
   id: 'id',
+  id_almacen: 'id_almacen',
   name: 'name',
   address: 'address',
   latitude: 'latitude',
@@ -189,8 +191,11 @@ exports.Prisma.CategoryScalarFieldEnum = {
 
 exports.Prisma.ProductScalarFieldEnum = {
   id: 'id',
+  id_producto: 'id_producto',
+  id_proveedor: 'id_proveedor',
   name: 'name',
   description: 'description',
+  sku: 'sku',
   categoryId: 'categoryId',
   unitPrice: 'unitPrice',
   weight: 'weight',
@@ -232,6 +237,11 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+
 exports.Prisma.OrderOrderByRelevanceFieldEnum = {
   customerId: 'customerId',
   address: 'address'
@@ -242,6 +252,7 @@ exports.Prisma.SubOrdersOrderByRelevanceFieldEnum = {
 };
 
 exports.Prisma.StoreOrderByRelevanceFieldEnum = {
+  id_almacen: 'id_almacen',
   name: 'name',
   address: 'address'
 };
@@ -260,8 +271,11 @@ exports.Prisma.CategoryOrderByRelevanceFieldEnum = {
 };
 
 exports.Prisma.ProductOrderByRelevanceFieldEnum = {
+  id_producto: 'id_producto',
+  id_proveedor: 'id_proveedor',
   name: 'name',
   description: 'description',
+  sku: 'sku',
   dimensionsCm: 'dimensionsCm',
   imageUrl: 'imageUrl',
   barCode: 'barCode'

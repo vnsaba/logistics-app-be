@@ -1726,13 +1726,15 @@ export namespace Prisma {
    */
 
   export type StoreCountOutputType = {
-    subOrders: number
+    orders: number
     inventory: number
+    SubOrders: number
   }
 
   export type StoreCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    subOrders?: boolean | StoreCountOutputTypeCountSubOrdersArgs
+    orders?: boolean | StoreCountOutputTypeCountOrdersArgs
     inventory?: boolean | StoreCountOutputTypeCountInventoryArgs
+    SubOrders?: boolean | StoreCountOutputTypeCountSubOrdersArgs
   }
 
   // Custom InputTypes
@@ -1749,8 +1751,8 @@ export namespace Prisma {
   /**
    * StoreCountOutputType without action
    */
-  export type StoreCountOutputTypeCountSubOrdersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SubOrdersWhereInput
+  export type StoreCountOutputTypeCountOrdersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OrderWhereInput
   }
 
   /**
@@ -1758,6 +1760,13 @@ export namespace Prisma {
    */
   export type StoreCountOutputTypeCountInventoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: InventoryWhereInput
+  }
+
+  /**
+   * StoreCountOutputType without action
+   */
+  export type StoreCountOutputTypeCountSubOrdersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SubOrdersWhereInput
   }
 
 
@@ -1946,6 +1955,7 @@ export namespace Prisma {
     totalAmount: number | null
     latitude: number | null
     longitude: number | null
+    storeId: number | null
   }
 
   export type OrderSumAggregateOutputType = {
@@ -1953,6 +1963,7 @@ export namespace Prisma {
     totalAmount: number | null
     latitude: number | null
     longitude: number | null
+    storeId: number | null
   }
 
   export type OrderMinAggregateOutputType = {
@@ -1965,6 +1976,7 @@ export namespace Prisma {
     address: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    storeId: number | null
   }
 
   export type OrderMaxAggregateOutputType = {
@@ -1977,6 +1989,7 @@ export namespace Prisma {
     address: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    storeId: number | null
   }
 
   export type OrderCountAggregateOutputType = {
@@ -1989,6 +2002,7 @@ export namespace Prisma {
     address: number
     createdAt: number
     updatedAt: number
+    storeId: number
     _all: number
   }
 
@@ -1998,6 +2012,7 @@ export namespace Prisma {
     totalAmount?: true
     latitude?: true
     longitude?: true
+    storeId?: true
   }
 
   export type OrderSumAggregateInputType = {
@@ -2005,6 +2020,7 @@ export namespace Prisma {
     totalAmount?: true
     latitude?: true
     longitude?: true
+    storeId?: true
   }
 
   export type OrderMinAggregateInputType = {
@@ -2017,6 +2033,7 @@ export namespace Prisma {
     address?: true
     createdAt?: true
     updatedAt?: true
+    storeId?: true
   }
 
   export type OrderMaxAggregateInputType = {
@@ -2029,6 +2046,7 @@ export namespace Prisma {
     address?: true
     createdAt?: true
     updatedAt?: true
+    storeId?: true
   }
 
   export type OrderCountAggregateInputType = {
@@ -2041,6 +2059,7 @@ export namespace Prisma {
     address?: true
     createdAt?: true
     updatedAt?: true
+    storeId?: true
     _all?: true
   }
 
@@ -2140,6 +2159,7 @@ export namespace Prisma {
     address: string
     createdAt: Date
     updatedAt: Date
+    storeId: number | null
     _count: OrderCountAggregateOutputType | null
     _avg: OrderAvgAggregateOutputType | null
     _sum: OrderSumAggregateOutputType | null
@@ -2171,7 +2191,9 @@ export namespace Prisma {
     address?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    storeId?: boolean
     subOrders?: boolean | Order$subOrdersArgs<ExtArgs>
+    Store?: boolean | Order$StoreArgs<ExtArgs>
     _count?: boolean | OrderCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["order"]>
 
@@ -2187,11 +2209,13 @@ export namespace Prisma {
     address?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    storeId?: boolean
   }
 
-  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "customerId" | "status" | "totalAmount" | "latitude" | "longitude" | "address" | "createdAt" | "updatedAt", ExtArgs["result"]["order"]>
+  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "customerId" | "status" | "totalAmount" | "latitude" | "longitude" | "address" | "createdAt" | "updatedAt" | "storeId", ExtArgs["result"]["order"]>
   export type OrderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     subOrders?: boolean | Order$subOrdersArgs<ExtArgs>
+    Store?: boolean | Order$StoreArgs<ExtArgs>
     _count?: boolean | OrderCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -2199,6 +2223,7 @@ export namespace Prisma {
     name: "Order"
     objects: {
       subOrders: Prisma.$SubOrdersPayload<ExtArgs>[]
+      Store: Prisma.$StorePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -2210,6 +2235,7 @@ export namespace Prisma {
       address: string
       createdAt: Date
       updatedAt: Date
+      storeId: number | null
     }, ExtArgs["result"]["order"]>
     composites: {}
   }
@@ -2551,6 +2577,7 @@ export namespace Prisma {
   export interface Prisma__OrderClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     subOrders<T extends Order$subOrdersArgs<ExtArgs> = {}>(args?: Subset<T, Order$subOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubOrdersPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Store<T extends Order$StoreArgs<ExtArgs> = {}>(args?: Subset<T, Order$StoreArgs<ExtArgs>>): Prisma__StoreClient<$Result.GetResult<Prisma.$StorePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2589,6 +2616,7 @@ export namespace Prisma {
     readonly address: FieldRef<"Order", 'String'>
     readonly createdAt: FieldRef<"Order", 'DateTime'>
     readonly updatedAt: FieldRef<"Order", 'DateTime'>
+    readonly storeId: FieldRef<"Order", 'Int'>
   }
     
 
@@ -2953,6 +2981,25 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: SubOrdersScalarFieldEnum | SubOrdersScalarFieldEnum[]
+  }
+
+  /**
+   * Order.Store
+   */
+  export type Order$StoreArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Store
+     */
+    select?: StoreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Store
+     */
+    omit?: StoreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StoreInclude<ExtArgs> | null
+    where?: StoreWhereInput
   }
 
   /**
@@ -5053,6 +5100,7 @@ export namespace Prisma {
 
   export type StoreMinAggregateOutputType = {
     id: number | null
+    id_almacen: string | null
     name: string | null
     address: string | null
     latitude: number | null
@@ -5067,6 +5115,7 @@ export namespace Prisma {
 
   export type StoreMaxAggregateOutputType = {
     id: number | null
+    id_almacen: string | null
     name: string | null
     address: string | null
     latitude: number | null
@@ -5081,6 +5130,7 @@ export namespace Prisma {
 
   export type StoreCountAggregateOutputType = {
     id: number
+    id_almacen: number
     name: number
     address: number
     latitude: number
@@ -5115,6 +5165,7 @@ export namespace Prisma {
 
   export type StoreMinAggregateInputType = {
     id?: true
+    id_almacen?: true
     name?: true
     address?: true
     latitude?: true
@@ -5129,6 +5180,7 @@ export namespace Prisma {
 
   export type StoreMaxAggregateInputType = {
     id?: true
+    id_almacen?: true
     name?: true
     address?: true
     latitude?: true
@@ -5143,6 +5195,7 @@ export namespace Prisma {
 
   export type StoreCountAggregateInputType = {
     id?: true
+    id_almacen?: true
     name?: true
     address?: true
     latitude?: true
@@ -5244,6 +5297,7 @@ export namespace Prisma {
 
   export type StoreGroupByOutputType = {
     id: number
+    id_almacen: string
     name: string
     address: string
     latitude: number
@@ -5277,6 +5331,7 @@ export namespace Prisma {
 
   export type StoreSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    id_almacen?: boolean
     name?: boolean
     address?: boolean
     latitude?: boolean
@@ -5288,8 +5343,9 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     city?: boolean | CityDefaultArgs<ExtArgs>
-    subOrders?: boolean | Store$subOrdersArgs<ExtArgs>
+    orders?: boolean | Store$ordersArgs<ExtArgs>
     inventory?: boolean | Store$inventoryArgs<ExtArgs>
+    SubOrders?: boolean | Store$SubOrdersArgs<ExtArgs>
     _count?: boolean | StoreCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["store"]>
 
@@ -5297,6 +5353,7 @@ export namespace Prisma {
 
   export type StoreSelectScalar = {
     id?: boolean
+    id_almacen?: boolean
     name?: boolean
     address?: boolean
     latitude?: boolean
@@ -5309,11 +5366,12 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type StoreOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "address" | "latitude" | "longitude" | "cityId" | "capacity" | "zipCode" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["store"]>
+  export type StoreOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "id_almacen" | "name" | "address" | "latitude" | "longitude" | "cityId" | "capacity" | "zipCode" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["store"]>
   export type StoreInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     city?: boolean | CityDefaultArgs<ExtArgs>
-    subOrders?: boolean | Store$subOrdersArgs<ExtArgs>
+    orders?: boolean | Store$ordersArgs<ExtArgs>
     inventory?: boolean | Store$inventoryArgs<ExtArgs>
+    SubOrders?: boolean | Store$SubOrdersArgs<ExtArgs>
     _count?: boolean | StoreCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -5321,11 +5379,13 @@ export namespace Prisma {
     name: "Store"
     objects: {
       city: Prisma.$CityPayload<ExtArgs>
-      subOrders: Prisma.$SubOrdersPayload<ExtArgs>[]
+      orders: Prisma.$OrderPayload<ExtArgs>[]
       inventory: Prisma.$InventoryPayload<ExtArgs>[]
+      SubOrders: Prisma.$SubOrdersPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
+      id_almacen: string
       name: string
       address: string
       latitude: number
@@ -5677,8 +5737,9 @@ export namespace Prisma {
   export interface Prisma__StoreClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     city<T extends CityDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CityDefaultArgs<ExtArgs>>): Prisma__CityClient<$Result.GetResult<Prisma.$CityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    subOrders<T extends Store$subOrdersArgs<ExtArgs> = {}>(args?: Subset<T, Store$subOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubOrdersPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    orders<T extends Store$ordersArgs<ExtArgs> = {}>(args?: Subset<T, Store$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     inventory<T extends Store$inventoryArgs<ExtArgs> = {}>(args?: Subset<T, Store$inventoryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InventoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    SubOrders<T extends Store$SubOrdersArgs<ExtArgs> = {}>(args?: Subset<T, Store$SubOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubOrdersPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5709,6 +5770,7 @@ export namespace Prisma {
    */
   interface StoreFieldRefs {
     readonly id: FieldRef<"Store", 'Int'>
+    readonly id_almacen: FieldRef<"Store", 'String'>
     readonly name: FieldRef<"Store", 'String'>
     readonly address: FieldRef<"Store", 'String'>
     readonly latitude: FieldRef<"Store", 'Float'>
@@ -6062,27 +6124,27 @@ export namespace Prisma {
   }
 
   /**
-   * Store.subOrders
+   * Store.orders
    */
-  export type Store$subOrdersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Store$ordersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the SubOrders
+     * Select specific fields to fetch from the Order
      */
-    select?: SubOrdersSelect<ExtArgs> | null
+    select?: OrderSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the SubOrders
+     * Omit specific fields from the Order
      */
-    omit?: SubOrdersOmit<ExtArgs> | null
+    omit?: OrderOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: SubOrdersInclude<ExtArgs> | null
-    where?: SubOrdersWhereInput
-    orderBy?: SubOrdersOrderByWithRelationInput | SubOrdersOrderByWithRelationInput[]
-    cursor?: SubOrdersWhereUniqueInput
+    include?: OrderInclude<ExtArgs> | null
+    where?: OrderWhereInput
+    orderBy?: OrderOrderByWithRelationInput | OrderOrderByWithRelationInput[]
+    cursor?: OrderWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: SubOrdersScalarFieldEnum | SubOrdersScalarFieldEnum[]
+    distinct?: OrderScalarFieldEnum | OrderScalarFieldEnum[]
   }
 
   /**
@@ -6107,6 +6169,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: InventoryScalarFieldEnum | InventoryScalarFieldEnum[]
+  }
+
+  /**
+   * Store.SubOrders
+   */
+  export type Store$SubOrdersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubOrders
+     */
+    select?: SubOrdersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SubOrders
+     */
+    omit?: SubOrdersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubOrdersInclude<ExtArgs> | null
+    where?: SubOrdersWhereInput
+    orderBy?: SubOrdersOrderByWithRelationInput | SubOrdersOrderByWithRelationInput[]
+    cursor?: SubOrdersWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SubOrdersScalarFieldEnum | SubOrdersScalarFieldEnum[]
   }
 
   /**
@@ -9087,8 +9173,11 @@ export namespace Prisma {
 
   export type ProductMinAggregateOutputType = {
     id: number | null
+    id_producto: string | null
+    id_proveedor: string | null
     name: string | null
     description: string | null
+    sku: string | null
     categoryId: number | null
     unitPrice: number | null
     weight: number | null
@@ -9105,8 +9194,11 @@ export namespace Prisma {
 
   export type ProductMaxAggregateOutputType = {
     id: number | null
+    id_producto: string | null
+    id_proveedor: string | null
     name: string | null
     description: string | null
+    sku: string | null
     categoryId: number | null
     unitPrice: number | null
     weight: number | null
@@ -9123,8 +9215,11 @@ export namespace Prisma {
 
   export type ProductCountAggregateOutputType = {
     id: number
+    id_producto: number
+    id_proveedor: number
     name: number
     description: number
+    sku: number
     categoryId: number
     unitPrice: number
     weight: number
@@ -9157,8 +9252,11 @@ export namespace Prisma {
 
   export type ProductMinAggregateInputType = {
     id?: true
+    id_producto?: true
+    id_proveedor?: true
     name?: true
     description?: true
+    sku?: true
     categoryId?: true
     unitPrice?: true
     weight?: true
@@ -9175,8 +9273,11 @@ export namespace Prisma {
 
   export type ProductMaxAggregateInputType = {
     id?: true
+    id_producto?: true
+    id_proveedor?: true
     name?: true
     description?: true
+    sku?: true
     categoryId?: true
     unitPrice?: true
     weight?: true
@@ -9193,8 +9294,11 @@ export namespace Prisma {
 
   export type ProductCountAggregateInputType = {
     id?: true
+    id_producto?: true
+    id_proveedor?: true
     name?: true
     description?: true
+    sku?: true
     categoryId?: true
     unitPrice?: true
     weight?: true
@@ -9298,8 +9402,11 @@ export namespace Prisma {
 
   export type ProductGroupByOutputType = {
     id: number
+    id_producto: string
+    id_proveedor: string
     name: string
     description: string
+    sku: string
     categoryId: number
     unitPrice: number
     weight: number
@@ -9335,8 +9442,11 @@ export namespace Prisma {
 
   export type ProductSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    id_producto?: boolean
+    id_proveedor?: boolean
     name?: boolean
     description?: boolean
+    sku?: boolean
     categoryId?: boolean
     unitPrice?: boolean
     weight?: boolean
@@ -9359,8 +9469,11 @@ export namespace Prisma {
 
   export type ProductSelectScalar = {
     id?: boolean
+    id_producto?: boolean
+    id_proveedor?: boolean
     name?: boolean
     description?: boolean
+    sku?: boolean
     categoryId?: boolean
     unitPrice?: boolean
     weight?: boolean
@@ -9375,7 +9488,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "categoryId" | "unitPrice" | "weight" | "isFragile" | "dimensionsCm" | "imageUrl" | "barCode" | "requiredRefrigeration" | "dateOfExpiration" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
+  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "id_producto" | "id_proveedor" | "name" | "description" | "sku" | "categoryId" | "unitPrice" | "weight" | "isFragile" | "dimensionsCm" | "imageUrl" | "barCode" | "requiredRefrigeration" | "dateOfExpiration" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
   export type ProductInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     category?: boolean | CategoryDefaultArgs<ExtArgs>
     inventory?: boolean | Product$inventoryArgs<ExtArgs>
@@ -9392,8 +9505,11 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
+      id_producto: string
+      id_proveedor: string
       name: string
       description: string
+      sku: string
       categoryId: number
       unitPrice: number
       weight: number
@@ -9779,8 +9895,11 @@ export namespace Prisma {
    */
   interface ProductFieldRefs {
     readonly id: FieldRef<"Product", 'Int'>
+    readonly id_producto: FieldRef<"Product", 'String'>
+    readonly id_proveedor: FieldRef<"Product", 'String'>
     readonly name: FieldRef<"Product", 'String'>
     readonly description: FieldRef<"Product", 'String'>
+    readonly sku: FieldRef<"Product", 'String'>
     readonly categoryId: FieldRef<"Product", 'Int'>
     readonly unitPrice: FieldRef<"Product", 'Float'>
     readonly weight: FieldRef<"Product", 'Float'>
@@ -12271,7 +12390,8 @@ export namespace Prisma {
     longitude: 'longitude',
     address: 'address',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    storeId: 'storeId'
   };
 
   export type OrderScalarFieldEnum = (typeof OrderScalarFieldEnum)[keyof typeof OrderScalarFieldEnum]
@@ -12306,6 +12426,7 @@ export namespace Prisma {
 
   export const StoreScalarFieldEnum: {
     id: 'id',
+    id_almacen: 'id_almacen',
     name: 'name',
     address: 'address',
     latitude: 'latitude',
@@ -12352,8 +12473,11 @@ export namespace Prisma {
 
   export const ProductScalarFieldEnum: {
     id: 'id',
+    id_producto: 'id_producto',
+    id_proveedor: 'id_proveedor',
     name: 'name',
     description: 'description',
+    sku: 'sku',
     categoryId: 'categoryId',
     unitPrice: 'unitPrice',
     weight: 'weight',
@@ -12407,6 +12531,14 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
   export const OrderOrderByRelevanceFieldEnum: {
     customerId: 'customerId',
     address: 'address'
@@ -12423,6 +12555,7 @@ export namespace Prisma {
 
 
   export const StoreOrderByRelevanceFieldEnum: {
+    id_almacen: 'id_almacen',
     name: 'name',
     address: 'address'
   };
@@ -12453,8 +12586,11 @@ export namespace Prisma {
 
 
   export const ProductOrderByRelevanceFieldEnum: {
+    id_producto: 'id_producto',
+    id_proveedor: 'id_proveedor',
     name: 'name',
     description: 'description',
+    sku: 'sku',
     dimensionsCm: 'dimensionsCm',
     imageUrl: 'imageUrl',
     barCode: 'barCode'
@@ -12555,7 +12691,9 @@ export namespace Prisma {
     address?: StringFilter<"Order"> | string
     createdAt?: DateTimeFilter<"Order"> | Date | string
     updatedAt?: DateTimeFilter<"Order"> | Date | string
+    storeId?: IntNullableFilter<"Order"> | number | null
     subOrders?: SubOrdersListRelationFilter
+    Store?: XOR<StoreNullableScalarRelationFilter, StoreWhereInput> | null
   }
 
   export type OrderOrderByWithRelationInput = {
@@ -12568,7 +12706,9 @@ export namespace Prisma {
     address?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    storeId?: SortOrderInput | SortOrder
     subOrders?: SubOrdersOrderByRelationAggregateInput
+    Store?: StoreOrderByWithRelationInput
     _relevance?: OrderOrderByRelevanceInput
   }
 
@@ -12585,7 +12725,9 @@ export namespace Prisma {
     address?: StringFilter<"Order"> | string
     createdAt?: DateTimeFilter<"Order"> | Date | string
     updatedAt?: DateTimeFilter<"Order"> | Date | string
+    storeId?: IntNullableFilter<"Order"> | number | null
     subOrders?: SubOrdersListRelationFilter
+    Store?: XOR<StoreNullableScalarRelationFilter, StoreWhereInput> | null
   }, "id">
 
   export type OrderOrderByWithAggregationInput = {
@@ -12598,6 +12740,7 @@ export namespace Prisma {
     address?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    storeId?: SortOrderInput | SortOrder
     _count?: OrderCountOrderByAggregateInput
     _avg?: OrderAvgOrderByAggregateInput
     _max?: OrderMaxOrderByAggregateInput
@@ -12618,6 +12761,7 @@ export namespace Prisma {
     address?: StringWithAggregatesFilter<"Order"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Order"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Order"> | Date | string
+    storeId?: IntNullableWithAggregatesFilter<"Order"> | number | null
   }
 
   export type SubOrdersWhereInput = {
@@ -12774,6 +12918,7 @@ export namespace Prisma {
     OR?: StoreWhereInput[]
     NOT?: StoreWhereInput | StoreWhereInput[]
     id?: IntFilter<"Store"> | number
+    id_almacen?: StringFilter<"Store"> | string
     name?: StringFilter<"Store"> | string
     address?: StringFilter<"Store"> | string
     latitude?: FloatFilter<"Store"> | number
@@ -12785,12 +12930,14 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Store"> | Date | string
     updatedAt?: DateTimeFilter<"Store"> | Date | string
     city?: XOR<CityScalarRelationFilter, CityWhereInput>
-    subOrders?: SubOrdersListRelationFilter
+    orders?: OrderListRelationFilter
     inventory?: InventoryListRelationFilter
+    SubOrders?: SubOrdersListRelationFilter
   }
 
   export type StoreOrderByWithRelationInput = {
     id?: SortOrder
+    id_almacen?: SortOrder
     name?: SortOrder
     address?: SortOrder
     latitude?: SortOrder
@@ -12802,13 +12949,15 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     city?: CityOrderByWithRelationInput
-    subOrders?: SubOrdersOrderByRelationAggregateInput
+    orders?: OrderOrderByRelationAggregateInput
     inventory?: InventoryOrderByRelationAggregateInput
+    SubOrders?: SubOrdersOrderByRelationAggregateInput
     _relevance?: StoreOrderByRelevanceInput
   }
 
   export type StoreWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    id_almacen?: string
     name?: string
     address?: string
     AND?: StoreWhereInput | StoreWhereInput[]
@@ -12823,12 +12972,14 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Store"> | Date | string
     updatedAt?: DateTimeFilter<"Store"> | Date | string
     city?: XOR<CityScalarRelationFilter, CityWhereInput>
-    subOrders?: SubOrdersListRelationFilter
+    orders?: OrderListRelationFilter
     inventory?: InventoryListRelationFilter
-  }, "id" | "name" | "address">
+    SubOrders?: SubOrdersListRelationFilter
+  }, "id" | "id_almacen" | "name" | "address">
 
   export type StoreOrderByWithAggregationInput = {
     id?: SortOrder
+    id_almacen?: SortOrder
     name?: SortOrder
     address?: SortOrder
     latitude?: SortOrder
@@ -12851,6 +13002,7 @@ export namespace Prisma {
     OR?: StoreScalarWhereWithAggregatesInput[]
     NOT?: StoreScalarWhereWithAggregatesInput | StoreScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Store"> | number
+    id_almacen?: StringWithAggregatesFilter<"Store"> | string
     name?: StringWithAggregatesFilter<"Store"> | string
     address?: StringWithAggregatesFilter<"Store"> | string
     latitude?: FloatWithAggregatesFilter<"Store"> | number
@@ -13025,8 +13177,11 @@ export namespace Prisma {
     OR?: ProductWhereInput[]
     NOT?: ProductWhereInput | ProductWhereInput[]
     id?: IntFilter<"Product"> | number
+    id_producto?: StringFilter<"Product"> | string
+    id_proveedor?: StringFilter<"Product"> | string
     name?: StringFilter<"Product"> | string
     description?: StringFilter<"Product"> | string
+    sku?: StringFilter<"Product"> | string
     categoryId?: IntFilter<"Product"> | number
     unitPrice?: FloatFilter<"Product"> | number
     weight?: FloatFilter<"Product"> | number
@@ -13046,8 +13201,11 @@ export namespace Prisma {
 
   export type ProductOrderByWithRelationInput = {
     id?: SortOrder
+    id_producto?: SortOrder
+    id_proveedor?: SortOrder
     name?: SortOrder
     description?: SortOrder
+    sku?: SortOrder
     categoryId?: SortOrder
     unitPrice?: SortOrder
     weight?: SortOrder
@@ -13068,18 +13226,21 @@ export namespace Prisma {
 
   export type ProductWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    barCode?: string
+    id_producto?: string
     AND?: ProductWhereInput | ProductWhereInput[]
     OR?: ProductWhereInput[]
     NOT?: ProductWhereInput | ProductWhereInput[]
+    id_proveedor?: StringFilter<"Product"> | string
     name?: StringFilter<"Product"> | string
     description?: StringFilter<"Product"> | string
+    sku?: StringFilter<"Product"> | string
     categoryId?: IntFilter<"Product"> | number
     unitPrice?: FloatFilter<"Product"> | number
     weight?: FloatFilter<"Product"> | number
     isFragile?: BoolFilter<"Product"> | boolean
     dimensionsCm?: StringFilter<"Product"> | string
     imageUrl?: StringFilter<"Product"> | string
+    barCode?: StringFilter<"Product"> | string
     requiredRefrigeration?: BoolFilter<"Product"> | boolean
     dateOfExpiration?: DateTimeFilter<"Product"> | Date | string
     status?: EnumstatusProductFilter<"Product"> | $Enums.statusProduct
@@ -13088,12 +13249,15 @@ export namespace Prisma {
     category?: XOR<CategoryScalarRelationFilter, CategoryWhereInput>
     inventory?: InventoryListRelationFilter
     orderItems?: OrderItemListRelationFilter
-  }, "id" | "barCode">
+  }, "id" | "id_producto">
 
   export type ProductOrderByWithAggregationInput = {
     id?: SortOrder
+    id_producto?: SortOrder
+    id_proveedor?: SortOrder
     name?: SortOrder
     description?: SortOrder
+    sku?: SortOrder
     categoryId?: SortOrder
     unitPrice?: SortOrder
     weight?: SortOrder
@@ -13118,8 +13282,11 @@ export namespace Prisma {
     OR?: ProductScalarWhereWithAggregatesInput[]
     NOT?: ProductScalarWhereWithAggregatesInput | ProductScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Product"> | number
+    id_producto?: StringWithAggregatesFilter<"Product"> | string
+    id_proveedor?: StringWithAggregatesFilter<"Product"> | string
     name?: StringWithAggregatesFilter<"Product"> | string
     description?: StringWithAggregatesFilter<"Product"> | string
+    sku?: StringWithAggregatesFilter<"Product"> | string
     categoryId?: IntWithAggregatesFilter<"Product"> | number
     unitPrice?: FloatWithAggregatesFilter<"Product"> | number
     weight?: FloatWithAggregatesFilter<"Product"> | number
@@ -13295,6 +13462,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     subOrders?: SubOrdersCreateNestedManyWithoutOrderInput
+    Store?: StoreCreateNestedOneWithoutOrdersInput
   }
 
   export type OrderUncheckedCreateInput = {
@@ -13307,6 +13475,7 @@ export namespace Prisma {
     address: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    storeId?: number | null
     subOrders?: SubOrdersUncheckedCreateNestedManyWithoutOrderInput
   }
 
@@ -13320,6 +13489,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     subOrders?: SubOrdersUpdateManyWithoutOrderNestedInput
+    Store?: StoreUpdateOneWithoutOrdersNestedInput
   }
 
   export type OrderUncheckedUpdateInput = {
@@ -13332,6 +13502,7 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    storeId?: NullableIntFieldUpdateOperationsInput | number | null
     subOrders?: SubOrdersUncheckedUpdateManyWithoutOrderNestedInput
   }
 
@@ -13345,6 +13516,7 @@ export namespace Prisma {
     address: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    storeId?: number | null
   }
 
   export type OrderUpdateManyMutationInput = {
@@ -13368,6 +13540,7 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    storeId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type SubOrdersCreateInput = {
@@ -13512,6 +13685,7 @@ export namespace Prisma {
   }
 
   export type StoreCreateInput = {
+    id_almacen: string
     name: string
     address: string
     latitude: number
@@ -13522,12 +13696,14 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     city: CityCreateNestedOneWithoutStoresInput
-    subOrders?: SubOrdersCreateNestedManyWithoutStoreInput
+    orders?: OrderCreateNestedManyWithoutStoreInput
     inventory?: InventoryCreateNestedManyWithoutStoreInput
+    SubOrders?: SubOrdersCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateInput = {
     id?: number
+    id_almacen: string
     name: string
     address: string
     latitude: number
@@ -13538,11 +13714,13 @@ export namespace Prisma {
     status?: $Enums.statusStore
     createdAt?: Date | string
     updatedAt?: Date | string
-    subOrders?: SubOrdersUncheckedCreateNestedManyWithoutStoreInput
+    orders?: OrderUncheckedCreateNestedManyWithoutStoreInput
     inventory?: InventoryUncheckedCreateNestedManyWithoutStoreInput
+    SubOrders?: SubOrdersUncheckedCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUpdateInput = {
+    id_almacen?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
@@ -13553,12 +13731,14 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     city?: CityUpdateOneRequiredWithoutStoresNestedInput
-    subOrders?: SubOrdersUpdateManyWithoutStoreNestedInput
+    orders?: OrderUpdateManyWithoutStoreNestedInput
     inventory?: InventoryUpdateManyWithoutStoreNestedInput
+    SubOrders?: SubOrdersUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
+    id_almacen?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
@@ -13569,12 +13749,14 @@ export namespace Prisma {
     status?: EnumstatusStoreFieldUpdateOperationsInput | $Enums.statusStore
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    subOrders?: SubOrdersUncheckedUpdateManyWithoutStoreNestedInput
+    orders?: OrderUncheckedUpdateManyWithoutStoreNestedInput
     inventory?: InventoryUncheckedUpdateManyWithoutStoreNestedInput
+    SubOrders?: SubOrdersUncheckedUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreCreateManyInput = {
     id?: number
+    id_almacen: string
     name: string
     address: string
     latitude: number
@@ -13588,6 +13770,7 @@ export namespace Prisma {
   }
 
   export type StoreUpdateManyMutationInput = {
+    id_almacen?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
@@ -13601,6 +13784,7 @@ export namespace Prisma {
 
   export type StoreUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
+    id_almacen?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
@@ -13756,8 +13940,11 @@ export namespace Prisma {
   }
 
   export type ProductCreateInput = {
+    id_producto: string
+    id_proveedor: string
     name: string
     description: string
+    sku: string
     unitPrice: number
     weight: number
     isFragile: boolean
@@ -13776,8 +13963,11 @@ export namespace Prisma {
 
   export type ProductUncheckedCreateInput = {
     id?: number
+    id_producto: string
+    id_proveedor: string
     name: string
     description: string
+    sku: string
     categoryId: number
     unitPrice: number
     weight: number
@@ -13795,8 +13985,11 @@ export namespace Prisma {
   }
 
   export type ProductUpdateInput = {
+    id_producto?: StringFieldUpdateOperationsInput | string
+    id_proveedor?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
     unitPrice?: FloatFieldUpdateOperationsInput | number
     weight?: FloatFieldUpdateOperationsInput | number
     isFragile?: BoolFieldUpdateOperationsInput | boolean
@@ -13815,8 +14008,11 @@ export namespace Prisma {
 
   export type ProductUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
+    id_producto?: StringFieldUpdateOperationsInput | string
+    id_proveedor?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
     categoryId?: IntFieldUpdateOperationsInput | number
     unitPrice?: FloatFieldUpdateOperationsInput | number
     weight?: FloatFieldUpdateOperationsInput | number
@@ -13835,8 +14031,11 @@ export namespace Prisma {
 
   export type ProductCreateManyInput = {
     id?: number
+    id_producto: string
+    id_proveedor: string
     name: string
     description: string
+    sku: string
     categoryId: number
     unitPrice: number
     weight: number
@@ -13852,8 +14051,11 @@ export namespace Prisma {
   }
 
   export type ProductUpdateManyMutationInput = {
+    id_producto?: StringFieldUpdateOperationsInput | string
+    id_proveedor?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
     unitPrice?: FloatFieldUpdateOperationsInput | number
     weight?: FloatFieldUpdateOperationsInput | number
     isFragile?: BoolFieldUpdateOperationsInput | boolean
@@ -13869,8 +14071,11 @@ export namespace Prisma {
 
   export type ProductUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
+    id_producto?: StringFieldUpdateOperationsInput | string
+    id_proveedor?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
     categoryId?: IntFieldUpdateOperationsInput | number
     unitPrice?: FloatFieldUpdateOperationsInput | number
     weight?: FloatFieldUpdateOperationsInput | number
@@ -14089,10 +14294,31 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type SubOrdersListRelationFilter = {
     every?: SubOrdersWhereInput
     some?: SubOrdersWhereInput
     none?: SubOrdersWhereInput
+  }
+
+  export type StoreNullableScalarRelationFilter = {
+    is?: StoreWhereInput | null
+    isNot?: StoreWhereInput | null
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type SubOrdersOrderByRelationAggregateInput = {
@@ -14115,6 +14341,7 @@ export namespace Prisma {
     address?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    storeId?: SortOrder
   }
 
   export type OrderAvgOrderByAggregateInput = {
@@ -14122,6 +14349,7 @@ export namespace Prisma {
     totalAmount?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
+    storeId?: SortOrder
   }
 
   export type OrderMaxOrderByAggregateInput = {
@@ -14134,6 +14362,7 @@ export namespace Prisma {
     address?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    storeId?: SortOrder
   }
 
   export type OrderMinOrderByAggregateInput = {
@@ -14146,6 +14375,7 @@ export namespace Prisma {
     address?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    storeId?: SortOrder
   }
 
   export type OrderSumOrderByAggregateInput = {
@@ -14153,6 +14383,7 @@ export namespace Prisma {
     totalAmount?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
+    storeId?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -14227,6 +14458,22 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type OrderScalarRelationFilter = {
@@ -14370,10 +14617,20 @@ export namespace Prisma {
     isNot?: CityWhereInput
   }
 
+  export type OrderListRelationFilter = {
+    every?: OrderWhereInput
+    some?: OrderWhereInput
+    none?: OrderWhereInput
+  }
+
   export type InventoryListRelationFilter = {
     every?: InventoryWhereInput
     some?: InventoryWhereInput
     none?: InventoryWhereInput
+  }
+
+  export type OrderOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type InventoryOrderByRelationAggregateInput = {
@@ -14388,6 +14645,7 @@ export namespace Prisma {
 
   export type StoreCountOrderByAggregateInput = {
     id?: SortOrder
+    id_almacen?: SortOrder
     name?: SortOrder
     address?: SortOrder
     latitude?: SortOrder
@@ -14411,6 +14669,7 @@ export namespace Prisma {
 
   export type StoreMaxOrderByAggregateInput = {
     id?: SortOrder
+    id_almacen?: SortOrder
     name?: SortOrder
     address?: SortOrder
     latitude?: SortOrder
@@ -14425,6 +14684,7 @@ export namespace Prisma {
 
   export type StoreMinOrderByAggregateInput = {
     id?: SortOrder
+    id_almacen?: SortOrder
     name?: SortOrder
     address?: SortOrder
     latitude?: SortOrder
@@ -14628,8 +14888,11 @@ export namespace Prisma {
 
   export type ProductCountOrderByAggregateInput = {
     id?: SortOrder
+    id_producto?: SortOrder
+    id_proveedor?: SortOrder
     name?: SortOrder
     description?: SortOrder
+    sku?: SortOrder
     categoryId?: SortOrder
     unitPrice?: SortOrder
     weight?: SortOrder
@@ -14653,8 +14916,11 @@ export namespace Prisma {
 
   export type ProductMaxOrderByAggregateInput = {
     id?: SortOrder
+    id_producto?: SortOrder
+    id_proveedor?: SortOrder
     name?: SortOrder
     description?: SortOrder
+    sku?: SortOrder
     categoryId?: SortOrder
     unitPrice?: SortOrder
     weight?: SortOrder
@@ -14671,8 +14937,11 @@ export namespace Prisma {
 
   export type ProductMinOrderByAggregateInput = {
     id?: SortOrder
+    id_producto?: SortOrder
+    id_proveedor?: SortOrder
     name?: SortOrder
     description?: SortOrder
+    sku?: SortOrder
     categoryId?: SortOrder
     unitPrice?: SortOrder
     weight?: SortOrder
@@ -14841,6 +15110,12 @@ export namespace Prisma {
     connect?: SubOrdersWhereUniqueInput | SubOrdersWhereUniqueInput[]
   }
 
+  export type StoreCreateNestedOneWithoutOrdersInput = {
+    create?: XOR<StoreCreateWithoutOrdersInput, StoreUncheckedCreateWithoutOrdersInput>
+    connectOrCreate?: StoreCreateOrConnectWithoutOrdersInput
+    connect?: StoreWhereUniqueInput
+  }
+
   export type SubOrdersUncheckedCreateNestedManyWithoutOrderInput = {
     create?: XOR<SubOrdersCreateWithoutOrderInput, SubOrdersUncheckedCreateWithoutOrderInput> | SubOrdersCreateWithoutOrderInput[] | SubOrdersUncheckedCreateWithoutOrderInput[]
     connectOrCreate?: SubOrdersCreateOrConnectWithoutOrderInput | SubOrdersCreateOrConnectWithoutOrderInput[]
@@ -14882,8 +15157,26 @@ export namespace Prisma {
     deleteMany?: SubOrdersScalarWhereInput | SubOrdersScalarWhereInput[]
   }
 
+  export type StoreUpdateOneWithoutOrdersNestedInput = {
+    create?: XOR<StoreCreateWithoutOrdersInput, StoreUncheckedCreateWithoutOrdersInput>
+    connectOrCreate?: StoreCreateOrConnectWithoutOrdersInput
+    upsert?: StoreUpsertWithoutOrdersInput
+    disconnect?: StoreWhereInput | boolean
+    delete?: StoreWhereInput | boolean
+    connect?: StoreWhereUniqueInput
+    update?: XOR<XOR<StoreUpdateToOneWithWhereWithoutOrdersInput, StoreUpdateWithoutOrdersInput>, StoreUncheckedUpdateWithoutOrdersInput>
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
     increment?: number
     decrement?: number
     multiply?: number
@@ -15008,6 +15301,20 @@ export namespace Prisma {
     connect?: CityWhereUniqueInput
   }
 
+  export type OrderCreateNestedManyWithoutStoreInput = {
+    create?: XOR<OrderCreateWithoutStoreInput, OrderUncheckedCreateWithoutStoreInput> | OrderCreateWithoutStoreInput[] | OrderUncheckedCreateWithoutStoreInput[]
+    connectOrCreate?: OrderCreateOrConnectWithoutStoreInput | OrderCreateOrConnectWithoutStoreInput[]
+    createMany?: OrderCreateManyStoreInputEnvelope
+    connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
+  }
+
+  export type InventoryCreateNestedManyWithoutStoreInput = {
+    create?: XOR<InventoryCreateWithoutStoreInput, InventoryUncheckedCreateWithoutStoreInput> | InventoryCreateWithoutStoreInput[] | InventoryUncheckedCreateWithoutStoreInput[]
+    connectOrCreate?: InventoryCreateOrConnectWithoutStoreInput | InventoryCreateOrConnectWithoutStoreInput[]
+    createMany?: InventoryCreateManyStoreInputEnvelope
+    connect?: InventoryWhereUniqueInput | InventoryWhereUniqueInput[]
+  }
+
   export type SubOrdersCreateNestedManyWithoutStoreInput = {
     create?: XOR<SubOrdersCreateWithoutStoreInput, SubOrdersUncheckedCreateWithoutStoreInput> | SubOrdersCreateWithoutStoreInput[] | SubOrdersUncheckedCreateWithoutStoreInput[]
     connectOrCreate?: SubOrdersCreateOrConnectWithoutStoreInput | SubOrdersCreateOrConnectWithoutStoreInput[]
@@ -15015,7 +15322,14 @@ export namespace Prisma {
     connect?: SubOrdersWhereUniqueInput | SubOrdersWhereUniqueInput[]
   }
 
-  export type InventoryCreateNestedManyWithoutStoreInput = {
+  export type OrderUncheckedCreateNestedManyWithoutStoreInput = {
+    create?: XOR<OrderCreateWithoutStoreInput, OrderUncheckedCreateWithoutStoreInput> | OrderCreateWithoutStoreInput[] | OrderUncheckedCreateWithoutStoreInput[]
+    connectOrCreate?: OrderCreateOrConnectWithoutStoreInput | OrderCreateOrConnectWithoutStoreInput[]
+    createMany?: OrderCreateManyStoreInputEnvelope
+    connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
+  }
+
+  export type InventoryUncheckedCreateNestedManyWithoutStoreInput = {
     create?: XOR<InventoryCreateWithoutStoreInput, InventoryUncheckedCreateWithoutStoreInput> | InventoryCreateWithoutStoreInput[] | InventoryUncheckedCreateWithoutStoreInput[]
     connectOrCreate?: InventoryCreateOrConnectWithoutStoreInput | InventoryCreateOrConnectWithoutStoreInput[]
     createMany?: InventoryCreateManyStoreInputEnvelope
@@ -15029,13 +15343,6 @@ export namespace Prisma {
     connect?: SubOrdersWhereUniqueInput | SubOrdersWhereUniqueInput[]
   }
 
-  export type InventoryUncheckedCreateNestedManyWithoutStoreInput = {
-    create?: XOR<InventoryCreateWithoutStoreInput, InventoryUncheckedCreateWithoutStoreInput> | InventoryCreateWithoutStoreInput[] | InventoryUncheckedCreateWithoutStoreInput[]
-    connectOrCreate?: InventoryCreateOrConnectWithoutStoreInput | InventoryCreateOrConnectWithoutStoreInput[]
-    createMany?: InventoryCreateManyStoreInputEnvelope
-    connect?: InventoryWhereUniqueInput | InventoryWhereUniqueInput[]
-  }
-
   export type EnumstatusStoreFieldUpdateOperationsInput = {
     set?: $Enums.statusStore
   }
@@ -15046,6 +15353,34 @@ export namespace Prisma {
     upsert?: CityUpsertWithoutStoresInput
     connect?: CityWhereUniqueInput
     update?: XOR<XOR<CityUpdateToOneWithWhereWithoutStoresInput, CityUpdateWithoutStoresInput>, CityUncheckedUpdateWithoutStoresInput>
+  }
+
+  export type OrderUpdateManyWithoutStoreNestedInput = {
+    create?: XOR<OrderCreateWithoutStoreInput, OrderUncheckedCreateWithoutStoreInput> | OrderCreateWithoutStoreInput[] | OrderUncheckedCreateWithoutStoreInput[]
+    connectOrCreate?: OrderCreateOrConnectWithoutStoreInput | OrderCreateOrConnectWithoutStoreInput[]
+    upsert?: OrderUpsertWithWhereUniqueWithoutStoreInput | OrderUpsertWithWhereUniqueWithoutStoreInput[]
+    createMany?: OrderCreateManyStoreInputEnvelope
+    set?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
+    disconnect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
+    delete?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
+    connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
+    update?: OrderUpdateWithWhereUniqueWithoutStoreInput | OrderUpdateWithWhereUniqueWithoutStoreInput[]
+    updateMany?: OrderUpdateManyWithWhereWithoutStoreInput | OrderUpdateManyWithWhereWithoutStoreInput[]
+    deleteMany?: OrderScalarWhereInput | OrderScalarWhereInput[]
+  }
+
+  export type InventoryUpdateManyWithoutStoreNestedInput = {
+    create?: XOR<InventoryCreateWithoutStoreInput, InventoryUncheckedCreateWithoutStoreInput> | InventoryCreateWithoutStoreInput[] | InventoryUncheckedCreateWithoutStoreInput[]
+    connectOrCreate?: InventoryCreateOrConnectWithoutStoreInput | InventoryCreateOrConnectWithoutStoreInput[]
+    upsert?: InventoryUpsertWithWhereUniqueWithoutStoreInput | InventoryUpsertWithWhereUniqueWithoutStoreInput[]
+    createMany?: InventoryCreateManyStoreInputEnvelope
+    set?: InventoryWhereUniqueInput | InventoryWhereUniqueInput[]
+    disconnect?: InventoryWhereUniqueInput | InventoryWhereUniqueInput[]
+    delete?: InventoryWhereUniqueInput | InventoryWhereUniqueInput[]
+    connect?: InventoryWhereUniqueInput | InventoryWhereUniqueInput[]
+    update?: InventoryUpdateWithWhereUniqueWithoutStoreInput | InventoryUpdateWithWhereUniqueWithoutStoreInput[]
+    updateMany?: InventoryUpdateManyWithWhereWithoutStoreInput | InventoryUpdateManyWithWhereWithoutStoreInput[]
+    deleteMany?: InventoryScalarWhereInput | InventoryScalarWhereInput[]
   }
 
   export type SubOrdersUpdateManyWithoutStoreNestedInput = {
@@ -15062,7 +15397,21 @@ export namespace Prisma {
     deleteMany?: SubOrdersScalarWhereInput | SubOrdersScalarWhereInput[]
   }
 
-  export type InventoryUpdateManyWithoutStoreNestedInput = {
+  export type OrderUncheckedUpdateManyWithoutStoreNestedInput = {
+    create?: XOR<OrderCreateWithoutStoreInput, OrderUncheckedCreateWithoutStoreInput> | OrderCreateWithoutStoreInput[] | OrderUncheckedCreateWithoutStoreInput[]
+    connectOrCreate?: OrderCreateOrConnectWithoutStoreInput | OrderCreateOrConnectWithoutStoreInput[]
+    upsert?: OrderUpsertWithWhereUniqueWithoutStoreInput | OrderUpsertWithWhereUniqueWithoutStoreInput[]
+    createMany?: OrderCreateManyStoreInputEnvelope
+    set?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
+    disconnect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
+    delete?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
+    connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
+    update?: OrderUpdateWithWhereUniqueWithoutStoreInput | OrderUpdateWithWhereUniqueWithoutStoreInput[]
+    updateMany?: OrderUpdateManyWithWhereWithoutStoreInput | OrderUpdateManyWithWhereWithoutStoreInput[]
+    deleteMany?: OrderScalarWhereInput | OrderScalarWhereInput[]
+  }
+
+  export type InventoryUncheckedUpdateManyWithoutStoreNestedInput = {
     create?: XOR<InventoryCreateWithoutStoreInput, InventoryUncheckedCreateWithoutStoreInput> | InventoryCreateWithoutStoreInput[] | InventoryUncheckedCreateWithoutStoreInput[]
     connectOrCreate?: InventoryCreateOrConnectWithoutStoreInput | InventoryCreateOrConnectWithoutStoreInput[]
     upsert?: InventoryUpsertWithWhereUniqueWithoutStoreInput | InventoryUpsertWithWhereUniqueWithoutStoreInput[]
@@ -15088,20 +15437,6 @@ export namespace Prisma {
     update?: SubOrdersUpdateWithWhereUniqueWithoutStoreInput | SubOrdersUpdateWithWhereUniqueWithoutStoreInput[]
     updateMany?: SubOrdersUpdateManyWithWhereWithoutStoreInput | SubOrdersUpdateManyWithWhereWithoutStoreInput[]
     deleteMany?: SubOrdersScalarWhereInput | SubOrdersScalarWhereInput[]
-  }
-
-  export type InventoryUncheckedUpdateManyWithoutStoreNestedInput = {
-    create?: XOR<InventoryCreateWithoutStoreInput, InventoryUncheckedCreateWithoutStoreInput> | InventoryCreateWithoutStoreInput[] | InventoryUncheckedCreateWithoutStoreInput[]
-    connectOrCreate?: InventoryCreateOrConnectWithoutStoreInput | InventoryCreateOrConnectWithoutStoreInput[]
-    upsert?: InventoryUpsertWithWhereUniqueWithoutStoreInput | InventoryUpsertWithWhereUniqueWithoutStoreInput[]
-    createMany?: InventoryCreateManyStoreInputEnvelope
-    set?: InventoryWhereUniqueInput | InventoryWhereUniqueInput[]
-    disconnect?: InventoryWhereUniqueInput | InventoryWhereUniqueInput[]
-    delete?: InventoryWhereUniqueInput | InventoryWhereUniqueInput[]
-    connect?: InventoryWhereUniqueInput | InventoryWhereUniqueInput[]
-    update?: InventoryUpdateWithWhereUniqueWithoutStoreInput | InventoryUpdateWithWhereUniqueWithoutStoreInput[]
-    updateMany?: InventoryUpdateManyWithWhereWithoutStoreInput | InventoryUpdateManyWithWhereWithoutStoreInput[]
-    deleteMany?: InventoryScalarWhereInput | InventoryScalarWhereInput[]
   }
 
   export type DepartmentCreateNestedOneWithoutCitiesInput = {
@@ -15493,6 +15828,17 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[]
@@ -15565,6 +15911,33 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedEnumstatusStoreFilter<$PrismaModel = never> = {
@@ -15662,6 +16035,44 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type StoreCreateWithoutOrdersInput = {
+    id_almacen: string
+    name: string
+    address: string
+    latitude: number
+    longitude: number
+    capacity: number
+    zipCode: number
+    status?: $Enums.statusStore
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    city: CityCreateNestedOneWithoutStoresInput
+    inventory?: InventoryCreateNestedManyWithoutStoreInput
+    SubOrders?: SubOrdersCreateNestedManyWithoutStoreInput
+  }
+
+  export type StoreUncheckedCreateWithoutOrdersInput = {
+    id?: number
+    id_almacen: string
+    name: string
+    address: string
+    latitude: number
+    longitude: number
+    cityId: number
+    capacity: number
+    zipCode: number
+    status?: $Enums.statusStore
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    inventory?: InventoryUncheckedCreateNestedManyWithoutStoreInput
+    SubOrders?: SubOrdersUncheckedCreateNestedManyWithoutStoreInput
+  }
+
+  export type StoreCreateOrConnectWithoutOrdersInput = {
+    where: StoreWhereUniqueInput
+    create: XOR<StoreCreateWithoutOrdersInput, StoreUncheckedCreateWithoutOrdersInput>
+  }
+
   export type SubOrdersUpsertWithWhereUniqueWithoutOrderInput = {
     where: SubOrdersWhereUniqueInput
     update: XOR<SubOrdersUpdateWithoutOrderInput, SubOrdersUncheckedUpdateWithoutOrderInput>
@@ -15692,6 +16103,50 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"SubOrders"> | Date | string
   }
 
+  export type StoreUpsertWithoutOrdersInput = {
+    update: XOR<StoreUpdateWithoutOrdersInput, StoreUncheckedUpdateWithoutOrdersInput>
+    create: XOR<StoreCreateWithoutOrdersInput, StoreUncheckedCreateWithoutOrdersInput>
+    where?: StoreWhereInput
+  }
+
+  export type StoreUpdateToOneWithWhereWithoutOrdersInput = {
+    where?: StoreWhereInput
+    data: XOR<StoreUpdateWithoutOrdersInput, StoreUncheckedUpdateWithoutOrdersInput>
+  }
+
+  export type StoreUpdateWithoutOrdersInput = {
+    id_almacen?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    capacity?: IntFieldUpdateOperationsInput | number
+    zipCode?: FloatFieldUpdateOperationsInput | number
+    status?: EnumstatusStoreFieldUpdateOperationsInput | $Enums.statusStore
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    city?: CityUpdateOneRequiredWithoutStoresNestedInput
+    inventory?: InventoryUpdateManyWithoutStoreNestedInput
+    SubOrders?: SubOrdersUpdateManyWithoutStoreNestedInput
+  }
+
+  export type StoreUncheckedUpdateWithoutOrdersInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    id_almacen?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    cityId?: IntFieldUpdateOperationsInput | number
+    capacity?: IntFieldUpdateOperationsInput | number
+    zipCode?: FloatFieldUpdateOperationsInput | number
+    status?: EnumstatusStoreFieldUpdateOperationsInput | $Enums.statusStore
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inventory?: InventoryUncheckedUpdateManyWithoutStoreNestedInput
+    SubOrders?: SubOrdersUncheckedUpdateManyWithoutStoreNestedInput
+  }
+
   export type OrderCreateWithoutSubOrdersInput = {
     customerId: string
     status?: $Enums.OrderStatus
@@ -15701,6 +16156,7 @@ export namespace Prisma {
     address: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    Store?: StoreCreateNestedOneWithoutOrdersInput
   }
 
   export type OrderUncheckedCreateWithoutSubOrdersInput = {
@@ -15713,6 +16169,7 @@ export namespace Prisma {
     address: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    storeId?: number | null
   }
 
   export type OrderCreateOrConnectWithoutSubOrdersInput = {
@@ -15721,6 +16178,7 @@ export namespace Prisma {
   }
 
   export type StoreCreateWithoutSubOrdersInput = {
+    id_almacen: string
     name: string
     address: string
     latitude: number
@@ -15731,11 +16189,13 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     city: CityCreateNestedOneWithoutStoresInput
+    orders?: OrderCreateNestedManyWithoutStoreInput
     inventory?: InventoryCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateWithoutSubOrdersInput = {
     id?: number
+    id_almacen: string
     name: string
     address: string
     latitude: number
@@ -15746,6 +16206,7 @@ export namespace Prisma {
     status?: $Enums.statusStore
     createdAt?: Date | string
     updatedAt?: Date | string
+    orders?: OrderUncheckedCreateNestedManyWithoutStoreInput
     inventory?: InventoryUncheckedCreateNestedManyWithoutStoreInput
   }
 
@@ -15801,6 +16262,7 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Store?: StoreUpdateOneWithoutOrdersNestedInput
   }
 
   export type OrderUncheckedUpdateWithoutSubOrdersInput = {
@@ -15813,6 +16275,7 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    storeId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type StoreUpsertWithoutSubOrdersInput = {
@@ -15827,6 +16290,7 @@ export namespace Prisma {
   }
 
   export type StoreUpdateWithoutSubOrdersInput = {
+    id_almacen?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
@@ -15837,11 +16301,13 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     city?: CityUpdateOneRequiredWithoutStoresNestedInput
+    orders?: OrderUpdateManyWithoutStoreNestedInput
     inventory?: InventoryUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateWithoutSubOrdersInput = {
     id?: IntFieldUpdateOperationsInput | number
+    id_almacen?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
@@ -15852,6 +16318,7 @@ export namespace Prisma {
     status?: EnumstatusStoreFieldUpdateOperationsInput | $Enums.statusStore
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    orders?: OrderUncheckedUpdateManyWithoutStoreNestedInput
     inventory?: InventoryUncheckedUpdateManyWithoutStoreNestedInput
   }
 
@@ -15911,8 +16378,11 @@ export namespace Prisma {
   }
 
   export type ProductCreateWithoutOrderItemsInput = {
+    id_producto: string
+    id_proveedor: string
     name: string
     description: string
+    sku: string
     unitPrice: number
     weight: number
     isFragile: boolean
@@ -15930,8 +16400,11 @@ export namespace Prisma {
 
   export type ProductUncheckedCreateWithoutOrderItemsInput = {
     id?: number
+    id_producto: string
+    id_proveedor: string
     name: string
     description: string
+    sku: string
     categoryId: number
     unitPrice: number
     weight: number
@@ -15996,8 +16469,11 @@ export namespace Prisma {
   }
 
   export type ProductUpdateWithoutOrderItemsInput = {
+    id_producto?: StringFieldUpdateOperationsInput | string
+    id_proveedor?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
     unitPrice?: FloatFieldUpdateOperationsInput | number
     weight?: FloatFieldUpdateOperationsInput | number
     isFragile?: BoolFieldUpdateOperationsInput | boolean
@@ -16015,8 +16491,11 @@ export namespace Prisma {
 
   export type ProductUncheckedUpdateWithoutOrderItemsInput = {
     id?: IntFieldUpdateOperationsInput | number
+    id_producto?: StringFieldUpdateOperationsInput | string
+    id_proveedor?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
     categoryId?: IntFieldUpdateOperationsInput | number
     unitPrice?: FloatFieldUpdateOperationsInput | number
     weight?: FloatFieldUpdateOperationsInput | number
@@ -16048,34 +16527,38 @@ export namespace Prisma {
     create: XOR<CityCreateWithoutStoresInput, CityUncheckedCreateWithoutStoresInput>
   }
 
-  export type SubOrdersCreateWithoutStoreInput = {
-    deliveryId: string
+  export type OrderCreateWithoutStoreInput = {
+    customerId: string
     status?: $Enums.OrderStatus
-    subTotal: number
+    totalAmount: number
+    latitude: number
+    longitude: number
+    address: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    order: OrderCreateNestedOneWithoutSubOrdersInput
-    orderItems?: OrderItemCreateNestedManyWithoutSubOrderInput
+    subOrders?: SubOrdersCreateNestedManyWithoutOrderInput
   }
 
-  export type SubOrdersUncheckedCreateWithoutStoreInput = {
+  export type OrderUncheckedCreateWithoutStoreInput = {
     id?: number
-    orderId: number
-    deliveryId: string
+    customerId: string
     status?: $Enums.OrderStatus
-    subTotal: number
+    totalAmount: number
+    latitude: number
+    longitude: number
+    address: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    orderItems?: OrderItemUncheckedCreateNestedManyWithoutSubOrderInput
+    subOrders?: SubOrdersUncheckedCreateNestedManyWithoutOrderInput
   }
 
-  export type SubOrdersCreateOrConnectWithoutStoreInput = {
-    where: SubOrdersWhereUniqueInput
-    create: XOR<SubOrdersCreateWithoutStoreInput, SubOrdersUncheckedCreateWithoutStoreInput>
+  export type OrderCreateOrConnectWithoutStoreInput = {
+    where: OrderWhereUniqueInput
+    create: XOR<OrderCreateWithoutStoreInput, OrderUncheckedCreateWithoutStoreInput>
   }
 
-  export type SubOrdersCreateManyStoreInputEnvelope = {
-    data: SubOrdersCreateManyStoreInput | SubOrdersCreateManyStoreInput[]
+  export type OrderCreateManyStoreInputEnvelope = {
+    data: OrderCreateManyStoreInput | OrderCreateManyStoreInput[]
     skipDuplicates?: boolean
   }
 
@@ -16110,6 +16593,37 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type SubOrdersCreateWithoutStoreInput = {
+    deliveryId: string
+    status?: $Enums.OrderStatus
+    subTotal: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    order: OrderCreateNestedOneWithoutSubOrdersInput
+    orderItems?: OrderItemCreateNestedManyWithoutSubOrderInput
+  }
+
+  export type SubOrdersUncheckedCreateWithoutStoreInput = {
+    id?: number
+    orderId: number
+    deliveryId: string
+    status?: $Enums.OrderStatus
+    subTotal: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    orderItems?: OrderItemUncheckedCreateNestedManyWithoutSubOrderInput
+  }
+
+  export type SubOrdersCreateOrConnectWithoutStoreInput = {
+    where: SubOrdersWhereUniqueInput
+    create: XOR<SubOrdersCreateWithoutStoreInput, SubOrdersUncheckedCreateWithoutStoreInput>
+  }
+
+  export type SubOrdersCreateManyStoreInputEnvelope = {
+    data: SubOrdersCreateManyStoreInput | SubOrdersCreateManyStoreInput[]
+    skipDuplicates?: boolean
+  }
+
   export type CityUpsertWithoutStoresInput = {
     update: XOR<CityUpdateWithoutStoresInput, CityUncheckedUpdateWithoutStoresInput>
     create: XOR<CityCreateWithoutStoresInput, CityUncheckedCreateWithoutStoresInput>
@@ -16132,20 +16646,36 @@ export namespace Prisma {
     departmentId?: IntFieldUpdateOperationsInput | number
   }
 
-  export type SubOrdersUpsertWithWhereUniqueWithoutStoreInput = {
-    where: SubOrdersWhereUniqueInput
-    update: XOR<SubOrdersUpdateWithoutStoreInput, SubOrdersUncheckedUpdateWithoutStoreInput>
-    create: XOR<SubOrdersCreateWithoutStoreInput, SubOrdersUncheckedCreateWithoutStoreInput>
+  export type OrderUpsertWithWhereUniqueWithoutStoreInput = {
+    where: OrderWhereUniqueInput
+    update: XOR<OrderUpdateWithoutStoreInput, OrderUncheckedUpdateWithoutStoreInput>
+    create: XOR<OrderCreateWithoutStoreInput, OrderUncheckedCreateWithoutStoreInput>
   }
 
-  export type SubOrdersUpdateWithWhereUniqueWithoutStoreInput = {
-    where: SubOrdersWhereUniqueInput
-    data: XOR<SubOrdersUpdateWithoutStoreInput, SubOrdersUncheckedUpdateWithoutStoreInput>
+  export type OrderUpdateWithWhereUniqueWithoutStoreInput = {
+    where: OrderWhereUniqueInput
+    data: XOR<OrderUpdateWithoutStoreInput, OrderUncheckedUpdateWithoutStoreInput>
   }
 
-  export type SubOrdersUpdateManyWithWhereWithoutStoreInput = {
-    where: SubOrdersScalarWhereInput
-    data: XOR<SubOrdersUpdateManyMutationInput, SubOrdersUncheckedUpdateManyWithoutStoreInput>
+  export type OrderUpdateManyWithWhereWithoutStoreInput = {
+    where: OrderScalarWhereInput
+    data: XOR<OrderUpdateManyMutationInput, OrderUncheckedUpdateManyWithoutStoreInput>
+  }
+
+  export type OrderScalarWhereInput = {
+    AND?: OrderScalarWhereInput | OrderScalarWhereInput[]
+    OR?: OrderScalarWhereInput[]
+    NOT?: OrderScalarWhereInput | OrderScalarWhereInput[]
+    id?: IntFilter<"Order"> | number
+    customerId?: StringFilter<"Order"> | string
+    status?: EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
+    totalAmount?: FloatFilter<"Order"> | number
+    latitude?: FloatFilter<"Order"> | number
+    longitude?: FloatFilter<"Order"> | number
+    address?: StringFilter<"Order"> | string
+    createdAt?: DateTimeFilter<"Order"> | Date | string
+    updatedAt?: DateTimeFilter<"Order"> | Date | string
+    storeId?: IntNullableFilter<"Order"> | number | null
   }
 
   export type InventoryUpsertWithWhereUniqueWithoutStoreInput = {
@@ -16178,6 +16708,22 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Inventory"> | Date | string
   }
 
+  export type SubOrdersUpsertWithWhereUniqueWithoutStoreInput = {
+    where: SubOrdersWhereUniqueInput
+    update: XOR<SubOrdersUpdateWithoutStoreInput, SubOrdersUncheckedUpdateWithoutStoreInput>
+    create: XOR<SubOrdersCreateWithoutStoreInput, SubOrdersUncheckedCreateWithoutStoreInput>
+  }
+
+  export type SubOrdersUpdateWithWhereUniqueWithoutStoreInput = {
+    where: SubOrdersWhereUniqueInput
+    data: XOR<SubOrdersUpdateWithoutStoreInput, SubOrdersUncheckedUpdateWithoutStoreInput>
+  }
+
+  export type SubOrdersUpdateManyWithWhereWithoutStoreInput = {
+    where: SubOrdersScalarWhereInput
+    data: XOR<SubOrdersUpdateManyMutationInput, SubOrdersUncheckedUpdateManyWithoutStoreInput>
+  }
+
   export type DepartmentCreateWithoutCitiesInput = {
     name: string
   }
@@ -16193,6 +16739,7 @@ export namespace Prisma {
   }
 
   export type StoreCreateWithoutCityInput = {
+    id_almacen: string
     name: string
     address: string
     latitude: number
@@ -16202,12 +16749,14 @@ export namespace Prisma {
     status?: $Enums.statusStore
     createdAt?: Date | string
     updatedAt?: Date | string
-    subOrders?: SubOrdersCreateNestedManyWithoutStoreInput
+    orders?: OrderCreateNestedManyWithoutStoreInput
     inventory?: InventoryCreateNestedManyWithoutStoreInput
+    SubOrders?: SubOrdersCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateWithoutCityInput = {
     id?: number
+    id_almacen: string
     name: string
     address: string
     latitude: number
@@ -16217,8 +16766,9 @@ export namespace Prisma {
     status?: $Enums.statusStore
     createdAt?: Date | string
     updatedAt?: Date | string
-    subOrders?: SubOrdersUncheckedCreateNestedManyWithoutStoreInput
+    orders?: OrderUncheckedCreateNestedManyWithoutStoreInput
     inventory?: InventoryUncheckedCreateNestedManyWithoutStoreInput
+    SubOrders?: SubOrdersUncheckedCreateNestedManyWithoutStoreInput
   }
 
   export type StoreCreateOrConnectWithoutCityInput = {
@@ -16272,6 +16822,7 @@ export namespace Prisma {
     OR?: StoreScalarWhereInput[]
     NOT?: StoreScalarWhereInput | StoreScalarWhereInput[]
     id?: IntFilter<"Store"> | number
+    id_almacen?: StringFilter<"Store"> | string
     name?: StringFilter<"Store"> | string
     address?: StringFilter<"Store"> | string
     latitude?: FloatFilter<"Store"> | number
@@ -16331,8 +16882,11 @@ export namespace Prisma {
   }
 
   export type ProductCreateWithoutCategoryInput = {
+    id_producto: string
+    id_proveedor: string
     name: string
     description: string
+    sku: string
     unitPrice: number
     weight: number
     isFragile: boolean
@@ -16350,8 +16904,11 @@ export namespace Prisma {
 
   export type ProductUncheckedCreateWithoutCategoryInput = {
     id?: number
+    id_producto: string
+    id_proveedor: string
     name: string
     description: string
+    sku: string
     unitPrice: number
     weight: number
     isFragile: boolean
@@ -16398,8 +16955,11 @@ export namespace Prisma {
     OR?: ProductScalarWhereInput[]
     NOT?: ProductScalarWhereInput | ProductScalarWhereInput[]
     id?: IntFilter<"Product"> | number
+    id_producto?: StringFilter<"Product"> | string
+    id_proveedor?: StringFilter<"Product"> | string
     name?: StringFilter<"Product"> | string
     description?: StringFilter<"Product"> | string
+    sku?: StringFilter<"Product"> | string
     categoryId?: IntFilter<"Product"> | number
     unitPrice?: FloatFilter<"Product"> | number
     weight?: FloatFilter<"Product"> | number
@@ -16555,8 +17115,11 @@ export namespace Prisma {
   }
 
   export type ProductCreateWithoutInventoryInput = {
+    id_producto: string
+    id_proveedor: string
     name: string
     description: string
+    sku: string
     unitPrice: number
     weight: number
     isFragile: boolean
@@ -16574,8 +17137,11 @@ export namespace Prisma {
 
   export type ProductUncheckedCreateWithoutInventoryInput = {
     id?: number
+    id_producto: string
+    id_proveedor: string
     name: string
     description: string
+    sku: string
     categoryId: number
     unitPrice: number
     weight: number
@@ -16597,6 +17163,7 @@ export namespace Prisma {
   }
 
   export type StoreCreateWithoutInventoryInput = {
+    id_almacen: string
     name: string
     address: string
     latitude: number
@@ -16607,11 +17174,13 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     city: CityCreateNestedOneWithoutStoresInput
-    subOrders?: SubOrdersCreateNestedManyWithoutStoreInput
+    orders?: OrderCreateNestedManyWithoutStoreInput
+    SubOrders?: SubOrdersCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateWithoutInventoryInput = {
     id?: number
+    id_almacen: string
     name: string
     address: string
     latitude: number
@@ -16622,7 +17191,8 @@ export namespace Prisma {
     status?: $Enums.statusStore
     createdAt?: Date | string
     updatedAt?: Date | string
-    subOrders?: SubOrdersUncheckedCreateNestedManyWithoutStoreInput
+    orders?: OrderUncheckedCreateNestedManyWithoutStoreInput
+    SubOrders?: SubOrdersUncheckedCreateNestedManyWithoutStoreInput
   }
 
   export type StoreCreateOrConnectWithoutInventoryInput = {
@@ -16671,8 +17241,11 @@ export namespace Prisma {
   }
 
   export type ProductUpdateWithoutInventoryInput = {
+    id_producto?: StringFieldUpdateOperationsInput | string
+    id_proveedor?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
     unitPrice?: FloatFieldUpdateOperationsInput | number
     weight?: FloatFieldUpdateOperationsInput | number
     isFragile?: BoolFieldUpdateOperationsInput | boolean
@@ -16690,8 +17263,11 @@ export namespace Prisma {
 
   export type ProductUncheckedUpdateWithoutInventoryInput = {
     id?: IntFieldUpdateOperationsInput | number
+    id_producto?: StringFieldUpdateOperationsInput | string
+    id_proveedor?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
     categoryId?: IntFieldUpdateOperationsInput | number
     unitPrice?: FloatFieldUpdateOperationsInput | number
     weight?: FloatFieldUpdateOperationsInput | number
@@ -16719,6 +17295,7 @@ export namespace Prisma {
   }
 
   export type StoreUpdateWithoutInventoryInput = {
+    id_almacen?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
@@ -16729,11 +17306,13 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     city?: CityUpdateOneRequiredWithoutStoresNestedInput
-    subOrders?: SubOrdersUpdateManyWithoutStoreNestedInput
+    orders?: OrderUpdateManyWithoutStoreNestedInput
+    SubOrders?: SubOrdersUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateWithoutInventoryInput = {
     id?: IntFieldUpdateOperationsInput | number
+    id_almacen?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
@@ -16744,7 +17323,8 @@ export namespace Prisma {
     status?: EnumstatusStoreFieldUpdateOperationsInput | $Enums.statusStore
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    subOrders?: SubOrdersUncheckedUpdateManyWithoutStoreNestedInput
+    orders?: OrderUncheckedUpdateManyWithoutStoreNestedInput
+    SubOrders?: SubOrdersUncheckedUpdateManyWithoutStoreNestedInput
   }
 
   export type HistoricalMovementUpsertWithWhereUniqueWithoutInventoryInput = {
@@ -16911,12 +17491,14 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type SubOrdersCreateManyStoreInput = {
+  export type OrderCreateManyStoreInput = {
     id?: number
-    orderId: number
-    deliveryId: string
+    customerId: string
     status?: $Enums.OrderStatus
-    subTotal: number
+    totalAmount: number
+    latitude: number
+    longitude: number
+    address: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -16931,33 +17513,49 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type SubOrdersUpdateWithoutStoreInput = {
-    deliveryId?: StringFieldUpdateOperationsInput | string
-    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    subTotal?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    order?: OrderUpdateOneRequiredWithoutSubOrdersNestedInput
-    orderItems?: OrderItemUpdateManyWithoutSubOrderNestedInput
+  export type SubOrdersCreateManyStoreInput = {
+    id?: number
+    orderId: number
+    deliveryId: string
+    status?: $Enums.OrderStatus
+    subTotal: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
-  export type SubOrdersUncheckedUpdateWithoutStoreInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    orderId?: IntFieldUpdateOperationsInput | number
-    deliveryId?: StringFieldUpdateOperationsInput | string
+  export type OrderUpdateWithoutStoreInput = {
+    customerId?: StringFieldUpdateOperationsInput | string
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    subTotal?: FloatFieldUpdateOperationsInput | number
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    address?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    orderItems?: OrderItemUncheckedUpdateManyWithoutSubOrderNestedInput
+    subOrders?: SubOrdersUpdateManyWithoutOrderNestedInput
   }
 
-  export type SubOrdersUncheckedUpdateManyWithoutStoreInput = {
+  export type OrderUncheckedUpdateWithoutStoreInput = {
     id?: IntFieldUpdateOperationsInput | number
-    orderId?: IntFieldUpdateOperationsInput | number
-    deliveryId?: StringFieldUpdateOperationsInput | string
+    customerId?: StringFieldUpdateOperationsInput | string
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    subTotal?: FloatFieldUpdateOperationsInput | number
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    address?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    subOrders?: SubOrdersUncheckedUpdateManyWithoutOrderNestedInput
+  }
+
+  export type OrderUncheckedUpdateManyWithoutStoreInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    customerId?: StringFieldUpdateOperationsInput | string
+    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    address?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16993,8 +17591,40 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type SubOrdersUpdateWithoutStoreInput = {
+    deliveryId?: StringFieldUpdateOperationsInput | string
+    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    subTotal?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    order?: OrderUpdateOneRequiredWithoutSubOrdersNestedInput
+    orderItems?: OrderItemUpdateManyWithoutSubOrderNestedInput
+  }
+
+  export type SubOrdersUncheckedUpdateWithoutStoreInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    orderId?: IntFieldUpdateOperationsInput | number
+    deliveryId?: StringFieldUpdateOperationsInput | string
+    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    subTotal?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    orderItems?: OrderItemUncheckedUpdateManyWithoutSubOrderNestedInput
+  }
+
+  export type SubOrdersUncheckedUpdateManyWithoutStoreInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    orderId?: IntFieldUpdateOperationsInput | number
+    deliveryId?: StringFieldUpdateOperationsInput | string
+    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    subTotal?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StoreCreateManyCityInput = {
     id?: number
+    id_almacen: string
     name: string
     address: string
     latitude: number
@@ -17007,6 +17637,7 @@ export namespace Prisma {
   }
 
   export type StoreUpdateWithoutCityInput = {
+    id_almacen?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
@@ -17016,12 +17647,14 @@ export namespace Prisma {
     status?: EnumstatusStoreFieldUpdateOperationsInput | $Enums.statusStore
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    subOrders?: SubOrdersUpdateManyWithoutStoreNestedInput
+    orders?: OrderUpdateManyWithoutStoreNestedInput
     inventory?: InventoryUpdateManyWithoutStoreNestedInput
+    SubOrders?: SubOrdersUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateWithoutCityInput = {
     id?: IntFieldUpdateOperationsInput | number
+    id_almacen?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
@@ -17031,12 +17664,14 @@ export namespace Prisma {
     status?: EnumstatusStoreFieldUpdateOperationsInput | $Enums.statusStore
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    subOrders?: SubOrdersUncheckedUpdateManyWithoutStoreNestedInput
+    orders?: OrderUncheckedUpdateManyWithoutStoreNestedInput
     inventory?: InventoryUncheckedUpdateManyWithoutStoreNestedInput
+    SubOrders?: SubOrdersUncheckedUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateManyWithoutCityInput = {
     id?: IntFieldUpdateOperationsInput | number
+    id_almacen?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
@@ -17071,8 +17706,11 @@ export namespace Prisma {
 
   export type ProductCreateManyCategoryInput = {
     id?: number
+    id_producto: string
+    id_proveedor: string
     name: string
     description: string
+    sku: string
     unitPrice: number
     weight: number
     isFragile: boolean
@@ -17087,8 +17725,11 @@ export namespace Prisma {
   }
 
   export type ProductUpdateWithoutCategoryInput = {
+    id_producto?: StringFieldUpdateOperationsInput | string
+    id_proveedor?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
     unitPrice?: FloatFieldUpdateOperationsInput | number
     weight?: FloatFieldUpdateOperationsInput | number
     isFragile?: BoolFieldUpdateOperationsInput | boolean
@@ -17106,8 +17747,11 @@ export namespace Prisma {
 
   export type ProductUncheckedUpdateWithoutCategoryInput = {
     id?: IntFieldUpdateOperationsInput | number
+    id_producto?: StringFieldUpdateOperationsInput | string
+    id_proveedor?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
     unitPrice?: FloatFieldUpdateOperationsInput | number
     weight?: FloatFieldUpdateOperationsInput | number
     isFragile?: BoolFieldUpdateOperationsInput | boolean
@@ -17125,8 +17769,11 @@ export namespace Prisma {
 
   export type ProductUncheckedUpdateManyWithoutCategoryInput = {
     id?: IntFieldUpdateOperationsInput | number
+    id_producto?: StringFieldUpdateOperationsInput | string
+    id_proveedor?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
     unitPrice?: FloatFieldUpdateOperationsInput | number
     weight?: FloatFieldUpdateOperationsInput | number
     isFragile?: BoolFieldUpdateOperationsInput | boolean

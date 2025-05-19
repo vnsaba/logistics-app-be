@@ -36,6 +36,19 @@ export class InventoryRepository implements IInventoryRepository {
     return inventory ? Inventory.createFrom(inventory) : null;
   }
 
+  async getStoreAndProductExist(
+    storeId: number,
+    productId: number
+  ): Promise<Inventory | null> {
+    const inventory = await prisma.inventory.findFirst({
+      where: { storeId, productId },
+    });
+    if (!inventory) {
+      return null
+    }
+    return Inventory.createFrom(inventory);
+  }
+
   async update(id: number, data: Partial<Inventory>): Promise<Inventory> {
     const updated = await prisma.inventory.update({
       where: { id },
@@ -95,7 +108,7 @@ export class InventoryRepository implements IInventoryRepository {
         },
         product: {
           status: 'ACTIVE',
-          
+
         },
       },
     });

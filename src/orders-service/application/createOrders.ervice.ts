@@ -32,7 +32,7 @@ export class CreateOrderService {
 
         //construir subordenes con asignacion automatica de repartidor
         const subOrders = await this.buildSubOrders(productsByStore);
-        console.log("subOrders:", JSON.stringify(subOrders, null, 2));
+        // console.log("subOrders:", JSON.stringify(subOrders, null, 2));
         // Calcular total general del pedido
         const totalAmount = subOrders.reduce((sum, sub) => sum + sub.subTotal, 0);
 
@@ -45,10 +45,9 @@ export class CreateOrderService {
             status: OrderStatus.PENDING,
             totalAmount,
             subOrders: subOrders
-
         });
 
-        return result;
+        return result
     }
 
     private async validateClient(clientId: string): Promise<void> {
@@ -74,19 +73,22 @@ export class CreateOrderService {
         return itemsByStore;
     }
 
+    //construir subordenes con asignacion automatica de repartidor
     private async buildSubOrders(
         itemsByStore: Record<number, CreateOrderItemDto[]>
     ): Promise<any[]> {
         const subOrdersData = [];
         for (const [storeIdStr, items] of Object.entries(itemsByStore)) {
             const storeId = Number(storeIdStr);
+            // console.log("storeId", storeId);
             await this.validateStoreAndProducts(storeId, items);
 
             const selectedDelivery = await this.selectBestDelivery(storeId);
 
             const subTotal = items.reduce((sum, item) => sum + item.unitPrice * item.quantity, 0);
-            await this.validateAndDiscountInventory(storeId, items);
-
+            if (isNaN(storeId)) {
+                throw new Error(`storeId inválido recibido: ${storeIdStr}`);
+            }
             subOrdersData.push({
                 storeId,
                 deliveryId: selectedDelivery.id,
@@ -108,11 +110,17 @@ export class CreateOrderService {
         for (const item of items) {
             const product = await this.productRepository.findById(item.productId);
             if (!product) throw new Error(`Product with id ${item.productId} not found`);
-            const productoExist = await this.inventoryRepository.findByProductAndStore(storeId, item.productId);
+
+            const productoExist = await this.inventoryRepository.getStoreAndProductExist(storeId, item.productId);
+            // console.log("productoExist", productoExist);
             if (!productoExist) throw new Error(`Product with id ${item.productId} not found in store ${storeId}`);
             if (productoExist.availableQuantity < item.quantity) {
                 throw new Error(`Product with id ${item.productId} not enough in store ${storeId}`);
             }
+            //descontar stock
+            await this.inventoryRepository.update(productoExist.id!, {
+                availableQuantity: productoExist.availableQuantity - item.quantity
+            });
         }
     }
 
@@ -151,26 +159,26 @@ export class CreateOrderService {
         return selected;
     }
 
-    private async validateAndDiscountInventory(storeId: number, items: CreateOrderItemDto[]): Promise<void> {
-        const store = await this.storeRepository.findById(storeId);
-        if (!store) throw new Error(`Store with id ${storeId} not found`);
+    // // Descontar el inventario
+    // private async validateAndDiscountInventory(storeId: number, items: CreateOrderItemDto[]): Promise<void> {
+    //     const store = await this.storeRepository.findById(storeId);
+    //     if (!store) throw new Error(`Store with id ${storeId} not found`);
 
-        for (const item of items) {
-            const product = await this.productRepository.findById(item.productId);
-            if (!product) throw new Error(`Product with id ${item.productId} not found`);
+    //     for (const item of items) {
+    //         const product = await this.productRepository.findById(item.productId);
+    //         if (!product) throw new Error(`Product with id ${item.productId} not found`);
 
-            const inventory = await this.inventoryRepository.findByProductAndStore(storeId, item.productId);
-            if (!inventory) throw new Error(`Inventory for product ${item.productId} in store ${storeId} not found`);
-            if (inventory.availableQuantity < item.quantity) {
-                throw new Error(`Not enough stock for product ${item.productId}`);
-            }
+    //         const inventory = await this.inventoryRepository.findByProductAndStore(storeId, item.productId);
+    //         if (!inventory) throw new Error(`Inventory for product ${item.productId} in store ${storeId} not found`);
+    //         if (inventory.availableQuantity < item.quantity) {
+    //             throw new Error(`Not enough stock for product ${item.productId}`);
+    //         }
 
-            // Descontar stock
-            await this.inventoryRepository.update(inventory.id!, {
-                availableQuantity: inventory.availableQuantity - item.quantity
-            });
-        }
-    }
-
-
+    //         // Descontar stock
+    //         await this.inventoryRepository.update(inventory.id!, {
+    //             availableQuantity: inventory.availableQuantity - item.quantity
+    //         });
+    //     }
 }
+
+
