@@ -6,7 +6,6 @@ import { Product } from "../../../product-service/domain/entity/product";
 const prisma = new PrismaClient();
 
 export class InventoryRepository implements IInventoryRepository {
-
   async create(inventory: Inventory): Promise<Inventory> {
     const created = await prisma.inventory.create({
       data: {
@@ -73,5 +72,21 @@ export class InventoryRepository implements IInventoryRepository {
     return inventory && inventory.product
       ? Product.createFrom(inventory.product)
       : null;
+  }
+
+  async createMany(inventories: Inventory[]): Promise<Inventory[]> {
+    const data = inventories.map((inv) => ({
+      productId: inv.productId,
+      storeId: inv.storeId,
+      availableQuantity: inv.availableQuantity,
+      minimumThreshold: inv.minimumThreshold,
+      lastResetDate: inv.lastResetDate,
+      createdAt: inv.createdAt,
+      updatedAt: inv.updatedAt,
+    }));
+
+    await prisma.inventory.createMany({ data });
+
+    return inventories;
   }
 }

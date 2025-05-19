@@ -1,4 +1,4 @@
-import { Product } from '../entity/product';
+import { Product } from "../entity/product";
 
 export interface IProductRepository {
   create(product: Product): Promise<Product>;
@@ -6,5 +6,7 @@ export interface IProductRepository {
   findAll(): Promise<Product[]>;
   update(id: number, product: Partial<Product>): Promise<Product>;
   delete(id: number): Promise<void>;
-  findByBarcode(barCode: string): Promise<Product | null>;
+  createMany(products: Product[]): Promise<Product[]>;
+  findByProductId(id: string): Promise<Product | null>;
+  findByProductIds(id_productos: string[]): Promise<Product[]>;
 }
