@@ -3,7 +3,7 @@
 - Código inválido o expirado 
 - Rol no encontrado 
 - Todo correcto → debe retornar el token generado
- */ 
+ */
 import { VerifyTwoFactorService } from '../../../auth-service/application/verifyTwoFactor.service';
 import { IUserRepository } from '../../../user-service/domain/interfaces/user.interface';
 import { IRoleRepository } from '../../../role-service/domain/interfaces/role.interface';
@@ -21,6 +21,8 @@ describe('VerifyTwoFactorService', () => {
   let mockUser: User;
 
   const userId = 'user-123';
+  const email = "ana@example.com"
+
   const validCode = '654321';
   const validToken: string = 'mocked.jwt.token';
   const mockRole = new Role(
@@ -58,8 +60,8 @@ describe('VerifyTwoFactorService', () => {
       getAllUsers: jest.fn(),
       clearResetToken: jest.fn()
     } as unknown as jest.Mocked<IUserRepository>;
-
     roleRepository = {
+      getByEmail: jest.fn(),
       findById: jest.fn()
     } as unknown as jest.Mocked<IRoleRepository>;
 
@@ -73,9 +75,10 @@ describe('VerifyTwoFactorService', () => {
       tokenGenerator
     );
 
+
     mockUser = new User(
       'Ana Gómez',
-      'ana@example.com',
+      email,
       'Abc12345!',
       'role-1',
       '3011234567',
@@ -86,52 +89,54 @@ describe('VerifyTwoFactorService', () => {
   });
 
   it('debería lanzar error si el usuario no existe', async () => {
-    userRepository.findById.mockResolvedValue(null);
+    userRepository.getByEmail.mockResolvedValue(null);
 
     await expect(
-      verifyTwoFactorService.verifyTwoFactor(userId, validCode)
-    ).rejects.toThrow('Invalid verification process');
+      verifyTwoFactorService.verifyTwoFactor(email, validCode)
+    ).rejects.toThrow('User not found'); // antes decía 'Invalid verification process'
   });
 
   it('debería lanzar error si el código es incorrecto', async () => {
     mockUser.twoFactorCode = '000000';
-    userRepository.findById.mockResolvedValue(mockUser);
+    userRepository.getByEmail.mockResolvedValue(mockUser);
 
     await expect(
-      verifyTwoFactorService.verifyTwoFactor(userId, validCode)
+      verifyTwoFactorService.verifyTwoFactor(email, validCode)
     ).rejects.toThrow('Invalid or expired verification code');
   });
 
   it('debería lanzar error si el código está expirado', async () => {
     mockUser.twoFactorExpires = new Date(Date.now() - 1000); // ya expirado
-    userRepository.findById.mockResolvedValue(mockUser);
+    userRepository.getByEmail.mockResolvedValue(mockUser);
 
     await expect(
-      verifyTwoFactorService.verifyTwoFactor(userId, validCode)
+      verifyTwoFactorService.verifyTwoFactor(email, validCode)
     ).rejects.toThrow('Invalid or expired verification code');
   });
 
   it('debería lanzar error si el rol no se encuentra', async () => {
-    userRepository.findById.mockResolvedValue(mockUser);
-    roleRepository.findById.mockResolvedValue(null);
+    userRepository.getByEmail.mockResolvedValue(mockUser);
+    roleRepository.findById.mockResolvedValue(null); 
 
     await expect(
-      verifyTwoFactorService.verifyTwoFactor(userId, validCode)
+      verifyTwoFactorService.verifyTwoFactor(email, validCode)
     ).rejects.toThrow('Role not found');
   });
 
   it('debería devolver un token si todo es válido', async () => {
-    userRepository.findById.mockResolvedValue(mockUser);
-    roleRepository.findById.mockResolvedValue(mockRole);
+    userRepository.getByEmail.mockResolvedValue(mockUser);
+    roleRepository.findById.mockResolvedValue(mockRole); 
     tokenGenerator.generateToken.mockReturnValue(validToken);
 
-    const result = await verifyTwoFactorService.verifyTwoFactor(userId, validCode);
+    const result = await verifyTwoFactorService.verifyTwoFactor(email, validCode);
 
-    expect(userRepository.clearTwoFactor).toHaveBeenCalledWith(userId);
-    expect(roleRepository.findById).toHaveBeenCalledWith(mockUser.roleId);
+    expect(userRepository.clearTwoFactor).toHaveBeenCalledWith(mockUser.id); 
+    expect(roleRepository.findById).toHaveBeenCalledWith(mockUser.roleId);   
+
     expect(tokenGenerator.generateToken).toHaveBeenCalledWith(
       {
-        id: userId,
+        id: mockUser.id,
+        name: mockUser.fullname,                  
         role: mockRole,
         email: mockUser.email
       },

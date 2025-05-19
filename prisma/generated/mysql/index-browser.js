@@ -129,8 +129,7 @@ exports.Prisma.OrderScalarFieldEnum = {
   longitude: 'longitude',
   address: 'address',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  storeId: 'storeId'
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SubOrdersScalarFieldEnum = {
@@ -235,11 +234,6 @@ exports.Prisma.HistoricalMovementScalarFieldEnum = {
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
-};
-
-exports.Prisma.NullsOrder = {
-  first: 'first',
-  last: 'last'
 };
 
 exports.Prisma.OrderOrderByRelevanceFieldEnum = {

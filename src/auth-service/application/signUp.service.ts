@@ -34,6 +34,11 @@ export class SignUpService {
 
     phone = `+57${phone}`;
 
+    if (!/^\d{10}$/.test(phone) || !phone.startsWith('3')) {
+      throw new HttpError("El número de teléfono debe tener 10 dígitos y comenzar con 3.", 400);
+    }
+
+
     const existingUser = await this.userRepository.getByEmail(email);
     if (existingUser) {
       errors.push({
@@ -45,20 +50,22 @@ export class SignUpService {
     const passwordHash =
       await this.passwordService.hashPassword(current_password);
 
-    const delivererRole = await this.roleRepository.findByName("REPARTIDOR");
-    if (!delivererRole) {
+    const clientRole = await this.roleRepository.findByName("CLIENTE");
+    if (!clientRole) {
       throw new HttpError(
-        'El rol "REPARTIDOR" no se encontró en la base de datos.',
+        'El rol "CLIENTE" no se encontró en la base de datos.',
         500
       );
     }
 
-    const delivererRoleId = delivererRole.id;
+
+
+    const clientRolId = clientRole.id;
     const newUser = new User(
       fullname,
       email,
       passwordHash,
-      delivererRoleId,
+      clientRolId,
       phone
     );
     newUser.status = "PENDING";

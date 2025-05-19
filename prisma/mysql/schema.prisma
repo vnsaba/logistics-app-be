@@ -42,8 +42,6 @@ model Order {
     createdAt   DateTime    @default(now())
     updatedAt   DateTime    @updatedAt
     subOrders   SubOrders[]
-    Store       Store?      @relation(fields: [storeId], references: [id])
-    storeId     Int?
 }
 
 model SubOrders {
@@ -86,7 +84,6 @@ model Store {
     status     statusStore @default(ACTIVE)
     createdAt  DateTime    @default(now())
     updatedAt  DateTime    @updatedAt
-    orders     Order[]
     inventory  Inventory[]
     SubOrders  SubOrders[]
 }

@@ -30,8 +30,12 @@ const mockDistanceService = {
 const mockInventoryRepository = {
     findByProductAndStore: jest.fn(),
     update: jest.fn(),
+    getStoreAndProductExist: jest.fn(),
 };
-
+mockInventoryRepository.getStoreAndProductExist.mockResolvedValue({
+    id: 100,
+    availableQuantity: 10,
+});
 const createOrderService = new CreateOrderService(
     mockOrderRepository as any,
     mockStoreRepository as any,

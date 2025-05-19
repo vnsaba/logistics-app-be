@@ -30,14 +30,14 @@ export class ChangePasswordService {
       throw new HttpError('La contraseña actual es incorrecta.', 401);
     }
 
-    // const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=[\]{};':"\\|,.<>/?])[A-Za-z\d!@#$%^&*()_\-+=[\]{};':"\\|,.<>/?]{8,64}$/;
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=[\]{};':"\\|,.<>/?])[A-Za-z\d!@#$%^&*()_\-+=[\]{};':"\\|,.<>/?]{8,64}$/;
 
-    // if (!passwordRegex.test(newPassword)) {
-    //   throw new HttpError(
-    //     'La nueva contraseña debe tener entre 8 y 64 caracteres, incluir al menos una letra mayúscula, una letra minúscula, un número y un carácter especial.',
-    //     400
-    //   );
-    // }
+    if (!passwordRegex.test(newPassword)) {
+      throw new HttpError(
+        'La nueva contraseña debe tener entre 8 y 64 caracteres, incluir al menos una letra mayúscula, una letra minúscula, un número y un carácter especial.',
+        400
+      );
+    }
 
     const hashedPassword = await this.passwordService.hashPassword(newPassword);
     await this.userRepository.updatePassword(user.email, hashedPassword);

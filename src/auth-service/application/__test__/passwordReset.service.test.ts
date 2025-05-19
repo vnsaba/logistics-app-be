@@ -9,12 +9,11 @@ describe('ResetPasswordService', () => {
   let mockUserRepo: jest.Mocked<IUserRepository>;
   let mockTokenManager: jest.Mocked<TokenManagerInterface>;
   let mockPasswordService: jest.Mocked<PasswordServiceInterface>;
-
   const mockUser: User = {
     id: 'userId',
     fullname: 'Test User',
     email: 'test@example.com',
-    current_password: 'oldHashedPassword', // Contraseña ya hasheada
+    current_password: 'oldHashedPassword',
     roleId: 'roleId',
     phone: '123456789',
     status: 'ACTIVE',
@@ -25,7 +24,14 @@ describe('ResetPasswordService', () => {
     verificationCodeExpires: null,
     twoFactorCode: null,
     twoFactorExpires: null,
+
+    // Campos faltantes:
+    latitude: 0,
+    longitude: 0,
+    isAvaliable: true,
+    activeOrders: 0,
   };
+
 
   const validTokenPayload = { email: mockUser.email };
   const validNewPassword = 'NewSecurePass1!';
@@ -36,7 +42,6 @@ describe('ResetPasswordService', () => {
       getByEmail: jest.fn(),
       updatePassword: jest.fn(),
       clearResetToken: jest.fn(),
-      // Métodos no usados directamente en estas pruebas, pero necesarios para el mock
       findById: jest.fn(),
       createUser: jest.fn(),
       updateUser: jest.fn(),
@@ -45,7 +50,13 @@ describe('ResetPasswordService', () => {
       updateTwoFactor: jest.fn(),
       clearTwoFactor: jest.fn(),
       getAllUsers: jest.fn(),
+
+      // Métodos que estaban faltando:
+      findByClientId: jest.fn(),
+      getAllDeliveries: jest.fn(),
+      updateActiveOrders: jest.fn(),
     } as jest.Mocked<IUserRepository>;
+
 
     mockTokenManager = {
       verifyToken: jest.fn(),
