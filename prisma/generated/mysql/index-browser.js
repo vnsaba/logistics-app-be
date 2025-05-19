@@ -182,6 +182,7 @@ exports.Prisma.CategoryScalarFieldEnum = {
   id: 'id',
   name: 'name',
   description: 'description',
+  isActive: 'isActive',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -242,8 +243,7 @@ exports.Prisma.SubOrdersOrderByRelevanceFieldEnum = {
 
 exports.Prisma.StoreOrderByRelevanceFieldEnum = {
   name: 'name',
-  address: 'address',
-  zipCode: 'zipCode'
+  address: 'address'
 };
 
 exports.Prisma.CityOrderByRelevanceFieldEnum = {
@@ -269,8 +269,7 @@ exports.Prisma.ProductOrderByRelevanceFieldEnum = {
 
 exports.Prisma.HistoricalMovementOrderByRelevanceFieldEnum = {
   user: 'user',
-  reason: 'reason',
-  movementType: 'movementType'
+  reason: 'reason'
 };
 exports.OrderStatus = exports.$Enums.OrderStatus = {
   PENDING: 'PENDING',
@@ -287,6 +286,12 @@ exports.statusStore = exports.$Enums.statusStore = {
 exports.statusProduct = exports.$Enums.statusProduct = {
   ACTIVE: 'ACTIVE',
   INACTIVE: 'INACTIVE'
+};
+
+exports.MovementType = exports.$Enums.MovementType = {
+  IN: 'IN',
+  OUT: 'OUT',
+  ADJUSTMENT: 'ADJUSTMENT'
 };
 
 exports.Prisma.ModelName = {

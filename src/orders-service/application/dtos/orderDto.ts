@@ -46,3 +46,25 @@ export class CreateOrderDto extends CreateOrderRequestDto {
 
 }
 
+
+export class SubOrderInterface {
+  id!: number;
+  storeId!: number;
+  deliveryId?: string;
+  status?: OrderStatus;
+  subTotal?: number;
+  orderItems!: CreateOrderItemDto[];
+}
+
+export interface OrderWithSubOrdersDto {
+  id: number;
+  customerId: string;
+  address: string;
+  latitude: number;
+  longitude: number;
+  status: OrderStatus;
+  totalAmount: number;
+  createdAt: Date;
+  updatedAt: Date;
+  subOrders: SubOrderInterface[];
+}

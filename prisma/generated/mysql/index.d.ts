@@ -93,6 +93,15 @@ export const statusProduct: {
 
 export type statusProduct = (typeof statusProduct)[keyof typeof statusProduct]
 
+
+export const MovementType: {
+  IN: 'IN',
+  OUT: 'OUT',
+  ADJUSTMENT: 'ADJUSTMENT'
+};
+
+export type MovementType = (typeof MovementType)[keyof typeof MovementType]
+
 }
 
 export type OrderStatus = $Enums.OrderStatus
@@ -106,6 +115,10 @@ export const statusStore: typeof $Enums.statusStore
 export type statusProduct = $Enums.statusProduct
 
 export const statusProduct: typeof $Enums.statusProduct
+
+export type MovementType = $Enums.MovementType
+
+export const MovementType: typeof $Enums.MovementType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -5026,6 +5039,7 @@ export namespace Prisma {
     longitude: number | null
     cityId: number | null
     capacity: number | null
+    zipCode: number | null
   }
 
   export type StoreSumAggregateOutputType = {
@@ -5034,6 +5048,7 @@ export namespace Prisma {
     longitude: number | null
     cityId: number | null
     capacity: number | null
+    zipCode: number | null
   }
 
   export type StoreMinAggregateOutputType = {
@@ -5044,7 +5059,7 @@ export namespace Prisma {
     longitude: number | null
     cityId: number | null
     capacity: number | null
-    zipCode: string | null
+    zipCode: number | null
     status: $Enums.statusStore | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -5058,7 +5073,7 @@ export namespace Prisma {
     longitude: number | null
     cityId: number | null
     capacity: number | null
-    zipCode: string | null
+    zipCode: number | null
     status: $Enums.statusStore | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -5086,6 +5101,7 @@ export namespace Prisma {
     longitude?: true
     cityId?: true
     capacity?: true
+    zipCode?: true
   }
 
   export type StoreSumAggregateInputType = {
@@ -5094,6 +5110,7 @@ export namespace Prisma {
     longitude?: true
     cityId?: true
     capacity?: true
+    zipCode?: true
   }
 
   export type StoreMinAggregateInputType = {
@@ -5233,7 +5250,7 @@ export namespace Prisma {
     longitude: number
     cityId: number
     capacity: number
-    zipCode: string
+    zipCode: number
     status: $Enums.statusStore
     createdAt: Date
     updatedAt: Date
@@ -5315,7 +5332,7 @@ export namespace Prisma {
       longitude: number
       cityId: number
       capacity: number
-      zipCode: string
+      zipCode: number
       status: $Enums.statusStore
       createdAt: Date
       updatedAt: Date
@@ -5698,7 +5715,7 @@ export namespace Prisma {
     readonly longitude: FieldRef<"Store", 'Float'>
     readonly cityId: FieldRef<"Store", 'Int'>
     readonly capacity: FieldRef<"Store", 'Int'>
-    readonly zipCode: FieldRef<"Store", 'String'>
+    readonly zipCode: FieldRef<"Store", 'Float'>
     readonly status: FieldRef<"Store", 'statusStore'>
     readonly createdAt: FieldRef<"Store", 'DateTime'>
     readonly updatedAt: FieldRef<"Store", 'DateTime'>
@@ -8066,6 +8083,7 @@ export namespace Prisma {
     id: number | null
     name: string | null
     description: string | null
+    isActive: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -8074,6 +8092,7 @@ export namespace Prisma {
     id: number | null
     name: string | null
     description: string | null
+    isActive: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -8082,6 +8101,7 @@ export namespace Prisma {
     id: number
     name: number
     description: number
+    isActive: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -8100,6 +8120,7 @@ export namespace Prisma {
     id?: true
     name?: true
     description?: true
+    isActive?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -8108,6 +8129,7 @@ export namespace Prisma {
     id?: true
     name?: true
     description?: true
+    isActive?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -8116,6 +8138,7 @@ export namespace Prisma {
     id?: true
     name?: true
     description?: true
+    isActive?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -8211,6 +8234,7 @@ export namespace Prisma {
     id: number
     name: string
     description: string
+    isActive: boolean
     createdAt: Date
     updatedAt: Date
     _count: CategoryCountAggregateOutputType | null
@@ -8238,6 +8262,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     description?: boolean
+    isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     products?: boolean | Category$productsArgs<ExtArgs>
@@ -8250,11 +8275,12 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     description?: boolean
+    isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type CategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "createdAt" | "updatedAt", ExtArgs["result"]["category"]>
+  export type CategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["category"]>
   export type CategoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     products?: boolean | Category$productsArgs<ExtArgs>
     _count?: boolean | CategoryCountOutputTypeDefaultArgs<ExtArgs>
@@ -8269,6 +8295,7 @@ export namespace Prisma {
       id: number
       name: string
       description: string
+      isActive: boolean
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["category"]>
@@ -8644,6 +8671,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Category", 'Int'>
     readonly name: FieldRef<"Category", 'String'>
     readonly description: FieldRef<"Category", 'String'>
+    readonly isActive: FieldRef<"Category", 'Boolean'>
     readonly createdAt: FieldRef<"Category", 'DateTime'>
     readonly updatedAt: FieldRef<"Category", 'DateTime'>
   }
@@ -11248,7 +11276,7 @@ export namespace Prisma {
     user: string | null
     movementDate: Date | null
     reason: string | null
-    movementType: string | null
+    movementType: $Enums.MovementType | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -11259,7 +11287,7 @@ export namespace Prisma {
     user: string | null
     movementDate: Date | null
     reason: string | null
-    movementType: string | null
+    movementType: $Enums.MovementType | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -11413,7 +11441,7 @@ export namespace Prisma {
     user: string
     movementDate: Date
     reason: string
-    movementType: string
+    movementType: $Enums.MovementType
     createdAt: Date
     updatedAt: Date
     _count: HistoricalMovementCountAggregateOutputType | null
@@ -11478,7 +11506,7 @@ export namespace Prisma {
       user: string
       movementDate: Date
       reason: string
-      movementType: string
+      movementType: $Enums.MovementType
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["historicalMovement"]>
@@ -11856,7 +11884,7 @@ export namespace Prisma {
     readonly user: FieldRef<"HistoricalMovement", 'String'>
     readonly movementDate: FieldRef<"HistoricalMovement", 'DateTime'>
     readonly reason: FieldRef<"HistoricalMovement", 'String'>
-    readonly movementType: FieldRef<"HistoricalMovement", 'String'>
+    readonly movementType: FieldRef<"HistoricalMovement", 'MovementType'>
     readonly createdAt: FieldRef<"HistoricalMovement", 'DateTime'>
     readonly updatedAt: FieldRef<"HistoricalMovement", 'DateTime'>
   }
@@ -12314,6 +12342,7 @@ export namespace Prisma {
     id: 'id',
     name: 'name',
     description: 'description',
+    isActive: 'isActive',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -12395,8 +12424,7 @@ export namespace Prisma {
 
   export const StoreOrderByRelevanceFieldEnum: {
     name: 'name',
-    address: 'address',
-    zipCode: 'zipCode'
+    address: 'address'
   };
 
   export type StoreOrderByRelevanceFieldEnum = (typeof StoreOrderByRelevanceFieldEnum)[keyof typeof StoreOrderByRelevanceFieldEnum]
@@ -12437,8 +12465,7 @@ export namespace Prisma {
 
   export const HistoricalMovementOrderByRelevanceFieldEnum: {
     user: 'user',
-    reason: 'reason',
-    movementType: 'movementType'
+    reason: 'reason'
   };
 
   export type HistoricalMovementOrderByRelevanceFieldEnum = (typeof HistoricalMovementOrderByRelevanceFieldEnum)[keyof typeof HistoricalMovementOrderByRelevanceFieldEnum]
@@ -12502,6 +12529,13 @@ export namespace Prisma {
    * Reference to a field of type 'statusProduct'
    */
   export type EnumstatusProductFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'statusProduct'>
+    
+
+
+  /**
+   * Reference to a field of type 'MovementType'
+   */
+  export type EnumMovementTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MovementType'>
     
   /**
    * Deep Input Types
@@ -12746,7 +12780,7 @@ export namespace Prisma {
     longitude?: FloatFilter<"Store"> | number
     cityId?: IntFilter<"Store"> | number
     capacity?: IntFilter<"Store"> | number
-    zipCode?: StringFilter<"Store"> | string
+    zipCode?: FloatFilter<"Store"> | number
     status?: EnumstatusStoreFilter<"Store"> | $Enums.statusStore
     createdAt?: DateTimeFilter<"Store"> | Date | string
     updatedAt?: DateTimeFilter<"Store"> | Date | string
@@ -12775,23 +12809,23 @@ export namespace Prisma {
 
   export type StoreWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    name?: string
+    address?: string
     AND?: StoreWhereInput | StoreWhereInput[]
     OR?: StoreWhereInput[]
     NOT?: StoreWhereInput | StoreWhereInput[]
-    name?: StringFilter<"Store"> | string
-    address?: StringFilter<"Store"> | string
     latitude?: FloatFilter<"Store"> | number
     longitude?: FloatFilter<"Store"> | number
     cityId?: IntFilter<"Store"> | number
     capacity?: IntFilter<"Store"> | number
-    zipCode?: StringFilter<"Store"> | string
+    zipCode?: FloatFilter<"Store"> | number
     status?: EnumstatusStoreFilter<"Store"> | $Enums.statusStore
     createdAt?: DateTimeFilter<"Store"> | Date | string
     updatedAt?: DateTimeFilter<"Store"> | Date | string
     city?: XOR<CityScalarRelationFilter, CityWhereInput>
     subOrders?: SubOrdersListRelationFilter
     inventory?: InventoryListRelationFilter
-  }, "id">
+  }, "id" | "name" | "address">
 
   export type StoreOrderByWithAggregationInput = {
     id?: SortOrder
@@ -12823,7 +12857,7 @@ export namespace Prisma {
     longitude?: FloatWithAggregatesFilter<"Store"> | number
     cityId?: IntWithAggregatesFilter<"Store"> | number
     capacity?: IntWithAggregatesFilter<"Store"> | number
-    zipCode?: StringWithAggregatesFilter<"Store"> | string
+    zipCode?: FloatWithAggregatesFilter<"Store"> | number
     status?: EnumstatusStoreWithAggregatesFilter<"Store"> | $Enums.statusStore
     createdAt?: DateTimeWithAggregatesFilter<"Store"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Store"> | Date | string
@@ -12930,6 +12964,7 @@ export namespace Prisma {
     id?: IntFilter<"Category"> | number
     name?: StringFilter<"Category"> | string
     description?: StringFilter<"Category"> | string
+    isActive?: BoolFilter<"Category"> | boolean
     createdAt?: DateTimeFilter<"Category"> | Date | string
     updatedAt?: DateTimeFilter<"Category"> | Date | string
     products?: ProductListRelationFilter
@@ -12939,6 +12974,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrder
+    isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     products?: ProductOrderByRelationAggregateInput
@@ -12947,20 +12983,22 @@ export namespace Prisma {
 
   export type CategoryWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    name?: string
     AND?: CategoryWhereInput | CategoryWhereInput[]
     OR?: CategoryWhereInput[]
     NOT?: CategoryWhereInput | CategoryWhereInput[]
-    name?: StringFilter<"Category"> | string
     description?: StringFilter<"Category"> | string
+    isActive?: BoolFilter<"Category"> | boolean
     createdAt?: DateTimeFilter<"Category"> | Date | string
     updatedAt?: DateTimeFilter<"Category"> | Date | string
     products?: ProductListRelationFilter
-  }, "id">
+  }, "id" | "name">
 
   export type CategoryOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrder
+    isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: CategoryCountOrderByAggregateInput
@@ -12977,6 +13015,7 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Category"> | number
     name?: StringWithAggregatesFilter<"Category"> | string
     description?: StringWithAggregatesFilter<"Category"> | string
+    isActive?: BoolWithAggregatesFilter<"Category"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Category"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Category"> | Date | string
   }
@@ -13182,7 +13221,7 @@ export namespace Prisma {
     user?: StringFilter<"HistoricalMovement"> | string
     movementDate?: DateTimeFilter<"HistoricalMovement"> | Date | string
     reason?: StringFilter<"HistoricalMovement"> | string
-    movementType?: StringFilter<"HistoricalMovement"> | string
+    movementType?: EnumMovementTypeFilter<"HistoricalMovement"> | $Enums.MovementType
     createdAt?: DateTimeFilter<"HistoricalMovement"> | Date | string
     updatedAt?: DateTimeFilter<"HistoricalMovement"> | Date | string
     inventory?: XOR<InventoryScalarRelationFilter, InventoryWhereInput>
@@ -13210,7 +13249,7 @@ export namespace Prisma {
     user?: StringFilter<"HistoricalMovement"> | string
     movementDate?: DateTimeFilter<"HistoricalMovement"> | Date | string
     reason?: StringFilter<"HistoricalMovement"> | string
-    movementType?: StringFilter<"HistoricalMovement"> | string
+    movementType?: EnumMovementTypeFilter<"HistoricalMovement"> | $Enums.MovementType
     createdAt?: DateTimeFilter<"HistoricalMovement"> | Date | string
     updatedAt?: DateTimeFilter<"HistoricalMovement"> | Date | string
     inventory?: XOR<InventoryScalarRelationFilter, InventoryWhereInput>
@@ -13241,7 +13280,7 @@ export namespace Prisma {
     user?: StringWithAggregatesFilter<"HistoricalMovement"> | string
     movementDate?: DateTimeWithAggregatesFilter<"HistoricalMovement"> | Date | string
     reason?: StringWithAggregatesFilter<"HistoricalMovement"> | string
-    movementType?: StringWithAggregatesFilter<"HistoricalMovement"> | string
+    movementType?: EnumMovementTypeWithAggregatesFilter<"HistoricalMovement"> | $Enums.MovementType
     createdAt?: DateTimeWithAggregatesFilter<"HistoricalMovement"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"HistoricalMovement"> | Date | string
   }
@@ -13478,7 +13517,7 @@ export namespace Prisma {
     latitude: number
     longitude: number
     capacity: number
-    zipCode: string
+    zipCode: number
     status?: $Enums.statusStore
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -13495,7 +13534,7 @@ export namespace Prisma {
     longitude: number
     cityId: number
     capacity: number
-    zipCode: string
+    zipCode: number
     status?: $Enums.statusStore
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -13509,7 +13548,7 @@ export namespace Prisma {
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
-    zipCode?: StringFieldUpdateOperationsInput | string
+    zipCode?: FloatFieldUpdateOperationsInput | number
     status?: EnumstatusStoreFieldUpdateOperationsInput | $Enums.statusStore
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13526,7 +13565,7 @@ export namespace Prisma {
     longitude?: FloatFieldUpdateOperationsInput | number
     cityId?: IntFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
-    zipCode?: StringFieldUpdateOperationsInput | string
+    zipCode?: FloatFieldUpdateOperationsInput | number
     status?: EnumstatusStoreFieldUpdateOperationsInput | $Enums.statusStore
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13542,7 +13581,7 @@ export namespace Prisma {
     longitude: number
     cityId: number
     capacity: number
-    zipCode: string
+    zipCode: number
     status?: $Enums.statusStore
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -13554,7 +13593,7 @@ export namespace Prisma {
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
-    zipCode?: StringFieldUpdateOperationsInput | string
+    zipCode?: FloatFieldUpdateOperationsInput | number
     status?: EnumstatusStoreFieldUpdateOperationsInput | $Enums.statusStore
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13568,7 +13607,7 @@ export namespace Prisma {
     longitude?: FloatFieldUpdateOperationsInput | number
     cityId?: IntFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
-    zipCode?: StringFieldUpdateOperationsInput | string
+    zipCode?: FloatFieldUpdateOperationsInput | number
     status?: EnumstatusStoreFieldUpdateOperationsInput | $Enums.statusStore
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13655,6 +13694,7 @@ export namespace Prisma {
   export type CategoryCreateInput = {
     name: string
     description: string
+    isActive: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     products?: ProductCreateNestedManyWithoutCategoryInput
@@ -13664,6 +13704,7 @@ export namespace Prisma {
     id?: number
     name: string
     description: string
+    isActive: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     products?: ProductUncheckedCreateNestedManyWithoutCategoryInput
@@ -13672,6 +13713,7 @@ export namespace Prisma {
   export type CategoryUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     products?: ProductUpdateManyWithoutCategoryNestedInput
@@ -13681,6 +13723,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     products?: ProductUncheckedUpdateManyWithoutCategoryNestedInput
@@ -13690,6 +13733,7 @@ export namespace Prisma {
     id?: number
     name: string
     description: string
+    isActive: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -13697,6 +13741,7 @@ export namespace Prisma {
   export type CategoryUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13705,6 +13750,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13919,7 +13965,7 @@ export namespace Prisma {
     user: string
     movementDate: Date | string
     reason: string
-    movementType: string
+    movementType: $Enums.MovementType
     createdAt?: Date | string
     updatedAt?: Date | string
     inventory: InventoryCreateNestedOneWithoutHistoricalMovementInput
@@ -13931,7 +13977,7 @@ export namespace Prisma {
     user: string
     movementDate: Date | string
     reason: string
-    movementType: string
+    movementType: $Enums.MovementType
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -13940,7 +13986,7 @@ export namespace Prisma {
     user?: StringFieldUpdateOperationsInput | string
     movementDate?: DateTimeFieldUpdateOperationsInput | Date | string
     reason?: StringFieldUpdateOperationsInput | string
-    movementType?: StringFieldUpdateOperationsInput | string
+    movementType?: EnumMovementTypeFieldUpdateOperationsInput | $Enums.MovementType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inventory?: InventoryUpdateOneRequiredWithoutHistoricalMovementNestedInput
@@ -13952,7 +13998,7 @@ export namespace Prisma {
     user?: StringFieldUpdateOperationsInput | string
     movementDate?: DateTimeFieldUpdateOperationsInput | Date | string
     reason?: StringFieldUpdateOperationsInput | string
-    movementType?: StringFieldUpdateOperationsInput | string
+    movementType?: EnumMovementTypeFieldUpdateOperationsInput | $Enums.MovementType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13963,7 +14009,7 @@ export namespace Prisma {
     user: string
     movementDate: Date | string
     reason: string
-    movementType: string
+    movementType: $Enums.MovementType
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -13972,7 +14018,7 @@ export namespace Prisma {
     user?: StringFieldUpdateOperationsInput | string
     movementDate?: DateTimeFieldUpdateOperationsInput | Date | string
     reason?: StringFieldUpdateOperationsInput | string
-    movementType?: StringFieldUpdateOperationsInput | string
+    movementType?: EnumMovementTypeFieldUpdateOperationsInput | $Enums.MovementType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13983,7 +14029,7 @@ export namespace Prisma {
     user?: StringFieldUpdateOperationsInput | string
     movementDate?: DateTimeFieldUpdateOperationsInput | Date | string
     reason?: StringFieldUpdateOperationsInput | string
-    movementType?: StringFieldUpdateOperationsInput | string
+    movementType?: EnumMovementTypeFieldUpdateOperationsInput | $Enums.MovementType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -14360,6 +14406,7 @@ export namespace Prisma {
     longitude?: SortOrder
     cityId?: SortOrder
     capacity?: SortOrder
+    zipCode?: SortOrder
   }
 
   export type StoreMaxOrderByAggregateInput = {
@@ -14396,6 +14443,7 @@ export namespace Prisma {
     longitude?: SortOrder
     cityId?: SortOrder
     capacity?: SortOrder
+    zipCode?: SortOrder
   }
 
   export type EnumstatusStoreWithAggregatesFilter<$PrismaModel = never> = {
@@ -14496,6 +14544,11 @@ export namespace Prisma {
     id?: SortOrder
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type ProductListRelationFilter = {
     every?: ProductWhereInput
     some?: ProductWhereInput
@@ -14516,6 +14569,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrder
+    isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -14528,6 +14582,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrder
+    isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -14536,6 +14591,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrder
+    isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -14544,9 +14600,12 @@ export namespace Prisma {
     id?: SortOrder
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type EnumstatusProductFilter<$PrismaModel = never> = {
@@ -14635,14 +14694,6 @@ export namespace Prisma {
     weight?: SortOrder
   }
 
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
-  }
-
   export type EnumstatusProductWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.statusProduct | EnumstatusProductFieldRefInput<$PrismaModel>
     in?: $Enums.statusProduct[]
@@ -14712,6 +14763,13 @@ export namespace Prisma {
     minimumThreshold?: SortOrder
   }
 
+  export type EnumMovementTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.MovementType | EnumMovementTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.MovementType[]
+    notIn?: $Enums.MovementType[]
+    not?: NestedEnumMovementTypeFilter<$PrismaModel> | $Enums.MovementType
+  }
+
   export type InventoryScalarRelationFilter = {
     is?: InventoryWhereInput
     isNot?: InventoryWhereInput
@@ -14764,6 +14822,16 @@ export namespace Prisma {
   export type HistoricalMovementSumOrderByAggregateInput = {
     id?: SortOrder
     inventoryId?: SortOrder
+  }
+
+  export type EnumMovementTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MovementType | EnumMovementTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.MovementType[]
+    notIn?: $Enums.MovementType[]
+    not?: NestedEnumMovementTypeWithAggregatesFilter<$PrismaModel> | $Enums.MovementType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMovementTypeFilter<$PrismaModel>
+    _max?: NestedEnumMovementTypeFilter<$PrismaModel>
   }
 
   export type SubOrdersCreateNestedManyWithoutOrderInput = {
@@ -15148,6 +15216,10 @@ export namespace Prisma {
     connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
   }
 
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
   export type ProductUpdateManyWithoutCategoryNestedInput = {
     create?: XOR<ProductCreateWithoutCategoryInput, ProductUncheckedCreateWithoutCategoryInput> | ProductCreateWithoutCategoryInput[] | ProductUncheckedCreateWithoutCategoryInput[]
     connectOrCreate?: ProductCreateOrConnectWithoutCategoryInput | ProductCreateOrConnectWithoutCategoryInput[]
@@ -15208,10 +15280,6 @@ export namespace Prisma {
     connectOrCreate?: OrderItemCreateOrConnectWithoutProductInput | OrderItemCreateOrConnectWithoutProductInput[]
     createMany?: OrderItemCreateManyProductInputEnvelope
     connect?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[]
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
   }
 
   export type EnumstatusProductFieldUpdateOperationsInput = {
@@ -15356,6 +15424,10 @@ export namespace Prisma {
     create?: XOR<InventoryCreateWithoutHistoricalMovementInput, InventoryUncheckedCreateWithoutHistoricalMovementInput>
     connectOrCreate?: InventoryCreateOrConnectWithoutHistoricalMovementInput
     connect?: InventoryWhereUniqueInput
+  }
+
+  export type EnumMovementTypeFieldUpdateOperationsInput = {
+    set?: $Enums.MovementType
   }
 
   export type InventoryUpdateOneRequiredWithoutHistoricalMovementNestedInput = {
@@ -15517,19 +15589,19 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
-  export type NestedEnumstatusProductFilter<$PrismaModel = never> = {
-    equals?: $Enums.statusProduct | EnumstatusProductFieldRefInput<$PrismaModel>
-    in?: $Enums.statusProduct[]
-    notIn?: $Enums.statusProduct[]
-    not?: NestedEnumstatusProductFilter<$PrismaModel> | $Enums.statusProduct
-  }
-
   export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type NestedEnumstatusProductFilter<$PrismaModel = never> = {
+    equals?: $Enums.statusProduct | EnumstatusProductFieldRefInput<$PrismaModel>
+    in?: $Enums.statusProduct[]
+    notIn?: $Enums.statusProduct[]
+    not?: NestedEnumstatusProductFilter<$PrismaModel> | $Enums.statusProduct
   }
 
   export type NestedEnumstatusProductWithAggregatesFilter<$PrismaModel = never> = {
@@ -15540,6 +15612,23 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumstatusProductFilter<$PrismaModel>
     _max?: NestedEnumstatusProductFilter<$PrismaModel>
+  }
+
+  export type NestedEnumMovementTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.MovementType | EnumMovementTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.MovementType[]
+    notIn?: $Enums.MovementType[]
+    not?: NestedEnumMovementTypeFilter<$PrismaModel> | $Enums.MovementType
+  }
+
+  export type NestedEnumMovementTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MovementType | EnumMovementTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.MovementType[]
+    notIn?: $Enums.MovementType[]
+    not?: NestedEnumMovementTypeWithAggregatesFilter<$PrismaModel> | $Enums.MovementType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMovementTypeFilter<$PrismaModel>
+    _max?: NestedEnumMovementTypeFilter<$PrismaModel>
   }
 
   export type SubOrdersCreateWithoutOrderInput = {
@@ -15637,7 +15726,7 @@ export namespace Prisma {
     latitude: number
     longitude: number
     capacity: number
-    zipCode: string
+    zipCode: number
     status?: $Enums.statusStore
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -15653,7 +15742,7 @@ export namespace Prisma {
     longitude: number
     cityId: number
     capacity: number
-    zipCode: string
+    zipCode: number
     status?: $Enums.statusStore
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -15743,7 +15832,7 @@ export namespace Prisma {
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
-    zipCode?: StringFieldUpdateOperationsInput | string
+    zipCode?: FloatFieldUpdateOperationsInput | number
     status?: EnumstatusStoreFieldUpdateOperationsInput | $Enums.statusStore
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15759,7 +15848,7 @@ export namespace Prisma {
     longitude?: FloatFieldUpdateOperationsInput | number
     cityId?: IntFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
-    zipCode?: StringFieldUpdateOperationsInput | string
+    zipCode?: FloatFieldUpdateOperationsInput | number
     status?: EnumstatusStoreFieldUpdateOperationsInput | $Enums.statusStore
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16109,7 +16198,7 @@ export namespace Prisma {
     latitude: number
     longitude: number
     capacity: number
-    zipCode: string
+    zipCode: number
     status?: $Enums.statusStore
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -16124,7 +16213,7 @@ export namespace Prisma {
     latitude: number
     longitude: number
     capacity: number
-    zipCode: string
+    zipCode: number
     status?: $Enums.statusStore
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -16189,7 +16278,7 @@ export namespace Prisma {
     longitude?: FloatFilter<"Store"> | number
     cityId?: IntFilter<"Store"> | number
     capacity?: IntFilter<"Store"> | number
-    zipCode?: StringFilter<"Store"> | string
+    zipCode?: FloatFilter<"Store"> | number
     status?: EnumstatusStoreFilter<"Store"> | $Enums.statusStore
     createdAt?: DateTimeFilter<"Store"> | Date | string
     updatedAt?: DateTimeFilter<"Store"> | Date | string
@@ -16328,6 +16417,7 @@ export namespace Prisma {
   export type CategoryCreateWithoutProductsInput = {
     name: string
     description: string
+    isActive: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -16336,6 +16426,7 @@ export namespace Prisma {
     id?: number
     name: string
     description: string
+    isActive: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -16417,6 +16508,7 @@ export namespace Prisma {
   export type CategoryUpdateWithoutProductsInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16425,6 +16517,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16509,7 +16602,7 @@ export namespace Prisma {
     latitude: number
     longitude: number
     capacity: number
-    zipCode: string
+    zipCode: number
     status?: $Enums.statusStore
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -16525,7 +16618,7 @@ export namespace Prisma {
     longitude: number
     cityId: number
     capacity: number
-    zipCode: string
+    zipCode: number
     status?: $Enums.statusStore
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -16541,7 +16634,7 @@ export namespace Prisma {
     user: string
     movementDate: Date | string
     reason: string
-    movementType: string
+    movementType: $Enums.MovementType
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -16551,7 +16644,7 @@ export namespace Prisma {
     user: string
     movementDate: Date | string
     reason: string
-    movementType: string
+    movementType: $Enums.MovementType
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -16631,7 +16724,7 @@ export namespace Prisma {
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
-    zipCode?: StringFieldUpdateOperationsInput | string
+    zipCode?: FloatFieldUpdateOperationsInput | number
     status?: EnumstatusStoreFieldUpdateOperationsInput | $Enums.statusStore
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16647,7 +16740,7 @@ export namespace Prisma {
     longitude?: FloatFieldUpdateOperationsInput | number
     cityId?: IntFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
-    zipCode?: StringFieldUpdateOperationsInput | string
+    zipCode?: FloatFieldUpdateOperationsInput | number
     status?: EnumstatusStoreFieldUpdateOperationsInput | $Enums.statusStore
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16679,7 +16772,7 @@ export namespace Prisma {
     user?: StringFilter<"HistoricalMovement"> | string
     movementDate?: DateTimeFilter<"HistoricalMovement"> | Date | string
     reason?: StringFilter<"HistoricalMovement"> | string
-    movementType?: StringFilter<"HistoricalMovement"> | string
+    movementType?: EnumMovementTypeFilter<"HistoricalMovement"> | $Enums.MovementType
     createdAt?: DateTimeFilter<"HistoricalMovement"> | Date | string
     updatedAt?: DateTimeFilter<"HistoricalMovement"> | Date | string
   }
@@ -16907,7 +17000,7 @@ export namespace Prisma {
     latitude: number
     longitude: number
     capacity: number
-    zipCode: string
+    zipCode: number
     status?: $Enums.statusStore
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -16919,7 +17012,7 @@ export namespace Prisma {
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
-    zipCode?: StringFieldUpdateOperationsInput | string
+    zipCode?: FloatFieldUpdateOperationsInput | number
     status?: EnumstatusStoreFieldUpdateOperationsInput | $Enums.statusStore
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16934,7 +17027,7 @@ export namespace Prisma {
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
-    zipCode?: StringFieldUpdateOperationsInput | string
+    zipCode?: FloatFieldUpdateOperationsInput | number
     status?: EnumstatusStoreFieldUpdateOperationsInput | $Enums.statusStore
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16949,7 +17042,7 @@ export namespace Prisma {
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
-    zipCode?: StringFieldUpdateOperationsInput | string
+    zipCode?: FloatFieldUpdateOperationsInput | number
     status?: EnumstatusStoreFieldUpdateOperationsInput | $Enums.statusStore
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17128,7 +17221,7 @@ export namespace Prisma {
     user: string
     movementDate: Date | string
     reason: string
-    movementType: string
+    movementType: $Enums.MovementType
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -17137,7 +17230,7 @@ export namespace Prisma {
     user?: StringFieldUpdateOperationsInput | string
     movementDate?: DateTimeFieldUpdateOperationsInput | Date | string
     reason?: StringFieldUpdateOperationsInput | string
-    movementType?: StringFieldUpdateOperationsInput | string
+    movementType?: EnumMovementTypeFieldUpdateOperationsInput | $Enums.MovementType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -17147,7 +17240,7 @@ export namespace Prisma {
     user?: StringFieldUpdateOperationsInput | string
     movementDate?: DateTimeFieldUpdateOperationsInput | Date | string
     reason?: StringFieldUpdateOperationsInput | string
-    movementType?: StringFieldUpdateOperationsInput | string
+    movementType?: EnumMovementTypeFieldUpdateOperationsInput | $Enums.MovementType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -17157,7 +17250,7 @@ export namespace Prisma {
     user?: StringFieldUpdateOperationsInput | string
     movementDate?: DateTimeFieldUpdateOperationsInput | Date | string
     reason?: StringFieldUpdateOperationsInput | string
-    movementType?: StringFieldUpdateOperationsInput | string
+    movementType?: EnumMovementTypeFieldUpdateOperationsInput | $Enums.MovementType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

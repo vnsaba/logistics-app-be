@@ -7,7 +7,7 @@ import { IDistanceService } from "../../geolocation-service/domain/interface/dis
 import { CreateOrderRequestDto, SubOrderDto } from "./dtos/orderDto";
 import { CreateOrderItemDto } from "../../orderItem-service/application/dtos/createOrderItemDto";
 import { OrderStatus } from "../../shared/enums/orderStatus.enum";
-import { IInventoryRepository } from '../../inventory/domain/interace/invetory.interface';
+import { IInventoryRepository } from '../../inventory-service/domain/interfaces/inventory.interface';
 import { Order } from "../domain/entity/order";
 
 export class CreateOrderService {
@@ -85,6 +85,7 @@ export class CreateOrderService {
             const selectedDelivery = await this.selectBestDelivery(storeId);
 
             const subTotal = items.reduce((sum, item) => sum + item.unitPrice * item.quantity, 0);
+            await this.validateAndDiscountInventory(storeId, items);
 
             subOrdersData.push({
                 storeId,
@@ -107,7 +108,7 @@ export class CreateOrderService {
         for (const item of items) {
             const product = await this.productRepository.findById(item.productId);
             if (!product) throw new Error(`Product with id ${item.productId} not found`);
-            const productoExist = await this.inventoryRepository.findByProductInStore(storeId, item.productId);
+            const productoExist = await this.inventoryRepository.findByProductAndStore(storeId, item.productId);
             if (!productoExist) throw new Error(`Product with id ${item.productId} not found in store ${storeId}`);
             if (productoExist.availableQuantity < item.quantity) {
                 throw new Error(`Product with id ${item.productId} not enough in store ${storeId}`);
@@ -149,5 +150,27 @@ export class CreateOrderService {
         if (!selected) throw new Error('No delivery person could be assigned');
         return selected;
     }
+
+    private async validateAndDiscountInventory(storeId: number, items: CreateOrderItemDto[]): Promise<void> {
+        const store = await this.storeRepository.findById(storeId);
+        if (!store) throw new Error(`Store with id ${storeId} not found`);
+
+        for (const item of items) {
+            const product = await this.productRepository.findById(item.productId);
+            if (!product) throw new Error(`Product with id ${item.productId} not found`);
+
+            const inventory = await this.inventoryRepository.findByProductAndStore(storeId, item.productId);
+            if (!inventory) throw new Error(`Inventory for product ${item.productId} in store ${storeId} not found`);
+            if (inventory.availableQuantity < item.quantity) {
+                throw new Error(`Not enough stock for product ${item.productId}`);
+            }
+
+            // Descontar stock
+            await this.inventoryRepository.update(inventory.id!, {
+                availableQuantity: inventory.availableQuantity - item.quantity
+            });
+        }
+    }
+
 
 }

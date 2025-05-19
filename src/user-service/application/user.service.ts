@@ -5,7 +5,7 @@ export class UserService {
   private userRepository: IUserRepository;
 
   constructor(userRepository: IUserRepository) {
-    this.userRepository = userRepository;
+    this.userRepository = userRepository
   }
 
   async getAllUsers(): Promise<Omit<UserType, 'current_password'>[]> {

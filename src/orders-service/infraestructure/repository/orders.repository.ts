@@ -1,6 +1,6 @@
 import { Order } from "src/orders-service/domain/entity/order";
 import { OrderInterface } from "src/orders-service/domain/interface/order.interface";
-import { CreateOrderDto } from "src/orders-service/application/dtos/orderDto";
+import { CreateOrderDto, OrderWithSubOrdersDto } from "src/orders-service/application/dtos/orderDto";
 import { UpdateOrderDto } from "src/orders-service/application/dtos/updateOrderDto";
 import { prismaMysql } from "../../../../prisma/index";
 import { OrderStatus } from "../../../shared/enums/orderStatus.enum";
@@ -43,15 +43,24 @@ export class OrdersRepository implements OrderInterface {
         })
     }
 
-    async findById(id: number): Promise<Order> {
-        return await prismaMysql.order.findUnique({
+    async findById(id: number, options?: any): Promise<OrderWithSubOrdersDto> {
+        const order = await prismaMysql.order.findUnique({
             where: { id: Number(id) },
-        }).then((order) => {
-            if (!order) {
-                throw new Error(`Order with id ${id} not found`);
-            }
-            return order;
-        })
+            include: {
+                subOrders: {
+                    include: {
+                        orderItems: true,
+                        store: true,
+                    }
+                }
+            },
+            ...(options || {}),
+        });
+        if (!order) {
+            throw new Error(`Order with id ${id} not found`);
+        }
+        // Adapt the result to OrderWithSubOrdersDto if necessary
+        return order as unknown as OrderWithSubOrdersDto;
     }
 
     async findAll(): Promise<Order[]> {
@@ -72,9 +81,9 @@ export class OrdersRepository implements OrderInterface {
         })
     }
 
-    async update(id: string, order: UpdateOrderDto): Promise<Order> {
+    async update(id: number, order: UpdateOrderDto): Promise<Order> {
         return await prismaMysql.order.update({
-            where: { id: Number(id) },
+            where: { id },
             data: {
                 status: order.status,
                 totalAmount: order.totalAmount,
@@ -97,9 +106,9 @@ export class OrdersRepository implements OrderInterface {
     }
 
     //para cancelar la orden tambien se puede usar el update
-    async updateStatus(id: string, status: OrderStatus): Promise<Order> {
+    async updateStatus(id: number, status: OrderStatus): Promise<Order> {
         return await prismaMysql.order.update({
-            where: { id: Number(id) },
+            where: { id},
             data: { status: status }
         });
     }

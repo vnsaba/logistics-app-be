@@ -8,7 +8,7 @@ import { GoogleMapsGeocodingService } from '../../../geolocation-service/infraes
 import { UserRepository } from "../../../user-service/infraestructure/repository/user.repository";
 import { DistanceService } from '../../../geolocation-service/infraestructure/distanceService';
 import { CreateOrderRequestDto } from "../../application/dtos/orderDto"
-import { InventoryRepository } from "../../../inventory/infraestructure/repository/inventory.repository";
+import { InventoryRepository } from "../../../inventory-service/infraestructure/repository/inventory.repository";
 import { ErrorResponse } from "../../../shared/domain/interfaces/error.interface";
 import { UserRole } from '../../../../types/auth/index';
 
@@ -80,7 +80,19 @@ export class OrdersController extends Controller {
         }
     }
 
-    //listar todos los pedidos de un clinte
+    //listar el pedido activo hecho por el  clinte con sus orderItems
+
+
+
+
+    //cancelar toda la orden
+
+
+    // //cancelar una suborden
+    // public async cancelSubOrder(){
+
+
+    // }
 
 }
 

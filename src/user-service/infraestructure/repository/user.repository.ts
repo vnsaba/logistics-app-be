@@ -119,21 +119,6 @@ export class UserRepository implements IUserRepository {
     return users;
   }
 
-  // public async findByDeliveryId(id: string): Promise<User | null> {
-  //   const user = await prismaMongo.user.findUnique({
-  //     where: { id },
-  //     include: {
-  //       role: true,
-  //     },
-  //   });
-
-  //   // Validar que el usuario existe y que su rol es 'delivery'
-  //   if (!user || !user.role || user.role.name !== 'delivery') {
-  //     return null;
-  //   }
-  //   return user;
-  // }
-
   public async findByClientId(id: string): Promise<User | null> {
     const user = await prismaMongo.user.findUnique({
       where: { id },
@@ -158,6 +143,15 @@ export class UserRepository implements IUserRepository {
       },
     });
     return users;
+  }
+
+ async updateActiveOrders(deliveryId: string, activeOrders: number): Promise<void> {
+     await prismaMongo.user.update({
+      where: { id: deliveryId },
+      data: {
+        activeOrders: activeOrders,
+      },
+    });
   }
 
 }

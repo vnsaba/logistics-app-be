@@ -140,6 +140,15 @@ exports.Prisma.UserScalarFieldEnum = {
   activeOrders: 'activeOrders'
 };
 
+exports.Prisma.LocationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -157,7 +166,8 @@ exports.Status = exports.$Enums.Status = {
 
 exports.Prisma.ModelName = {
   Role: 'Role',
-  User: 'User'
+  User: 'User',
+  Location: 'Location'
 };
 
 /**

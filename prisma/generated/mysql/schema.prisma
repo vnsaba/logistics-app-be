@@ -25,11 +25,14 @@ enum statusProduct {
   INACTIVE
 }
 
+enum MovementType {
+  IN
+  OUT
+  ADJUSTMENT
+}
+
 model Order {
   id          Int         @id @default(autoincrement())
-  // storeId     Int
-  // store       Store       @relation(fields: [storeId], references: [id])
-  // deliveryId  String
   customerId  String
   status      OrderStatus @default(PENDING)
   totalAmount Float //sum de subordenes
@@ -38,7 +41,6 @@ model Order {
   address     String
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
-  // orderItems  OrderItem[]
   subOrders   SubOrders[]
 }
 
@@ -58,33 +60,29 @@ model SubOrders {
 
 model OrderItem {
   id         Int       @id @default(autoincrement())
-  // orderId   Int
-  // order     Order    @relation(fields: [orderId], references: [id])
   subOrderId Int
   subOrder   SubOrders @relation(fields: [subOrderId], references: [id])
   productId  Int
   product    Product   @relation(fields: [productId], references: [id])
   quantity   Int
   unitPrice  Float
-  //   totalPrice  Float
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
 }
 
 model Store {
   id        Int         @id @default(autoincrement())
-  name      String
-  address   String
+  name      String      @unique
+  address   String      @unique
   latitude  Float
   longitude Float
   cityId    Int
   city      City        @relation(fields: [cityId], references: [id])
   capacity  Int
-  zipCode   String
+  zipCode   Float
   status    statusStore @default(ACTIVE)
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
-  // orders    Order[]
   subOrders SubOrders[]
   inventory Inventory[]
 }
@@ -105,8 +103,9 @@ model Department {
 
 model Category {
   id          Int       @id @default(autoincrement())
-  name        String
+  name        String    @unique
   description String
+  isActive    Boolean
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   products    Product[]
@@ -148,13 +147,13 @@ model Inventory {
 }
 
 model HistoricalMovement {
-  id           Int       @id @default(autoincrement())
+  id           Int          @id @default(autoincrement())
   inventoryId  Int
-  inventory    Inventory @relation(fields: [inventoryId], references: [id])
+  inventory    Inventory    @relation(fields: [inventoryId], references: [id])
   user         String
   movementDate DateTime
   reason       String
-  movementType String
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
+  movementType MovementType
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
 }

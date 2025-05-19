@@ -25,6 +25,12 @@ enum statusProduct {
     INACTIVE
 }
 
+enum MovementType {
+  IN
+  OUT
+  ADJUSTMENT
+}
+
 model Order {
     id          Int         @id @default(autoincrement())
     customerId  String
@@ -66,14 +72,14 @@ model OrderItem {
 
 model Store {
     id        Int         @id @default(autoincrement())
-    name      String
-    address   String
+    name      String      @unique
+    address   String      @unique
     latitude  Float
     longitude Float
     cityId    Int
     city      City        @relation(fields: [cityId], references: [id])
     capacity  Int
-    zipCode   String
+    zipCode   Float
     status    statusStore @default(ACTIVE)
     createdAt DateTime    @default(now())
     updatedAt DateTime    @updatedAt
@@ -97,8 +103,9 @@ model Department {
 
 model Category {
     id          Int       @id @default(autoincrement())
-    name        String
+    name        String    @unique
     description String
+    isActive    Boolean
     createdAt   DateTime  @default(now())
     updatedAt   DateTime  @updatedAt
     products    Product[]
@@ -140,13 +147,13 @@ model Inventory {
 }
 
 model HistoricalMovement {
-    id           Int       @id @default(autoincrement())
-    inventoryId  Int
-    inventory    Inventory @relation(fields: [inventoryId], references: [id])
-    user         String
-    movementDate DateTime
-    reason       String
-    movementType String
-    createdAt   DateTime  @default(now())
-    updatedAt   DateTime  @updatedAt
+  id           Int          @id @default(autoincrement())
+  inventoryId  Int
+  inventory    Inventory    @relation(fields: [inventoryId], references: [id])
+  user         String
+  movementDate DateTime
+  reason       String
+  movementType MovementType 
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
 }

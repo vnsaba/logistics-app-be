@@ -14,9 +14,7 @@ export interface IUserRepository {
   updateTwoFactor(id: string, code: string, expires: Date): Promise<void>
   clearTwoFactor(id: string): Promise<void>;
   getAllUsers(): Promise<Omit<UserType, 'current_password'>[]>
-  // findByDeliveryId(id: string): Promise<User | null>;
   findByClientId(id: string): Promise<User | null>;
   getAllDeliveries(isAvaliable: boolean): Promise<DeliveryInfo[]>;
-  //obtener la informacion de usuario, email, id y role y nombre completo y el numero de telefono
-  
+  updateActiveOrders(deliveryId: string, activeOrders: number): Promise<void>;
 }
