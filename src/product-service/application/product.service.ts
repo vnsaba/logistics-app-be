@@ -9,12 +9,13 @@ export class ProductService {
   async create(productData: CreateProductDto): Promise<Product> {
     const product = Product.createFrom(productData);
 
-    const existing = await this.productRepository.findByBarcode(
-      product.barCode
-    );
+    if (!product.id_producto) {
+      throw new Error("Product ID is required.");
+    }
+    const existing = await this.productRepository.findByProductId(product.id_producto);
     if (existing) {
       throw new Error(
-        `Product with barCode ${product.barCode} already exists.`
+        `Product with id ${product.id_producto} already exists.`
       );
     }
 

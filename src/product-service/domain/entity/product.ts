@@ -2,6 +2,8 @@ export class Product {
   id?: number;
 
   constructor(
+    public id_producto: string,
+    public id_proveedor: string,
     public name: string,
     public description: string,
     public sku: string,
@@ -45,39 +47,39 @@ export class Product {
       throw new Error("Weight must be a positive number.");
     }
 
-    const dimensionsRegex = /^\d+(\.\d+)?x\d+(\.\d+)?x\d+(\.\d+)?$/;
-    if (!dimensionsRegex.test(dimensionsCm)) {
-      throw new Error(
-        "Dimensions must be in the format 'LxWxH' (e.g., '10x20x30')."
-      );
-    }
+    // const dimensionsRegex = /^\d+(\.\d+)?x\d+(\.\d+)?x\d+(\.\d+)?$/;
+    // if (!dimensionsRegex.test(dimensionsCm)) {
+    //   throw new Error(
+    //     "Dimensions must be in the format 'LxWxH' (e.g., '10x20x30')."
+    //   );
+    // }
 
     // if (imageUrl && !/^https?:\/\/.+\.(jpg|jpeg|png|gif)$/.test(imageUrl)) {
     //   throw new Error("Image URL must be a valid URL pointing to an image.");
     // }
 
-    const barCodeRegex = /^\d{13}$/;
-    if (!barCodeRegex.test(barCode)) {
-      throw new Error("Bar code must be a 13-digit number.");
-    }
+    // const barCodeRegex = /^\d{13}$/;
+    // if (!barCodeRegex.test(barCode)) {
+    //   throw new Error("Bar code must be a 13-digit number.");
+    // }
 
-    if (
-      !(dateOfExpiration instanceof Date) ||
-      isNaN(dateOfExpiration.getTime())
-    ) {
-      throw new Error("Date of expiration must be a valid date.");
-    }
+    // if (
+    //   !(dateOfExpiration instanceof Date) ||
+    //   isNaN(dateOfExpiration.getTime())
+    // ) {
+    //   throw new Error("Date of expiration must be a valid date.");
+    // }
 
-    if (dateOfExpiration < new Date()) {
-      throw new Error("Date of expiration cannot be in the past.");
-    }
+    // if (dateOfExpiration < new Date()) {
+    //   throw new Error("Date of expiration cannot be in the past.");
+    // }
 
-    const validStatuses = ["ACTIVE", "INACTIVE"];
-    if (!validStatuses.includes(status)) {
-      throw new Error(
-        `Status must be one of the following: ${validStatuses.join(", ")}.`
-      );
-    }
+    // const validStatuses = ["ACTIVE", "INACTIVE"];
+    // if (!validStatuses.includes(status)) {
+    //   throw new Error(
+    //     `Status must be one of the following: ${validStatuses.join(", ")}.`
+    //   );
+    // }
 
     if (id) this.id = id;
   }
@@ -87,6 +89,8 @@ export class Product {
     data: Partial<Omit<Product, "id">> & { id?: number }
   ): Product {
     return new Product(
+      data.id_producto!,
+      data.id_proveedor!,
       data.name!,
       data.description!,
       data.sku!,

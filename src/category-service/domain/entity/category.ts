@@ -22,6 +22,6 @@ export class Category {
   }
 
   static createFrom(data: Partial<Category> & { id?: number }): Category {
-    return new Category(data.name!, data.description!, data.isActive, data.id);
+    return new Category(data.name!, data.description!, data.isActive!, data.id);
   }
 }

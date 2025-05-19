@@ -33,31 +33,43 @@ enum MovementType {
 
 model Order {
     id          Int         @id @default(autoincrement())
-    storeId     Int
-    store       Store       @relation(fields: [storeId], references: [id])
-    deliveryId  String
     customerId  String
     status      OrderStatus @default(PENDING)
-    totalAmount Float
+    totalAmount Float //sum de subordenes
     latitude    Float
     longitude   Float
     address     String
     createdAt   DateTime    @default(now())
     updatedAt   DateTime    @updatedAt
-    orderItems  OrderItem[]
+    subOrders   SubOrders[]
+}
+
+model SubOrders {
+    id        Int      @id @default(autoincrement())
+    orderId   Int
+    order     Order    @relation(fields: [orderId], references: [id])
+    storeId   Int
+    store     Store    @relation(fields: [storeId], references: [id])
+    deliveryId String
+    status    OrderStatus @default(PENDING)
+    subTotal Float
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    orderItems OrderItem[]
 }
 
 model OrderItem {
-    id         Int      @id @default(autoincrement())
-    orderId    Int
-    order      Order    @relation(fields: [orderId], references: [id])
-    productId  Int
-    product    Product  @relation(fields: [productId], references: [id])
-    quantity   Int
-    unit_price Float
-    createdAt  DateTime @default(now())
-    updatedAt  DateTime @updatedAt
+    id        Int      @id @default(autoincrement())
+    subOrderId Int
+    subOrder   SubOrders @relation(fields: [subOrderId], references: [id])
+    productId Int
+    product   Product  @relation(fields: [productId], references: [id])
+    quantity  Int
+    unitPrice Float
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 }
+
 
 model Store {
     id         Int         @id @default(autoincrement())
@@ -73,8 +85,9 @@ model Store {
     status     statusStore @default(ACTIVE)
     createdAt  DateTime    @default(now())
     updatedAt  DateTime    @updatedAt
-    orders     Order[]
     inventory  Inventory[]
+    SubOrders  SubOrders[]
+    @@index([name])
 }
 
 model City {
@@ -83,6 +96,9 @@ model City {
     departmentId Int
     department   Department @relation(fields: [departmentId], references: [id])
     stores       Store[]
+
+    @@index([name, departmentId])
+    @@index([departmentId])
 }
 
 model Department {
@@ -103,6 +119,8 @@ model Category {
 
 model Product {
     id                    Int           @id @default(autoincrement())
+    id_producto           String        @unique
+    id_proveedor          String
     name                  String
     description           String
     sku                   String
@@ -113,7 +131,7 @@ model Product {
     isFragile             Boolean
     dimensionsCm          String
     imageUrl              String
-    barCode               String        @unique
+    barCode               String
     requiredRefrigeration Boolean
     dateOfExpiration      DateTime
     status                statusProduct @default(ACTIVE)
@@ -121,6 +139,10 @@ model Product {
     updatedAt             DateTime      @updatedAt
     inventory             Inventory[]
     orderItems            OrderItem[]
+
+    @@index([categoryId])
+    @@index([name])
+    @@index([status])
 }
 
 model Inventory {
@@ -135,6 +157,8 @@ model Inventory {
     createdAt          DateTime             @default(now())
     updatedAt          DateTime             @updatedAt
     historicalMovement HistoricalMovement[]
+
+    @@unique([productId, storeId])
 }
 
 model HistoricalMovement {
@@ -147,4 +171,6 @@ model HistoricalMovement {
     movementType MovementType
     createdAt    DateTime     @default(now())
     updatedAt    DateTime     @updatedAt
+
+    @@index([inventoryId])
 }

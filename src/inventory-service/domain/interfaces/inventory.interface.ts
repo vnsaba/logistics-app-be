@@ -9,5 +9,6 @@ export interface IInventoryRepository {
   delete(id: number): Promise<void>;
   findAll(): Promise<Inventory[]>;  
   findByStore(storeId: number): Promise<Inventory[]>; 
-  findProductByProductId(id: number): Promise<Product | null>; // Método para encontrar un producto por su ID
+  findProductByProductId(id: number): Promise<Product | null>; 
+  createMany(inventories: Inventory[]): Promise<Inventory[]>;
 }
