@@ -5,6 +5,6 @@ export interface UpdateStoreDto {
   capacity?: number;
   latitude?: number;
   longitude?: number;
-  zipCode?: string;
+  zipCode?: number;
   status?: "ACTIVE" | "INACTIVE";
 }
