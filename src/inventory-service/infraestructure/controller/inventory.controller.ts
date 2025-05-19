@@ -17,6 +17,10 @@ import { InventoryService } from "../../application/inventory.service";
 import { InventoryRepository } from "../repository/inventory.repository";
 import { AuthenticatedRequest } from "../../../types/express.d";
 import { CreateInventoryDto } from "../dto/create-inventory.dto";
+import { NodemailerEmailSender } from "../../../shared/infraestructure/nodemailerEmailSender";
+import { UserRepository } from "../../../user-service/infraestructure/repository/user.repository";
+import { StoreRepository } from "../../../store-service/infraestructure/repository/store.repository";
+
 
 @Route("inventories")
 @Tags("Inventory")
@@ -26,7 +30,16 @@ export class InventoryController extends Controller {
   constructor() {
     super();
     const repository = new InventoryRepository();
-    this.inventoryService = new InventoryService(repository);
+    const emailSender = new NodemailerEmailSender();
+    const userRepository = new UserRepository();
+    const storeRepository = new StoreRepository();
+
+    this.inventoryService = new InventoryService(
+      repository,
+      emailSender,
+      userRepository,
+      storeRepository
+    );
   }
 
   @Post("create-or-update")
