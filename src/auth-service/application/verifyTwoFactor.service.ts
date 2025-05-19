@@ -27,8 +27,12 @@ export class VerifyTwoFactorService {
      * @throws {Error} If the provided code is invalid or has expired.
      * @throws {Error} If the user's role cannot be found.
      */
-    async verifyTwoFactor(userId: string, code: string): Promise<{ token: string }> {
-        const user = await this.userRepository.findById(userId);
+    async verifyTwoFactor(email: string, code: string): Promise<{ token: string }> {
+        const user = await this.userRepository.getByEmail(email);
+
+        if (!user) {
+            throw new Error("User not found");
+        }
         
         if (!user?.twoFactorCode || !user?.twoFactorExpires) {
             throw new Error("Invalid verification process");
@@ -48,6 +52,7 @@ export class VerifyTwoFactorService {
 
         const token = await this.tokenGenerator.generateToken({
             id: user.id!,
+            name: user.fullname,
             role,
             email: user.email
         }, {  expiresIn: "1h" });

@@ -24,6 +24,10 @@ async function main() {
       { id: 'perm-8', name: 'view_deliveries', resource: 'deliveries', action: 'view' },
       { id: 'perm-9', name: 'update_deliveries', resource: 'deliveries', action: 'update' },
     ],
+    CLIENTE: [
+      { id: 'perm-8', name: 'view_deliveries', resource: 'deliveries', action: 'view' },
+      { id: 'perm-9', name: 'update_deliveries', resource: 'deliveries', action: 'update' },
+    ],
   }
 
   // 2. Crear los roles con los permisos embebidos

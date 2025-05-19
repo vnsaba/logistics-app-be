@@ -27,4 +27,6 @@ export class ProductRepository implements IProductRepository {
   async delete(id: number): Promise<void> {
     await prismaMysql.product.delete({ where: { id } });
   }
+
+  
 }

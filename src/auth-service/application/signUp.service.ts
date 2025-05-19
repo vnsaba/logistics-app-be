@@ -30,21 +30,10 @@ export class SignUpService {
     current_password: string,
     phone: string
   ): Promise<User> {
-    const errors: ValidationError[] = []; 
+    const errors: ValidationError[] = [];
 
-    // Validación del teléfono
-    // const phoneRegex = /^3\d{9}$/;
-    // if (!phoneRegex.test(phone)) {
-    //   errors.push({
-    //     field: "phone",
-    //     message:
-    //       "El número de teléfono debe tener 10 dígitos y comenzar con 3.",
-    //   });
-    // } else {
-      phone = `+57${phone}`;
-    // }
+    phone = `+57${phone}`;
 
-    // Validación del email
     const existingUser = await this.userRepository.getByEmail(email);
     if (existingUser) {
       errors.push({
@@ -52,21 +41,6 @@ export class SignUpService {
         message: "Ya existe un usuario con ese email.",
       });
     }
-
-    // Validación de la contraseña
-    // const passwordRegex =
-    //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=[\]{};':"\\|,.<>/?])[A-Za-z\d!@#$%^&*()_\-+=[\]{};':"\\|,.<>/?]{8,64}$/;
-    // if (!passwordRegex.test(current_password)) {
-    //   errors.push({
-    //     field: "current_password",
-    //     message:
-    //       "La contraseña debe tener entre 8 y 64 caracteres, incluir al menos una letra mayúscula, una letra minúscula, un número y un carácter especial.",
-    //   });
-    // }
-
-    // if (errors.length > 0) {
-    //   throw new HttpError(JSON.stringify(errors), 400);
-    // }
 
     const passwordHash =
       await this.passwordService.hashPassword(current_password);

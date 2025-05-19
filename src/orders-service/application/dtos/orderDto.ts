@@ -3,17 +3,30 @@ import { IsEnum, IsString, IsNumber, IsLatitude, IsLongitude } from 'class-valid
 import { OrderStatus } from "../../../shared/enums/orderStatus.enum";
 import { CreateOrderItemDto } from '../../../orderItem-service/application/dtos/createOrderItemDto';
 
-export class CreateOrderDto {
-    @IsNotEmpty({ message: 'Store ID is required' })
-    storeId!: number;
-
-    @IsNotEmpty({ message: 'Delivery ID is required' })
-    @IsString({ message: 'Delivery ID must be a string' })
-    deliveryId!: string;
-
+export class CreateOrderRequestDto {
     @IsNotEmpty({ message: 'Customer ID is required' })
     @IsString({ message: 'Customer ID must be a string' })
     customerId!: string;
+
+    @IsString({ message: 'Address must be a string' })
+    @IsNotEmpty({ message: 'Address is required' })
+    @MinLength(10, { message: 'Address is too short' })
+    address!: string;
+
+    @IsArray({ message: 'Items must be an array' })
+    @ArrayMinSize(1, { message: 'At least one item is required' })
+    subOrders!: SubOrderDto[];
+}
+
+export class SubOrderDto {
+    storeId!: number;
+    deliveryId?: string;
+    status?: OrderStatus;
+    subTotal?: number;
+    orderItems!: CreateOrderItemDto[];
+}
+
+export class CreateOrderDto extends CreateOrderRequestDto {
 
     @IsEnum(OrderStatus, { message: 'Invalid order status' })
     status!: OrderStatus;
@@ -31,13 +44,5 @@ export class CreateOrderDto {
     @IsNotEmpty({ message: 'Longitude is required' })
     longitude!: number;
 
-    @IsString({ message: 'Address must be a string' })
-    @IsNotEmpty({ message: 'Address is required' })
-    @MinLength(10, { message: 'Address is too short' })
-    address!: string;
-
-    @IsArray({ message: 'Items must be an array' })
-    @ArrayMinSize(1, { message: 'At least one item is required' })
-    items!: CreateOrderItemDto[];
 }
 

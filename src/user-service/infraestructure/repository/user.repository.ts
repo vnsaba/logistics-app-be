@@ -1,18 +1,19 @@
 import { User } from '../../domain/entity/user';
 import { User as UserType } from '../../../../types/auth/index';
-import { PrismaClient } from '../../../../prisma/generated/mongodb';
-const prisma = new PrismaClient();
+import { prismaMongo } from "../../../../prisma/index";
 
 import { IUserRepository } from '../../domain/interfaces/user.interface';
+import { DeliveryInfo } from '../../domain/interfaces/deliveryInfo.interface';
 
 export class UserRepository implements IUserRepository {
+
   async findById(id: string): Promise<User | null> {
-    const user = await prisma.user.findUnique({ where: { id } });
+    const user = await prismaMongo.user.findUnique({ where: { id } });
     return user;
   }
 
   public async createUser(userData: User): Promise<User> {
-    return await prisma.user.create({
+    return await prismaMongo.user.create({
       data: {
         fullname: userData.fullname,
         email: userData.email,
@@ -32,7 +33,7 @@ export class UserRepository implements IUserRepository {
   }
 
   public async getByEmail(email: string): Promise<User | null> {
-    const user = await prisma.user.findUnique({ where: { email } });
+    const user = await prismaMongo.user.findUnique({ where: { email } });
     if (!user) {
       return null;
     }
@@ -40,7 +41,7 @@ export class UserRepository implements IUserRepository {
   }
 
   public async updateUser(user: User): Promise<User> {
-    return await prisma.user.update({
+    return await prismaMongo.user.update({
       where: { email: user.email },
       data: {
         fullname: user.fullname,
@@ -53,11 +54,11 @@ export class UserRepository implements IUserRepository {
   }
 
   public async deleteUser(id: string): Promise<void> {
-    await prisma.user.delete({ where: { id } });
+    await prismaMongo.user.delete({ where: { id } });
   }
 
   async updatePassword(email: string, newPassword: string): Promise<void> {
-    await prisma.user.update({
+    await prismaMongo.user.update({
       where: { email },
       data: {
         current_password: newPassword,
@@ -66,14 +67,14 @@ export class UserRepository implements IUserRepository {
   }
 
   async clearResetToken(email: string): Promise<void> {
-    await prisma.user.update({
+    await prismaMongo.user.update({
       where: { email },
       data: { resetPasswordToken: null },
     });
   }
 
   async updateResetPasswordToken(email: string, token: string): Promise<void> {
-    await prisma.user.update({
+    await prismaMongo.user.update({
       where: { email },
       data: {
         resetPasswordToken: token,
@@ -86,7 +87,7 @@ export class UserRepository implements IUserRepository {
     code: string,
     expires: Date
   ): Promise<void> {
-    await prisma.user.update({
+    await prismaMongo.user.update({
       where: { id },
       data: {
         twoFactorCode: code,
@@ -96,7 +97,7 @@ export class UserRepository implements IUserRepository {
   }
 
   async clearTwoFactor(id: string): Promise<void> {
-    await prisma.user.update({
+    await prismaMongo.user.update({
       where: { id },
       data: {
         twoFactorCode: null,
@@ -106,7 +107,7 @@ export class UserRepository implements IUserRepository {
   }
 
   public async getAllUsers(): Promise<Omit<UserType, 'current_password'>[]> {
-    const users = await prisma.user.findMany({
+    const users = await prismaMongo.user.findMany({
       omit: {
         current_password: true,
       },
@@ -118,33 +119,45 @@ export class UserRepository implements IUserRepository {
     return users;
   }
 
-  public async findByDeliveryId(id: string): Promise<User | null> {
-    const user = await prisma.user.findUnique({
+  // public async findByDeliveryId(id: string): Promise<User | null> {
+  //   const user = await prismaMongo.user.findUnique({
+  //     where: { id },
+  //     include: {
+  //       role: true,
+  //     },
+  //   });
+
+  //   // Validar que el usuario existe y que su rol es 'delivery'
+  //   if (!user || !user.role || user.role.name !== 'delivery') {
+  //     return null;
+  //   }
+  //   return user;
+  // }
+
+  public async findByClientId(id: string): Promise<User | null> {
+    const user = await prismaMongo.user.findUnique({
       where: { id },
       include: {
         role: true,
       },
     });
 
-    // Validar que el usuario existe y que su rol es 'delivery'
-    if (!user || !user.role || user.role.name !== 'delivery') {
+    if (!user || !user.role || user.role.name !== 'CLIENTE') {
       return null;
     }
     return user;
   }
 
-  public async findByClientId(id: string): Promise<User | null> {
-    const user = await prisma.user.findUnique({
-      where: { id },
-      include: {
-        role: true,
+  public async getAllDeliveries(isAvaliable: boolean): Promise<DeliveryInfo[]> {
+    const users = await prismaMongo.user.findMany({
+      where: {
+        role: {
+          name: 'REPARTIDOR',
+        },
+        isAvaliable: isAvaliable,
       },
     });
-
-    if (!user || !user.role || user.role.name !== 'client') {
-      return null;
-    }
-    return user;
+    return users;
   }
 
 }

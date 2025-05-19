@@ -6,20 +6,12 @@ export class UpdateUserDto {
      */
     fullname?: string;
   
-    /**
-     * @pattern ^[^\s@]+@[^\s@]+\.[^\s@]+$ Invalid email format
-     */
-    email?: string;
   
-    /**
-     * @pattern ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=[\]{};':"\\|,.<>/?])[A-Za-z\d!@#$%^&*()_\-+=[\]{};':"\\|,.<>/?]{8,64}$ Password must be 8-64 characters long, include at least one uppercase letter, one lowercase letter, one number, and one special character
-     */
+    // /**
+    //  * @pattern ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=[\]{};':"\\|,.<>/?])[A-Za-z\d!@#$%^&*()_\-+=[\]{};':"\\|,.<>/?]{8,64}$ Password must be 8-64 characters long, include at least one uppercase letter, one lowercase letter, one number, and one special character
+    //  */
     current_password?: string;
   
-    /**
-     * @isString Role ID must be a string   verify if this is correct
-     */
-    roleId?: string;
   
     /**
      * @isString Phone number must be a string

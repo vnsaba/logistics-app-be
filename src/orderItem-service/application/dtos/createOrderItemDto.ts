@@ -1,11 +1,9 @@
 
 export interface CreateOrderItemDto {
 
-    productId: number;
+  productId: number;
 
-    quantity: number;
-  
+  quantity: number;
 
-    unitPrice: number;
-  }
-  
+  unitPrice: number;
+}

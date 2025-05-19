@@ -216,8 +216,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.6.0
-   * Query Engine version: f676762280b54cd07c770017ed3711ddde35f37a
+   * Prisma Client JS version: 6.7.0
+   * Query Engine version: 3cff47a7f5d65c3ea74883f1d736e41d68ce91ed
    */
   export type PrismaVersion = {
     client: string
@@ -2030,8 +2030,22 @@ export namespace Prisma {
 
   export type AggregateUser = {
     _count: UserCountAggregateOutputType | null
+    _avg: UserAvgAggregateOutputType | null
+    _sum: UserSumAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
+  }
+
+  export type UserAvgAggregateOutputType = {
+    latitude: number | null
+    longitude: number | null
+    activeOrders: number | null
+  }
+
+  export type UserSumAggregateOutputType = {
+    latitude: number | null
+    longitude: number | null
+    activeOrders: number | null
   }
 
   export type UserMinAggregateOutputType = {
@@ -2049,6 +2063,10 @@ export namespace Prisma {
     twoFactorCode: string | null
     twoFactorExpires: Date | null
     resetPasswordToken: string | null
+    latitude: number | null
+    longitude: number | null
+    isAvaliable: boolean | null
+    activeOrders: number | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -2066,6 +2084,10 @@ export namespace Prisma {
     twoFactorCode: string | null
     twoFactorExpires: Date | null
     resetPasswordToken: string | null
+    latitude: number | null
+    longitude: number | null
+    isAvaliable: boolean | null
+    activeOrders: number | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -2083,9 +2105,25 @@ export namespace Prisma {
     twoFactorCode: number
     twoFactorExpires: number
     resetPasswordToken: number
+    latitude: number
+    longitude: number
+    isAvaliable: number
+    activeOrders: number
     _all: number
   }
 
+
+  export type UserAvgAggregateInputType = {
+    latitude?: true
+    longitude?: true
+    activeOrders?: true
+  }
+
+  export type UserSumAggregateInputType = {
+    latitude?: true
+    longitude?: true
+    activeOrders?: true
+  }
 
   export type UserMinAggregateInputType = {
     id?: true
@@ -2102,6 +2140,10 @@ export namespace Prisma {
     twoFactorCode?: true
     twoFactorExpires?: true
     resetPasswordToken?: true
+    latitude?: true
+    longitude?: true
+    isAvaliable?: true
+    activeOrders?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -2119,6 +2161,10 @@ export namespace Prisma {
     twoFactorCode?: true
     twoFactorExpires?: true
     resetPasswordToken?: true
+    latitude?: true
+    longitude?: true
+    isAvaliable?: true
+    activeOrders?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -2136,6 +2182,10 @@ export namespace Prisma {
     twoFactorCode?: true
     twoFactorExpires?: true
     resetPasswordToken?: true
+    latitude?: true
+    longitude?: true
+    isAvaliable?: true
+    activeOrders?: true
     _all?: true
   }
 
@@ -2177,6 +2227,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: UserAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UserSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: UserMinAggregateInputType
@@ -2207,6 +2269,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: UserCountAggregateInputType | true
+    _avg?: UserAvgAggregateInputType
+    _sum?: UserSumAggregateInputType
     _min?: UserMinAggregateInputType
     _max?: UserMaxAggregateInputType
   }
@@ -2226,7 +2290,13 @@ export namespace Prisma {
     twoFactorCode: string | null
     twoFactorExpires: Date | null
     resetPasswordToken: string | null
+    latitude: number | null
+    longitude: number | null
+    isAvaliable: boolean | null
+    activeOrders: number | null
     _count: UserCountAggregateOutputType | null
+    _avg: UserAvgAggregateOutputType | null
+    _sum: UserSumAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
   }
@@ -2260,6 +2330,10 @@ export namespace Prisma {
     twoFactorCode?: boolean
     twoFactorExpires?: boolean
     resetPasswordToken?: boolean
+    latitude?: boolean
+    longitude?: boolean
+    isAvaliable?: boolean
+    activeOrders?: boolean
     role?: boolean | RoleDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2280,9 +2354,13 @@ export namespace Prisma {
     twoFactorCode?: boolean
     twoFactorExpires?: boolean
     resetPasswordToken?: boolean
+    latitude?: boolean
+    longitude?: boolean
+    isAvaliable?: boolean
+    activeOrders?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullname" | "email" | "phone" | "current_password" | "roleId" | "status" | "created_at" | "updated_at" | "verificationCode" | "verificationCodeExpires" | "twoFactorCode" | "twoFactorExpires" | "resetPasswordToken", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullname" | "email" | "phone" | "current_password" | "roleId" | "status" | "created_at" | "updated_at" | "verificationCode" | "verificationCodeExpires" | "twoFactorCode" | "twoFactorExpires" | "resetPasswordToken" | "latitude" | "longitude" | "isAvaliable" | "activeOrders", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     role?: boolean | RoleDefaultArgs<ExtArgs>
   }
@@ -2307,6 +2385,10 @@ export namespace Prisma {
       twoFactorCode: string | null
       twoFactorExpires: Date | null
       resetPasswordToken: string | null
+      latitude: number | null
+      longitude: number | null
+      isAvaliable: boolean | null
+      activeOrders: number | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -2714,6 +2796,10 @@ export namespace Prisma {
     readonly twoFactorCode: FieldRef<"User", 'String'>
     readonly twoFactorExpires: FieldRef<"User", 'DateTime'>
     readonly resetPasswordToken: FieldRef<"User", 'String'>
+    readonly latitude: FieldRef<"User", 'Float'>
+    readonly longitude: FieldRef<"User", 'Float'>
+    readonly isAvaliable: FieldRef<"User", 'Boolean'>
+    readonly activeOrders: FieldRef<"User", 'Int'>
   }
     
 
@@ -3129,7 +3215,11 @@ export namespace Prisma {
     verificationCodeExpires: 'verificationCodeExpires',
     twoFactorCode: 'twoFactorCode',
     twoFactorExpires: 'twoFactorExpires',
-    resetPasswordToken: 'resetPasswordToken'
+    resetPasswordToken: 'resetPasswordToken',
+    latitude: 'latitude',
+    longitude: 'longitude',
+    isAvaliable: 'isAvaliable',
+    activeOrders: 'activeOrders'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -3195,6 +3285,27 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -3281,6 +3392,10 @@ export namespace Prisma {
     twoFactorCode?: StringNullableFilter<"User"> | string | null
     twoFactorExpires?: DateTimeNullableFilter<"User"> | Date | string | null
     resetPasswordToken?: StringNullableFilter<"User"> | string | null
+    latitude?: FloatNullableFilter<"User"> | number | null
+    longitude?: FloatNullableFilter<"User"> | number | null
+    isAvaliable?: BoolNullableFilter<"User"> | boolean | null
+    activeOrders?: IntNullableFilter<"User"> | number | null
     role?: XOR<RoleScalarRelationFilter, RoleWhereInput>
   }
 
@@ -3299,6 +3414,10 @@ export namespace Prisma {
     twoFactorCode?: SortOrder
     twoFactorExpires?: SortOrder
     resetPasswordToken?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+    isAvaliable?: SortOrder
+    activeOrders?: SortOrder
     role?: RoleOrderByWithRelationInput
   }
 
@@ -3320,6 +3439,10 @@ export namespace Prisma {
     twoFactorCode?: StringNullableFilter<"User"> | string | null
     twoFactorExpires?: DateTimeNullableFilter<"User"> | Date | string | null
     resetPasswordToken?: StringNullableFilter<"User"> | string | null
+    latitude?: FloatNullableFilter<"User"> | number | null
+    longitude?: FloatNullableFilter<"User"> | number | null
+    isAvaliable?: BoolNullableFilter<"User"> | boolean | null
+    activeOrders?: IntNullableFilter<"User"> | number | null
     role?: XOR<RoleScalarRelationFilter, RoleWhereInput>
   }, "id" | "email">
 
@@ -3338,9 +3461,15 @@ export namespace Prisma {
     twoFactorCode?: SortOrder
     twoFactorExpires?: SortOrder
     resetPasswordToken?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+    isAvaliable?: SortOrder
+    activeOrders?: SortOrder
     _count?: UserCountOrderByAggregateInput
+    _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
+    _sum?: UserSumOrderByAggregateInput
   }
 
   export type UserScalarWhereWithAggregatesInput = {
@@ -3361,6 +3490,10 @@ export namespace Prisma {
     twoFactorCode?: StringNullableWithAggregatesFilter<"User"> | string | null
     twoFactorExpires?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     resetPasswordToken?: StringNullableWithAggregatesFilter<"User"> | string | null
+    latitude?: FloatNullableWithAggregatesFilter<"User"> | number | null
+    longitude?: FloatNullableWithAggregatesFilter<"User"> | number | null
+    isAvaliable?: BoolNullableWithAggregatesFilter<"User"> | boolean | null
+    activeOrders?: IntNullableWithAggregatesFilter<"User"> | number | null
   }
 
   export type RoleCreateInput = {
@@ -3426,6 +3559,10 @@ export namespace Prisma {
     twoFactorCode?: string | null
     twoFactorExpires?: Date | string | null
     resetPasswordToken?: string | null
+    latitude?: number | null
+    longitude?: number | null
+    isAvaliable?: boolean | null
+    activeOrders?: number | null
     role: RoleCreateNestedOneWithoutUserInput
   }
 
@@ -3444,6 +3581,10 @@ export namespace Prisma {
     twoFactorCode?: string | null
     twoFactorExpires?: Date | string | null
     resetPasswordToken?: string | null
+    latitude?: number | null
+    longitude?: number | null
+    isAvaliable?: boolean | null
+    activeOrders?: number | null
   }
 
   export type UserUpdateInput = {
@@ -3459,6 +3600,10 @@ export namespace Prisma {
     twoFactorCode?: NullableStringFieldUpdateOperationsInput | string | null
     twoFactorExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    isAvaliable?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    activeOrders?: NullableIntFieldUpdateOperationsInput | number | null
     role?: RoleUpdateOneRequiredWithoutUserNestedInput
   }
 
@@ -3476,6 +3621,10 @@ export namespace Prisma {
     twoFactorCode?: NullableStringFieldUpdateOperationsInput | string | null
     twoFactorExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    isAvaliable?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    activeOrders?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type UserCreateManyInput = {
@@ -3493,6 +3642,10 @@ export namespace Prisma {
     twoFactorCode?: string | null
     twoFactorExpires?: Date | string | null
     resetPasswordToken?: string | null
+    latitude?: number | null
+    longitude?: number | null
+    isAvaliable?: boolean | null
+    activeOrders?: number | null
   }
 
   export type UserUpdateManyMutationInput = {
@@ -3508,6 +3661,10 @@ export namespace Prisma {
     twoFactorCode?: NullableStringFieldUpdateOperationsInput | string | null
     twoFactorExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    isAvaliable?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    activeOrders?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -3524,6 +3681,10 @@ export namespace Prisma {
     twoFactorCode?: NullableStringFieldUpdateOperationsInput | string | null
     twoFactorExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    isAvaliable?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    activeOrders?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -3653,6 +3814,36 @@ export namespace Prisma {
     isSet?: boolean
   }
 
+  export type FloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+    isSet?: boolean
+  }
+
+  export type BoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+    isSet?: boolean
+  }
+
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+    isSet?: boolean
+  }
+
   export type RoleScalarRelationFilter = {
     is?: RoleWhereInput
     isNot?: RoleWhereInput
@@ -3673,6 +3864,16 @@ export namespace Prisma {
     twoFactorCode?: SortOrder
     twoFactorExpires?: SortOrder
     resetPasswordToken?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+    isAvaliable?: SortOrder
+    activeOrders?: SortOrder
+  }
+
+  export type UserAvgOrderByAggregateInput = {
+    latitude?: SortOrder
+    longitude?: SortOrder
+    activeOrders?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -3690,6 +3891,10 @@ export namespace Prisma {
     twoFactorCode?: SortOrder
     twoFactorExpires?: SortOrder
     resetPasswordToken?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+    isAvaliable?: SortOrder
+    activeOrders?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -3707,6 +3912,16 @@ export namespace Prisma {
     twoFactorCode?: SortOrder
     twoFactorExpires?: SortOrder
     resetPasswordToken?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+    isAvaliable?: SortOrder
+    activeOrders?: SortOrder
+  }
+
+  export type UserSumOrderByAggregateInput = {
+    latitude?: SortOrder
+    longitude?: SortOrder
+    activeOrders?: SortOrder
   }
 
   export type EnumStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -3764,6 +3979,49 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+    isSet?: boolean
+  }
+
+  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+    isSet?: boolean
+  }
+
+  export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
+    isSet?: boolean
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
     isSet?: boolean
   }
 
@@ -3852,6 +4110,29 @@ export namespace Prisma {
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
     set?: Date | string | null
+    unset?: boolean
+  }
+
+  export type NullableFloatFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+    unset?: boolean
+  }
+
+  export type NullableBoolFieldUpdateOperationsInput = {
+    set?: boolean | null
+    unset?: boolean
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
     unset?: boolean
   }
 
@@ -3960,6 +4241,36 @@ export namespace Prisma {
     isSet?: boolean
   }
 
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+    isSet?: boolean
+  }
+
+  export type NestedBoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+    isSet?: boolean
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+    isSet?: boolean
+  }
+
   export type NestedEnumStatusWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
     in?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
@@ -4002,18 +4313,6 @@ export namespace Prisma {
     isSet?: boolean
   }
 
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-    isSet?: boolean
-  }
-
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -4026,6 +4325,49 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+    isSet?: boolean
+  }
+
+  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+    isSet?: boolean
+  }
+
+  export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
+    isSet?: boolean
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
     isSet?: boolean
   }
 
@@ -4043,6 +4385,10 @@ export namespace Prisma {
     twoFactorCode?: string | null
     twoFactorExpires?: Date | string | null
     resetPasswordToken?: string | null
+    latitude?: number | null
+    longitude?: number | null
+    isAvaliable?: boolean | null
+    activeOrders?: number | null
   }
 
   export type UserUncheckedCreateWithoutRoleInput = {
@@ -4059,6 +4405,10 @@ export namespace Prisma {
     twoFactorCode?: string | null
     twoFactorExpires?: Date | string | null
     resetPasswordToken?: string | null
+    latitude?: number | null
+    longitude?: number | null
+    isAvaliable?: boolean | null
+    activeOrders?: number | null
   }
 
   export type UserCreateOrConnectWithoutRoleInput = {
@@ -4113,6 +4463,10 @@ export namespace Prisma {
     twoFactorCode?: StringNullableFilter<"User"> | string | null
     twoFactorExpires?: DateTimeNullableFilter<"User"> | Date | string | null
     resetPasswordToken?: StringNullableFilter<"User"> | string | null
+    latitude?: FloatNullableFilter<"User"> | number | null
+    longitude?: FloatNullableFilter<"User"> | number | null
+    isAvaliable?: BoolNullableFilter<"User"> | boolean | null
+    activeOrders?: IntNullableFilter<"User"> | number | null
   }
 
   export type RoleCreateWithoutUserInput = {
@@ -4171,6 +4525,10 @@ export namespace Prisma {
     twoFactorCode?: string | null
     twoFactorExpires?: Date | string | null
     resetPasswordToken?: string | null
+    latitude?: number | null
+    longitude?: number | null
+    isAvaliable?: boolean | null
+    activeOrders?: number | null
   }
 
   export type PermissionUpdateInput = {
@@ -4193,6 +4551,10 @@ export namespace Prisma {
     twoFactorCode?: NullableStringFieldUpdateOperationsInput | string | null
     twoFactorExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    isAvaliable?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    activeOrders?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type UserUncheckedUpdateWithoutRoleInput = {
@@ -4208,6 +4570,10 @@ export namespace Prisma {
     twoFactorCode?: NullableStringFieldUpdateOperationsInput | string | null
     twoFactorExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    isAvaliable?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    activeOrders?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type UserUncheckedUpdateManyWithoutRoleInput = {
@@ -4223,6 +4589,10 @@ export namespace Prisma {
     twoFactorCode?: NullableStringFieldUpdateOperationsInput | string | null
     twoFactorExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    isAvaliable?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    activeOrders?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
 

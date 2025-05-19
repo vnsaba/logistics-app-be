@@ -19,13 +19,13 @@ export class ResetPasswordService {
             throw new Error('User not found');
         }
 
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=[\]{};':"\\|,.<>/?])[A-Za-z\d!@#$%^&*()_\-+=[\]{};':"\\|,.<>/?]{8,64}$/;
+        // const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=[\]{};':"\\|,.<>/?])[A-Za-z\d!@#$%^&*()_\-+=[\]{};':"\\|,.<>/?]{8,64}$/;
 
-        if (!passwordRegex.test(newPassword)) {
-            throw new Error(
-                'Password must be 8-64 characters long, include at least one uppercase letter, one lowercase letter, one number, and one special character.'
-            );
-        }
+        // if (!passwordRegex.test(newPassword)) {
+        //     throw new Error(
+        //         'Password must be 8-64 characters long, include at least one uppercase letter, one lowercase letter, one number, and one special character.'
+        //     );
+        // }
         const passwordHash = await this.passwordService.hashPassword(newPassword); // Hash de la nueva contraseña
         await this.userRepository.updatePassword(user?.email, passwordHash);
         await this.userRepository.clearResetToken(user?.email); // Limpiar el token de restablecimiento de contraseña

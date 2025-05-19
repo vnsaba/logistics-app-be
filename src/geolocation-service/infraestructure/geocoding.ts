@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GeocodingService } from '../domain/interfaces/geocoding.interface';
+import { GeocodingService } from '../../geolocation-service/domain/interface/geocoding.interface';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -15,7 +15,6 @@ export class GoogleMapsGeocodingService implements GeocodingService {
                     key: this.apikey,
                 },
             });
-            console.log('Geocoding response:', response);
 
             if (response.data.status !== 'OK') {
                 throw new Error(`Geocoding failed: ${response.data.status}`);
