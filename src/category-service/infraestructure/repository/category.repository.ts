@@ -20,6 +20,7 @@ export class CategoryRepository implements ICategoryRepository {
       data: {
         name: category.name,
         description: category.description,
+        isActive: category.isActive,
       },
     });
     return Category.createFrom(created);

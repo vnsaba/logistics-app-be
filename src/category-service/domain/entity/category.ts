@@ -4,6 +4,7 @@ export class Category {
   constructor(
     public name: string,
     public description: string,
+    public isActive: boolean = true,
     id?: number
   ) {
     this.validate();
@@ -21,6 +22,6 @@ export class Category {
   }
 
   static createFrom(data: Partial<Category> & { id?: number }): Category {
-    return new Category(data.name!, data.description!, data.id);
+    return new Category(data.name!, data.description!, data.isActive, data.id);
   }
 }
