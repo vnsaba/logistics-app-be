@@ -1,11 +1,11 @@
-import { Order } from "src/orders-service/domain/entity/order";
-import { OrderInterface } from "src/orders-service/domain/interface/order.interface";
-import { CreateOrderDto, OrderWithSubOrdersDto } from "src/orders-service/application/dtos/orderDto";
-import { UpdateOrderDto } from "src/orders-service/application/dtos/updateOrderDto";
+import { Order } from "../../domain/entity/order";
+import { IOrderRepository } from "../../domain/interface/order.interface";
+import { CreateOrderDto, OrderWithSubOrdersDto } from "../../application/dtos/orderDto";
+import { UpdateOrderDto } from "../../application/dtos/updateOrderDto";
 import { prismaMysql } from "../../../../prisma/index";
 import { OrderStatus } from "../../../shared/enums/orderStatus.enum";
 
-export class OrdersRepository implements OrderInterface {
+export class OrdersRepository implements IOrderRepository {
 
     async create(order: CreateOrderDto): Promise<Order> {
         return await prismaMysql.order.create({
@@ -95,21 +95,31 @@ export class OrdersRepository implements OrderInterface {
         })
     }
 
-    async cancelOrder(id: string): Promise<Order> {
-        return await prismaMysql.order.update({
-            where: { id: Number(id) },
-            data: {
-                status: OrderStatus.CANCELED,
-                updatedAt: new Date(),
-            }
-        })
-    }
-
     //para cancelar la orden tambien se puede usar el update
     async updateStatus(id: number, status: OrderStatus): Promise<Order> {
         return await prismaMysql.order.update({
-            where: { id},
+            where: { id },
             data: { status: status }
         });
     }
+
+    async findByClientId(clientId: string): Promise<Order[]> {
+        return await prismaMysql.order.findMany({
+            where: { customerId: clientId },
+            include: {
+                subOrders: {
+                    include: {
+                        orderItems: true,
+                        store: true,
+                    }
+                }
+            }
+        }).then((orders) => {
+            if (!orders) {
+                throw new Error(`Orders not found`);
+            }
+            return orders;
+        })
+    }
+
 }

@@ -1,4 +1,4 @@
-import { Controller, Post, Route, SuccessResponse, Body, Tags, Security, Get } from "tsoa";
+import { Controller, Post, Route, SuccessResponse, Body, Tags, Get } from "tsoa";
 import { Order } from '../../domain/entity/order';
 import { CreateOrderService } from '../../application/createOrders.ervice';
 import { OrdersRepository } from "../repository/orders.repository";
@@ -7,10 +7,13 @@ import { ProductRepository } from '../../../product-service/infraestructure/repo
 import { GoogleMapsGeocodingService } from '../../../geolocation-service/infraestructure/geocoding';
 import { UserRepository } from "../../../user-service/infraestructure/repository/user.repository";
 import { DistanceService } from '../../../geolocation-service/infraestructure/distanceService';
-import { CreateOrderRequestDto } from "../../application/dtos/orderDto"
+import { CancelSubOrderResponse, CreateOrderRequestDto, SubOrderInfoDto } from "../../application/dtos/orderDto"
 import { InventoryRepository } from "../../../inventory-service/infraestructure/repository/inventory.repository";
 import { ErrorResponse } from "../../../shared/domain/interfaces/error.interface";
-import { UserRole } from '../../../../types/auth/index';
+// import { UserRole } from '../../../../types/auth/index';
+import { CancelSubOrderService } from "../../application/cancelSubOrder.service";
+import { SubOrderRepository } from "../repository/subOrderRepository";
+import { OrderInfoService } from '../../application/orderInfo.service';
 
 @Route('orders')
 @Tags('orders')
@@ -23,6 +26,9 @@ export class OrdersController extends Controller {
     private readonly userSRepository: UserRepository
     private readonly distanceService: DistanceService
     private readonly inventoryRepository: InventoryRepository
+    private readonly subOrdersRepository: SubOrderRepository;
+    private readonly cancelSubOrderService: CancelSubOrderService;
+    private readonly orderInfoService: OrderInfoService;
 
     constructor() {
         super();
@@ -33,11 +39,14 @@ export class OrdersController extends Controller {
         this.distanceService = new DistanceService(process.env.GEOCODING_API as string);
         this.userSRepository = new UserRepository();
         this.inventoryRepository = new InventoryRepository();
+        this.subOrdersRepository = new SubOrderRepository();
+        this.orderInfoService = new OrderInfoService(this.subOrdersRepository,this.storeRepository, this.productsRepository, this.userSRepository, this.orderRepository);
+        this.cancelSubOrderService = new CancelSubOrderService(this.orderRepository, this.userSRepository, this.subOrdersRepository, this.inventoryRepository);
         this.createOrderService = new CreateOrderService(this.orderRepository, this.storeRepository, this.productsRepository,
             this.geocodingService, this.userSRepository, this.distanceService, this.inventoryRepository);
     }
 
-    @Security('jwt', [UserRole.CLIENTE])
+    // @Security('jwt', [UserRole.CLIENTE])
     @SuccessResponse("201", "Created")
     @Post('create')
     public async createOrder(@Body() requestBody: CreateOrderRequestDto,
@@ -80,19 +89,43 @@ export class OrdersController extends Controller {
         }
     }
 
-    //listar el pedido activo hecho por el  clinte con sus orderItems
+    @SuccessResponse("200", "OK")
+    @Post('cancel-suborder')
+    public async cancelSubOrder(
+        @Body() body: { subOrderId: number }
+    ): Promise<CancelSubOrderResponse | ErrorResponse> {
+        try {
+            const result = await this.cancelSubOrderService.cancelSubOrder(body.subOrderId);
+            if (!result) {
+                this.setStatus(404);
+                return { status: 404, message: "Suborder not found" };
+            }
+            this.setStatus(200);
+            return result;
+        } catch (error) {
+            this.setStatus(500);
+            return { status: 500, message: error instanceof Error ? error.message : "Internal Server Error" };
+        }
+    }
 
-
-
-
-    //cancelar toda la orden
-
-
-    // //cancelar una suborden
-    // public async cancelSubOrder(){
-
-
-    // }
-
+    //listar las ordenes de un cliente
+    @SuccessResponse("200", "OK")
+    @Post('subOrder-info')
+    public async getSubOrderInfo(
+        @Body() body: { clientId: string }
+    ): Promise<SubOrderInfoDto[] | ErrorResponse> {
+        try {
+            const result = await this.orderInfoService.getOrderInfo(body.clientId);
+            if (!result) {
+                this.setStatus(404);
+                return { status: 404, message: "Suborder not found" };
+            }
+            this.setStatus(200);
+            return result;
+        } catch (error) {
+            this.setStatus(500);
+            return { status: 500, message: error instanceof Error ? error.message : "Internal Server Error" };
+        }
+    }
 }
 

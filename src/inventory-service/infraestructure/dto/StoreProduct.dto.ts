@@ -10,6 +10,8 @@ export interface StoreProductDto {
   productDescription: string;
   unitPrice: number;
   imageUrl: string;
+  categoryName: string;
+  categoryIdd: number;
 
   availableQuantity: number;
 }

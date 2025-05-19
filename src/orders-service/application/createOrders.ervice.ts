@@ -1,4 +1,4 @@
-import { OrderInterface } from "../domain/interface/order.interface";
+import { IOrderRepository } from "../domain/interface/order.interface";
 import { IStoreRepository } from "../../store-service/domain/interfaces/store.interface";
 import { IProductRepository } from "../../product-service/domain/interfaces/product.interface";
 import { GeocodingService } from "../../geolocation-service/domain/interface/geocoding.interface";
@@ -12,7 +12,7 @@ import { Order } from "../domain/entity/order";
 
 export class CreateOrderService {
     constructor(
-        private readonly orderRepository: OrderInterface,
+        private readonly orderRepository: IOrderRepository,
         private readonly storeRepository: IStoreRepository,
         private readonly productRepository: IProductRepository,
         private readonly geocodingService: GeocodingService,

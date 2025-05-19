@@ -1,14 +1,14 @@
 import { OrderStatus } from "../../shared/enums/orderStatus.enum";
-import { OrderInterface } from "../domain/interface/order.interface";
-import { IUserRepository } from "src/user-service/domain/interfaces/user.interface";
-import { ISubOrderInterface } from "../domain/interface/subOrders.interface";
+import { IOrderRepository } from "../domain/interface/order.interface";
+import { IUserRepository } from "../../user-service/domain/interfaces/user.interface";
+import { ISubOrderRepository } from "../domain/interface/subOrders.interface";
 import { IInventoryRepository } from "../../inventory-service/domain/interfaces/inventory.interface";
 
 export class CancelOrderService {
     constructor(
-        private readonly orderRepository: OrderInterface,
+        private readonly orderRepository: IOrderRepository,
         private readonly userRepository: IUserRepository,
-        private readonly subOrdersRepository: ISubOrderInterface,
+        private readonly subOrdersRepository: ISubOrderRepository,
         private readonly inventoryRepository: IInventoryRepository,
     ) { }
 
@@ -28,7 +28,7 @@ export class CancelOrderService {
         await this.orderRepository.updateStatus(orderId, OrderStatus.CANCELED);
 
         await Promise.all(order.subOrders.map(async (sub) => {
-            await this.subOrdersRepository.canceledSubOrder(sub.id, OrderStatus.CANCELED);
+            await this.subOrdersRepository.updateStatus(sub.id, OrderStatus.CANCELED);
 
             // Liberar al repartidor
             if (sub.deliveryId) {

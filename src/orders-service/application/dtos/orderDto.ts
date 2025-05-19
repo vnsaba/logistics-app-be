@@ -47,13 +47,15 @@ export class CreateOrderDto extends CreateOrderRequestDto {
 }
 
 
-export class SubOrderInterface {
-  id!: number;
-  storeId!: number;
-  deliveryId?: string;
-  status?: OrderStatus;
-  subTotal?: number;
-  orderItems!: CreateOrderItemDto[];
+export interface SubOrderInterface {
+  id: number;
+  orderId: number;
+  storeId: number;
+  deliveryId: string;
+  status: OrderStatus;
+  subTotal: number;
+  createdAt: Date;
+  orderItems: CreateOrderItemDto[];
 }
 
 export interface OrderWithSubOrdersDto {
@@ -67,4 +69,52 @@ export interface OrderWithSubOrdersDto {
   createdAt: Date;
   updatedAt: Date;
   subOrders: SubOrderInterface[];
+}
+
+export interface OrderInterface {
+  id: number;
+  customerId: string;
+  address: string;
+  latitude: number;
+  longitude: number;
+  status: OrderStatus;
+  totalAmount: number;
+  createdAt: Date;
+  updatedAt: Date;
+  subOrders: SubOrderInterface[];
+}
+
+export interface CancelSubOrderResponse {
+  message: string;
+  subOrderId: number;
+  status: OrderStatus;
+}
+
+export interface DeliveryInfoDto {
+  id: string;
+  fullName: string;
+  phone: string;
+}
+
+export interface ProductOrderInfoDto {
+  id: number;
+  name: string;
+  unitPrice: number;
+  quantity: number;
+  total: number; // unitPrice * quantity
+}
+
+export interface SubOrderInfoDto {
+  id?: number;
+  subOrderId: number;
+  status: string;
+  totalAmount: number;
+  storeName: string;
+  createdAt: Date;
+  delivery: DeliveryInfoDto;
+  products: ProductOrderInfoDto[];
+}
+
+export interface OrderInfoDto {
+  subOrders: SubOrderInfoDto[];
 }

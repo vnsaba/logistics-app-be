@@ -80,7 +80,11 @@ export class InventoryRepository implements IInventoryRepository {
     const inventories = await prisma.inventory.findMany({
       include: {
         store: true,
-        product: true,
+        product: {
+          include: {
+            category: true,
+          },
+        },
       },
       where: {
         availableQuantity: {
@@ -91,6 +95,7 @@ export class InventoryRepository implements IInventoryRepository {
         },
         product: {
           status: 'ACTIVE',
+          
         },
       },
     });
@@ -107,6 +112,8 @@ export class InventoryRepository implements IInventoryRepository {
       productDescription: inv.product.description,
       unitPrice: inv.product.unitPrice,
       imageUrl: inv.product.imageUrl,
+      categoryName: inv.product.category.name,
+      categoryIdd: inv.product.category.id,
 
       availableQuantity: inv.availableQuantity,
     }));

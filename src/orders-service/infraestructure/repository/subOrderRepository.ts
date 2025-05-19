@@ -1,6 +1,58 @@
+import { SubOrderInterface } from "../../application/dtos/orderDto";
+import { OrderStatus } from "../../../shared/enums/orderStatus.enum";
+import { ISubOrderRepository } from "../../domain/interface/subOrders.interface";
+import { prismaMysql } from "../../../../prisma/index";
 
-export interface SubOrderInterface {
-    //buscar las ordenes asoaaciadas a la orden
-    findByIdWithItems(id: number): Promise<SubOrderInterface | null>;
-    
+export class SubOrderRepository implements ISubOrderRepository {
+    async findById(id: number): Promise<SubOrderInterface | null> {
+        return await prismaMysql.subOrders.findUnique({
+            where: { id: id },
+            include: {
+                orderItems: true,
+                store: true,
+            }
+        }).then((subOrder) => {
+            if (!subOrder) {
+                return null;
+            }
+            return {
+                ...subOrder,
+                status: subOrder.status as OrderStatus | undefined
+            } as SubOrderInterface;
+        }).catch((error) => {
+            throw new Error(`Error finding suborder: ${error}`);
+        })
+    }
+
+    async updateStatus(id: number, status: OrderStatus): Promise<void> {
+        return await prismaMysql.subOrders.update({
+            where: { id: id },
+            data: { status: status },
+        }).then(() => {
+            return;
+        }).catch((error) => {
+            throw new Error(`Error updating suborder status: ${error}`);
+        });
+    }
+
+    async findByIdWithItems(id: number): Promise<SubOrderInterface> {
+        return await prismaMysql.subOrders.findUnique({
+            where: { id: id },
+            include: {
+                orderItems: true,
+                store: true,
+            }
+        }).then((subOrder) => {
+            if (!subOrder) {
+                throw new Error(`SubOrder with id ${id} not found`);
+            }
+            return {
+                ...subOrder,
+                status: subOrder.status as OrderStatus | undefined
+            } as SubOrderInterface;
+        }).catch((error) => {
+            throw new Error(`Error finding suborder: ${error}`);
+        });
+    }
+
 }
