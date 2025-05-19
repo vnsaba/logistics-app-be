@@ -5,6 +5,7 @@ export class OrderItem {
         public productId: number,
         public quantity: number,
         public unitPrice: number,
+        public subOrderId: number,
         public createdAt: Date,
         public updatedAt: Date
     ){}

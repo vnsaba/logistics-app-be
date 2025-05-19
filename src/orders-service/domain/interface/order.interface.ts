@@ -9,5 +9,6 @@ export interface IOrderRepository {
     findAll(): Promise<Order[]>;
     update(id:number, order:UpdateOrderDto): Promise<Order>;
     updateStatus(id:number, status:OrderStatus): Promise<Order>;
-    findByClientId(clientId: string): Promise<Order[]>;
+    findByClientId(clientId: string): Promise<Order[]>
+    findByOrder(id: number): Promise<Order> 
 }

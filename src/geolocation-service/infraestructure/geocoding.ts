@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { GeocodingService } from '../../geolocation-service/domain/interface/geocoding.interface';
-import dotenv from 'dotenv';
-dotenv.config();
+
 
 export class GoogleMapsGeocodingService implements GeocodingService {
     constructor(private readonly apikey: string) {}

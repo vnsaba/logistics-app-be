@@ -14,6 +14,8 @@ import { ErrorResponse } from "../../../shared/domain/interfaces/error.interface
 import { CancelSubOrderService } from "../../application/cancelSubOrder.service";
 import { SubOrderRepository } from "../repository/subOrderRepository";
 import { OrderInfoService } from '../../application/orderInfo.service';
+import { updateOrderService } from '../../application/updateOrder.service';
+import { OrderItemRepository } from "../../../orderItem-service/infraestructure/repository/orderItem.repository";
 
 @Route('orders')
 @Tags('orders')
@@ -29,6 +31,8 @@ export class OrdersController extends Controller {
     private readonly subOrdersRepository: SubOrderRepository;
     private readonly cancelSubOrderService: CancelSubOrderService;
     private readonly orderInfoService: OrderInfoService;
+    private readonly orderItemRepository: OrderItemRepository
+    private readonly updateOrderService: updateOrderService;
 
     constructor() {
         super();
@@ -40,7 +44,10 @@ export class OrdersController extends Controller {
         this.userSRepository = new UserRepository();
         this.inventoryRepository = new InventoryRepository();
         this.subOrdersRepository = new SubOrderRepository();
-        this.orderInfoService = new OrderInfoService(this.subOrdersRepository,this.storeRepository, this.productsRepository, this.userSRepository, this.orderRepository);
+        this.orderItemRepository = new OrderItemRepository();
+        this.updateOrderService = new updateOrderService(this.orderRepository, this.subOrdersRepository, this.geocodingService, this.orderItemRepository, this.userSRepository, this.inventoryRepository);
+
+        this.orderInfoService = new OrderInfoService(this.subOrdersRepository, this.storeRepository, this.productsRepository, this.userSRepository, this.orderRepository);
         this.cancelSubOrderService = new CancelSubOrderService(this.orderRepository, this.userSRepository, this.subOrdersRepository, this.inventoryRepository);
         this.createOrderService = new CreateOrderService(this.orderRepository, this.storeRepository, this.productsRepository,
             this.geocodingService, this.userSRepository, this.distanceService, this.inventoryRepository);
@@ -127,5 +134,53 @@ export class OrdersController extends Controller {
             return { status: 500, message: error instanceof Error ? error.message : "Internal Server Error" };
         }
     }
+
+    @SuccessResponse("200", "Order address updated")
+    @Post('update-address')
+    public async updateOrderAddress(
+        @Body() body: { orderId: number, newAddress: string }
+    ): Promise<{ message: string } | ErrorResponse> {
+        try {
+            await this.updateOrderService.updateOrder(body.orderId, body.newAddress);
+            this.setStatus(200);
+            return { message: 'Order address updated successfully' };
+        } catch (error) {
+            this.setStatus(500);
+            return { status: 500, message: error instanceof Error ? error.message : "Internal Server Error" };
+        }
+    }
+
+    @SuccessResponse("200", "SubOrder delivery updated")
+    @Post('update-suborder-delivery')
+    public async updateSubOrderDelivery(
+        @Body() body: { subOrderId: number, deliveryId: string }
+    ): Promise<{ message: string } | ErrorResponse> {
+        try {
+            await this.updateOrderService.updateSubOrder(body.deliveryId, body.subOrderId);
+            this.setStatus(200);
+            return { message: 'Suborder delivery updated successfully' };
+        } catch (error) {
+            this.setStatus(500);
+            return { status: 500, message: error instanceof Error ? error.message : "Internal Server Error" };
+        }
+    }
+
+    @SuccessResponse("200", "OrderItem quantity updated")
+    @Post('update-orderitem')
+    public async updateOrderItemQuantity(
+        @Body() body: { id: number, quantity: number }
+    ): Promise<{ message: string } | ErrorResponse> {
+        try {
+            await this.updateOrderService.updateOrderItem(body.id, body.quantity);
+            this.setStatus(200);
+            return { message: 'Order item updated successfully' };
+        } catch (error) {
+            this.setStatus(500);
+            return { status: 500, message: error instanceof Error ? error.message : "Internal Server Error" };
+        }
+    }
+
+
+
 }
 

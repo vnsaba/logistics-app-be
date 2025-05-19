@@ -63,6 +63,19 @@ export class OrdersRepository implements IOrderRepository {
         return order as unknown as OrderWithSubOrdersDto;
     }
 
+
+    async findByOrder(id: number): Promise<Order> {
+        return await prismaMysql.order.findUnique({
+            where: { id: Number(id) },
+        }).then((order) => {
+            if (!order) {
+                throw new Error(`Order with id ${id} not found`);
+            }
+            return order;
+        })
+
+    }
+
     async findAll(): Promise<Order[]> {
         return await prismaMysql.order.findMany({
             include: {

@@ -4,4 +4,5 @@ export interface IOrderItemRepository {
     findById(id: number): Promise<OrderItem | null>;
     update(orderItem: OrderItem): Promise<OrderItem>;
     delete(id: number): Promise<void>;
+    // findByOrderId(subOrderId: number, id: number): Promise<OrderItem>;
 }

@@ -7,13 +7,8 @@ import { UpdateOrderItemDto } from "../../application/dtos/UpdateOrderItemDto";
 export class OrderItemRepository implements IOrderItemRepository {
     async findById(id: number): Promise<OrderItem | null> {
         return await prismaMysql.orderItem.findUnique({
-            where: { id: Number(id) },
-        }).then((orderItem) => {
-            if (!orderItem) {
-                return null;
-            }
-            return orderItem;
-        })
+            where: { id: id }
+        });
     }
 
     async update(orderItem: UpdateOrderItemDto): Promise<OrderItem> {
@@ -31,4 +26,17 @@ export class OrderItemRepository implements IOrderItemRepository {
             where: { id: Number(id) },
         });
     }
+
+    // async findByOrderId(orderId: number, id: number): Promise<OrderItem> {
+    //     const orderItem = await prismaMysql.orderItem.findUnique({
+    //         where: {
+    //             subOrderId: orderId,
+    //             productId: id
+    //         }
+    //     });
+    //     if (!orderItem) {
+    //         throw new Error(`OrderItem with orderId ${orderId} and id ${id} not found`);
+    //     }
+    //     return orderItem;
+    // }
 }

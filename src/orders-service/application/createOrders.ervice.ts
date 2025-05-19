@@ -137,7 +137,9 @@ export class CreateOrderService {
                 isAvaliable: delivery.isAvaliable
             }));
 
-        if (validDeliveries.length === 0) throw new Error('No delivery person available');
+        // if (validDeliveries.length === 0) throw new Error('No delivery person available');
+        if (validDeliveries.length === 0) {throw new Error('No delivery person available');}
+
 
         const distances = await this.distanceService.getDistancesFromGoogle( //calcula las distancias de los repartidores a la tienda
             store!.latitude,
@@ -158,27 +160,6 @@ export class CreateOrderService {
         if (!selected) throw new Error('No delivery person could be assigned');
         return selected;
     }
-
-    // // Descontar el inventario
-    // private async validateAndDiscountInventory(storeId: number, items: CreateOrderItemDto[]): Promise<void> {
-    //     const store = await this.storeRepository.findById(storeId);
-    //     if (!store) throw new Error(`Store with id ${storeId} not found`);
-
-    //     for (const item of items) {
-    //         const product = await this.productRepository.findById(item.productId);
-    //         if (!product) throw new Error(`Product with id ${item.productId} not found`);
-
-    //         const inventory = await this.inventoryRepository.findByProductAndStore(storeId, item.productId);
-    //         if (!inventory) throw new Error(`Inventory for product ${item.productId} in store ${storeId} not found`);
-    //         if (inventory.availableQuantity < item.quantity) {
-    //             throw new Error(`Not enough stock for product ${item.productId}`);
-    //         }
-
-    //         // Descontar stock
-    //         await this.inventoryRepository.update(inventory.id!, {
-    //             availableQuantity: inventory.availableQuantity - item.quantity
-    //         });
-    //     }
 }
 
 
