@@ -68,7 +68,6 @@ export class InventoryController extends Controller {
     return inventory;
   }
 
-
   @Get("/available-products")
   public async getAllAvailableProducts(): Promise<StoreProductDto[]> {
     return await this.inventoryService.getAllWithStoreAndProduct();
