@@ -26,7 +26,7 @@ export class OrdersRepository implements IOrderRepository {
                         createdAt: new Date(),
                         updatedAt: new Date(),
                         store: {
-                            connect: { id: subOrder.storeId }
+                            connect: { id: subOrder.storeId },
                         },
                         orderItems: {
                             create: subOrder.orderItems.map((item) => ({
@@ -38,9 +38,17 @@ export class OrdersRepository implements IOrderRepository {
                             })),
                         },
                     })),
-                }
+                },
             },
-        })
+            include: {
+                subOrders: {
+                    include: {
+                        store: true,
+                        orderItems: true,
+                    },
+                },
+            },
+        });
     }
 
     async findById(id: number, options?: any): Promise<OrderWithSubOrdersDto> {

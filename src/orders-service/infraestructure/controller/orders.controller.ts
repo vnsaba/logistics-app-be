@@ -1,4 +1,4 @@
-import { Controller, Post, Route, SuccessResponse, Body, Tags, Get } from "tsoa";
+import { Controller, Post, Route, SuccessResponse, Body, Tags, Get, Security } from "tsoa";
 import { Order } from '../../domain/entity/order';
 import { CreateOrderService } from '../../application/createOrders.ervice';
 import { OrdersRepository } from "../repository/orders.repository";
@@ -10,7 +10,7 @@ import { DistanceService } from '../../../geolocation-service/infraestructure/di
 import { CancelSubOrderResponse, CreateOrderRequestDto, SubOrderInfoDto } from "../../application/dtos/orderDto"
 import { InventoryRepository } from "../../../inventory-service/infraestructure/repository/inventory.repository";
 import { ErrorResponse } from "../../../shared/domain/interfaces/error.interface";
-// import { UserRole } from '../../../../types/auth/index';
+import { UserRole } from '../../../../types/auth/index';
 import { CancelSubOrderService } from "../../application/cancelSubOrder.service";
 import { SubOrderRepository } from "../repository/subOrderRepository";
 import { OrderInfoService } from '../../application/orderInfo.service';
@@ -53,7 +53,7 @@ export class OrdersController extends Controller {
             this.geocodingService, this.userSRepository, this.distanceService, this.inventoryRepository);
     }
 
-    // @Security('jwt', [UserRole.CLIENTE])
+    @Security('jwt', [UserRole.CLIENTE])
     @SuccessResponse("201", "Created")
     @Post('create')
     public async createOrder(@Body() requestBody: CreateOrderRequestDto,
@@ -77,7 +77,7 @@ export class OrdersController extends Controller {
     }
 
     //LISTAR TODOS LOS PEDIDOS QUE PEUDEN SER OBSERVADOS POR EL GERENTE Y EL ADMINISTRADOR
-    // @Security('jwt', [UserRole.GERENTE, UserRole.ADMINISTRADOR])
+    @Security('jwt', [UserRole.GERENTE, UserRole.ADMINISTRADOR])
     @SuccessResponse("200", "OK")
     @Get('list')
     public async listOrders(
@@ -98,6 +98,7 @@ export class OrdersController extends Controller {
 
     @SuccessResponse("200", "OK")
     @Post('cancel-suborder')
+    @Security('jwt', [UserRole.CLIENTE])
     public async cancelSubOrder(
         @Body() body: { subOrderId: number }
     ): Promise<CancelSubOrderResponse | ErrorResponse> {
@@ -115,9 +116,9 @@ export class OrdersController extends Controller {
         }
     }
 
-    //listar las ordenes de un cliente
     @SuccessResponse("200", "OK")
     @Post('subOrder-info')
+    @Security('jwt', [UserRole.CLIENTE])
     public async getSubOrderInfo(
         @Body() body: { clientId: string }
     ): Promise<SubOrderInfoDto[] | ErrorResponse> {
@@ -137,6 +138,7 @@ export class OrdersController extends Controller {
 
     @SuccessResponse("200", "Order address updated")
     @Post('update-address')
+    @Security('jwt', [UserRole.CLIENTE])
     public async updateOrderAddress(
         @Body() body: { orderId: number, newAddress: string }
     ): Promise<{ message: string } | ErrorResponse> {
@@ -167,6 +169,7 @@ export class OrdersController extends Controller {
 
     @SuccessResponse("200", "OrderItem quantity updated")
     @Post('update-orderitem')
+    @Security('jwt', [UserRole.CLIENTE])
     public async updateOrderItemQuantity(
         @Body() body: { id: number, quantity: number }
     ): Promise<{ message: string } | ErrorResponse> {
