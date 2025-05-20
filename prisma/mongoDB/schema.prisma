@@ -42,7 +42,7 @@ model User {
   twoFactorExpires        DateTime?
   resetPasswordToken      String?
 
-  //ubicacion del repartidor
+  //ubicacion del repartid¿or
   latitude               Float?
   longitude              Float?
   isAvaliable           Boolean? @default(true)
