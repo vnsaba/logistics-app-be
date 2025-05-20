@@ -4,10 +4,10 @@ import {
   Tags,
   Post,
   Get,
-  Put,
   Delete,
   Body,
   Path,
+  Patch,
   UploadedFile,
 } from "tsoa";
 
@@ -58,7 +58,7 @@ export class ProductController extends Controller {
     return await this.productService.getById(id);
   }
 
-  @Put("{id}")
+  @Patch("{id}")
   public async updateProduct(
     @Path() id: number,
     @Body() body: UpdateProductDto
