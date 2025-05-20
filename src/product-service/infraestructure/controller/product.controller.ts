@@ -8,6 +8,7 @@ import {
   Delete,
   Body,
   Path,
+  UploadedFile,
 } from "tsoa";
 
 import { Product } from "../../domain/entity/product";
@@ -15,23 +16,35 @@ import { ProductService } from "../../application/product.service";
 import { ProductRepository } from "../repository/product.repository";
 import { CreateProductDto } from "../dto/create-product.dto";
 import { UpdateProductDto } from "../dto/update-product.dto";
+import { UploadProductService } from "../../application/uploadProduct.service";
+import { InventoryRepository } from "../../../inventory-service/infraestructure/repository/inventory.repository";
+import { MulterFileReader } from "../../../shared/infraestructure/multerFileReader";
 
 @Route("products")
 @Tags("Products")
 export class ProductController extends Controller {
   private readonly productService: ProductService;
+  private readonly uploadProductService: UploadProductService;
 
   constructor() {
     super();
-    const repository = new ProductRepository();
-    this.productService = new ProductService(repository);
+    const inventoryRepository = new InventoryRepository();
+    const productRepository = new ProductRepository();
+    this.productService = new ProductService(productRepository);
+    const multerFileReader = new MulterFileReader();
+
+    this.uploadProductService = new UploadProductService(
+      productRepository,
+      inventoryRepository,
+      multerFileReader
+    );
   }
 
   @Post()
   public async createProduct(@Body() body: CreateProductDto): Promise<Product> {
     return await this.productService.create({
       ...body,
-      dateOfExpiration: new Date(body.dateOfExpiration), 
+      dateOfExpiration: new Date(body.dateOfExpiration),
     });
   }
 
@@ -61,5 +74,16 @@ export class ProductController extends Controller {
   @Delete("{id}")
   public async deleteProduct(@Path() id: number): Promise<void> {
     await this.productService.delete(id);
+  }
+
+  @Post("upload")
+  public async loadStores(@UploadedFile() file: Express.Multer.File) {
+    return await this.uploadProductService.upload<
+      Express.Multer.File,
+      { id: string; last_name: string; phone: string; isbn: string }
+    >({
+      file,
+      separator: ";",
+    });
   }
 }

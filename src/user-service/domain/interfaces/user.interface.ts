@@ -11,10 +11,13 @@ export interface IUserRepository {
   updateResetPasswordToken(email: string, token: string): Promise<void>;
   updatePassword(email: string, newPassword: string): Promise<void>;
   clearResetToken(email: string): Promise<void>;
-  updateTwoFactor(id: string, code: string, expires: Date): Promise<void>
+  updateTwoFactor(id: string, code: string, expires: Date): Promise<void>;
   clearTwoFactor(id: string): Promise<void>;
   getAllUsers(): Promise<Omit<UserType, 'current_password'>[]>
   findByClientId(id: string): Promise<User | null>;
   getAllDeliveries(isAvaliable: boolean): Promise<DeliveryInfo[]>;
   updateActiveOrders(deliveryId: string, activeOrders: number): Promise<void>;
+  getAllUsers(): Promise<Omit<UserType, "current_password">[]>;
+  createMany(users: User[]): Promise<(User | null)[]>;
+  findByEmails(emails: string[]): Promise<User[]>;
 }

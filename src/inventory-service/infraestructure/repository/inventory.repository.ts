@@ -7,7 +7,6 @@ import { StoreProductDto } from "../dto/StoreProduct.dto";
 const prisma = new PrismaClient();
 
 export class InventoryRepository implements IInventoryRepository {
-
   async create(inventory: Inventory): Promise<Inventory> {
     const created = await prisma.inventory.create({
       data: {
@@ -132,5 +131,21 @@ export class InventoryRepository implements IInventoryRepository {
     }));
 
     return result;
+  }
+
+  async createMany(inventories: Inventory[]): Promise<Inventory[]> {
+    const data = inventories.map((inv) => ({
+      productId: inv.productId,
+      storeId: inv.storeId,
+      availableQuantity: inv.availableQuantity,
+      minimumThreshold: inv.minimumThreshold,
+      lastResetDate: inv.lastResetDate,
+      createdAt: inv.createdAt,
+      updatedAt: inv.updatedAt,
+    }));
+
+    await prisma.inventory.createMany({ data });
+
+    return inventories;
   }
 }

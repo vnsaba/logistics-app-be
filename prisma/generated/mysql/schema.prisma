@@ -86,6 +86,8 @@ model Store {
   updatedAt  DateTime    @updatedAt
   inventory  Inventory[]
   SubOrders  SubOrders[]
+
+  @@index([name])
 }
 
 model City {
@@ -94,6 +96,9 @@ model City {
   departmentId Int
   department   Department @relation(fields: [departmentId], references: [id])
   stores       Store[]
+
+  @@index([name, departmentId])
+  @@index([departmentId])
 }
 
 model Department {
@@ -134,6 +139,10 @@ model Product {
   updatedAt             DateTime      @updatedAt
   inventory             Inventory[]
   orderItems            OrderItem[]
+
+  @@index([categoryId])
+  @@index([name])
+  @@index([status])
 }
 
 model Inventory {
@@ -148,6 +157,8 @@ model Inventory {
   createdAt          DateTime             @default(now())
   updatedAt          DateTime             @updatedAt
   historicalMovement HistoricalMovement[]
+
+  @@unique([productId, storeId])
 }
 
 model HistoricalMovement {
@@ -160,4 +171,6 @@ model HistoricalMovement {
   movementType MovementType
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @updatedAt
+
+  @@index([inventoryId])
 }

@@ -1,6 +1,6 @@
-import { IProductRepository } from '../../domain/interfaces/product.interface';
 import { Product } from '../../domain/entity/product';
 import { prismaMysql } from "../../../../prisma/index";
+import { IProductRepository } from "../../domain/interfaces/product.interface";
 
 
 export class ProductRepository implements IProductRepository {
@@ -28,5 +28,45 @@ export class ProductRepository implements IProductRepository {
     await prismaMysql.product.delete({ where: { id } });
   }
 
-  
+
+  async createMany(products: Product[]): Promise<Product[]> {
+    const data = products.map((p) => ({
+      id_producto: p.id_producto,
+      id_proveedor: p.id_proveedor,
+      name: p.name,
+      description: p.description,
+      sku: p.sku,
+      categoryId: p.categoryId,
+      unitPrice: p.unitPrice,
+      weight: p.weight,
+      isFragile: p.isFragile,
+      dimensionsCm: p.dimensionsCm,
+      imageUrl: p.imageUrl,
+      barCode: p.barCode,
+      requiredRefrigeration: p.requiredRefrigeration,
+      dateOfExpiration: p.dateOfExpiration,
+      status: p.status,
+    }));
+
+    await prismaMysql.product.createMany({ data });
+
+    return products;
+  }
+
+  async findByProductId(id_producto: string): Promise<Product | null> {
+    return await prismaMysql.product.findUnique({ where: { id_producto: id_producto } });
+  }
+
+  async findByProductIds(id_productos: string[]): Promise<Product[]> {
+    const products = await prismaMysql.product.findMany({
+      where: {
+        id_producto: {
+          in: id_productos,
+        },
+      },
+    });
+
+    return products.map(p => Product.createFrom(p));
+  }
+
 }

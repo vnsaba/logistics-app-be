@@ -13,4 +13,6 @@ export interface IInventoryRepository {
   findProductByProductId(id: number): Promise<Product | null>;   
   getAllStoreWithProduct(): Promise<StoreProductDto[]>;
   getStoreAndProductExist(storeId: number, productId: number): Promise<Inventory | null>;
+  findProductByProductId(id: number): Promise<Product | null>; 
+  createMany(inventories: Inventory[]): Promise<Inventory[]>;
 }

@@ -13239,6 +13239,7 @@ export namespace Prisma {
 
   export type InventoryWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    productId_storeId?: InventoryProductIdStoreIdCompoundUniqueInput
     AND?: InventoryWhereInput | InventoryWhereInput[]
     OR?: InventoryWhereInput[]
     NOT?: InventoryWhereInput | InventoryWhereInput[]
@@ -13252,7 +13253,7 @@ export namespace Prisma {
     product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
     store?: XOR<StoreScalarRelationFilter, StoreWhereInput>
     historicalMovement?: HistoricalMovementListRelationFilter
-  }, "id">
+  }, "id" | "productId_storeId">
 
   export type InventoryOrderByWithAggregationInput = {
     id?: SortOrder
@@ -14824,6 +14825,11 @@ export namespace Prisma {
 
   export type HistoricalMovementOrderByRelationAggregateInput = {
     _count?: SortOrder
+  }
+
+  export type InventoryProductIdStoreIdCompoundUniqueInput = {
+    productId: number
+    storeId: number
   }
 
   export type InventoryCountOrderByAggregateInput = {

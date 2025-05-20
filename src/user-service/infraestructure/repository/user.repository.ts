@@ -1,7 +1,6 @@
 import { User } from '../../domain/entity/user';
 import { User as UserType } from '../../../../types/auth/index';
 import { prismaMongo } from "../../../../prisma/index";
-
 import { IUserRepository } from '../../domain/interfaces/user.interface';
 import { DeliveryInfo } from '../../domain/interfaces/deliveryInfo.interface';
 
@@ -10,6 +9,19 @@ export class UserRepository implements IUserRepository {
   async findById(id: string): Promise<User | null> {
     const user = await prismaMongo.user.findUnique({ where: { id } });
     return user;
+  }
+
+  public async createMany(users: User[]): Promise<(User | null)[]> {
+    return await Promise.all(
+      users.map(async (user) => {
+        try {
+          return await this.createUser(user);
+        } catch (e) {
+          console.error(`Error inserting user ${user.email}:`, e);
+          return null;
+        }
+      })
+    );
   }
 
   public async createUser(userData: User): Promise<User> {
@@ -21,13 +33,13 @@ export class UserRepository implements IUserRepository {
         phone: userData.phone,
         roleId: userData.roleId,
         status: userData.status,
-        created_at: new Date(),
-        updated_at: new Date(),
-        resetPasswordToken: null,
-        twoFactorCode: null,
-        twoFactorExpires: null,
-        verificationCode: userData.verificationCode,
-        verificationCodeExpires: userData.verificationCodeExpires,
+        created_at: userData.created_at ?? new Date(),
+        updated_at: userData.updated_at ?? new Date(),
+        resetPasswordToken: userData.resetPasswordToken ?? null,
+        verificationCode: userData.verificationCode ?? null,
+        verificationCodeExpires: userData.verificationCodeExpires ?? null,
+        twoFactorCode: userData.twoFactorCode ?? null,
+        twoFactorExpires: userData.twoFactorExpires ?? null,
       },
     });
   }
@@ -108,6 +120,7 @@ export class UserRepository implements IUserRepository {
 
   public async getAllUsers(): Promise<Omit<UserType, 'current_password'>[]> {
     const users = await prismaMongo.user.findMany({
+
       omit: {
         current_password: true,
       },
@@ -145,8 +158,8 @@ export class UserRepository implements IUserRepository {
     return users;
   }
 
- async updateActiveOrders(deliveryId: string, activeOrders: number): Promise<void> {
-     await prismaMongo.user.update({
+  async updateActiveOrders(deliveryId: string, activeOrders: number): Promise<void> {
+    await prismaMongo.user.update({
       where: { id: deliveryId },
       data: {
         activeOrders: activeOrders,
@@ -154,4 +167,12 @@ export class UserRepository implements IUserRepository {
     });
   }
 
+
+  async findByEmails(emails: string[]): Promise<User[]> {
+    return await prismaMongo.user.findMany({
+      where: {
+        email: { in: emails },
+      },
+    });
+  }
 }
