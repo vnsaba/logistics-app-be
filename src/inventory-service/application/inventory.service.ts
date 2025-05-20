@@ -8,6 +8,10 @@ import { IUserRepository } from "../../user-service/domain/interfaces/user.inter
 import { Product } from "../../product-service/domain/entity/product";
 import { IStoreRepository } from "../..//store-service/domain/interfaces/store.interface";
 import { StoreProductDto } from "../infraestructure/dto/StoreProduct.dto";
+import { EmailSenderInterface } from "src/shared/domain/interfaces/emailSender.interface";
+import { IUserRepository } from "../../user-service/domain/interfaces/user.interface";
+import { Product } from "../../product-service/domain/entity/product";
+import { IStoreRepository } from "../..//store-service/domain/interfaces/store.interface";
 
 export class InventoryService {
   private historicalMovementRepository = new HistoricalMovementRepository();
@@ -158,5 +162,4 @@ export class InventoryService {
   async getAllWithStoreAndProduct(): Promise<StoreProductDto[]> {
     return await this.inventoryRepository.getAllStoreWithProduct();
   }
-  
 }

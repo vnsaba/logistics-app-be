@@ -60,6 +60,8 @@ describe("ResetPasswordService", () => {
     } as jest.Mocked<IUserRepository>;
 
 
+    } as jest.Mocked<IUserRepository>;
+    
     mockTokenManager = {
       verifyToken: jest.fn(),
       generateToken: jest.fn(), // Mock necesario para la interfaz

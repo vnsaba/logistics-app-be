@@ -3,6 +3,12 @@ import { User as UserType } from '../../../../types/auth/index';
 import { prismaMongo } from "../../../../prisma/index";
 import { IUserRepository } from '../../domain/interfaces/user.interface';
 import { DeliveryInfo } from '../../domain/interfaces/deliveryInfo.interface';
+import { User } from "../../domain/entity/user";
+import { User as UserType } from "../../../../types/auth/index";
+import { PrismaClient } from "../../../../prisma/generated/mongodb";
+const prisma = new PrismaClient();
+import { IUserRepository } from "../../domain/interfaces/user.interface";
+ 
 
 export class UserRepository implements IUserRepository {
 
@@ -121,6 +127,9 @@ export class UserRepository implements IUserRepository {
   public async getAllUsers(): Promise<Omit<UserType, 'current_password'>[]> {
     const users = await prismaMongo.user.findMany({
 
+
+  public async getAllUsers(): Promise<Omit<UserType, "current_password">[]> {
+    const users = await prisma.user.findMany({
       omit: {
         current_password: true,
       },
@@ -170,6 +179,9 @@ export class UserRepository implements IUserRepository {
 
   async findByEmails(emails: string[]): Promise<User[]> {
     return await prismaMongo.user.findMany({
+
+  async findByEmails(emails: string[]): Promise<User[]> {
+    return await prisma.user.findMany({
       where: {
         email: { in: emails },
       },

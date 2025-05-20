@@ -23,6 +23,7 @@ import { StoreRepository } from "../../../store-service/infraestructure/reposito
 import { StoreProductDto } from "../dto/StoreProduct.dto";
 
 
+
 @Route("inventories")
 @Tags("Inventory")
 export class InventoryController extends Controller {
@@ -67,7 +68,7 @@ export class InventoryController extends Controller {
     return inventory;
   }
 
-  
+
   @Get("/available-products")
   public async getAllAvailableProducts(): Promise<StoreProductDto[]> {
     return await this.inventoryService.getAllWithStoreAndProduct();
@@ -98,3 +99,4 @@ export class InventoryController extends Controller {
 
 }
 
+}

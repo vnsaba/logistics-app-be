@@ -35,6 +35,7 @@ export class InventoryRepository implements IInventoryRepository {
     return inventory ? Inventory.createFrom(inventory) : null;
   }
 
+
   async getStoreAndProductExist(
     storeId: number,
     productId: number
@@ -47,6 +48,7 @@ export class InventoryRepository implements IInventoryRepository {
     }
     return Inventory.createFrom(inventory);
   }
+
 
   async update(id: number, data: Partial<Inventory>): Promise<Inventory> {
     const updated = await prisma.inventory.update({
@@ -70,6 +72,8 @@ export class InventoryRepository implements IInventoryRepository {
       where: { storeId },
       include: {
         product: true,
+        product: true, // Incluye la relación con Product si es necesario
+
       },
     });
 
@@ -132,6 +136,7 @@ export class InventoryRepository implements IInventoryRepository {
 
     return result;
   }
+
 
   async createMany(inventories: Inventory[]): Promise<Inventory[]> {
     const data = inventories.map((inv) => ({

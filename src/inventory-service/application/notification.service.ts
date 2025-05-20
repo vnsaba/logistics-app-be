@@ -2,6 +2,7 @@ import { EmailSenderInterface } from "../../shared/domain/interfaces/emailSender
 import { IInventoryRepository } from "../domain/interfaces/inventory.interface";
 import { Inventory } from "../domain/entity/inventory";
 import { IUserRepository } from "../../user-service/domain/interfaces/user.interface";
+import { IUserRepository } from "src/user-service/domain/interfaces/user.interface";
 import { User } from "../../user-service/domain/entity/user";
 import { Store } from "../../store-service/domain/entity/store";
 import { IStoreRepository } from "../../store-service/domain/interfaces/store.interface";
