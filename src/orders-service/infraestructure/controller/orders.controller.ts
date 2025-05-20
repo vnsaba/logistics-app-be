@@ -53,7 +53,7 @@ export class OrdersController extends Controller {
             this.geocodingService, this.userSRepository, this.distanceService, this.inventoryRepository);
     }
 
-    @Security('jwt', [UserRole.CLIENTE])
+    // @Security('jwt', [UserRole.CLIENTE])
     @SuccessResponse("201", "Created")
     @Post('create')
     public async createOrder(@Body() requestBody: CreateOrderRequestDto,
