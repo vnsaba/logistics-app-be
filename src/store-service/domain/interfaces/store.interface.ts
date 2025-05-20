@@ -11,5 +11,4 @@ export interface IStoreRepository {
   findByIdAlmacen(id_almacen: string): Promise<Store | null>;
   createMany(stores: Store[]): Promise<Store[]>;
   findByIdAlmacenes(ids: string[]): Promise<Store[]>;
-
 }

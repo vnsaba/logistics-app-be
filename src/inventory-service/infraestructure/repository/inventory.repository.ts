@@ -2,6 +2,7 @@ import { PrismaClient } from "../../../../prisma/generated/mysql";
 import { IInventoryRepository } from "../../domain/interfaces/inventory.interface";
 import { Inventory } from "../../domain/entity/inventory";
 import { Product } from "../../../product-service/domain/entity/product";
+import { StoreProductDto } from "../dto/StoreProduct.dto";
 
 const prisma = new PrismaClient();
 
@@ -34,6 +35,19 @@ export class InventoryRepository implements IInventoryRepository {
     return inventory ? Inventory.createFrom(inventory) : null;
   }
 
+  async getStoreAndProductExist(
+    storeId: number,
+    productId: number
+  ): Promise<Inventory | null> {
+    const inventory = await prisma.inventory.findFirst({
+      where: { storeId, productId },
+    });
+    if (!inventory) {
+      return null
+    }
+    return Inventory.createFrom(inventory);
+  }
+
   async update(id: number, data: Partial<Inventory>): Promise<Inventory> {
     const updated = await prisma.inventory.update({
       where: { id },
@@ -55,7 +69,7 @@ export class InventoryRepository implements IInventoryRepository {
     const inventories = await prisma.inventory.findMany({
       where: { storeId },
       include: {
-        product: true, // Incluye la relación con Product si es necesario
+        product: true,
       },
     });
 
@@ -72,6 +86,51 @@ export class InventoryRepository implements IInventoryRepository {
     return inventory && inventory.product
       ? Product.createFrom(inventory.product)
       : null;
+  }
+
+  async getAllStoreWithProduct(): Promise<StoreProductDto[]> {
+    const inventories = await prisma.inventory.findMany({
+      include: {
+        store: true,
+        product: {
+          include: {
+            category: true,
+          },
+        },
+      },
+      where: {
+        availableQuantity: {
+          gt: 0,
+        },
+        store: {
+          status: 'ACTIVE',
+        },
+        product: {
+          status: 'ACTIVE',
+
+        },
+      },
+    });
+
+    const result: StoreProductDto[] = inventories.map((inv) => ({
+      storeId: inv.store.id,
+      storeName: inv.store.name,
+      storeAddress: inv.store.address,
+      storeLatitude: inv.store.latitude,
+      storeLongitude: inv.store.longitude,
+
+      productId: inv.product.id,
+      productName: inv.product.name,
+      productDescription: inv.product.description,
+      unitPrice: inv.product.unitPrice,
+      imageUrl: inv.product.imageUrl,
+      categoryName: inv.product.category.name,
+      categoryIdd: inv.product.category.id,
+
+      availableQuantity: inv.availableQuantity,
+    }));
+
+    return result;
   }
 
   async createMany(inventories: Inventory[]): Promise<Inventory[]> {

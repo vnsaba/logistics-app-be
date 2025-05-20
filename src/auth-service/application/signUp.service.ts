@@ -30,21 +30,15 @@ export class SignUpService {
     current_password: string,
     phone: string
   ): Promise<User> {
-    const errors: ValidationError[] = []; 
+    const errors: ValidationError[] = [];
 
-    // Validación del teléfono
-    const phoneRegex = /^3\d{9}$/;
-    if (!phoneRegex.test(phone)) {
-      errors.push({
-        field: "phone",
-        message:
-          "El número de teléfono debe tener 10 dígitos y comenzar con 3.",
-      });
-    } else {
-      phone = `+57${phone}`;
+    phone = `+57${phone}`;
+
+    if (!/^\d{10}$/.test(phone) || !phone.startsWith('3')) {
+      throw new HttpError("El número de teléfono debe tener 10 dígitos y comenzar con 3.", 400);
     }
 
-    // Validación del email
+
     const existingUser = await this.userRepository.getByEmail(email);
     if (existingUser) {
       errors.push({
@@ -53,38 +47,25 @@ export class SignUpService {
       });
     }
 
-    // Validación de la contraseña
-    const passwordRegex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=[\]{};':"\\|,.<>/?])[A-Za-z\d!@#$%^&*()_\-+=[\]{};':"\\|,.<>/?]{8,64}$/;
-    if (!passwordRegex.test(current_password)) {
-      errors.push({
-        field: "current_password",
-        message:
-          "La contraseña debe tener entre 8 y 64 caracteres, incluir al menos una letra mayúscula, una letra minúscula, un número y un carácter especial.",
-      });
-    }
-
-    if (errors.length > 0) {
-      throw new HttpError(JSON.stringify(errors), 400);
-    }
-
     const passwordHash =
       await this.passwordService.hashPassword(current_password);
 
-    const delivererRole = await this.roleRepository.findByName("REPARTIDOR");
-    if (!delivererRole) {
+    const clientRole = await this.roleRepository.findByName("CLIENTE");
+    if (!clientRole) {
       throw new HttpError(
-        'El rol "REPARTIDOR" no se encontró en la base de datos.',
+        'El rol "CLIENTE" no se encontró en la base de datos.',
         500
       );
     }
 
-    const delivererRoleId = delivererRole.id;
+
+
+    const clientRolId = clientRole.id;
     const newUser = new User(
       fullname,
       email,
       passwordHash,
-      delivererRoleId,
+      clientRolId,
       phone
     );
     newUser.status = "PENDING";

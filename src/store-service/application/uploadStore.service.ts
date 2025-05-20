@@ -205,6 +205,10 @@ export class UploadStoreService {
       verificationCodeExpires: null,
       twoFactorCode: null,
       twoFactorExpires: null,
+      latitude: null,
+      longitude: null,
+      isAvaliable: false,
+      activeOrders: 0
     }));
 
     const createdUsers = await this.userRepository.createMany(usersData);

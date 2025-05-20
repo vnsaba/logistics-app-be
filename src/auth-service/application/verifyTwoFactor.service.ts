@@ -17,8 +17,22 @@ export class VerifyTwoFactorService {
         this.tokenGenerator = tokenGenerator;
     }
 
-    async verifyTwoFactor(userId: string, code: string): Promise<{ token: string }> {
-        const user = await this.userRepository.findById(userId);
+    /**
+     * Verifies a two-factor authentication code for a user and generates a token upon successful verification.
+     *
+     * @param userId - The unique identifier of the user attempting to verify the two-factor code.
+     * @param code - The two-factor authentication code provided by the user.
+     * @returns A promise that resolves to an object containing the generated token.
+     * @throws {Error} If the user does not have a valid two-factor verification process initialized.
+     * @throws {Error} If the provided code is invalid or has expired.
+     * @throws {Error} If the user's role cannot be found.
+     */
+    async verifyTwoFactor(email: string, code: string): Promise<{ token: string }> {
+        const user = await this.userRepository.getByEmail(email);
+
+        if (!user) {
+            throw new Error("User not found");
+        }
         
         if (!user?.twoFactorCode || !user?.twoFactorExpires) {
             throw new Error("Invalid verification process");
@@ -38,6 +52,7 @@ export class VerifyTwoFactorService {
 
         const token = await this.tokenGenerator.generateToken({
             id: user.id!,
+            name: user.fullname,
             role,
             email: user.email
         }, {  expiresIn: "1h" });

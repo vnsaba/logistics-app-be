@@ -1,3 +1,4 @@
+import { StoreProductDto } from '../../infraestructure/dto/StoreProduct.dto';
 import { Product } from '../../../product-service/domain/entity/product';
 import { Inventory } from '../entity/inventory';
 
@@ -9,6 +10,9 @@ export interface IInventoryRepository {
   delete(id: number): Promise<void>;
   findAll(): Promise<Inventory[]>;  
   findByStore(storeId: number): Promise<Inventory[]>; 
+  findProductByProductId(id: number): Promise<Product | null>;   
+  getAllStoreWithProduct(): Promise<StoreProductDto[]>;
+  getStoreAndProductExist(storeId: number, productId: number): Promise<Inventory | null>;
   findProductByProductId(id: number): Promise<Product | null>; 
   createMany(inventories: Inventory[]): Promise<Inventory[]>;
 }

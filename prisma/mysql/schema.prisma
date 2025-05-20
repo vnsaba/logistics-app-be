@@ -10,7 +10,7 @@ datasource db {
 
 enum OrderStatus {
     PENDING
-    IN_PROFRESS
+    IN_PROGRESS
     CANCELED
     COMPLETED
 }
@@ -45,29 +45,29 @@ model Order {
 }
 
 model SubOrders {
-    id        Int      @id @default(autoincrement())
-    orderId   Int
-    order     Order    @relation(fields: [orderId], references: [id])
-    storeId   Int
-    store     Store    @relation(fields: [storeId], references: [id])
+    id         Int         @id @default(autoincrement())
+    orderId    Int
+    order      Order       @relation(fields: [orderId], references: [id])
+    storeId    Int
+    store      Store       @relation(fields: [storeId], references: [id])
     deliveryId String
-    status    OrderStatus @default(PENDING)
-    subTotal Float
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+    status     OrderStatus @default(PENDING)
+    subTotal   Float
+    createdAt  DateTime    @default(now())
+    updatedAt  DateTime    @updatedAt
     orderItems OrderItem[]
 }
 
 model OrderItem {
-    id        Int      @id @default(autoincrement())
+    id         Int       @id @default(autoincrement())
     subOrderId Int
     subOrder   SubOrders @relation(fields: [subOrderId], references: [id])
-    productId Int
-    product   Product  @relation(fields: [productId], references: [id])
-    quantity  Int
-    unitPrice Float
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+    productId  Int
+    product    Product   @relation(fields: [productId], references: [id])
+    quantity   Int
+    unitPrice  Float
+    createdAt  DateTime  @default(now())
+    updatedAt  DateTime  @updatedAt
 }
 
 
