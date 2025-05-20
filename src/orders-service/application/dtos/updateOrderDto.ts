@@ -1,4 +1,3 @@
-import { IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, IsLatitude, IsLongitude } from 'class-validator';
 import { OrderStatus } from '../../../shared/enums/orderStatus.enum';
 // export class UpdateOrderDto {
 //   @IsEnum(OrderStatus, { message: 'Status must be a valid OrderStatus' })

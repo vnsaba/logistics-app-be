@@ -4,7 +4,7 @@ import { HistoricalMovementRepository } from "../../historical-movement/infraest
 import { CreateInventoryDto } from "../infraestructure/dto/create-inventory.dto";
 import { NotificationService } from "./notification.service";
 import { StoreProductDto } from "../infraestructure/dto/StoreProduct.dto";
-import { EmailSenderInterface } from "src/shared/domain/interfaces/emailSender.interface";
+import { EmailSenderInterface } from "../../shared/domain/interfaces/emailSender.interface";
 import { IUserRepository } from "../../user-service/domain/interfaces/user.interface";
 import { Product } from "../../product-service/domain/entity/product";
 import { IStoreRepository } from "../..//store-service/domain/interfaces/store.interface";
