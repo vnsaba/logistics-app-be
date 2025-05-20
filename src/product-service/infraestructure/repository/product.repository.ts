@@ -1,10 +1,6 @@
 import { Product } from '../../domain/entity/product';
 import { prismaMysql } from "../../../../prisma/index";
 import { IProductRepository } from "../../domain/interfaces/product.interface";
-import { PrismaClient } from "../../../../prisma/generated/mysql";
-import { IProductRepository } from "../../domain/interfaces/product.interface";
-import { Product } from "../../domain/entity/product";
-
 
 
 export class ProductRepository implements IProductRepository {
@@ -16,11 +12,9 @@ export class ProductRepository implements IProductRepository {
     return await prismaMysql.product.findUnique({ where: { id } });
   }
 
-
   async findByBarcode(barCode: string): Promise<Product | null> {
     return await prismaMysql.product.findFirst({ where: { barCode } });
   }
-
 
   async findAll(): Promise<Product[]> {
     return await prismaMysql.product.findMany();
@@ -56,8 +50,6 @@ export class ProductRepository implements IProductRepository {
 
     await prismaMysql.product.createMany({ data });
 
-    await prisma.product.createMany({ data });
-
     return products;
   }
 
@@ -76,19 +68,5 @@ export class ProductRepository implements IProductRepository {
 
     return products.map(p => Product.createFrom(p));
   }
-    return await prisma.product.findUnique({ where: { id_producto: id_producto } });
-  }
-
-  async findByProductIds(id_productos: string[]): Promise<Product[]> {
-  const products = await prisma.product.findMany({
-    where: {
-      id_producto: {
-        in: id_productos,
-      },
-    },
-  });
-
-  return products.map(p => Product.createFrom(p));
-}
 
 }

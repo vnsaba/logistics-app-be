@@ -22,7 +22,6 @@ export class HistoricalMovementRepository implements IHistoricalMovementReposito
       ...created,
       movementType: created.movementType as "IN" | "OUT" | "ADJUSTMENT"
     });
-    return HistoricalMovement.createFrom(created);
   }
 
   async findById(id: number): Promise<HistoricalMovement | null> {
@@ -33,7 +32,6 @@ export class HistoricalMovementRepository implements IHistoricalMovementReposito
           movementType: movement.movementType as "IN" | "OUT" | "ADJUSTMENT"
         })
       : null;
-    return movement ? HistoricalMovement.createFrom(movement) : null;
   }
 
   async findByInventoryId(inventoryId: number): Promise<HistoricalMovement[]> {
@@ -44,7 +42,6 @@ export class HistoricalMovementRepository implements IHistoricalMovementReposito
         movementType: movement.movementType as "IN" | "OUT" | "ADJUSTMENT"
       })
     );
-    return movements.map(HistoricalMovement.createFrom);
   }
 
   async findAll(): Promise<HistoricalMovement[]> {
@@ -55,7 +52,5 @@ export class HistoricalMovementRepository implements IHistoricalMovementReposito
         movementType: movement.movementType as "IN" | "OUT" | "ADJUSTMENT"
       })
     );
-
-    return movements.map(HistoricalMovement.createFrom);
   }
 }

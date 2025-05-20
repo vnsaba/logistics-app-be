@@ -99,4 +99,4 @@ export class InventoryController extends Controller {
 
 }
 
-}
+

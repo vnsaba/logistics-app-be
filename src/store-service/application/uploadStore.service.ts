@@ -209,7 +209,6 @@ export class UploadStoreService {
       longitude: null,
       isAvaliable: false,
       activeOrders: 0
-
     }));
 
     const createdUsers = await this.userRepository.createMany(usersData);
@@ -253,6 +252,4 @@ export class UploadStoreService {
       throw new Error(`Invalid store status: ${status}`);
     }
   }
-}
-
 }

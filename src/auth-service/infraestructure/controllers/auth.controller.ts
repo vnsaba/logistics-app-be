@@ -7,7 +7,6 @@ import {
   Request,
   Middlewares,
   Query,
-  Response,
   Tags,
 } from "tsoa";
 import { UserRepository } from "../../../user-service/infraestructure/repository/user.repository";
@@ -29,7 +28,6 @@ import { authMiddleware } from "../../../middleware/auth.midlleware";
 import { AdminSignUpService } from "../../application/adminSignUp.service";
 import { HttpError } from "../../../shared/errors/HttpError";
 import { ValidationError } from "../../../shared/domain/interfaces/validationError";
-import { CreateUserDto } from "../../../user-service/application/dtos/createUserDto";
 
 interface VerificationResponse {
   message: string;
@@ -97,12 +95,15 @@ export class AuthController extends Controller {
   }
 
   @SuccessResponse("201", "Created")
-  @Response<ValidationError[]>(422, "Validation Failed")
-  @Response<{ message: string }>(500, "Internal Server Error")
   @Post("register")
   public async createUser(
     @Body()
-    requestBody: CreateUserDto
+    requestBody: {
+      fullname: string;
+      email: string;
+      current_password: string;
+      phone: string;
+    }
   ): Promise<{ message: string; errors?: ValidationError[]; user?: User }> {
     try {
       const { fullname, email, current_password, phone } = requestBody;
@@ -129,7 +130,6 @@ export class AuthController extends Controller {
       }
     }
   }
-
 
   @SuccessResponse("200", "OK")
   @Post("forgot-password")
@@ -185,12 +185,14 @@ export class AuthController extends Controller {
   @SuccessResponse("200", "OK")
   @Post("verify-code")
   public async verifyCodeSms(
-    @Body() requestBody: { email: string; code: string }
+    @Body() requestBody: { id: string; code: string }
   ): Promise<{ token: string }> {
     this.setStatus(200);
-    const { email, code } = requestBody;
+    const { id, code } = requestBody;
+    console.log("ID:", id);
+    console.log("Code:", code);
     const { token } = await this.verifyTwoFactorService.verifyTwoFactor(
-      email,
+      id,
       code
     );
     return { token };

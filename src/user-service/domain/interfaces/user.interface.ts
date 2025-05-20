@@ -1,8 +1,6 @@
 import { User } from '../entity/user';
 import { User as UserType } from '../../../../types/auth/index'
 import { DeliveryInfo } from './deliveryInfo.interface';
-import { User } from "../entity/user";
-import { User as UserType } from "../../../../types/auth/index";
 
 export interface IUserRepository {
   findById(id: string): Promise<User | null>;

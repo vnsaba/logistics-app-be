@@ -30,13 +30,11 @@ export class StoreRepository implements IStoreRepository {
 
   // Buscar una tienda por su nombre
   async findByName(name: string): Promise<Store | null> {
-  const store = await prisma.store.findFirst({ where: { name } });
     const store = await prisma.store.findUnique({ where: { name } });
     return store ? Store.createFrom(store) : null;
   }
 
   async findByAddress(address: string): Promise<Store | null> {
-    const store = await prisma.store.findFirst({ where: { address } });
     const store = await prisma.store.findUnique({ where: { address } });
     return store ? Store.createFrom(store) : null;
   }
