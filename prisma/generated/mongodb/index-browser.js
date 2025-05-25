@@ -134,10 +134,12 @@ exports.Prisma.UserScalarFieldEnum = {
   twoFactorCode: 'twoFactorCode',
   twoFactorExpires: 'twoFactorExpires',
   resetPasswordToken: 'resetPasswordToken',
+  cityId: 'cityId',
+  backOrders: 'backOrders',
+  ordersToday: 'ordersToday',
   latitude: 'latitude',
   longitude: 'longitude',
-  isAvaliable: 'isAvaliable',
-  activeOrders: 'activeOrders'
+  storeId: 'storeId'
 };
 
 exports.Prisma.LocationScalarFieldEnum = {

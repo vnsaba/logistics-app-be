@@ -9,8 +9,10 @@ export class User {
   roleId: string;
   latitude: number | null;
   longitude: number | null;
-  isAvaliable: boolean | null;
-  activeOrders: number | null;
+  cityId: string | null;
+  backOrders: number | null;
+  ordersToday: number | null;
+  storeId: string | null;
   status: 'ACTIVE' | 'INACTIVE' | 'PENDING';
   resetPasswordToken: string | null;
   verificationCode: string | null;
@@ -68,8 +70,10 @@ export class User {
     this.twoFactorExpires = null;
     this.latitude = null;
     this.longitude = null;
-    this.activeOrders = null;
-    this.isAvaliable = false;
+    this.cityId = null;
+    this.backOrders = null;
+    this.ordersToday = null;
+    this.storeId = null;
     if (id) {
       this.id = id;
     }

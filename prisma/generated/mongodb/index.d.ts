@@ -2159,15 +2159,17 @@ export namespace Prisma {
   }
 
   export type UserAvgAggregateOutputType = {
+    backOrders: number | null
+    ordersToday: number | null
     latitude: number | null
     longitude: number | null
-    activeOrders: number | null
   }
 
   export type UserSumAggregateOutputType = {
+    backOrders: number | null
+    ordersToday: number | null
     latitude: number | null
     longitude: number | null
-    activeOrders: number | null
   }
 
   export type UserMinAggregateOutputType = {
@@ -2185,10 +2187,12 @@ export namespace Prisma {
     twoFactorCode: string | null
     twoFactorExpires: Date | null
     resetPasswordToken: string | null
+    cityId: string | null
+    backOrders: number | null
+    ordersToday: number | null
     latitude: number | null
     longitude: number | null
-    isAvaliable: boolean | null
-    activeOrders: number | null
+    storeId: string | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -2206,10 +2210,12 @@ export namespace Prisma {
     twoFactorCode: string | null
     twoFactorExpires: Date | null
     resetPasswordToken: string | null
+    cityId: string | null
+    backOrders: number | null
+    ordersToday: number | null
     latitude: number | null
     longitude: number | null
-    isAvaliable: boolean | null
-    activeOrders: number | null
+    storeId: string | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -2227,24 +2233,28 @@ export namespace Prisma {
     twoFactorCode: number
     twoFactorExpires: number
     resetPasswordToken: number
+    cityId: number
+    backOrders: number
+    ordersToday: number
     latitude: number
     longitude: number
-    isAvaliable: number
-    activeOrders: number
+    storeId: number
     _all: number
   }
 
 
   export type UserAvgAggregateInputType = {
+    backOrders?: true
+    ordersToday?: true
     latitude?: true
     longitude?: true
-    activeOrders?: true
   }
 
   export type UserSumAggregateInputType = {
+    backOrders?: true
+    ordersToday?: true
     latitude?: true
     longitude?: true
-    activeOrders?: true
   }
 
   export type UserMinAggregateInputType = {
@@ -2262,10 +2272,12 @@ export namespace Prisma {
     twoFactorCode?: true
     twoFactorExpires?: true
     resetPasswordToken?: true
+    cityId?: true
+    backOrders?: true
+    ordersToday?: true
     latitude?: true
     longitude?: true
-    isAvaliable?: true
-    activeOrders?: true
+    storeId?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -2283,10 +2295,12 @@ export namespace Prisma {
     twoFactorCode?: true
     twoFactorExpires?: true
     resetPasswordToken?: true
+    cityId?: true
+    backOrders?: true
+    ordersToday?: true
     latitude?: true
     longitude?: true
-    isAvaliable?: true
-    activeOrders?: true
+    storeId?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -2304,10 +2318,12 @@ export namespace Prisma {
     twoFactorCode?: true
     twoFactorExpires?: true
     resetPasswordToken?: true
+    cityId?: true
+    backOrders?: true
+    ordersToday?: true
     latitude?: true
     longitude?: true
-    isAvaliable?: true
-    activeOrders?: true
+    storeId?: true
     _all?: true
   }
 
@@ -2412,10 +2428,12 @@ export namespace Prisma {
     twoFactorCode: string | null
     twoFactorExpires: Date | null
     resetPasswordToken: string | null
+    cityId: string | null
+    backOrders: number | null
+    ordersToday: number | null
     latitude: number | null
     longitude: number | null
-    isAvaliable: boolean | null
-    activeOrders: number | null
+    storeId: string | null
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
     _sum: UserSumAggregateOutputType | null
@@ -2452,10 +2470,12 @@ export namespace Prisma {
     twoFactorCode?: boolean
     twoFactorExpires?: boolean
     resetPasswordToken?: boolean
+    cityId?: boolean
+    backOrders?: boolean
+    ordersToday?: boolean
     latitude?: boolean
     longitude?: boolean
-    isAvaliable?: boolean
-    activeOrders?: boolean
+    storeId?: boolean
     role?: boolean | RoleDefaultArgs<ExtArgs>
     lastLocation?: boolean | User$lastLocationArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -2478,13 +2498,15 @@ export namespace Prisma {
     twoFactorCode?: boolean
     twoFactorExpires?: boolean
     resetPasswordToken?: boolean
+    cityId?: boolean
+    backOrders?: boolean
+    ordersToday?: boolean
     latitude?: boolean
     longitude?: boolean
-    isAvaliable?: boolean
-    activeOrders?: boolean
+    storeId?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullname" | "email" | "phone" | "current_password" | "roleId" | "status" | "created_at" | "updated_at" | "verificationCode" | "verificationCodeExpires" | "twoFactorCode" | "twoFactorExpires" | "resetPasswordToken" | "latitude" | "longitude" | "isAvaliable" | "activeOrders", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullname" | "email" | "phone" | "current_password" | "roleId" | "status" | "created_at" | "updated_at" | "verificationCode" | "verificationCodeExpires" | "twoFactorCode" | "twoFactorExpires" | "resetPasswordToken" | "cityId" | "backOrders" | "ordersToday" | "latitude" | "longitude" | "storeId", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     role?: boolean | RoleDefaultArgs<ExtArgs>
     lastLocation?: boolean | User$lastLocationArgs<ExtArgs>
@@ -2512,10 +2534,12 @@ export namespace Prisma {
       twoFactorCode: string | null
       twoFactorExpires: Date | null
       resetPasswordToken: string | null
+      cityId: string | null
+      backOrders: number | null
+      ordersToday: number | null
       latitude: number | null
       longitude: number | null
-      isAvaliable: boolean | null
-      activeOrders: number | null
+      storeId: string | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -2924,10 +2948,12 @@ export namespace Prisma {
     readonly twoFactorCode: FieldRef<"User", 'String'>
     readonly twoFactorExpires: FieldRef<"User", 'DateTime'>
     readonly resetPasswordToken: FieldRef<"User", 'String'>
+    readonly cityId: FieldRef<"User", 'String'>
+    readonly backOrders: FieldRef<"User", 'Int'>
+    readonly ordersToday: FieldRef<"User", 'Int'>
     readonly latitude: FieldRef<"User", 'Float'>
     readonly longitude: FieldRef<"User", 'Float'>
-    readonly isAvaliable: FieldRef<"User", 'Boolean'>
-    readonly activeOrders: FieldRef<"User", 'Int'>
+    readonly storeId: FieldRef<"User", 'String'>
   }
     
 
@@ -4396,10 +4422,12 @@ export namespace Prisma {
     twoFactorCode: 'twoFactorCode',
     twoFactorExpires: 'twoFactorExpires',
     resetPasswordToken: 'resetPasswordToken',
+    cityId: 'cityId',
+    backOrders: 'backOrders',
+    ordersToday: 'ordersToday',
     latitude: 'latitude',
     longitude: 'longitude',
-    isAvaliable: 'isAvaliable',
-    activeOrders: 'activeOrders'
+    storeId: 'storeId'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -4481,27 +4509,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Float'
-   */
-  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
-    
-
-
-  /**
-   * Reference to a field of type 'Float[]'
-   */
-  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
-    
-
-
-  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -4512,6 +4519,20 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
   /**
    * Deep Input Types
@@ -4584,10 +4605,12 @@ export namespace Prisma {
     twoFactorCode?: StringNullableFilter<"User"> | string | null
     twoFactorExpires?: DateTimeNullableFilter<"User"> | Date | string | null
     resetPasswordToken?: StringNullableFilter<"User"> | string | null
+    cityId?: StringNullableFilter<"User"> | string | null
+    backOrders?: IntNullableFilter<"User"> | number | null
+    ordersToday?: IntNullableFilter<"User"> | number | null
     latitude?: FloatNullableFilter<"User"> | number | null
     longitude?: FloatNullableFilter<"User"> | number | null
-    isAvaliable?: BoolNullableFilter<"User"> | boolean | null
-    activeOrders?: IntNullableFilter<"User"> | number | null
+    storeId?: StringNullableFilter<"User"> | string | null
     role?: XOR<RoleScalarRelationFilter, RoleWhereInput>
     lastLocation?: LocationListRelationFilter
   }
@@ -4607,10 +4630,12 @@ export namespace Prisma {
     twoFactorCode?: SortOrder
     twoFactorExpires?: SortOrder
     resetPasswordToken?: SortOrder
+    cityId?: SortOrder
+    backOrders?: SortOrder
+    ordersToday?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
-    isAvaliable?: SortOrder
-    activeOrders?: SortOrder
+    storeId?: SortOrder
     role?: RoleOrderByWithRelationInput
     lastLocation?: LocationOrderByRelationAggregateInput
   }
@@ -4633,10 +4658,12 @@ export namespace Prisma {
     twoFactorCode?: StringNullableFilter<"User"> | string | null
     twoFactorExpires?: DateTimeNullableFilter<"User"> | Date | string | null
     resetPasswordToken?: StringNullableFilter<"User"> | string | null
+    cityId?: StringNullableFilter<"User"> | string | null
+    backOrders?: IntNullableFilter<"User"> | number | null
+    ordersToday?: IntNullableFilter<"User"> | number | null
     latitude?: FloatNullableFilter<"User"> | number | null
     longitude?: FloatNullableFilter<"User"> | number | null
-    isAvaliable?: BoolNullableFilter<"User"> | boolean | null
-    activeOrders?: IntNullableFilter<"User"> | number | null
+    storeId?: StringNullableFilter<"User"> | string | null
     role?: XOR<RoleScalarRelationFilter, RoleWhereInput>
     lastLocation?: LocationListRelationFilter
   }, "id" | "email">
@@ -4656,10 +4683,12 @@ export namespace Prisma {
     twoFactorCode?: SortOrder
     twoFactorExpires?: SortOrder
     resetPasswordToken?: SortOrder
+    cityId?: SortOrder
+    backOrders?: SortOrder
+    ordersToday?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
-    isAvaliable?: SortOrder
-    activeOrders?: SortOrder
+    storeId?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -4685,10 +4714,12 @@ export namespace Prisma {
     twoFactorCode?: StringNullableWithAggregatesFilter<"User"> | string | null
     twoFactorExpires?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     resetPasswordToken?: StringNullableWithAggregatesFilter<"User"> | string | null
+    cityId?: StringNullableWithAggregatesFilter<"User"> | string | null
+    backOrders?: IntNullableWithAggregatesFilter<"User"> | number | null
+    ordersToday?: IntNullableWithAggregatesFilter<"User"> | number | null
     latitude?: FloatNullableWithAggregatesFilter<"User"> | number | null
     longitude?: FloatNullableWithAggregatesFilter<"User"> | number | null
-    isAvaliable?: BoolNullableWithAggregatesFilter<"User"> | boolean | null
-    activeOrders?: IntNullableWithAggregatesFilter<"User"> | number | null
+    storeId?: StringNullableWithAggregatesFilter<"User"> | string | null
   }
 
   export type LocationWhereInput = {
@@ -4816,10 +4847,12 @@ export namespace Prisma {
     twoFactorCode?: string | null
     twoFactorExpires?: Date | string | null
     resetPasswordToken?: string | null
+    cityId?: string | null
+    backOrders?: number | null
+    ordersToday?: number | null
     latitude?: number | null
     longitude?: number | null
-    isAvaliable?: boolean | null
-    activeOrders?: number | null
+    storeId?: string | null
     role: RoleCreateNestedOneWithoutUserInput
     lastLocation?: LocationCreateNestedManyWithoutUserInput
   }
@@ -4839,10 +4872,12 @@ export namespace Prisma {
     twoFactorCode?: string | null
     twoFactorExpires?: Date | string | null
     resetPasswordToken?: string | null
+    cityId?: string | null
+    backOrders?: number | null
+    ordersToday?: number | null
     latitude?: number | null
     longitude?: number | null
-    isAvaliable?: boolean | null
-    activeOrders?: number | null
+    storeId?: string | null
     lastLocation?: LocationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -4859,10 +4894,12 @@ export namespace Prisma {
     twoFactorCode?: NullableStringFieldUpdateOperationsInput | string | null
     twoFactorExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    cityId?: NullableStringFieldUpdateOperationsInput | string | null
+    backOrders?: NullableIntFieldUpdateOperationsInput | number | null
+    ordersToday?: NullableIntFieldUpdateOperationsInput | number | null
     latitude?: NullableFloatFieldUpdateOperationsInput | number | null
     longitude?: NullableFloatFieldUpdateOperationsInput | number | null
-    isAvaliable?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    activeOrders?: NullableIntFieldUpdateOperationsInput | number | null
+    storeId?: NullableStringFieldUpdateOperationsInput | string | null
     role?: RoleUpdateOneRequiredWithoutUserNestedInput
     lastLocation?: LocationUpdateManyWithoutUserNestedInput
   }
@@ -4881,10 +4918,12 @@ export namespace Prisma {
     twoFactorCode?: NullableStringFieldUpdateOperationsInput | string | null
     twoFactorExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    cityId?: NullableStringFieldUpdateOperationsInput | string | null
+    backOrders?: NullableIntFieldUpdateOperationsInput | number | null
+    ordersToday?: NullableIntFieldUpdateOperationsInput | number | null
     latitude?: NullableFloatFieldUpdateOperationsInput | number | null
     longitude?: NullableFloatFieldUpdateOperationsInput | number | null
-    isAvaliable?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    activeOrders?: NullableIntFieldUpdateOperationsInput | number | null
+    storeId?: NullableStringFieldUpdateOperationsInput | string | null
     lastLocation?: LocationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -4903,10 +4942,12 @@ export namespace Prisma {
     twoFactorCode?: string | null
     twoFactorExpires?: Date | string | null
     resetPasswordToken?: string | null
+    cityId?: string | null
+    backOrders?: number | null
+    ordersToday?: number | null
     latitude?: number | null
     longitude?: number | null
-    isAvaliable?: boolean | null
-    activeOrders?: number | null
+    storeId?: string | null
   }
 
   export type UserUpdateManyMutationInput = {
@@ -4922,10 +4963,12 @@ export namespace Prisma {
     twoFactorCode?: NullableStringFieldUpdateOperationsInput | string | null
     twoFactorExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    cityId?: NullableStringFieldUpdateOperationsInput | string | null
+    backOrders?: NullableIntFieldUpdateOperationsInput | number | null
+    ordersToday?: NullableIntFieldUpdateOperationsInput | number | null
     latitude?: NullableFloatFieldUpdateOperationsInput | number | null
     longitude?: NullableFloatFieldUpdateOperationsInput | number | null
-    isAvaliable?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    activeOrders?: NullableIntFieldUpdateOperationsInput | number | null
+    storeId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -4942,10 +4985,12 @@ export namespace Prisma {
     twoFactorCode?: NullableStringFieldUpdateOperationsInput | string | null
     twoFactorExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    cityId?: NullableStringFieldUpdateOperationsInput | string | null
+    backOrders?: NullableIntFieldUpdateOperationsInput | number | null
+    ordersToday?: NullableIntFieldUpdateOperationsInput | number | null
     latitude?: NullableFloatFieldUpdateOperationsInput | number | null
     longitude?: NullableFloatFieldUpdateOperationsInput | number | null
-    isAvaliable?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    activeOrders?: NullableIntFieldUpdateOperationsInput | number | null
+    storeId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type LocationCreateInput = {
@@ -5133,24 +5178,6 @@ export namespace Prisma {
     isSet?: boolean
   }
 
-  export type FloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
-    isSet?: boolean
-  }
-
-  export type BoolNullableFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
-    isSet?: boolean
-  }
-
   export type IntNullableFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -5160,6 +5187,18 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
+    isSet?: boolean
+  }
+
+  export type FloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
     isSet?: boolean
   }
 
@@ -5193,16 +5232,19 @@ export namespace Prisma {
     twoFactorCode?: SortOrder
     twoFactorExpires?: SortOrder
     resetPasswordToken?: SortOrder
+    cityId?: SortOrder
+    backOrders?: SortOrder
+    ordersToday?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
-    isAvaliable?: SortOrder
-    activeOrders?: SortOrder
+    storeId?: SortOrder
   }
 
   export type UserAvgOrderByAggregateInput = {
+    backOrders?: SortOrder
+    ordersToday?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
-    activeOrders?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -5220,10 +5262,12 @@ export namespace Prisma {
     twoFactorCode?: SortOrder
     twoFactorExpires?: SortOrder
     resetPasswordToken?: SortOrder
+    cityId?: SortOrder
+    backOrders?: SortOrder
+    ordersToday?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
-    isAvaliable?: SortOrder
-    activeOrders?: SortOrder
+    storeId?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -5241,16 +5285,19 @@ export namespace Prisma {
     twoFactorCode?: SortOrder
     twoFactorExpires?: SortOrder
     resetPasswordToken?: SortOrder
+    cityId?: SortOrder
+    backOrders?: SortOrder
+    ordersToday?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
-    isAvaliable?: SortOrder
-    activeOrders?: SortOrder
+    storeId?: SortOrder
   }
 
   export type UserSumOrderByAggregateInput = {
+    backOrders?: SortOrder
+    ordersToday?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
-    activeOrders?: SortOrder
   }
 
   export type EnumStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -5311,32 +5358,6 @@ export namespace Prisma {
     isSet?: boolean
   }
 
-  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedFloatNullableFilter<$PrismaModel>
-    _min?: NestedFloatNullableFilter<$PrismaModel>
-    _max?: NestedFloatNullableFilter<$PrismaModel>
-    isSet?: boolean
-  }
-
-  export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedBoolNullableFilter<$PrismaModel>
-    _max?: NestedBoolNullableFilter<$PrismaModel>
-    isSet?: boolean
-  }
-
   export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -5351,6 +5372,23 @@ export namespace Prisma {
     _sum?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedIntNullableFilter<$PrismaModel>
     _max?: NestedIntNullableFilter<$PrismaModel>
+    isSet?: boolean
+  }
+
+  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
     isSet?: boolean
   }
 
@@ -5525,7 +5563,7 @@ export namespace Prisma {
     unset?: boolean
   }
 
-  export type NullableFloatFieldUpdateOperationsInput = {
+  export type NullableIntFieldUpdateOperationsInput = {
     set?: number | null
     increment?: number
     decrement?: number
@@ -5534,12 +5572,7 @@ export namespace Prisma {
     unset?: boolean
   }
 
-  export type NullableBoolFieldUpdateOperationsInput = {
-    set?: boolean | null
-    unset?: boolean
-  }
-
-  export type NullableIntFieldUpdateOperationsInput = {
+  export type NullableFloatFieldUpdateOperationsInput = {
     set?: number | null
     increment?: number
     decrement?: number
@@ -5703,24 +5736,6 @@ export namespace Prisma {
     isSet?: boolean
   }
 
-  export type NestedFloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
-    isSet?: boolean
-  }
-
-  export type NestedBoolNullableFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
-    isSet?: boolean
-  }
-
   export type NestedIntNullableFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -5730,6 +5745,18 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
+    isSet?: boolean
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
     isSet?: boolean
   }
 
@@ -5790,32 +5817,6 @@ export namespace Prisma {
     isSet?: boolean
   }
 
-  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedFloatNullableFilter<$PrismaModel>
-    _min?: NestedFloatNullableFilter<$PrismaModel>
-    _max?: NestedFloatNullableFilter<$PrismaModel>
-    isSet?: boolean
-  }
-
-  export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedBoolNullableFilter<$PrismaModel>
-    _max?: NestedBoolNullableFilter<$PrismaModel>
-    isSet?: boolean
-  }
-
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -5830,6 +5831,23 @@ export namespace Prisma {
     _sum?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedIntNullableFilter<$PrismaModel>
     _max?: NestedIntNullableFilter<$PrismaModel>
+    isSet?: boolean
+  }
+
+  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
     isSet?: boolean
   }
 
@@ -5874,10 +5892,12 @@ export namespace Prisma {
     twoFactorCode?: string | null
     twoFactorExpires?: Date | string | null
     resetPasswordToken?: string | null
+    cityId?: string | null
+    backOrders?: number | null
+    ordersToday?: number | null
     latitude?: number | null
     longitude?: number | null
-    isAvaliable?: boolean | null
-    activeOrders?: number | null
+    storeId?: string | null
     lastLocation?: LocationCreateNestedManyWithoutUserInput
   }
 
@@ -5895,10 +5915,12 @@ export namespace Prisma {
     twoFactorCode?: string | null
     twoFactorExpires?: Date | string | null
     resetPasswordToken?: string | null
+    cityId?: string | null
+    backOrders?: number | null
+    ordersToday?: number | null
     latitude?: number | null
     longitude?: number | null
-    isAvaliable?: boolean | null
-    activeOrders?: number | null
+    storeId?: string | null
     lastLocation?: LocationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -5954,10 +5976,12 @@ export namespace Prisma {
     twoFactorCode?: StringNullableFilter<"User"> | string | null
     twoFactorExpires?: DateTimeNullableFilter<"User"> | Date | string | null
     resetPasswordToken?: StringNullableFilter<"User"> | string | null
+    cityId?: StringNullableFilter<"User"> | string | null
+    backOrders?: IntNullableFilter<"User"> | number | null
+    ordersToday?: IntNullableFilter<"User"> | number | null
     latitude?: FloatNullableFilter<"User"> | number | null
     longitude?: FloatNullableFilter<"User"> | number | null
-    isAvaliable?: BoolNullableFilter<"User"> | boolean | null
-    activeOrders?: IntNullableFilter<"User"> | number | null
+    storeId?: StringNullableFilter<"User"> | string | null
   }
 
   export type RoleCreateWithoutUserInput = {
@@ -6069,10 +6093,12 @@ export namespace Prisma {
     twoFactorCode?: string | null
     twoFactorExpires?: Date | string | null
     resetPasswordToken?: string | null
+    cityId?: string | null
+    backOrders?: number | null
+    ordersToday?: number | null
     latitude?: number | null
     longitude?: number | null
-    isAvaliable?: boolean | null
-    activeOrders?: number | null
+    storeId?: string | null
     role: RoleCreateNestedOneWithoutUserInput
   }
 
@@ -6091,10 +6117,12 @@ export namespace Prisma {
     twoFactorCode?: string | null
     twoFactorExpires?: Date | string | null
     resetPasswordToken?: string | null
+    cityId?: string | null
+    backOrders?: number | null
+    ordersToday?: number | null
     latitude?: number | null
     longitude?: number | null
-    isAvaliable?: boolean | null
-    activeOrders?: number | null
+    storeId?: string | null
   }
 
   export type UserCreateOrConnectWithoutLastLocationInput = {
@@ -6126,10 +6154,12 @@ export namespace Prisma {
     twoFactorCode?: NullableStringFieldUpdateOperationsInput | string | null
     twoFactorExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    cityId?: NullableStringFieldUpdateOperationsInput | string | null
+    backOrders?: NullableIntFieldUpdateOperationsInput | number | null
+    ordersToday?: NullableIntFieldUpdateOperationsInput | number | null
     latitude?: NullableFloatFieldUpdateOperationsInput | number | null
     longitude?: NullableFloatFieldUpdateOperationsInput | number | null
-    isAvaliable?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    activeOrders?: NullableIntFieldUpdateOperationsInput | number | null
+    storeId?: NullableStringFieldUpdateOperationsInput | string | null
     role?: RoleUpdateOneRequiredWithoutUserNestedInput
   }
 
@@ -6147,10 +6177,12 @@ export namespace Prisma {
     twoFactorCode?: NullableStringFieldUpdateOperationsInput | string | null
     twoFactorExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    cityId?: NullableStringFieldUpdateOperationsInput | string | null
+    backOrders?: NullableIntFieldUpdateOperationsInput | number | null
+    ordersToday?: NullableIntFieldUpdateOperationsInput | number | null
     latitude?: NullableFloatFieldUpdateOperationsInput | number | null
     longitude?: NullableFloatFieldUpdateOperationsInput | number | null
-    isAvaliable?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    activeOrders?: NullableIntFieldUpdateOperationsInput | number | null
+    storeId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserCreateManyRoleInput = {
@@ -6167,10 +6199,12 @@ export namespace Prisma {
     twoFactorCode?: string | null
     twoFactorExpires?: Date | string | null
     resetPasswordToken?: string | null
+    cityId?: string | null
+    backOrders?: number | null
+    ordersToday?: number | null
     latitude?: number | null
     longitude?: number | null
-    isAvaliable?: boolean | null
-    activeOrders?: number | null
+    storeId?: string | null
   }
 
   export type PermissionUpdateInput = {
@@ -6193,10 +6227,12 @@ export namespace Prisma {
     twoFactorCode?: NullableStringFieldUpdateOperationsInput | string | null
     twoFactorExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    cityId?: NullableStringFieldUpdateOperationsInput | string | null
+    backOrders?: NullableIntFieldUpdateOperationsInput | number | null
+    ordersToday?: NullableIntFieldUpdateOperationsInput | number | null
     latitude?: NullableFloatFieldUpdateOperationsInput | number | null
     longitude?: NullableFloatFieldUpdateOperationsInput | number | null
-    isAvaliable?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    activeOrders?: NullableIntFieldUpdateOperationsInput | number | null
+    storeId?: NullableStringFieldUpdateOperationsInput | string | null
     lastLocation?: LocationUpdateManyWithoutUserNestedInput
   }
 
@@ -6213,10 +6249,12 @@ export namespace Prisma {
     twoFactorCode?: NullableStringFieldUpdateOperationsInput | string | null
     twoFactorExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    cityId?: NullableStringFieldUpdateOperationsInput | string | null
+    backOrders?: NullableIntFieldUpdateOperationsInput | number | null
+    ordersToday?: NullableIntFieldUpdateOperationsInput | number | null
     latitude?: NullableFloatFieldUpdateOperationsInput | number | null
     longitude?: NullableFloatFieldUpdateOperationsInput | number | null
-    isAvaliable?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    activeOrders?: NullableIntFieldUpdateOperationsInput | number | null
+    storeId?: NullableStringFieldUpdateOperationsInput | string | null
     lastLocation?: LocationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -6233,10 +6271,12 @@ export namespace Prisma {
     twoFactorCode?: NullableStringFieldUpdateOperationsInput | string | null
     twoFactorExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    cityId?: NullableStringFieldUpdateOperationsInput | string | null
+    backOrders?: NullableIntFieldUpdateOperationsInput | number | null
+    ordersToday?: NullableIntFieldUpdateOperationsInput | number | null
     latitude?: NullableFloatFieldUpdateOperationsInput | number | null
     longitude?: NullableFloatFieldUpdateOperationsInput | number | null
-    isAvaliable?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    activeOrders?: NullableIntFieldUpdateOperationsInput | number | null
+    storeId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type LocationCreateManyUserInput = {

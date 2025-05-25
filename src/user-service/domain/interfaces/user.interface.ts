@@ -1,6 +1,5 @@
 import { User } from '../entity/user';
 import { User as UserType } from '../../../../types/auth/index'
-import { DeliveryInfo } from './deliveryInfo.interface';
 
 export interface IUserRepository {
   findById(id: string): Promise<User | null>;
@@ -15,9 +14,8 @@ export interface IUserRepository {
   clearTwoFactor(id: string): Promise<void>;
   getAllUsers(): Promise<Omit<UserType, 'current_password'>[]>
   findByClientId(id: string): Promise<User | null>;
-  getAllDeliveries(isAvaliable: boolean): Promise<DeliveryInfo[]>;
-  updateActiveOrders(deliveryId: string, activeOrders: number): Promise<void>;
   getAllUsers(): Promise<Omit<UserType, "current_password">[]>;
   createMany(users: User[]): Promise<(User | null)[]>;
   findByEmails(emails: string[]): Promise<User[]>;
+  findByDeliveries(cityId: string, storeId: string): Promise<User[]>
 }

@@ -11,7 +11,7 @@ export interface StoreProductDto {
   unitPrice: number;
   imageUrl: string;
   categoryName: string;
-  categoryIdd: number;
+  categoryId: number;
 
   availableQuantity: number;
 }

@@ -2,7 +2,6 @@ import { User } from '../../domain/entity/user';
 import { User as UserType } from '../../../../types/auth/index';
 import { prismaMongo } from "../../../../prisma/index";
 import { IUserRepository } from '../../domain/interfaces/user.interface';
-import { DeliveryInfo } from '../../domain/interfaces/deliveryInfo.interface';
 
 export class UserRepository implements IUserRepository {
 
@@ -146,28 +145,6 @@ export class UserRepository implements IUserRepository {
     return user;
   }
 
-  public async getAllDeliveries(isAvaliable: boolean): Promise<DeliveryInfo[]> {
-    const users = await prismaMongo.user.findMany({
-      where: {
-        role: {
-          name: 'REPARTIDOR',
-        },
-        isAvaliable: isAvaliable,
-      },
-    });
-    return users;
-  }
-
-  async updateActiveOrders(deliveryId: string, activeOrders: number): Promise<void> {
-    await prismaMongo.user.update({
-      where: { id: deliveryId },
-      data: {
-        activeOrders: activeOrders,
-      },
-    });
-  }
-
-
   async findByEmails(emails: string[]): Promise<User[]> {
     return await prismaMongo.user.findMany({
       where: {
@@ -175,4 +152,18 @@ export class UserRepository implements IUserRepository {
       },
     });
   }
+
+  //filtrar todos los repartidores de una tienda en una ciudad y departamento especifico
+  async findByDeliveries(cityId: string, storeId: string): Promise<User[]> {
+    return await prismaMongo.user.findMany({
+      where: {
+        role: {
+          name: 'REPARTIDOR',
+        },
+        cityId: cityId,
+        storeId: storeId,
+      },
+    });
+  }
+
 }

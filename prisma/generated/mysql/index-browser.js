@@ -120,32 +120,25 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.OrderScalarFieldEnum = {
+exports.Prisma.OrdersScalarFieldEnum = {
   id: 'id',
   customerId: 'customerId',
-  status: 'status',
-  totalAmount: 'totalAmount',
+  address: 'address',
   latitude: 'latitude',
   longitude: 'longitude',
-  address: 'address',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.SubOrdersScalarFieldEnum = {
-  id: 'id',
-  orderId: 'orderId',
   storeId: 'storeId',
   deliveryId: 'deliveryId',
   status: 'status',
   subTotal: 'subTotal',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  cityId: 'cityId',
+  deliveryDate: 'deliveryDate'
 };
 
 exports.Prisma.OrderItemScalarFieldEnum = {
   id: 'id',
-  subOrderId: 'subOrderId',
+  orderId: 'orderId',
   productId: 'productId',
   quantity: 'quantity',
   unitPrice: 'unitPrice',
@@ -158,6 +151,7 @@ exports.Prisma.StoreScalarFieldEnum = {
   id_almacen: 'id_almacen',
   name: 'name',
   address: 'address',
+  userId: 'userId',
   latitude: 'latitude',
   longitude: 'longitude',
   cityId: 'cityId',
@@ -231,24 +225,29 @@ exports.Prisma.HistoricalMovementScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.OrderEventScalarFieldEnum = {
+  id: 'id',
+  orderId: 'orderId',
+  status: 'status',
+  date: 'date'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
 };
 
-exports.Prisma.OrderOrderByRelevanceFieldEnum = {
+exports.Prisma.OrdersOrderByRelevanceFieldEnum = {
   customerId: 'customerId',
-  address: 'address'
-};
-
-exports.Prisma.SubOrdersOrderByRelevanceFieldEnum = {
+  address: 'address',
   deliveryId: 'deliveryId'
 };
 
 exports.Prisma.StoreOrderByRelevanceFieldEnum = {
   id_almacen: 'id_almacen',
   name: 'name',
-  address: 'address'
+  address: 'address',
+  userId: 'userId'
 };
 
 exports.Prisma.CityOrderByRelevanceFieldEnum = {
@@ -279,11 +278,16 @@ exports.Prisma.HistoricalMovementOrderByRelevanceFieldEnum = {
   user: 'user',
   reason: 'reason'
 };
+
+exports.Prisma.OrderEventOrderByRelevanceFieldEnum = {
+  status: 'status'
+};
 exports.OrderStatus = exports.$Enums.OrderStatus = {
   PENDING: 'PENDING',
   IN_PROGRESS: 'IN_PROGRESS',
   CANCELED: 'CANCELED',
-  COMPLETED: 'COMPLETED'
+  ONTHEWAY: 'ONTHEWAY',
+  DELIVERED: 'DELIVERED'
 };
 
 exports.statusStore = exports.$Enums.statusStore = {
@@ -303,8 +307,7 @@ exports.MovementType = exports.$Enums.MovementType = {
 };
 
 exports.Prisma.ModelName = {
-  Order: 'Order',
-  SubOrders: 'SubOrders',
+  Orders: 'Orders',
   OrderItem: 'OrderItem',
   Store: 'Store',
   City: 'City',
@@ -312,7 +315,8 @@ exports.Prisma.ModelName = {
   Category: 'Category',
   Product: 'Product',
   Inventory: 'Inventory',
-  HistoricalMovement: 'HistoricalMovement'
+  HistoricalMovement: 'HistoricalMovement',
+  OrderEvent: 'OrderEvent'
 };
 
 /**
