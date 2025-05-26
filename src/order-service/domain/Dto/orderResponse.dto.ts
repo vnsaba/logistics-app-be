@@ -11,12 +11,7 @@ export class OrderResponseDTO {
     name: string;
     isActive: boolean;
     description: string;
-    images: [
-      { 
-        "url": string;
-        "name": string;
-      }
-    ];
+    images: ImageDTO[];
     createdAt: string;
     unitPrice: number;
     category: number;
@@ -54,4 +49,11 @@ export class OrderResponseDTO {
     status: string;
   }[];
   orderNumber!: number;
+}
+
+
+// image.dto.ts
+export class ImageDTO {
+  url!: string;
+  name!: string;
 }

@@ -28,8 +28,6 @@ describe("ResetPasswordService", () => {
     // Campos faltantes:
     latitude: 0,
     longitude: 0,
-    isAvaliable: true,
-    activeOrders: 0,
   };
 
 
@@ -57,6 +55,7 @@ describe("ResetPasswordService", () => {
       findByClientId: jest.fn(),
       getAllDeliveries: jest.fn(),
       updateActiveOrders: jest.fn(),
+      findByDeliveries: jest.fn(),
     } as jest.Mocked<IUserRepository>;
 
 
