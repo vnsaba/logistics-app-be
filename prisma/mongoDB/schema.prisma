@@ -64,7 +64,6 @@ model Location {
 
 
 
-
 enum Status {
   ACTIVE
   INACTIVE
