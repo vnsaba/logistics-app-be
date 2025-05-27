@@ -25,9 +25,13 @@ describe("ResetPasswordService", () => {
     twoFactorCode: null,
     twoFactorExpires: null,
 
-    // Campos faltantes:
     latitude: 0,
     longitude: 0,
+
+    cityId: "cityId",
+    backOrders: 0,
+    ordersToday: 0,
+    storeId: "storeId",
   };
 
 

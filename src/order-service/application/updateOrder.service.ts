@@ -1,6 +1,7 @@
 import { OrderStatus } from "../../shared/enums/orderStatus.enum";
 import { IOrderRepository } from "../domain/interface/order.interface";
 import { GeocodingService } from "../../geolocation-service/domain/interface/geocoding.interface";
+import { Order } from "../domain/entity/order";
 
 export class UpdateOrderService {
     constructor(
@@ -9,7 +10,7 @@ export class UpdateOrderService {
     ) { }
 
     //actualizar la direccion de la orden
-    async updateOrder(id: number, address: string ): Promise<void> {
+    async updateOrder(id: number, address: string ): Promise<Order> {
         const order = await this.orderRepository.findById(id);
 
         if (!order) throw new Error("Order not found");
@@ -29,6 +30,7 @@ export class UpdateOrderService {
                 longitude: longitude
             });
         }
+        return order
 
     }
 

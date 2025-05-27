@@ -2,7 +2,6 @@ import { Controller, Post, Route, SuccessResponse, Body, Tags, Get, Security, Pa
 import { CreateOrderService } from '../../application/createOrder.service';
 import { OrdersRepository } from "../respository/order.repository";
 import { StoreRepository } from "../../../store-service/infraestructure/repository/store.repository";
-// import { ProductRepository } from '../../../product-service/infraestructure/repository/product.repository';
 import { GoogleMapsGeocodingService } from '../../../geolocation-service/infraestructure/geocoding';
 import { UserRepository } from "../../../user-service/infraestructure/repository/user.repository";
 import { DistanceService } from '../../../geolocation-service/infraestructure/distanceService';
@@ -23,7 +22,6 @@ export class OrdersController extends Controller {
     private readonly createOrderService: CreateOrderService;
     private readonly storeRepository: StoreRepository;
     private readonly orderRepository: OrdersRepository;
-    // private readonly productsRepository: ProductRepository;
     private readonly geocodingService: GoogleMapsGeocodingService;
     private readonly userSRepository: UserRepository
     private readonly distanceService: DistanceService
@@ -37,7 +35,6 @@ export class OrdersController extends Controller {
         super();
         this.orderRepository = new OrdersRepository();
         this.storeRepository = new StoreRepository();
-        // this.productsRepository = new ProductRepository();
         this.geocodingService = new GoogleMapsGeocodingService(process.env.GEOCODING_API as string);
         this.distanceService = new DistanceService(process.env.GEOCODING_API as string);
         this.userSRepository = new UserRepository();
@@ -54,7 +51,17 @@ export class OrdersController extends Controller {
     @Get()
     @SuccessResponse("200", "OK") //obtener la iformacion de todas las ordenes
     public async getAllOrders(): Promise<OrderResponseDTO[]> {
-        return this.orderRepository.getAllWithRelations();
+        try {
+            const orders = await this.orderRepository.getAllWithRelations();
+            if (!orders || orders.length === 0) {
+                this.setStatus(404);
+                throw new Error('No orders found');
+            }
+            return orders;
+        } catch (error) {
+            this.setStatus(500);
+            throw new Error(error instanceof Error ? error.message : "Internal Server Error");
+        }
     }
 
     // @Security('jwt', [UserRole.CLIENTE])
@@ -120,25 +127,43 @@ export class OrdersController extends Controller {
     public async updateStatus(
         @Path() orderId: number,
         @Body() body: { newStatus: OrderStatus }
-    ): Promise<void> {
-
-        // Convert PrismaOrderStatus to your shared OrderStatus enum
-        const mappedStatus = body.newStatus as unknown as OrderStatus;
-
-        await this.updateOrderStatus.execute({ orderId, newStatus: mappedStatus });
-
-        this.setStatus(200);
+    ): Promise<{ message: string }> {
+        try {
+            await this.updateOrderStatus.execute({ orderId, newStatus: body.newStatus });
+            this.setStatus(200);
+            return { message: 'Status correctly updated' };
+        } catch (error) {
+            if (error instanceof Error) {
+                this.setStatus(400);
+                return { message: error.message };
+            }
+            this.setStatus(500);
+            return { message: "Internal Server Error" };
+        }
     }
+
 
     @Put('{orderId}/address')
     public async updateAddress(
         @Path() orderId: number,
         @Body() body: { address: string }
-    ): Promise<void> {
-
-       await this.updateOrderService.updateOrder(orderId, body.address);
-
-        this.setStatus(200);
+    ): Promise<{ message: string } | ErrorResponse> {
+        try {
+            const order = await this.updateOrderService.updateOrder(orderId, body.address);
+            if (!order) {
+                this.setStatus(404);
+                return { status: 404, message: "Order not found" };
+            }
+            this.setStatus(200);
+            return { message: "Order address updated successfully" };
+        } catch (error) {
+            if (error instanceof Error) {
+                this.setStatus(400);
+                return { status: 400, message: error.message };
+            }
+            this.setStatus(500);
+            return { status: 500, message: "Internal Server Error" };
+        }
     }
 
 }
