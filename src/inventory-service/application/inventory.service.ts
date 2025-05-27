@@ -3,7 +3,8 @@ import { Inventory } from "../domain/entity/inventory";
 import { HistoricalMovementRepository } from "../../historical-movement/infraestructure/repository/historical-movement.repository"; // Importamos el repositorio de movimientos históricos
 import { CreateInventoryDto } from "../infraestructure/dto/create-inventory.dto";
 import { NotificationService } from "./notification.service";
-import { EmailSenderInterface } from "src/shared/domain/interfaces/emailSender.interface";
+import { StoreProductDto } from "../infraestructure/dto/StoreProduct.dto";
+import { EmailSenderInterface } from "../../shared/domain/interfaces/emailSender.interface";
 import { IUserRepository } from "../../user-service/domain/interfaces/user.interface";
 import { Product } from "../../product-service/domain/entity/product";
 import { IStoreRepository } from "../..//store-service/domain/interfaces/store.interface";
@@ -154,5 +155,7 @@ export class InventoryService {
     return await this.inventoryRepository.findProductByProductId(productId);
   }
 
-  
+  async getAllWithStoreAndProduct(): Promise<StoreProductDto[]> {
+    return await this.inventoryRepository.getAllStoreWithProduct();
+  }
 }

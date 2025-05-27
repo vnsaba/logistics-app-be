@@ -1,6 +1,6 @@
 export class Store {
   id?: number;
-
+  userId?: string
   constructor(
     public id_almacen: string,
     public name: string,
@@ -10,11 +10,13 @@ export class Store {
     public latitude: number,
     public longitude: number,
     public zipCode: number,
-    public status: "ACTIVE" | "INACTIVE" = "ACTIVE", 
+    public status: "ACTIVE" | "INACTIVE" = "ACTIVE",
+    userId?: string, 
     id?: number
   ) {
     this.validateFields(); 
     if (id) this.id = id;
+    if (userId) this.userId = userId;
   }
 
   private validateFields(): void {
@@ -67,6 +69,7 @@ export class Store {
       data.longitude!,
       data.zipCode!,
       data.status ?? "ACTIVE", // Default to ACTIVE if no status is provided
+      data.userId,
       data.id
     );
   }

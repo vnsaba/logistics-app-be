@@ -185,14 +185,12 @@ export class AuthController extends Controller {
   @SuccessResponse("200", "OK")
   @Post("verify-code")
   public async verifyCodeSms(
-    @Body() requestBody: { id: string; code: string }
+    @Body() requestBody: { email: string; code: string }
   ): Promise<{ token: string }> {
     this.setStatus(200);
-    const { id, code } = requestBody;
-    console.log("ID:", id);
-    console.log("Code:", code);
+    const { email, code } = requestBody;
     const { token } = await this.verifyTwoFactorService.verifyTwoFactor(
-      id,
+      email,
       code
     );
     return { token };

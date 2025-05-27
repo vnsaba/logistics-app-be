@@ -7,6 +7,12 @@ export class User {
   email: string;
   current_password: string;
   roleId: string;
+  latitude: number | null;
+  longitude: number | null;
+  cityId: string | null;
+  backOrders: number | null;
+  ordersToday: number | null;
+  storeId: string | null;
   status: 'ACTIVE' | 'INACTIVE' | 'PENDING';
   resetPasswordToken: string | null;
   verificationCode: string | null;
@@ -26,29 +32,29 @@ export class User {
       email = email.toLowerCase().trim();
     }
 
-    // Validate null/empty field
-    if (!fullname || !email || !current_password) {
-      throw new Error(
-        'Los campos fullname, email y current_password son obligatorios.'
-      );
-    }
+    // // Validate null/empty field
+    // if (!fullname || !email || !current_password) {
+    //   throw new Error(
+    //     'Los campos fullname, email y current_password son obligatorios.'
+    //   );
+    // }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      throw new Error('El formato del email es inválido.');
-    }
+    // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    // if (!emailRegex.test(email)) {
+    //   throw new Error('El formato del email es inválido.');
+    // }
 
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=[\]{};':"\\|,.<>/?])[A-Za-z\d!@#$%^&*()_\-+=[\]{};':"\\|,.<>/?]{8,64}$/;
+    // const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=[\]{};':"\\|,.<>/?])[A-Za-z\d!@#$%^&*()_\-+=[\]{};':"\\|,.<>/?]{8,64}$/;
 
-    if (!passwordRegex.test(current_password)) {
-        throw new Error(
-            'Password must be 8-64 characters long, include at least one uppercase letter, one lowercase letter, one number, and one special character.'
-        );
-    }
+    // if (!passwordRegex.test(current_password)) {
+    //   throw new Error(
+    //     'Password must be 8-64 characters long, include at least one uppercase letter, one lowercase letter, one number, and one special character.'
+    //   );
+    // }
 
-    if (current_password.length < 6) {
-      throw new Error('La contraseña debe tener al menos 6 caracteres.');
-    }
+    // if (current_password.length < 6) {
+    //   throw new Error('La contraseña debe tener al menos 6 caracteres.');
+    // }
     this.fullname = fullname;
     this.email = email;
     this.current_password = current_password;
@@ -62,6 +68,12 @@ export class User {
     this.verificationCodeExpires = null;
     this.twoFactorCode = null;
     this.twoFactorExpires = null;
+    this.latitude = null;
+    this.longitude = null;
+    this.cityId = null;
+    this.backOrders = null;
+    this.ordersToday = null;
+    this.storeId = null;
     if (id) {
       this.id = id;
     }

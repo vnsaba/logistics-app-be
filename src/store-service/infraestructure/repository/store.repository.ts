@@ -1,18 +1,16 @@
-import { PrismaClient } from "../../../../prisma/generated/mysql";
 import { Store } from "../../domain/entity/store";
+import { prismaMysql } from "../../../../prisma/index";
 import { IStoreRepository } from "../../domain/interfaces/store.interface";
-
-const prisma = new PrismaClient();
 
 export class StoreRepository implements IStoreRepository {
   // Buscar una tienda por su ID
   async findById(id: number): Promise<Store | null> {
-    const store = await prisma.store.findUnique({ where: { id } });
+    const store = await prismaMysql.store.findUnique({ where: { id: id } });
     return store ? Store.createFrom(store) : null;
   }
 
   public async create(store: Store): Promise<Store> {
-    const created = await prisma.store.create({
+    const created = await prismaMysql.store.create({
       data: {
         id_almacen: store.id_almacen,
         name: store.name,
@@ -23,24 +21,25 @@ export class StoreRepository implements IStoreRepository {
         longitude: store.longitude,
         zipCode: store.zipCode,
         status: store.status,
+        userId: store.userId!,
       },
     });
-    return Store.createFrom(created);
+    return Store.createFrom(created)
   }
 
   // Buscar una tienda por su nombre
   async findByName(name: string): Promise<Store | null> {
-    const store = await prisma.store.findUnique({ where: { name } });
+    const store = await prismaMysql.store.findUnique({ where: { name } });
     return store ? Store.createFrom(store) : null;
   }
 
   async findByAddress(address: string): Promise<Store | null> {
-    const store = await prisma.store.findUnique({ where: { address } });
+    const store = await prismaMysql.store.findUnique({ where: { address } });
     return store ? Store.createFrom(store) : null;
   }
 
   async update(id: number, data: Partial<Store>): Promise<Store> {
-    const updatedStore = await prisma.store.update({
+    const updatedStore = await prismaMysql.store.update({
       where: { id },
       data: {
         ...data,
@@ -50,16 +49,16 @@ export class StoreRepository implements IStoreRepository {
   }
 
   async delete(id: number): Promise<void> {
-    await prisma.store.delete({ where: { id } });
+    await prismaMysql.store.delete({ where: { id } });
   }
 
   async findAll(): Promise<Store[]> {
-    const stores = await prisma.store.findMany();
+    const stores = await prismaMysql.store.findMany();
     return stores.map((store) => Store.createFrom(store));
   }
 
   async findByIdAlmacen(id_almacen: string): Promise<Store | null> {
-    const store = await prisma.store.findUnique({ where: { id_almacen } });
+    const store = await prismaMysql.store.findUnique({ where: { id_almacen } });
     return store ? Store.createFrom(store) : null;
   }
 
@@ -74,9 +73,10 @@ export class StoreRepository implements IStoreRepository {
       longitude: store.longitude,
       zipCode: store.zipCode,
       status: store.status,
+      userId: store.userId!,
     }));
 
-    await prisma.store.createMany({
+    await prismaMysql.store.createMany({
       data,
       skipDuplicates: true,
     });
@@ -84,7 +84,7 @@ export class StoreRepository implements IStoreRepository {
   }
 
   async findByIdAlmacenes(ids: string[]): Promise<Store[]> {
-    const stores = await prisma.store.findMany({
+    const stores = await prismaMysql.store.findMany({
       where: {
         id_almacen: { in: ids },
       },

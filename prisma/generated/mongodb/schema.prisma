@@ -1,0 +1,71 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/mongodb"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("MONGO_DB_URL")
+}
+
+type Permission {
+  id       String
+  name     String
+  resource String
+  action   String
+}
+
+model Role {
+  id          String       @id @default(auto()) @map("_id") @db.ObjectId
+  name        String       @unique
+  description String
+  permissions Permission[]
+  User        User[]
+
+  @@map("roles")
+}
+
+model User {
+  id                      String     @id @default(auto()) @map("_id") @db.ObjectId
+  fullname                String
+  email                   String     @unique
+  phone                   String
+  current_password        String
+  roleId                  String     @db.ObjectId
+  role                    Role       @relation(fields: [roleId], references: [id])
+  status                  Status     @default(PENDING)
+  created_at              DateTime
+  updated_at              DateTime
+  verificationCode        String?
+  verificationCodeExpires DateTime?
+  twoFactorCode           String?
+  twoFactorExpires        DateTime?
+  resetPasswordToken      String?
+  cityId                  String?
+  backOrders              Int?       @default(0)
+  ordersToday             Int?       @default(0)
+  latitude                Float?
+  longitude               Float?
+  storeId                 String?
+  lastLocation            Location[]
+
+  @@map("users")
+}
+
+model Location {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @db.ObjectId
+  user      User     @relation(fields: [userId], references: [id])
+  latitude  Float
+  longitude Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("locations")
+}
+
+enum Status {
+  ACTIVE
+  INACTIVE
+  PENDING
+}

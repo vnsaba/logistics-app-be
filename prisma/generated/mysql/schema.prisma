@@ -1,0 +1,195 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/mysql"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("MYSQL_DB_URL")
+}
+
+enum OrderStatus {
+  PENDING
+  IN_PROGRESS
+  CANCELED
+  ONTHEWAY
+  DELIVERED
+}
+
+enum statusStore {
+  ACTIVE
+  INACTIVE
+}
+
+enum statusProduct {
+  ACTIVE
+  INACTIVE
+}
+
+enum MovementType {
+  IN
+  OUT
+  ADJUSTMENT
+}
+
+// model Order {
+//     id          Int         @id @default(autoincrement())
+//     customerId  String
+//     status      OrderStatus @default(PENDING)
+//     totalAmount Float //sum de subordenes
+//     latitude    Float
+//     longitude   Float
+//     address     String
+//     createdAt   DateTime    @default(now())
+//     updatedAt   DateTime    @updatedAt
+//     subOrders   SubOrders[]
+// }
+
+model Orders {
+  id           Int          @id @default(autoincrement())
+  customerId   String
+  address      String
+  latitude     Float
+  longitude    Float
+  storeId      Int
+  store        Store        @relation(fields: [storeId], references: [id])
+  deliveryId   String
+  status       OrderStatus
+  subTotal     Float
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  cityId       Int
+  city         City         @relation(fields: [cityId], references: [id])
+  deliveryDate DateTime
+  orderItems   OrderItem[]
+  events       OrderEvent[]
+}
+
+model OrderItem {
+  id        Int      @id @default(autoincrement())
+  orderId   Int
+  order     Orders   @relation(fields: [orderId], references: [id])
+  productId Int
+  product   Product  @relation(fields: [productId], references: [id])
+  quantity  Int
+  unitPrice Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Store {
+  id         Int         @id @default(autoincrement())
+  id_almacen String      @unique
+  name       String      @unique
+  address    String      @unique
+  userId     String
+  latitude   Float
+  longitude  Float
+  cityId     Int
+  city       City        @relation(fields: [cityId], references: [id])
+  capacity   Int
+  zipCode    Float
+  status     statusStore @default(ACTIVE)
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  inventory  Inventory[]
+  orders     Orders[]
+
+  @@index([name])
+}
+
+model City {
+  id           Int        @id @default(autoincrement())
+  name         String
+  departmentId Int
+  department   Department @relation(fields: [departmentId], references: [id])
+  stores       Store[]
+  orders       Orders[]
+
+  @@index([name, departmentId])
+  @@index([departmentId])
+}
+
+model Department {
+  id     Int    @id @default(autoincrement())
+  name   String
+  cities City[]
+}
+
+model Category {
+  id          Int       @id @default(autoincrement())
+  name        String    @unique
+  description String
+  isActive    Boolean
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  products    Product[]
+}
+
+model Product {
+  id                    Int           @id @default(autoincrement())
+  id_producto           String        @unique
+  id_proveedor          String
+  name                  String
+  description           String
+  sku                   String
+  categoryId            Int
+  category              Category      @relation(fields: [categoryId], references: [id])
+  unitPrice             Float
+  weight                Float
+  isFragile             Boolean
+  dimensionsCm          String
+  imageUrl              String
+  barCode               String
+  requiredRefrigeration Boolean
+  dateOfExpiration      DateTime
+  status                statusProduct @default(ACTIVE)
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+  inventory             Inventory[]
+  orderItems            OrderItem[]
+
+  @@index([categoryId])
+  @@index([name])
+  @@index([status])
+}
+
+model Inventory {
+  id                 Int                  @id @default(autoincrement())
+  productId          Int
+  product            Product              @relation(fields: [productId], references: [id])
+  storeId            Int
+  store              Store                @relation(fields: [storeId], references: [id])
+  availableQuantity  Int
+  minimumThreshold   Int
+  lastResetDate      DateTime
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  historicalMovement HistoricalMovement[]
+
+  @@unique([productId, storeId])
+}
+
+model HistoricalMovement {
+  id           Int          @id @default(autoincrement())
+  inventoryId  Int
+  inventory    Inventory    @relation(fields: [inventoryId], references: [id])
+  user         String
+  movementDate DateTime
+  reason       String
+  movementType MovementType
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  @@index([inventoryId])
+}
+
+model OrderEvent {
+  id      Int      @id @default(autoincrement())
+  orderId Int
+  status  String
+  date    DateTime @default(now())
+  order   Orders   @relation(fields: [orderId], references: [id])
+
+  @@index([orderId])
+}

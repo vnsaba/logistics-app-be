@@ -1,10 +1,19 @@
 // infraestructure/repository/city.repository.ts
+import { ICityRepository } from "../../domain/interface/city.interface";
 import { PrismaClient } from "../../../../prisma/generated/mysql";
 import { City } from "../../domain/entity/city";
 
 const prisma = new PrismaClient();
 
-export class CityRepository {
+export class CityRepository implements ICityRepository {
+
+  async findById(id: number): Promise<City | null> {
+    const city = await prisma.city.findUnique({
+      where: { id },
+    });
+    return city ? City.createFrom(city) : null;
+  }
+
   async findByNameAndDepartmentId(
     name: string,
     departmentId: number

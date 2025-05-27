@@ -10,9 +10,10 @@ datasource db {
 
 enum OrderStatus {
     PENDING
-    IN_PROFRESS
+    IN_PROGRESS
     CANCELED
-    COMPLETED
+    ONTHEWAY
+    DELIVERED
 }
 
 enum statusStore {
@@ -31,43 +32,36 @@ enum MovementType {
     ADJUSTMENT
 }
 
-model Order {
-    id          Int         @id @default(autoincrement())
-    customerId  String
-    status      OrderStatus @default(PENDING)
-    totalAmount Float //sum de subordenes
-    latitude    Float
-    longitude   Float
-    address     String
-    createdAt   DateTime    @default(now())
-    updatedAt   DateTime    @updatedAt
-    subOrders   SubOrders[]
-}
-
-model SubOrders {
-    id        Int      @id @default(autoincrement())
-    orderId   Int
-    order     Order    @relation(fields: [orderId], references: [id])
-    storeId   Int
-    store     Store    @relation(fields: [storeId], references: [id])
+model Orders {
+    id         Int         @id @default(autoincrement())
+    customerId String
+    address    String
+    latitude   Float
+    longitude  Float
+    storeId    Int
+    store      Store       @relation(fields: [storeId], references: [id])
     deliveryId String
-    status    OrderStatus @default(PENDING)
-    subTotal Float
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+    status     OrderStatus 
+    subTotal   Float
+    createdAt  DateTime    @default(now())
+    updatedAt  DateTime    @updatedAt
+    cityId     Int
+    city       City        @relation(fields: [cityId], references: [id])
+    deliveryDate DateTime
     orderItems OrderItem[]
+    events        OrderEvent[]
 }
 
 model OrderItem {
-    id        Int      @id @default(autoincrement())
-    subOrderId Int
-    subOrder   SubOrders @relation(fields: [subOrderId], references: [id])
-    productId Int
-    product   Product  @relation(fields: [productId], references: [id])
-    quantity  Int
-    unitPrice Float
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+    id         Int       @id @default(autoincrement())
+    orderId Int
+    order   Orders @relation(fields: [orderId], references: [id])
+    productId  Int
+    product    Product   @relation(fields: [productId], references: [id])
+    quantity   Int
+    unitPrice  Float
+    createdAt  DateTime  @default(now())
+    updatedAt  DateTime  @updatedAt
 }
 
 
@@ -76,6 +70,7 @@ model Store {
     id_almacen String      @unique
     name       String      @unique
     address    String      @unique
+    userId     String
     latitude   Float
     longitude  Float
     cityId     Int
@@ -86,7 +81,7 @@ model Store {
     createdAt  DateTime    @default(now())
     updatedAt  DateTime    @updatedAt
     inventory  Inventory[]
-    SubOrders  SubOrders[]
+    orders  Orders[]
     @@index([name])
 }
 
@@ -96,7 +91,7 @@ model City {
     departmentId Int
     department   Department @relation(fields: [departmentId], references: [id])
     stores       Store[]
-
+    orders       Orders[]
     @@index([name, departmentId])
     @@index([departmentId])
 }
@@ -174,3 +169,22 @@ model HistoricalMovement {
 
     @@index([inventoryId])
 }
+
+model OrderEvent {
+  id        Int      @id @default(autoincrement())
+  orderId   Int
+  status    String
+  date      DateTime @default(now())
+  order     Orders   @relation(fields: [orderId], references: [id])
+
+  @@index([orderId])
+}
+
+model DeliveryLocation {
+  id         Int      @id @default(autoincrement())
+  deliveryId String   
+  latitude   Float
+  longitude  Float
+  updatedAt  DateTime @updatedAt
+}
+

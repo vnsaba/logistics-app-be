@@ -20,6 +20,8 @@ import { CreateInventoryDto } from "../dto/create-inventory.dto";
 import { NodemailerEmailSender } from "../../../shared/infraestructure/nodemailerEmailSender";
 import { UserRepository } from "../../../user-service/infraestructure/repository/user.repository";
 import { StoreRepository } from "../../../store-service/infraestructure/repository/store.repository";
+import { StoreProductDto } from "../dto/StoreProduct.dto";
+
 
 
 @Route("inventories")
@@ -66,6 +68,11 @@ export class InventoryController extends Controller {
     return inventory;
   }
 
+  @Get("/available-products")
+  public async getAllAvailableProducts(): Promise<StoreProductDto[]> {
+    return await this.inventoryService.getAllWithStoreAndProduct();
+  }
+
   @Get("{id}")
   public async getInventoryById(@Path() id: number): Promise<Inventory | null> {
     return await this.inventoryService.getById(id);
@@ -87,4 +94,8 @@ export class InventoryController extends Controller {
   ): Promise<Inventory[]> {
     return await this.inventoryService.getByStore(storeId);
   }
+
+
 }
+
+

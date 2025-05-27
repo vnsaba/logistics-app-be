@@ -18,21 +18,39 @@ export class HistoricalMovementRepository implements IHistoricalMovementReposito
       },
     });
 
-    return HistoricalMovement.createFrom(created);
+    return HistoricalMovement.createFrom({
+      ...created,
+      movementType: created.movementType as "IN" | "OUT" | "ADJUSTMENT"
+    });
   }
 
   async findById(id: number): Promise<HistoricalMovement | null> {
     const movement = await prisma.historicalMovement.findUnique({ where: { id } });
-    return movement ? HistoricalMovement.createFrom(movement) : null;
+    return movement
+      ? HistoricalMovement.createFrom({
+          ...movement,
+          movementType: movement.movementType as "IN" | "OUT" | "ADJUSTMENT"
+        })
+      : null;
   }
 
   async findByInventoryId(inventoryId: number): Promise<HistoricalMovement[]> {
     const movements = await prisma.historicalMovement.findMany({ where: { inventoryId } });
-    return movements.map(HistoricalMovement.createFrom);
+    return movements.map(movement =>
+      HistoricalMovement.createFrom({
+        ...movement,
+        movementType: movement.movementType as "IN" | "OUT" | "ADJUSTMENT"
+      })
+    );
   }
 
   async findAll(): Promise<HistoricalMovement[]> {
     const movements = await prisma.historicalMovement.findMany();
-    return movements.map(HistoricalMovement.createFrom);
+    return movements.map(movement =>
+      HistoricalMovement.createFrom({
+        ...movement,
+        movementType: movement.movementType as "IN" | "OUT" | "ADJUSTMENT"
+      })
+    );
   }
 }

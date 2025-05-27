@@ -12,26 +12,20 @@ import {
   Delete,
 } from "tsoa";
 import { Role } from '../../domain/entity/role';
-import { UserRole} from '../../../../types/auth/index';
-import { CreateRoleService } from "../../application/create-role.service";
-import { DeleteRoleService } from "../../application/delete-role.service";
-import { UpdateRoleService } from "../../application/update-role.service";
+import { UserRole } from '../../../../types/auth/index';
+import { RoleService } from "../../application/role.service";
 import { RoleRepository } from "../repository/role.repository";
 
 @Route('roles')
 @Tags('Roles')
 export class RoleController extends Controller {
-  private readonly createRoleService: CreateRoleService;
-  private readonly deleteRoleService: DeleteRoleService;
-  private readonly updateRoleService: UpdateRoleService;
+  private readonly roleService: RoleService;
   private readonly roleRepository: RoleRepository;
 
   constructor() {
     super();
-    this.roleRepository = new RoleRepository(); 
-    this.createRoleService = new CreateRoleService(this.roleRepository); 
-    this.deleteRoleService = new DeleteRoleService(this.roleRepository); 
-    this.updateRoleService = new UpdateRoleService(this.roleRepository);
+    this.roleRepository = new RoleRepository();
+    this.roleService = new RoleService(this.roleRepository);
   }
 
 
@@ -61,7 +55,7 @@ export class RoleController extends Controller {
   @SuccessResponse('201', 'Role created successfully')
   @Post()
   public async create(@Body() roleData: Omit<Role, 'id'>): Promise<Role> {
-    const createdRole = await this.createRoleService.execute(roleData); // Usando el servicio de creación
+    const createdRole = await this.roleService.create(roleData); // Usando el servicio de creación
     this.setStatus(201);
     return createdRole;
   }
@@ -76,7 +70,7 @@ export class RoleController extends Controller {
       throw new Error('Role not found');
     }
 
-    const updatedRole = await this.updateRoleService.execute(id, data); 
+    const updatedRole = await this.roleService.update(id, data);
     if (!updatedRole) {
       this.setStatus(500);
       throw new Error('Failed to update role');
@@ -94,8 +88,43 @@ export class RoleController extends Controller {
       this.setStatus(404);
       throw new Error('Role not found');
     }
-    await this.deleteRoleService.execute(id); // Usando el servicio de eliminación
+    await this.roleService.delete(id); // Usando el servicio de eliminación
     this.setStatus(200);
     return { message: 'Role deleted successfully' };
   }
+  @Security('jwt', [UserRole.ADMINISTRADOR])
+  @Post('{id}/permissions')
+  public async addPermissions(
+    @Path() id: string,
+    @Body() permissions: { name: string; resource: string; action: string }[]
+  ): Promise<Role> {
+    // Generate a unique id for each permission (using crypto or uuid, or fallback to Date.now for demo)
+    const permissionsWithId = permissions.map(p => ({
+      ...p,
+      id: `${p.name}-${p.resource}-${p.action}-${Date.now()}-${Math.random()}`
+    }));
+    const role = await this.roleService.addPermissions(id, permissionsWithId);
+    if (!role) {
+      this.setStatus(404);
+      throw new Error('Role not found');
+    }
+    this.setStatus(200);
+    return role;
+  }
+  @Security('jwt', [UserRole.ADMINISTRADOR])
+  @Delete('{id}/permissions')
+  public async removePermissions(
+    @Path() id: string,
+    @Body() permissionNames: string[]
+  ): Promise<Role> {
+    const role = await this.roleService.removePermissions(id, permissionNames);
+    if (!role) {
+      this.setStatus(404);
+      throw new Error('Role not found');
+    }
+    this.setStatus(200);
+    return role;
+  }
+
+
 }

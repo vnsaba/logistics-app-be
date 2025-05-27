@@ -3,6 +3,7 @@ export enum UserRole {
   GERENTE = 'GERENTE',
   DESPACHADOR = 'DESPACHADOR',
   REPARTIDOR = 'REPARTIDOR',
+  CLIENTE = 'CLIENTE'
 }
 
 export interface Permission {

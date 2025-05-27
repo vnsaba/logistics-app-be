@@ -41,12 +41,12 @@ model User {
   twoFactorCode           String?
   twoFactorExpires        DateTime?
   resetPasswordToken      String?
-
-  //ubicacion del repartid¿or
+  cityId                 String?
+  backOrders          Int?     @default(0)
+  ordersToday         Int?     @default(0)
   latitude               Float?
   longitude              Float?
-  isAvaliable           Boolean? @default(true)
-  activeOrders          Int?     @default(0)
+  storeId                String?
   lastLocation          Location[]
   @@map("users")
 }
@@ -59,12 +59,14 @@ model Location {
   longitude Float
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
   @@map("locations")
 }
+
+
 
 enum Status {
   ACTIVE
   INACTIVE
   PENDING
 }
+
