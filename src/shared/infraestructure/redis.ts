@@ -1,6 +1,5 @@
 import Redis from 'ioredis';
 
-// Puedes usar una variable de entorno para configurar la URL de Redis
 const redisUrl = process.env.REDIS_URL || 'redis://localhost:6379';
 
 const redisClient = new Redis(redisUrl);
