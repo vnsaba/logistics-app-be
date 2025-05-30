@@ -63,6 +63,11 @@ export type HistoricalMovement = $Result.DefaultSelection<Prisma.$HistoricalMove
  * 
  */
 export type OrderEvent = $Result.DefaultSelection<Prisma.$OrderEventPayload>
+/**
+ * Model DeliveryLocation
+ * 
+ */
+export type DeliveryLocation = $Result.DefaultSelection<Prisma.$DeliveryLocationPayload>
 
 /**
  * Enums
@@ -345,6 +350,16 @@ export class PrismaClient<
     * ```
     */
   get orderEvent(): Prisma.OrderEventDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.deliveryLocation`: Exposes CRUD operations for the **DeliveryLocation** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more DeliveryLocations
+    * const deliveryLocations = await prisma.deliveryLocation.findMany()
+    * ```
+    */
+  get deliveryLocation(): Prisma.DeliveryLocationDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -794,7 +809,8 @@ export namespace Prisma {
     Product: 'Product',
     Inventory: 'Inventory',
     HistoricalMovement: 'HistoricalMovement',
-    OrderEvent: 'OrderEvent'
+    OrderEvent: 'OrderEvent',
+    DeliveryLocation: 'DeliveryLocation'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -813,7 +829,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "orders" | "orderItem" | "store" | "city" | "department" | "category" | "product" | "inventory" | "historicalMovement" | "orderEvent"
+      modelProps: "orders" | "orderItem" | "store" | "city" | "department" | "category" | "product" | "inventory" | "historicalMovement" | "orderEvent" | "deliveryLocation"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1477,6 +1493,72 @@ export namespace Prisma {
           }
         }
       }
+      DeliveryLocation: {
+        payload: Prisma.$DeliveryLocationPayload<ExtArgs>
+        fields: Prisma.DeliveryLocationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DeliveryLocationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeliveryLocationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DeliveryLocationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeliveryLocationPayload>
+          }
+          findFirst: {
+            args: Prisma.DeliveryLocationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeliveryLocationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DeliveryLocationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeliveryLocationPayload>
+          }
+          findMany: {
+            args: Prisma.DeliveryLocationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeliveryLocationPayload>[]
+          }
+          create: {
+            args: Prisma.DeliveryLocationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeliveryLocationPayload>
+          }
+          createMany: {
+            args: Prisma.DeliveryLocationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.DeliveryLocationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeliveryLocationPayload>
+          }
+          update: {
+            args: Prisma.DeliveryLocationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeliveryLocationPayload>
+          }
+          deleteMany: {
+            args: Prisma.DeliveryLocationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DeliveryLocationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.DeliveryLocationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeliveryLocationPayload>
+          }
+          aggregate: {
+            args: Prisma.DeliveryLocationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDeliveryLocation>
+          }
+          groupBy: {
+            args: Prisma.DeliveryLocationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DeliveryLocationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DeliveryLocationCountArgs<ExtArgs>
+            result: $Utils.Optional<DeliveryLocationCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1571,6 +1653,7 @@ export namespace Prisma {
     inventory?: InventoryOmit
     historicalMovement?: HistoricalMovementOmit
     orderEvent?: OrderEventOmit
+    deliveryLocation?: DeliveryLocationOmit
   }
 
   /* Types for Logging */
@@ -12322,6 +12405,930 @@ export namespace Prisma {
 
 
   /**
+   * Model DeliveryLocation
+   */
+
+  export type AggregateDeliveryLocation = {
+    _count: DeliveryLocationCountAggregateOutputType | null
+    _avg: DeliveryLocationAvgAggregateOutputType | null
+    _sum: DeliveryLocationSumAggregateOutputType | null
+    _min: DeliveryLocationMinAggregateOutputType | null
+    _max: DeliveryLocationMaxAggregateOutputType | null
+  }
+
+  export type DeliveryLocationAvgAggregateOutputType = {
+    id: number | null
+    latitude: number | null
+    longitude: number | null
+  }
+
+  export type DeliveryLocationSumAggregateOutputType = {
+    id: number | null
+    latitude: number | null
+    longitude: number | null
+  }
+
+  export type DeliveryLocationMinAggregateOutputType = {
+    id: number | null
+    deliveryId: string | null
+    latitude: number | null
+    longitude: number | null
+    updatedAt: Date | null
+  }
+
+  export type DeliveryLocationMaxAggregateOutputType = {
+    id: number | null
+    deliveryId: string | null
+    latitude: number | null
+    longitude: number | null
+    updatedAt: Date | null
+  }
+
+  export type DeliveryLocationCountAggregateOutputType = {
+    id: number
+    deliveryId: number
+    latitude: number
+    longitude: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type DeliveryLocationAvgAggregateInputType = {
+    id?: true
+    latitude?: true
+    longitude?: true
+  }
+
+  export type DeliveryLocationSumAggregateInputType = {
+    id?: true
+    latitude?: true
+    longitude?: true
+  }
+
+  export type DeliveryLocationMinAggregateInputType = {
+    id?: true
+    deliveryId?: true
+    latitude?: true
+    longitude?: true
+    updatedAt?: true
+  }
+
+  export type DeliveryLocationMaxAggregateInputType = {
+    id?: true
+    deliveryId?: true
+    latitude?: true
+    longitude?: true
+    updatedAt?: true
+  }
+
+  export type DeliveryLocationCountAggregateInputType = {
+    id?: true
+    deliveryId?: true
+    latitude?: true
+    longitude?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type DeliveryLocationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DeliveryLocation to aggregate.
+     */
+    where?: DeliveryLocationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DeliveryLocations to fetch.
+     */
+    orderBy?: DeliveryLocationOrderByWithRelationInput | DeliveryLocationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DeliveryLocationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DeliveryLocations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DeliveryLocations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned DeliveryLocations
+    **/
+    _count?: true | DeliveryLocationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: DeliveryLocationAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: DeliveryLocationSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DeliveryLocationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DeliveryLocationMaxAggregateInputType
+  }
+
+  export type GetDeliveryLocationAggregateType<T extends DeliveryLocationAggregateArgs> = {
+        [P in keyof T & keyof AggregateDeliveryLocation]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDeliveryLocation[P]>
+      : GetScalarType<T[P], AggregateDeliveryLocation[P]>
+  }
+
+
+
+
+  export type DeliveryLocationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DeliveryLocationWhereInput
+    orderBy?: DeliveryLocationOrderByWithAggregationInput | DeliveryLocationOrderByWithAggregationInput[]
+    by: DeliveryLocationScalarFieldEnum[] | DeliveryLocationScalarFieldEnum
+    having?: DeliveryLocationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DeliveryLocationCountAggregateInputType | true
+    _avg?: DeliveryLocationAvgAggregateInputType
+    _sum?: DeliveryLocationSumAggregateInputType
+    _min?: DeliveryLocationMinAggregateInputType
+    _max?: DeliveryLocationMaxAggregateInputType
+  }
+
+  export type DeliveryLocationGroupByOutputType = {
+    id: number
+    deliveryId: string
+    latitude: number
+    longitude: number
+    updatedAt: Date
+    _count: DeliveryLocationCountAggregateOutputType | null
+    _avg: DeliveryLocationAvgAggregateOutputType | null
+    _sum: DeliveryLocationSumAggregateOutputType | null
+    _min: DeliveryLocationMinAggregateOutputType | null
+    _max: DeliveryLocationMaxAggregateOutputType | null
+  }
+
+  type GetDeliveryLocationGroupByPayload<T extends DeliveryLocationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DeliveryLocationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DeliveryLocationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DeliveryLocationGroupByOutputType[P]>
+            : GetScalarType<T[P], DeliveryLocationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DeliveryLocationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    deliveryId?: boolean
+    latitude?: boolean
+    longitude?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["deliveryLocation"]>
+
+
+
+  export type DeliveryLocationSelectScalar = {
+    id?: boolean
+    deliveryId?: boolean
+    latitude?: boolean
+    longitude?: boolean
+    updatedAt?: boolean
+  }
+
+  export type DeliveryLocationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "deliveryId" | "latitude" | "longitude" | "updatedAt", ExtArgs["result"]["deliveryLocation"]>
+
+  export type $DeliveryLocationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "DeliveryLocation"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      deliveryId: string
+      latitude: number
+      longitude: number
+      updatedAt: Date
+    }, ExtArgs["result"]["deliveryLocation"]>
+    composites: {}
+  }
+
+  type DeliveryLocationGetPayload<S extends boolean | null | undefined | DeliveryLocationDefaultArgs> = $Result.GetResult<Prisma.$DeliveryLocationPayload, S>
+
+  type DeliveryLocationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DeliveryLocationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DeliveryLocationCountAggregateInputType | true
+    }
+
+  export interface DeliveryLocationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['DeliveryLocation'], meta: { name: 'DeliveryLocation' } }
+    /**
+     * Find zero or one DeliveryLocation that matches the filter.
+     * @param {DeliveryLocationFindUniqueArgs} args - Arguments to find a DeliveryLocation
+     * @example
+     * // Get one DeliveryLocation
+     * const deliveryLocation = await prisma.deliveryLocation.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DeliveryLocationFindUniqueArgs>(args: SelectSubset<T, DeliveryLocationFindUniqueArgs<ExtArgs>>): Prisma__DeliveryLocationClient<$Result.GetResult<Prisma.$DeliveryLocationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one DeliveryLocation that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DeliveryLocationFindUniqueOrThrowArgs} args - Arguments to find a DeliveryLocation
+     * @example
+     * // Get one DeliveryLocation
+     * const deliveryLocation = await prisma.deliveryLocation.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DeliveryLocationFindUniqueOrThrowArgs>(args: SelectSubset<T, DeliveryLocationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DeliveryLocationClient<$Result.GetResult<Prisma.$DeliveryLocationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DeliveryLocation that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DeliveryLocationFindFirstArgs} args - Arguments to find a DeliveryLocation
+     * @example
+     * // Get one DeliveryLocation
+     * const deliveryLocation = await prisma.deliveryLocation.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DeliveryLocationFindFirstArgs>(args?: SelectSubset<T, DeliveryLocationFindFirstArgs<ExtArgs>>): Prisma__DeliveryLocationClient<$Result.GetResult<Prisma.$DeliveryLocationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DeliveryLocation that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DeliveryLocationFindFirstOrThrowArgs} args - Arguments to find a DeliveryLocation
+     * @example
+     * // Get one DeliveryLocation
+     * const deliveryLocation = await prisma.deliveryLocation.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DeliveryLocationFindFirstOrThrowArgs>(args?: SelectSubset<T, DeliveryLocationFindFirstOrThrowArgs<ExtArgs>>): Prisma__DeliveryLocationClient<$Result.GetResult<Prisma.$DeliveryLocationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more DeliveryLocations that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DeliveryLocationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all DeliveryLocations
+     * const deliveryLocations = await prisma.deliveryLocation.findMany()
+     * 
+     * // Get first 10 DeliveryLocations
+     * const deliveryLocations = await prisma.deliveryLocation.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const deliveryLocationWithIdOnly = await prisma.deliveryLocation.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DeliveryLocationFindManyArgs>(args?: SelectSubset<T, DeliveryLocationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DeliveryLocationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a DeliveryLocation.
+     * @param {DeliveryLocationCreateArgs} args - Arguments to create a DeliveryLocation.
+     * @example
+     * // Create one DeliveryLocation
+     * const DeliveryLocation = await prisma.deliveryLocation.create({
+     *   data: {
+     *     // ... data to create a DeliveryLocation
+     *   }
+     * })
+     * 
+     */
+    create<T extends DeliveryLocationCreateArgs>(args: SelectSubset<T, DeliveryLocationCreateArgs<ExtArgs>>): Prisma__DeliveryLocationClient<$Result.GetResult<Prisma.$DeliveryLocationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many DeliveryLocations.
+     * @param {DeliveryLocationCreateManyArgs} args - Arguments to create many DeliveryLocations.
+     * @example
+     * // Create many DeliveryLocations
+     * const deliveryLocation = await prisma.deliveryLocation.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DeliveryLocationCreateManyArgs>(args?: SelectSubset<T, DeliveryLocationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a DeliveryLocation.
+     * @param {DeliveryLocationDeleteArgs} args - Arguments to delete one DeliveryLocation.
+     * @example
+     * // Delete one DeliveryLocation
+     * const DeliveryLocation = await prisma.deliveryLocation.delete({
+     *   where: {
+     *     // ... filter to delete one DeliveryLocation
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DeliveryLocationDeleteArgs>(args: SelectSubset<T, DeliveryLocationDeleteArgs<ExtArgs>>): Prisma__DeliveryLocationClient<$Result.GetResult<Prisma.$DeliveryLocationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one DeliveryLocation.
+     * @param {DeliveryLocationUpdateArgs} args - Arguments to update one DeliveryLocation.
+     * @example
+     * // Update one DeliveryLocation
+     * const deliveryLocation = await prisma.deliveryLocation.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DeliveryLocationUpdateArgs>(args: SelectSubset<T, DeliveryLocationUpdateArgs<ExtArgs>>): Prisma__DeliveryLocationClient<$Result.GetResult<Prisma.$DeliveryLocationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more DeliveryLocations.
+     * @param {DeliveryLocationDeleteManyArgs} args - Arguments to filter DeliveryLocations to delete.
+     * @example
+     * // Delete a few DeliveryLocations
+     * const { count } = await prisma.deliveryLocation.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DeliveryLocationDeleteManyArgs>(args?: SelectSubset<T, DeliveryLocationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DeliveryLocations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DeliveryLocationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many DeliveryLocations
+     * const deliveryLocation = await prisma.deliveryLocation.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DeliveryLocationUpdateManyArgs>(args: SelectSubset<T, DeliveryLocationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one DeliveryLocation.
+     * @param {DeliveryLocationUpsertArgs} args - Arguments to update or create a DeliveryLocation.
+     * @example
+     * // Update or create a DeliveryLocation
+     * const deliveryLocation = await prisma.deliveryLocation.upsert({
+     *   create: {
+     *     // ... data to create a DeliveryLocation
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the DeliveryLocation we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DeliveryLocationUpsertArgs>(args: SelectSubset<T, DeliveryLocationUpsertArgs<ExtArgs>>): Prisma__DeliveryLocationClient<$Result.GetResult<Prisma.$DeliveryLocationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of DeliveryLocations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DeliveryLocationCountArgs} args - Arguments to filter DeliveryLocations to count.
+     * @example
+     * // Count the number of DeliveryLocations
+     * const count = await prisma.deliveryLocation.count({
+     *   where: {
+     *     // ... the filter for the DeliveryLocations we want to count
+     *   }
+     * })
+    **/
+    count<T extends DeliveryLocationCountArgs>(
+      args?: Subset<T, DeliveryLocationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DeliveryLocationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a DeliveryLocation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DeliveryLocationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DeliveryLocationAggregateArgs>(args: Subset<T, DeliveryLocationAggregateArgs>): Prisma.PrismaPromise<GetDeliveryLocationAggregateType<T>>
+
+    /**
+     * Group by DeliveryLocation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DeliveryLocationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DeliveryLocationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DeliveryLocationGroupByArgs['orderBy'] }
+        : { orderBy?: DeliveryLocationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DeliveryLocationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDeliveryLocationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the DeliveryLocation model
+   */
+  readonly fields: DeliveryLocationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for DeliveryLocation.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DeliveryLocationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the DeliveryLocation model
+   */
+  interface DeliveryLocationFieldRefs {
+    readonly id: FieldRef<"DeliveryLocation", 'Int'>
+    readonly deliveryId: FieldRef<"DeliveryLocation", 'String'>
+    readonly latitude: FieldRef<"DeliveryLocation", 'Float'>
+    readonly longitude: FieldRef<"DeliveryLocation", 'Float'>
+    readonly updatedAt: FieldRef<"DeliveryLocation", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * DeliveryLocation findUnique
+   */
+  export type DeliveryLocationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DeliveryLocation
+     */
+    select?: DeliveryLocationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DeliveryLocation
+     */
+    omit?: DeliveryLocationOmit<ExtArgs> | null
+    /**
+     * Filter, which DeliveryLocation to fetch.
+     */
+    where: DeliveryLocationWhereUniqueInput
+  }
+
+  /**
+   * DeliveryLocation findUniqueOrThrow
+   */
+  export type DeliveryLocationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DeliveryLocation
+     */
+    select?: DeliveryLocationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DeliveryLocation
+     */
+    omit?: DeliveryLocationOmit<ExtArgs> | null
+    /**
+     * Filter, which DeliveryLocation to fetch.
+     */
+    where: DeliveryLocationWhereUniqueInput
+  }
+
+  /**
+   * DeliveryLocation findFirst
+   */
+  export type DeliveryLocationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DeliveryLocation
+     */
+    select?: DeliveryLocationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DeliveryLocation
+     */
+    omit?: DeliveryLocationOmit<ExtArgs> | null
+    /**
+     * Filter, which DeliveryLocation to fetch.
+     */
+    where?: DeliveryLocationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DeliveryLocations to fetch.
+     */
+    orderBy?: DeliveryLocationOrderByWithRelationInput | DeliveryLocationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DeliveryLocations.
+     */
+    cursor?: DeliveryLocationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DeliveryLocations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DeliveryLocations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DeliveryLocations.
+     */
+    distinct?: DeliveryLocationScalarFieldEnum | DeliveryLocationScalarFieldEnum[]
+  }
+
+  /**
+   * DeliveryLocation findFirstOrThrow
+   */
+  export type DeliveryLocationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DeliveryLocation
+     */
+    select?: DeliveryLocationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DeliveryLocation
+     */
+    omit?: DeliveryLocationOmit<ExtArgs> | null
+    /**
+     * Filter, which DeliveryLocation to fetch.
+     */
+    where?: DeliveryLocationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DeliveryLocations to fetch.
+     */
+    orderBy?: DeliveryLocationOrderByWithRelationInput | DeliveryLocationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DeliveryLocations.
+     */
+    cursor?: DeliveryLocationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DeliveryLocations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DeliveryLocations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DeliveryLocations.
+     */
+    distinct?: DeliveryLocationScalarFieldEnum | DeliveryLocationScalarFieldEnum[]
+  }
+
+  /**
+   * DeliveryLocation findMany
+   */
+  export type DeliveryLocationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DeliveryLocation
+     */
+    select?: DeliveryLocationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DeliveryLocation
+     */
+    omit?: DeliveryLocationOmit<ExtArgs> | null
+    /**
+     * Filter, which DeliveryLocations to fetch.
+     */
+    where?: DeliveryLocationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DeliveryLocations to fetch.
+     */
+    orderBy?: DeliveryLocationOrderByWithRelationInput | DeliveryLocationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing DeliveryLocations.
+     */
+    cursor?: DeliveryLocationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DeliveryLocations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DeliveryLocations.
+     */
+    skip?: number
+    distinct?: DeliveryLocationScalarFieldEnum | DeliveryLocationScalarFieldEnum[]
+  }
+
+  /**
+   * DeliveryLocation create
+   */
+  export type DeliveryLocationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DeliveryLocation
+     */
+    select?: DeliveryLocationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DeliveryLocation
+     */
+    omit?: DeliveryLocationOmit<ExtArgs> | null
+    /**
+     * The data needed to create a DeliveryLocation.
+     */
+    data: XOR<DeliveryLocationCreateInput, DeliveryLocationUncheckedCreateInput>
+  }
+
+  /**
+   * DeliveryLocation createMany
+   */
+  export type DeliveryLocationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many DeliveryLocations.
+     */
+    data: DeliveryLocationCreateManyInput | DeliveryLocationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * DeliveryLocation update
+   */
+  export type DeliveryLocationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DeliveryLocation
+     */
+    select?: DeliveryLocationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DeliveryLocation
+     */
+    omit?: DeliveryLocationOmit<ExtArgs> | null
+    /**
+     * The data needed to update a DeliveryLocation.
+     */
+    data: XOR<DeliveryLocationUpdateInput, DeliveryLocationUncheckedUpdateInput>
+    /**
+     * Choose, which DeliveryLocation to update.
+     */
+    where: DeliveryLocationWhereUniqueInput
+  }
+
+  /**
+   * DeliveryLocation updateMany
+   */
+  export type DeliveryLocationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update DeliveryLocations.
+     */
+    data: XOR<DeliveryLocationUpdateManyMutationInput, DeliveryLocationUncheckedUpdateManyInput>
+    /**
+     * Filter which DeliveryLocations to update
+     */
+    where?: DeliveryLocationWhereInput
+    /**
+     * Limit how many DeliveryLocations to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * DeliveryLocation upsert
+   */
+  export type DeliveryLocationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DeliveryLocation
+     */
+    select?: DeliveryLocationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DeliveryLocation
+     */
+    omit?: DeliveryLocationOmit<ExtArgs> | null
+    /**
+     * The filter to search for the DeliveryLocation to update in case it exists.
+     */
+    where: DeliveryLocationWhereUniqueInput
+    /**
+     * In case the DeliveryLocation found by the `where` argument doesn't exist, create a new DeliveryLocation with this data.
+     */
+    create: XOR<DeliveryLocationCreateInput, DeliveryLocationUncheckedCreateInput>
+    /**
+     * In case the DeliveryLocation was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DeliveryLocationUpdateInput, DeliveryLocationUncheckedUpdateInput>
+  }
+
+  /**
+   * DeliveryLocation delete
+   */
+  export type DeliveryLocationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DeliveryLocation
+     */
+    select?: DeliveryLocationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DeliveryLocation
+     */
+    omit?: DeliveryLocationOmit<ExtArgs> | null
+    /**
+     * Filter which DeliveryLocation to delete.
+     */
+    where: DeliveryLocationWhereUniqueInput
+  }
+
+  /**
+   * DeliveryLocation deleteMany
+   */
+  export type DeliveryLocationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DeliveryLocations to delete
+     */
+    where?: DeliveryLocationWhereInput
+    /**
+     * Limit how many DeliveryLocations to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * DeliveryLocation without action
+   */
+  export type DeliveryLocationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DeliveryLocation
+     */
+    select?: DeliveryLocationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DeliveryLocation
+     */
+    omit?: DeliveryLocationOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -12477,6 +13484,17 @@ export namespace Prisma {
   export type OrderEventScalarFieldEnum = (typeof OrderEventScalarFieldEnum)[keyof typeof OrderEventScalarFieldEnum]
 
 
+  export const DeliveryLocationScalarFieldEnum: {
+    id: 'id',
+    deliveryId: 'deliveryId',
+    latitude: 'latitude',
+    longitude: 'longitude',
+    updatedAt: 'updatedAt'
+  };
+
+  export type DeliveryLocationScalarFieldEnum = (typeof DeliveryLocationScalarFieldEnum)[keyof typeof DeliveryLocationScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -12553,6 +13571,13 @@ export namespace Prisma {
   };
 
   export type OrderEventOrderByRelevanceFieldEnum = (typeof OrderEventOrderByRelevanceFieldEnum)[keyof typeof OrderEventOrderByRelevanceFieldEnum]
+
+
+  export const DeliveryLocationOrderByRelevanceFieldEnum: {
+    deliveryId: 'deliveryId'
+  };
+
+  export type DeliveryLocationOrderByRelevanceFieldEnum = (typeof DeliveryLocationOrderByRelevanceFieldEnum)[keyof typeof DeliveryLocationOrderByRelevanceFieldEnum]
 
 
   /**
@@ -13401,6 +14426,61 @@ export namespace Prisma {
     date?: DateTimeWithAggregatesFilter<"OrderEvent"> | Date | string
   }
 
+  export type DeliveryLocationWhereInput = {
+    AND?: DeliveryLocationWhereInput | DeliveryLocationWhereInput[]
+    OR?: DeliveryLocationWhereInput[]
+    NOT?: DeliveryLocationWhereInput | DeliveryLocationWhereInput[]
+    id?: IntFilter<"DeliveryLocation"> | number
+    deliveryId?: StringFilter<"DeliveryLocation"> | string
+    latitude?: FloatFilter<"DeliveryLocation"> | number
+    longitude?: FloatFilter<"DeliveryLocation"> | number
+    updatedAt?: DateTimeFilter<"DeliveryLocation"> | Date | string
+  }
+
+  export type DeliveryLocationOrderByWithRelationInput = {
+    id?: SortOrder
+    deliveryId?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+    updatedAt?: SortOrder
+    _relevance?: DeliveryLocationOrderByRelevanceInput
+  }
+
+  export type DeliveryLocationWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: DeliveryLocationWhereInput | DeliveryLocationWhereInput[]
+    OR?: DeliveryLocationWhereInput[]
+    NOT?: DeliveryLocationWhereInput | DeliveryLocationWhereInput[]
+    deliveryId?: StringFilter<"DeliveryLocation"> | string
+    latitude?: FloatFilter<"DeliveryLocation"> | number
+    longitude?: FloatFilter<"DeliveryLocation"> | number
+    updatedAt?: DateTimeFilter<"DeliveryLocation"> | Date | string
+  }, "id">
+
+  export type DeliveryLocationOrderByWithAggregationInput = {
+    id?: SortOrder
+    deliveryId?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+    updatedAt?: SortOrder
+    _count?: DeliveryLocationCountOrderByAggregateInput
+    _avg?: DeliveryLocationAvgOrderByAggregateInput
+    _max?: DeliveryLocationMaxOrderByAggregateInput
+    _min?: DeliveryLocationMinOrderByAggregateInput
+    _sum?: DeliveryLocationSumOrderByAggregateInput
+  }
+
+  export type DeliveryLocationScalarWhereWithAggregatesInput = {
+    AND?: DeliveryLocationScalarWhereWithAggregatesInput | DeliveryLocationScalarWhereWithAggregatesInput[]
+    OR?: DeliveryLocationScalarWhereWithAggregatesInput[]
+    NOT?: DeliveryLocationScalarWhereWithAggregatesInput | DeliveryLocationScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"DeliveryLocation"> | number
+    deliveryId?: StringWithAggregatesFilter<"DeliveryLocation"> | string
+    latitude?: FloatWithAggregatesFilter<"DeliveryLocation"> | number
+    longitude?: FloatWithAggregatesFilter<"DeliveryLocation"> | number
+    updatedAt?: DateTimeWithAggregatesFilter<"DeliveryLocation"> | Date | string
+  }
+
   export type OrdersCreateInput = {
     customerId: string
     address: string
@@ -14186,6 +15266,59 @@ export namespace Prisma {
     orderId?: IntFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DeliveryLocationCreateInput = {
+    deliveryId: string
+    latitude: number
+    longitude: number
+    updatedAt?: Date | string
+  }
+
+  export type DeliveryLocationUncheckedCreateInput = {
+    id?: number
+    deliveryId: string
+    latitude: number
+    longitude: number
+    updatedAt?: Date | string
+  }
+
+  export type DeliveryLocationUpdateInput = {
+    deliveryId?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DeliveryLocationUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    deliveryId?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DeliveryLocationCreateManyInput = {
+    id?: number
+    deliveryId: string
+    latitude: number
+    longitude: number
+    updatedAt?: Date | string
+  }
+
+  export type DeliveryLocationUpdateManyMutationInput = {
+    deliveryId?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DeliveryLocationUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    deliveryId?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -15011,6 +16144,48 @@ export namespace Prisma {
   export type OrderEventSumOrderByAggregateInput = {
     id?: SortOrder
     orderId?: SortOrder
+  }
+
+  export type DeliveryLocationOrderByRelevanceInput = {
+    fields: DeliveryLocationOrderByRelevanceFieldEnum | DeliveryLocationOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type DeliveryLocationCountOrderByAggregateInput = {
+    id?: SortOrder
+    deliveryId?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DeliveryLocationAvgOrderByAggregateInput = {
+    id?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+  }
+
+  export type DeliveryLocationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    deliveryId?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DeliveryLocationMinOrderByAggregateInput = {
+    id?: SortOrder
+    deliveryId?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DeliveryLocationSumOrderByAggregateInput = {
+    id?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
   }
 
   export type StoreCreateNestedOneWithoutOrdersInput = {

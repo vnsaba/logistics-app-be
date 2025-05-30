@@ -24,7 +24,7 @@ export class StoreRepository implements IStoreRepository {
         userId: store.userId!,
       },
     });
-    return Store.createFrom(created)
+    return Store.createFrom(created);
   }
 
   // Buscar una tienda por su nombre
@@ -87,6 +87,15 @@ export class StoreRepository implements IStoreRepository {
     const stores = await prismaMysql.store.findMany({
       where: {
         id_almacen: { in: ids },
+      },
+    });
+    return stores.map((store) => Store.createFrom(store));
+  }
+
+  public async findByManager(managerId: string): Promise<Store[]> {
+    const stores = await prismaMysql.store.findMany({
+      where: {
+        userId: managerId,
       },
     });
     return stores.map((store) => Store.createFrom(store));
