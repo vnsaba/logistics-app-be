@@ -6,6 +6,7 @@ export class OrderResponseDTO {
   };
   subtotal!: number;
   createdAt!: string;
+  deliveryDate!: string | null;
   products!: {
     id: number;
     name: string;
@@ -20,6 +21,11 @@ export class OrderResponseDTO {
     id: number;
     text: string;
   };
+  address!: {
+    text: string;
+    latitude: number | null;
+    longitude: number | null;
+  }
   store!: {
     id: number;
     name: string;
@@ -27,8 +33,8 @@ export class OrderResponseDTO {
     createdAt: string;
     address: {
       "text": string;
-      "latitude": number;
-      "longitude": number;
+      "latitude": number | null;
+      "longitude": number | null;
     }
   };
   courier!: {
@@ -38,14 +44,17 @@ export class OrderResponseDTO {
     gsm: string;
     createdAt: string;
     accountNumber: string;
-    address: string;
-    status: {
+    address: {
+      text: string;
+      latitude: number | null;
+      longitude: number | null;
+    }; status: {
       id: number;
       text: string;
     };
   } | null;
   events!: {
-    date: Date; // ← Ya no opcional si siempre lo estás retornando
+    date: Date | null; // ← Ya no opcional si siempre lo estás retornando
     status: string;
   }[];
   orderNumber!: number;

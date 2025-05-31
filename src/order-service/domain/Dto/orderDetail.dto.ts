@@ -37,7 +37,11 @@ export interface OrderDetailDTO {
         createdAt: Date;
         accountNumber: string;
         licensePlate: string;
-        address: string;
+        address: {
+            text: string;
+            latitude: number;
+            longitude: number;
+        };
         status: {
             id: number;
             text: string;

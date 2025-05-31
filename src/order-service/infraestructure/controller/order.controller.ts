@@ -166,6 +166,23 @@ export class OrdersController extends Controller {
         }
     }
 
+    //obtener las ordenes de un usuario
+    @Get('user/{userId}')
+    @SuccessResponse("200", "OK")
+    public async getOrdersByUserId(@Path() userId: string): Promise<OrderResponseDTO[]> {
+        try {
+            const orders = await this.orderRepository.getOrdersByCustomerId(userId);
+            if (!orders || orders.length === 0) {
+                this.setStatus(404);
+                throw new Error('No orders found for this user');
+            }
+            return orders;
+        } catch (error) {
+            this.setStatus(500);
+            throw new Error(error instanceof Error ? error.message : "Internal Server Error");
+        }
+    }
+
 }
 
 
