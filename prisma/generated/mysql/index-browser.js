@@ -232,6 +232,14 @@ exports.Prisma.OrderEventScalarFieldEnum = {
   date: 'date'
 };
 
+exports.Prisma.DeliveryLocationScalarFieldEnum = {
+  id: 'id',
+  deliveryId: 'deliveryId',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -282,6 +290,10 @@ exports.Prisma.HistoricalMovementOrderByRelevanceFieldEnum = {
 exports.Prisma.OrderEventOrderByRelevanceFieldEnum = {
   status: 'status'
 };
+
+exports.Prisma.DeliveryLocationOrderByRelevanceFieldEnum = {
+  deliveryId: 'deliveryId'
+};
 exports.OrderStatus = exports.$Enums.OrderStatus = {
   PENDING: 'PENDING',
   IN_PROGRESS: 'IN_PROGRESS',
@@ -316,7 +328,8 @@ exports.Prisma.ModelName = {
   Product: 'Product',
   Inventory: 'Inventory',
   HistoricalMovement: 'HistoricalMovement',
-  OrderEvent: 'OrderEvent'
+  OrderEvent: 'OrderEvent',
+  DeliveryLocation: 'DeliveryLocation'
 };
 
 /**
