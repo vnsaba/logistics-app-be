@@ -44,4 +44,9 @@ export class ProductService {
   async delete(id: number): Promise<void> {
     await this.productRepository.delete(id);
   }
+
+  // TODO actualizar url de la imagen del producto updateImage
+  async updateImage(id: number, imageUrl: string): Promise<Product> {
+    return await this.productRepository.update(id, { imageUrl });
+  }
 }

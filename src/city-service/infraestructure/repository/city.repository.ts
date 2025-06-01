@@ -6,7 +6,6 @@ import { City } from "../../domain/entity/city";
 const prisma = new PrismaClient();
 
 export class CityRepository implements ICityRepository {
-
   async findById(id: number): Promise<City | null> {
     const city = await prisma.city.findUnique({
       where: { id },
@@ -14,7 +13,7 @@ export class CityRepository implements ICityRepository {
     return city ? City.createFrom(city) : null;
   }
 
-  async findByNameAndDepartmentId(
+  async findByNameAndDepartment(
     name: string,
     departmentId: number
   ): Promise<City | null> {
@@ -70,6 +69,16 @@ export class CityRepository implements ICityRepository {
       where: {
         name: { in: names },
         departmentId: { in: departmentIds },
+      },
+    });
+
+    return cities.map((city) => City.createFrom(city));
+  }
+
+  async findAllWithDepartments(): Promise<City[]> {
+    const cities = await prisma.city.findMany({
+      include: {
+        department: true,
       },
     });
 

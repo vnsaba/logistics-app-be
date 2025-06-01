@@ -32,19 +32,6 @@ enum MovementType {
   ADJUSTMENT
 }
 
-// model Order {
-//     id          Int         @id @default(autoincrement())
-//     customerId  String
-//     status      OrderStatus @default(PENDING)
-//     totalAmount Float //sum de subordenes
-//     latitude    Float
-//     longitude   Float
-//     address     String
-//     createdAt   DateTime    @default(now())
-//     updatedAt   DateTime    @updatedAt
-//     subOrders   SubOrders[]
-// }
-
 model Orders {
   id           Int          @id @default(autoincrement())
   customerId   String
@@ -192,4 +179,12 @@ model OrderEvent {
   order   Orders   @relation(fields: [orderId], references: [id])
 
   @@index([orderId])
+}
+
+model DeliveryLocation {
+  id         Int      @id @default(autoincrement())
+  deliveryId String
+  latitude   Float
+  longitude  Float
+  updatedAt  DateTime @updatedAt
 }

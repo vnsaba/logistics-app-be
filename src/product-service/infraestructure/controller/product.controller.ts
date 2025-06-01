@@ -71,6 +71,16 @@ export class ProductController extends Controller {
     });
   }
 
+  // todo: revisar que sirva
+  @Patch("{id}/image")
+  public async updateProductImage(
+    @Path() id: number,
+    @Body() body: { imageUrl: string }
+  ): Promise<Product> {
+    return await this.productService.updateImage(id, body.imageUrl);
+  }
+
+
   @Delete("{id}")
   public async deleteProduct(@Path() id: number): Promise<void> {
     await this.productService.delete(id);
