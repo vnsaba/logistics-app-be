@@ -1,10 +1,9 @@
-import { User } from '../../domain/entity/user';
-import { User as UserType } from '../../../../types/auth/index';
-import { prismaMongo } from '../../../../prisma/index';
-import { IUserRepository } from '../../domain/interfaces/user.interface';
+import { User } from "../../domain/entity/user";
+import { User as UserType } from "../../../../types/auth/index";
+import { prismaMongo } from "../../../../prisma/index";
+import { IUserRepository } from "../../domain/interfaces/user.interface";
 
 export class UserRepository implements IUserRepository {
-
   async findById(id: string): Promise<User | null> {
     const user = await prismaMongo.user.findUnique({ where: { id } });
     return user;
@@ -117,9 +116,8 @@ export class UserRepository implements IUserRepository {
     });
   }
 
-  public async getAllUsers(): Promise<Omit<UserType, 'current_password'>[]> {
+  public async getAllUsers(): Promise<Omit<UserType, "current_password">[]> {
     const users = await prismaMongo.user.findMany({
-
       omit: {
         current_password: true,
       },
@@ -139,7 +137,7 @@ export class UserRepository implements IUserRepository {
       },
     });
 
-    if (!user || !user.role || user.role.name !== 'CLIENTE') {
+    if (!user || !user.role || user.role.name !== "CLIENTE") {
       return null;
     }
     return user;
@@ -158,14 +156,13 @@ export class UserRepository implements IUserRepository {
     return await prismaMongo.user.findMany({
       where: {
         role: {
-          name: 'REPARTIDOR',
+          name: "REPARTIDOR",
         },
         cityId: cityId,
         storeId: storeId,
       },
     });
   }
-
 
   async getAllCouriersWithLocation(): Promise<any[]> {
     return await prismaMongo.user.findMany({
@@ -187,5 +184,23 @@ export class UserRepository implements IUserRepository {
   }
 
 
+  async getUsersByRole(
+    role: string
+  ): Promise<Omit<UserType, "current_password">[]> {
+    return await prismaMongo.user.findMany({
+      where: {
+        role: {
+          name: role,
+        },
+      },
+    });
+  }
 
+  async getRoleById(roleId: string): Promise<string | null> {
+    const role = await prismaMongo.role.findUnique({
+      where: { id: roleId },
+      select: { name: true },
+    });
+    return role ? role.name : null;
+  }
 }

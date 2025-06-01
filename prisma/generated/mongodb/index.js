@@ -156,7 +156,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\Usuario\\Desktop\\logistics-app-be\\prisma\\generated\\mongodb",
+      "value": "C:\\Users\\USUARIO\\Documents\\Universidad\\Septimo Semestre\\Software\\project\\backend\\prisma\\generated\\mongodb",
       "fromEnvVar": null
     },
     "config": {
@@ -170,7 +170,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\Usuario\\Desktop\\logistics-app-be\\prisma\\mongoDB\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\USUARIO\\Documents\\Universidad\\Septimo Semestre\\Software\\project\\backend\\prisma\\mongoDB\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
