@@ -2,6 +2,7 @@ import { Route, Controller, Get, Security, Tags } from 'tsoa';
 import { UserService } from '../../application/user.service';
 import { UserRepository } from '../repository/user.repository';
 import { UserRole, User as UserType } from '../../../../types/auth/index';
+// import { CourierLocationDto } from '../../application/dtos/CourierLocatio.dto';
 
 @Route('users')
 @Tags('User')
@@ -23,4 +24,6 @@ export class UserController extends Controller {
     const users = await this.userService.getAllUsers();
     return users;
   }
+
+
 }

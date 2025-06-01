@@ -15,6 +15,8 @@ import { CancelSubOrderService } from "../../application/CancelSubOrder.service"
 import { OrderItemRepository } from "../respository/orderItem.repository";
 import { UpdateOrderStatusService } from "../../application/updateOrderStatus.service";
 import { OrderStatus } from "../../../shared/enums/orderStatus.enum";
+import { GetOrderDetailSerice } from "../../application/getOrderDetails.service";
+import { LocationRepository } from "../../../geolocation-service/infraestructure/repository/location.respository";
 
 @Route('orders')
 @Tags('orders')
@@ -30,6 +32,8 @@ export class OrdersController extends Controller {
     private readonly updateOrderStatus: UpdateOrderStatusService;
     private readonly orderItemRepository: OrderItemRepository;
     private readonly updateOrderService: UpdateOrderService;
+    private readonly getOrderDetailSerice: GetOrderDetailSerice
+    private readonly locationRepository: LocationRepository;
 
     constructor() {
         super();
@@ -45,6 +49,8 @@ export class OrdersController extends Controller {
             this.geocodingService, this.userSRepository, this.distanceService, this.inventoryRepository);
         this.cancelSubOrderService = new CancelSubOrderService(this.orderRepository, this.orderItemRepository, this.inventoryRepository);
         this.updateOrderStatus = new UpdateOrderStatusService(this.orderRepository)
+        this.locationRepository = new LocationRepository();
+        this.getOrderDetailSerice = new GetOrderDetailSerice(this.orderRepository, this.userSRepository, this.locationRepository, this.geocodingService);
     }
 
 
@@ -91,10 +97,11 @@ export class OrdersController extends Controller {
      * Obtener una orden por ID con sus relaciones
      * @param orderId ID de la orden
      */
-    @Get('{orderId}')
+    @Get('/{orderId}')
     @SuccessResponse("200", "OK") //obtener la informaciond de uan orden en especifico
-    public async getOrderById(@Path() orderId: number): Promise<OrderResponseDTO> {
-        const order = await this.orderRepository.getByIdWithRelations(orderId);
+    public async getOrderById(@Path() orderId: number): Promise<OrderResponseDTO | null> {
+        // const order = await this.orderRepository.getByIdWithRelations(orderId);
+        const order = await this.getOrderDetailSerice.execute(orderId);
         if (!order) {
             this.setStatus(404);
             throw new Error('order not found');
@@ -175,6 +182,23 @@ export class OrdersController extends Controller {
             if (!orders || orders.length === 0) {
                 this.setStatus(404);
                 throw new Error('No orders found for this user');
+            }
+            return orders;
+        } catch (error) {
+            this.setStatus(500);
+            throw new Error(error instanceof Error ? error.message : "Internal Server Error");
+        }
+    }
+
+    //obtener las ordenes de un courier
+    @Get('courier/{courierId}')
+    @SuccessResponse("200", "OK")
+    public async getOrdersByCourierId(@Path() courierId: string): Promise<OrderResponseDTO[]> {
+        try {
+            const orders = await this.orderRepository.getOrdersByCourierId(courierId);
+            if (!orders || orders.length === 0) {
+                this.setStatus(404);
+                throw new Error('No orders found for this courier');
             }
             return orders;
         } catch (error) {

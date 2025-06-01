@@ -44,8 +44,6 @@ model User {
   cityId                 String?
   backOrders          Int?     @default(0)
   ordersToday         Int?     @default(0)
-  latitude               Float?
-  longitude              Float?
   storeId                String?
   lastLocation          Location[]
   @@map("users")
@@ -57,6 +55,7 @@ model Location {
   user      User   @relation(fields: [userId], references: [id])
   latitude  Float
   longitude Float
+  timestamp DateTime
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   @@map("locations")
@@ -69,4 +68,5 @@ enum Status {
   INACTIVE
   PENDING
 }
+
 

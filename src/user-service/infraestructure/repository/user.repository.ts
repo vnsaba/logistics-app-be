@@ -1,6 +1,6 @@
 import { User } from '../../domain/entity/user';
 import { User as UserType } from '../../../../types/auth/index';
-import { prismaMongo } from "../../../../prisma/index";
+import { prismaMongo } from '../../../../prisma/index';
 import { IUserRepository } from '../../domain/interfaces/user.interface';
 
 export class UserRepository implements IUserRepository {
@@ -165,5 +165,27 @@ export class UserRepository implements IUserRepository {
       },
     });
   }
+
+
+  async getAllCouriersWithLocation(): Promise<any[]> {
+    return await prismaMongo.user.findMany({
+      where: {
+        role: {
+          name: "REPARTIDOR",
+        },
+        status: "ACTIVE",
+      },
+      include: {
+        lastLocation: {
+          orderBy: {
+            createdAt: 'desc',
+          },
+          take: 1,
+        },
+      },
+    });
+  }
+
+
 
 }

@@ -44,7 +44,6 @@ export class SignInService {
 
     const code = generateVerificationCode();
     const expires = expiresAt();
-    console.log('Code:', code);
 
     await this.UserRepository.updateTwoFactor(user.id!, code, expires);
     await this.SMS.sendSMS(user.phone, code);

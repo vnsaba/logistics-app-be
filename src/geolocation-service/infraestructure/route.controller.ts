@@ -4,7 +4,7 @@ import { Client, TravelMode } from '@googlemaps/google-maps-services-js';
 @Route('routes')
 @Tags('Routes')
 export class RouteController extends Controller {
-  private client = new Client({});
+  private readonly client = new Client({});
 
   @Get('optimal')
   public async getOptimalRoute(
