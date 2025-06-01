@@ -24,10 +24,6 @@ describe("ResetPasswordService", () => {
     verificationCodeExpires: null,
     twoFactorCode: null,
     twoFactorExpires: null,
-
-    latitude: 0,
-    longitude: 0,
-
     cityId: "cityId",
     backOrders: 0,
     ordersToday: 0,
@@ -55,11 +51,11 @@ describe("ResetPasswordService", () => {
       createMany: jest.fn(),
       findByEmails: jest.fn(),
       getEmailById: jest.fn(),
-      // Métodos que estaban faltando:
       findByClientId: jest.fn(),
       getAllDeliveries: jest.fn(),
       updateActiveOrders: jest.fn(),
       findByDeliveries: jest.fn(),
+      getAllCouriersWithLocation: jest.fn(), 
       getUsersByRole: jest.fn(),
     } as jest.Mocked<IUserRepository>;
 

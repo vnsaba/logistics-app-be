@@ -3393,6 +3393,7 @@ export namespace Prisma {
     userId: string | null
     latitude: number | null
     longitude: number | null
+    timestamp: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -3402,6 +3403,7 @@ export namespace Prisma {
     userId: string | null
     latitude: number | null
     longitude: number | null
+    timestamp: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -3411,6 +3413,7 @@ export namespace Prisma {
     userId: number
     latitude: number
     longitude: number
+    timestamp: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -3432,6 +3435,7 @@ export namespace Prisma {
     userId?: true
     latitude?: true
     longitude?: true
+    timestamp?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -3441,6 +3445,7 @@ export namespace Prisma {
     userId?: true
     latitude?: true
     longitude?: true
+    timestamp?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -3450,6 +3455,7 @@ export namespace Prisma {
     userId?: true
     latitude?: true
     longitude?: true
+    timestamp?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -3546,6 +3552,7 @@ export namespace Prisma {
     userId: string
     latitude: number
     longitude: number
+    timestamp: Date
     createdAt: Date
     updatedAt: Date
     _count: LocationCountAggregateOutputType | null
@@ -3574,6 +3581,7 @@ export namespace Prisma {
     userId?: boolean
     latitude?: boolean
     longitude?: boolean
+    timestamp?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -3586,11 +3594,12 @@ export namespace Prisma {
     userId?: boolean
     latitude?: boolean
     longitude?: boolean
+    timestamp?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type LocationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "latitude" | "longitude" | "createdAt" | "updatedAt", ExtArgs["result"]["location"]>
+  export type LocationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "latitude" | "longitude" | "timestamp" | "createdAt" | "updatedAt", ExtArgs["result"]["location"]>
   export type LocationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -3605,6 +3614,7 @@ export namespace Prisma {
       userId: string
       latitude: number
       longitude: number
+      timestamp: Date
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["location"]>
@@ -4004,6 +4014,7 @@ export namespace Prisma {
     readonly userId: FieldRef<"Location", 'String'>
     readonly latitude: FieldRef<"Location", 'Float'>
     readonly longitude: FieldRef<"Location", 'Float'>
+    readonly timestamp: FieldRef<"Location", 'DateTime'>
     readonly createdAt: FieldRef<"Location", 'DateTime'>
     readonly updatedAt: FieldRef<"Location", 'DateTime'>
   }
@@ -4438,6 +4449,7 @@ export namespace Prisma {
     userId: 'userId',
     latitude: 'latitude',
     longitude: 'longitude',
+    timestamp: 'timestamp',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -4730,6 +4742,7 @@ export namespace Prisma {
     userId?: StringFilter<"Location"> | string
     latitude?: FloatFilter<"Location"> | number
     longitude?: FloatFilter<"Location"> | number
+    timestamp?: DateTimeFilter<"Location"> | Date | string
     createdAt?: DateTimeFilter<"Location"> | Date | string
     updatedAt?: DateTimeFilter<"Location"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -4740,6 +4753,7 @@ export namespace Prisma {
     userId?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
+    timestamp?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
@@ -4753,6 +4767,7 @@ export namespace Prisma {
     userId?: StringFilter<"Location"> | string
     latitude?: FloatFilter<"Location"> | number
     longitude?: FloatFilter<"Location"> | number
+    timestamp?: DateTimeFilter<"Location"> | Date | string
     createdAt?: DateTimeFilter<"Location"> | Date | string
     updatedAt?: DateTimeFilter<"Location"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -4763,6 +4778,7 @@ export namespace Prisma {
     userId?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
+    timestamp?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: LocationCountOrderByAggregateInput
@@ -4780,6 +4796,7 @@ export namespace Prisma {
     userId?: StringWithAggregatesFilter<"Location"> | string
     latitude?: FloatWithAggregatesFilter<"Location"> | number
     longitude?: FloatWithAggregatesFilter<"Location"> | number
+    timestamp?: DateTimeWithAggregatesFilter<"Location"> | Date | string
     createdAt?: DateTimeWithAggregatesFilter<"Location"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Location"> | Date | string
   }
@@ -4997,6 +5014,7 @@ export namespace Prisma {
     id?: string
     latitude: number
     longitude: number
+    timestamp: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutLastLocationInput
@@ -5007,6 +5025,7 @@ export namespace Prisma {
     userId: string
     latitude: number
     longitude: number
+    timestamp: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -5014,6 +5033,7 @@ export namespace Prisma {
   export type LocationUpdateInput = {
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutLastLocationNestedInput
@@ -5023,6 +5043,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -5032,6 +5053,7 @@ export namespace Prisma {
     userId: string
     latitude: number
     longitude: number
+    timestamp: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -5039,6 +5061,7 @@ export namespace Prisma {
   export type LocationUpdateManyMutationInput = {
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -5047,6 +5070,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -5413,6 +5437,7 @@ export namespace Prisma {
     userId?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
+    timestamp?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -5427,6 +5452,7 @@ export namespace Prisma {
     userId?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
+    timestamp?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -5436,6 +5462,7 @@ export namespace Prisma {
     userId?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
+    timestamp?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -6007,6 +6034,7 @@ export namespace Prisma {
     id?: string
     latitude: number
     longitude: number
+    timestamp: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -6015,6 +6043,7 @@ export namespace Prisma {
     id?: string
     latitude: number
     longitude: number
+    timestamp: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -6075,6 +6104,7 @@ export namespace Prisma {
     userId?: StringFilter<"Location"> | string
     latitude?: FloatFilter<"Location"> | number
     longitude?: FloatFilter<"Location"> | number
+    timestamp?: DateTimeFilter<"Location"> | Date | string
     createdAt?: DateTimeFilter<"Location"> | Date | string
     updatedAt?: DateTimeFilter<"Location"> | Date | string
   }
@@ -6283,6 +6313,7 @@ export namespace Prisma {
     id?: string
     latitude: number
     longitude: number
+    timestamp: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -6290,6 +6321,7 @@ export namespace Prisma {
   export type LocationUpdateWithoutUserInput = {
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -6297,6 +6329,7 @@ export namespace Prisma {
   export type LocationUncheckedUpdateWithoutUserInput = {
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -6304,6 +6337,7 @@ export namespace Prisma {
   export type LocationUncheckedUpdateManyWithoutUserInput = {
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

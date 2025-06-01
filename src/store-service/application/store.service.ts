@@ -22,8 +22,6 @@ export class StoreService {
       store.address
     );
 
-    console.log("existingStoreByAddress", existingStoreByAddress);
-
     if (existingStoreByAddress) {
       throw new Error("Store with this address already exists.");
     }
