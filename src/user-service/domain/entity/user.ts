@@ -7,8 +7,6 @@ export class User {
   email: string;
   current_password: string;
   roleId: string;
-  latitude: number | null;
-  longitude: number | null;
   cityId: string | null;
   backOrders: number | null;
   ordersToday: number | null;
@@ -68,8 +66,6 @@ export class User {
     this.verificationCodeExpires = null;
     this.twoFactorCode = null;
     this.twoFactorExpires = null;
-    this.latitude = null;
-    this.longitude = null;
     this.cityId = null;
     this.backOrders = null;
     this.ordersToday = null;

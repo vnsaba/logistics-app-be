@@ -44,12 +44,12 @@ export class OrdersController extends Controller {
         this.userSRepository = new UserRepository();
         this.inventoryRepository = new InventoryRepository();
         this.orderItemRepository = new OrderItemRepository();
+        this.locationRepository = new LocationRepository();
         this.updateOrderService = new UpdateOrderService(this.orderRepository, this.geocodingService); //actualiza la direccion
         this.createOrderService = new CreateOrderService(this.orderRepository, this.storeRepository,
-            this.geocodingService, this.userSRepository, this.distanceService, this.inventoryRepository);
+            this.geocodingService, this.userSRepository, this.distanceService, this.inventoryRepository, this.locationRepository);
         this.cancelSubOrderService = new CancelSubOrderService(this.orderRepository, this.orderItemRepository, this.inventoryRepository);
         this.updateOrderStatus = new UpdateOrderStatusService(this.orderRepository)
-        this.locationRepository = new LocationRepository();
         this.getOrderDetailSerice = new GetOrderDetailSerice(this.orderRepository, this.userSRepository, this.locationRepository, this.geocodingService);
     }
 

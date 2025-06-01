@@ -7,6 +7,7 @@ import { OrderStatus } from "../../shared/enums/orderStatus.enum";
 import { IInventoryRepository } from '../../inventory-service/domain/interfaces/inventory.interface';
 import { CreateOrderDto, CreateOrderResponseDto } from "../domain/Dto/createOrder.dto";
 import { User } from "../../user-service/domain/entity/user";
+import { IlocationRepository } from '../../geolocation-service/domain/interface/Location.interface';
 
 export class CreateOrderService {
     constructor(
@@ -16,6 +17,7 @@ export class CreateOrderService {
         private readonly userRepository: IUserRepository,
         private readonly distanceService: IDistanceService,
         private readonly inventoryRepository: IInventoryRepository,
+        private readonly locationRepository: IlocationRepository, //
     ) { }
 
     async createOrder(order: CreateOrderResponseDto): Promise<CreateOrderDto> {
@@ -69,7 +71,7 @@ export class CreateOrderService {
             orderItems: order.orderItems,
             cityId: order.cityId,
             deliveryDate: new Date(), //mirar como asignar la fecha de entrega
-            
+
         });
 
         return result;
@@ -99,12 +101,19 @@ export class CreateOrderService {
 
         if (!available.length) throw new Error('All delivery persons have reached their limit today');
 
-        // Armar lista para Google Distance Matrix
-        const deliveryLocations = available.map(d => ({
-            id: d.id!,
-            latitude: d.latitude!,
-            longitude: d.longitude!
-        }));
+        const deliveryLocations = await Promise.all(
+            available.map(async (d) => {
+                const location = await this.locationRepository.getCurrentLocation(d.id!);
+                if (!location) {
+                    throw new Error(`Location not found for deliveryId: ${d.id}`);
+                }
+                return {
+                    id: d.id!,
+                    latitude: location.latitude!,
+                    longitude: location.longitude!,
+                };
+            })
+        );
 
         // Llamada única a Google API
         const distances = await this.distanceService.getDistancesFromGoogle(

@@ -15,7 +15,6 @@ export class LocationRepository implements IlocationRepository {
     }
 
     async getCurrentLocation(deliveryId: string): Promise<DeliverylocationDto | null> {
-        console.log('Fetching current location for deliveryId:', deliveryId);
         const location = await prismaMongo.location.findFirst({
             where: { userId: deliveryId },
             orderBy: {
