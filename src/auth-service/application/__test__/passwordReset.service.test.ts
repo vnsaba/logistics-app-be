@@ -55,11 +55,11 @@ describe("ResetPasswordService", () => {
       createMany: jest.fn(),
       findByEmails: jest.fn(),
       getEmailById: jest.fn(),
-      // Métodos que estaban faltando:
       findByClientId: jest.fn(),
       getAllDeliveries: jest.fn(),
       updateActiveOrders: jest.fn(),
       findByDeliveries: jest.fn(),
+      getAllCouriersWithLocation: jest.fn(),
     } as jest.Mocked<IUserRepository>;
 
 
