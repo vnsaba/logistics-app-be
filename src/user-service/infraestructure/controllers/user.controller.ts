@@ -23,4 +23,12 @@ export class UserController extends Controller {
     const users = await this.userService.getAllUsers();
     return users;
   }
+
+  @Security('jwt', [UserRole.ADMINISTRADOR])
+  @Get('role/{role}')
+  public async getUsersByRole(role: UserRole): Promise<Omit<UserType, 'current_password'>[]> {
+    this.setStatus(200);
+    const users = await this.userService.getUsersByRole(role);
+    return users;
+  }
 }

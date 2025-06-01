@@ -18,4 +18,5 @@ export interface IUserRepository {
   createMany(users: User[]): Promise<(User | null)[]>;
   findByEmails(emails: string[]): Promise<User[]>;
   findByDeliveries(cityId: string, storeId: string): Promise<User[]>
+  getUsersByRole(role: string): Promise<Omit<UserType, "current_password">[]>;
 }

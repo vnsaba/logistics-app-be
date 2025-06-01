@@ -164,7 +164,9 @@ export class UserRepository implements IUserRepository {
     });
   }
 
-  async getUserByRole(role: string): Promise<User[]> {
+  async getUsersByRole(
+    role: string
+  ): Promise<Omit<UserType, "current_password">[]> {
     return await prismaMongo.user.findMany({
       where: {
         role: {
