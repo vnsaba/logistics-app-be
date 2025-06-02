@@ -1,7 +1,7 @@
 import { GetCurrentLocationService } from "../../application/getCurrentLocation.service";
 import { GetLocationHistoryService } from "../../application/getLocationHistory.service";
 import { SaveDeliveryLocationService } from "../../application/saveDeliveryLocation.service";
-import { DeliverylocationDto, SaveDeliverylocationDto } from "../../domain/dto/deliveryLocation.dto";
+import { SaveDeliverylocationDto } from "../../domain/dto/deliveryLocation.dto";
 import { Body, Controller, Get, Path, Post, Route, Tags } from "tsoa";
 import { LocationRepository } from "../repository/location.respository";
 
@@ -23,7 +23,6 @@ export class LocationController extends Controller {
     @Post('update')
     public async updateLocation(@Body() body: SaveDeliverylocationDto): Promise<{ success: boolean }> {
         await this.saveDeliveryLocationService.saveDeliveryLocation(body);
-        // await redisService.setLocation(body.deliveryId, body.latitude, body.longitude);
         return { success: true };
     }
 

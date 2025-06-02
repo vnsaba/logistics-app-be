@@ -1,4 +1,3 @@
-import { DeliverylocationDto } from "../domain/dto/deliveryLocation.dto";
 import { IlocationRepository } from "../domain/interface/Location.interface";
 
 export class GetLocationHistoryService {
