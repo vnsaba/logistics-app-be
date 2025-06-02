@@ -96,8 +96,8 @@ export class CreateOrderService {
         if (!store) throw new Error(`Store with id ${storeId} not found`);
         if (!deliveries.length) throw new Error('No delivery persons available for this store');
 
-        // Filtrar repartidores disponibles (menos de 5 órdenes)
-        const available = deliveries.filter(d => d.ordersToday! < 5);
+        // Filtrar repartidores disponibles (menos de 8 órdenes)
+        const available = deliveries.filter(d => d.ordersToday! < 8);
 
         if (!available.length) throw new Error('All delivery persons have reached their limit today');
 
