@@ -18,6 +18,6 @@ export interface IUserRepository {
   createMany(users: User[]): Promise<(User | null)[]>;
   findByEmails(emails: string[]): Promise<User[]>;
   findByDeliveries(cityId: string, storeId: string): Promise<User[]> // no sirve, borrar
-  getAllCouriersWithLocation(): Promise<any[]> 
+  getAllCouriersWithLocation(): Promise<any[]>
   getUsersByRole(role: string): Promise<Omit<UserType, "current_password">[]>;
 }

@@ -4,20 +4,17 @@ import swaggerUi from "swagger-ui-express";
 import { ValidateError } from "tsoa";
 import cors from "cors";
 
-// src/app.ts
+import { ReportService } from "../src/report-service/application/report.service";  
+import { OrdersRepository } from "../src/order-service/infraestructure/respository/order.repository"; 
 
 export const app = express();
 
 // Swagger UI
-// @ts-expect-error: req and res typing
 app.use("/docs", swaggerUi.serve, async (_req: ExRequest, res: ExResponse) => {
-  return res.send(
-    swaggerUi.generateHTML(await import("../build/swagger.json"))
-  );
+  const html = await import("../build/swagger.json").then(mod => swaggerUi.generateHTML(mod));
+  res.send(html);
 });
 
-// Middleware to proccess incoming requests
-// Use body parser to read sent json payloads
 app.use(
   urlencoded({
     extended: true,
@@ -26,9 +23,55 @@ app.use(
 app.use(json());
 app.use(cors());
 
-// Register routes
+// **RUTA MANUAL PARA PDF**
+app.get("/reports/:deliveryId/pdf", async (req: ExRequest, res: ExResponse) => {
+  try {
+    const { deliveryId } = req.params;
+
+    const reportService = new ReportService(new OrdersRepository());
+    const { pdf } = await reportService.generateReport(deliveryId);
+
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader(
+      "Content-Disposition",
+      `attachment; filename="report_${deliveryId}.pdf"`
+    );
+
+    res.send(pdf);
+  } catch (error) {
+    console.error("Error generating PDF:", error);
+    res.status(500).json({ message: "Error generating PDF report" });
+  }
+});
+
+// **RUTA MANUAL PARA EXCEL**
+app.get("/reports/:deliveryId/excel", async (req: ExRequest, res: ExResponse) => {
+  try {
+    const { deliveryId } = req.params;
+
+    const reportService = new ReportService(new OrdersRepository());
+    const { excel } = await reportService.generateReport(deliveryId);
+
+    res.setHeader(
+      "Content-Type",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    );
+    res.setHeader(
+      "Content-Disposition",
+      `attachment; filename="report_${deliveryId}.xlsx"`
+    );
+
+    res.send(excel);
+  } catch (error) {
+    console.error("Error generating Excel:", error);
+    res.status(500).json({ message: "Error generating Excel report" });
+  }
+});
+
+// Registrar rutas TSOA
 RegisterRoutes(app);
 
+// Middleware para manejo de errores
 app.use(function errorHandler(
   err: unknown,
   _: express.Request,

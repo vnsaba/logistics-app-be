@@ -48,13 +48,13 @@ export class Store {
     //   throw new Error("Longitude must be a valid number between -180 and 180.");
     // }
 
-   if (this.zipCode < 0) {
-      throw new Error("Postal code must be a positive number.");
-    }
+  //  if (this.zipCode < 0) {
+  //     throw new Error("Postal code must be a positive number.");
+  //   }
 
-    if (!["ACTIVE", "INACTIVE"].includes(this.status)) {
-      throw new Error("Status must be 'ACTIVE' or 'INACTIVE'.");
-    }
+  //   if (!["ACTIVE", "INACTIVE"].includes(this.status)) {
+  //     throw new Error("Status must be 'ACTIVE' or 'INACTIVE'.");
+  //   }
   }
 
   // Método de fábrica
