@@ -10,7 +10,7 @@ datasource db {
 
 enum OrderStatus {
     PENDING
-    IN_PROGRESS
+    READY
     CANCELED
     ONTHEWAY
     DELIVERED

@@ -75,7 +75,7 @@ export type DeliveryLocation = $Result.DefaultSelection<Prisma.$DeliveryLocation
 export namespace $Enums {
   export const OrderStatus: {
   PENDING: 'PENDING',
-  IN_PROGRESS: 'IN_PROGRESS',
+  READY: 'READY',
   CANCELED: 'CANCELED',
   ONTHEWAY: 'ONTHEWAY',
   DELIVERED: 'DELIVERED'

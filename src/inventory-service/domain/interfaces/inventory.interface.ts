@@ -11,7 +11,7 @@ export interface IInventoryRepository {
   findAll(): Promise<Inventory[]>;
   findByStore(storeId: number): Promise<Inventory[]>;
   findProductByProductId(id: number): Promise<Product | null>;
-  getAllStoreWithProduct(): Promise<StoreProductDto[]>;
+  getAllStoreWithProduct(CityId: number): Promise<StoreProductDto[]>;
   getStoreAndProductExist(storeId: number, productId: number): Promise<Inventory | null>;
   findProductByProductId(id: number): Promise<Product | null>;
   createMany(inventories: Inventory[]): Promise<Inventory[]>;

@@ -1,12 +1,12 @@
 import { Order } from "../entity/order";
 import { UpdateOrderDto } from "../Dto/updateOrder.dto";
-import { CreateOrderDto } from "../Dto/createOrder.dto";
+// import { CreateOrderDto } from "../Dto/createOrder.dto";
 import { OrderResponseDTO } from "../Dto/orderResponse.dto";
 import { OrderStatus } from "prisma/generated/mysql";
 import { OrderDetailResponseDTO } from "../Dto/orderDetail.dto";
 
 export interface IOrderRepository {
-    create(order: CreateOrderDto): Promise<CreateOrderDto>;
+    create(order: any): Promise<any>;
     findById(id: number): Promise<Order | null>;
     getAllWithRelations(): Promise<OrderResponseDTO[]>;
     getByIdWithRelations(id: number): Promise<OrderDetailResponseDTO | null>;

@@ -1,4 +1,4 @@
-import { Controller, Get, Route, Tags } from "tsoa";
+import { Body, Controller, Get, Post, Route, Tags } from "tsoa";
 import { UserRepository } from "../repository/user.repository";
 import { UserService } from "../../application/user.service";
 
@@ -13,6 +13,11 @@ export class CourierController extends Controller {
         this.userService = new UserService(userRepository);
     }
 
+    //crear un courier
+    @Post("/create ")
+    async createCourier(@Body() courierData: any): Promise<any> {
+        return await this.userService.createCourier(courierData);
+    }
 
     @Get("/")
     async getCouriersWithLocation(): Promise<any[]> {

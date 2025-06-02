@@ -3,8 +3,8 @@ import { IOrderRepository } from '../domain/interface/order.interface';
 import { OrderStatus } from '../../shared/enums/orderStatus.enum';
 
 const validTransitions: Record<OrderStatus, OrderStatus[]> = {
-    [OrderStatus.PENDING]: [OrderStatus.IN_PROGRESS, OrderStatus.CANCELED],
-    [OrderStatus.IN_PROGRESS]: [OrderStatus.ONTHEWAY, OrderStatus.CANCELED],
+    [OrderStatus.PENDING]: [OrderStatus.READY, OrderStatus.CANCELED],
+    [OrderStatus.READY]: [OrderStatus.ONTHEWAY, OrderStatus.CANCELED],
     [OrderStatus.ONTHEWAY]: [OrderStatus.DELIVERED, OrderStatus.CANCELED],
     [OrderStatus.DELIVERED]: [],
     [OrderStatus.CANCELED]: [],
@@ -18,13 +18,13 @@ export class UpdateOrderStatusService {
         const order = await this.repository.findById(orderId);
         if (!order) throw new Error('Order not found');
 
-        const currentStatus = order.status as OrderStatus;
+        const currentStatus = order.status;
 
-        if (!validTransitions[currentStatus].includes(newStatus as OrderStatus)) {
+        if (!validTransitions[currentStatus].includes(newStatus)) {
             throw new Error(`Invalid transition from ${currentStatus} to ${newStatus}`);
         }
 
-        await this.repository.updateStatus(orderId, newStatus as OrderStatus);
-        await this.repository.addEvent(orderId, newStatus as OrderStatus);
+        await this.repository.updateStatus(orderId, newStatus);
+        await this.repository.addEvent(orderId, newStatus);
     }
 }

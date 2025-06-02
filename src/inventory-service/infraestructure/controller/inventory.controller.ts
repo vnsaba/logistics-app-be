@@ -22,8 +22,6 @@ import { UserRepository } from "../../../user-service/infraestructure/repository
 import { StoreRepository } from "../../../store-service/infraestructure/repository/store.repository";
 import { StoreProductDto } from "../dto/StoreProduct.dto";
 
-
-
 @Route("inventories")
 @Tags("Inventory")
 export class InventoryController extends Controller {
@@ -68,9 +66,9 @@ export class InventoryController extends Controller {
     return inventory;
   }
 
-  @Get("/available-products")
-  public async getAllAvailableProducts(): Promise<StoreProductDto[]> {
-    return await this.inventoryService.getAllWithStoreAndProduct();
+  @Get("/available-products/{cityId}")
+  public async getAllAvailableProducts(@Path() cityId: number): Promise<StoreProductDto[]> {
+    return await this.inventoryService.getAllWithStoreAndProduct(cityId);
   }
 
   @Get("{id}")
