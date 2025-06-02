@@ -138,8 +138,7 @@ describe('VerifyTwoFactorService', () => {
         id: mockUser.id,
         name: mockUser.fullname,                  
         role: mockRole,
-        email: mockUser.email,
-        cityId: mockUser.cityId
+        email: mockUser.email
       },
       { expiresIn: '1h' }
     );

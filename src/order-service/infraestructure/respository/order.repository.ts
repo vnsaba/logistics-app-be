@@ -228,15 +228,6 @@ export class OrdersRepository implements IOrderRepository {
           prismaMongo.user.findUnique({ where: { id: order.deliveryId } }),
         ]);
 
-    //listar las ordenes de un cliente
-    async getOrdersByCustomerId(customerId: string): Promise<OrderResponseDTO[]> { //ya no es necesario
-        const orders = await prismaMysql.orders.findMany({
-            where: { customerId },
-            include: {
-                orderItems: { include: { product: { include: { category: true } } } },
-                store: true,
-                city: { include: { department: true } },
-                events: true,
         return {
           id: order.id,
           user: {
@@ -351,54 +342,6 @@ export class OrdersRepository implements IOrderRepository {
       })
     );
 
-    //listar los pedidos de un repartidor
-    async getOrdersByCourierId(courierId: string): Promise<OrderResponseDTO[]> {
-        console.log("Fetching orders for courier:", courierId);
-        throw new Error("Method not implemented.");
-    }
-
-    //obtener las ordenes de un repartidor en la fecha actual
-    async findByDeliveryAndDate(
-        deliveryId: string,
-        startDate: Date,
-        endDate: Date
-    ): Promise<any[] | null> {
-        const orders = await prismaMysql.orders.findMany({
-            where: {
-                deliveryId: deliveryId,
-                createdAt: {
-                    gte: startDate,
-                    lte: endDate
-                }
-            },
-            include: {
-                orderItems: { include: { product: true } },
-                store: true,
-                city: { include: { department: true } },
-            }
-        });
-
-        // Si no hay pedidos, retorna null
-        if (!orders || orders.length === 0) return null;
-
-        // Enriquecer con datos de MongoDB (cliente y repartidor)
-        const enrichedOrders = await Promise.all(
-            orders.map(async (order) => {
-                const [customer, delivery] = await Promise.all([
-                    prismaMongo.user.findUnique({ where: { id: order.customerId } }),
-                    prismaMongo.user.findUnique({ where: { id: order.deliveryId } }),
-                ]);
-
-                return {
-                    ...order,
-                    customer,
-                    delivery,
-                };
-            })
-        );
-
-        return enrichedOrders;
-    }
     return enrichedOrders;
   }
 }

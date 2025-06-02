@@ -5,7 +5,7 @@ import { IUserRepository } from "../../user-service/domain/interfaces/user.inter
 import { IDistanceService } from "../../geolocation-service/domain/interface/distance.interface";
 import { OrderStatus } from "../../shared/enums/orderStatus.enum";
 import { IInventoryRepository } from '../../inventory-service/domain/interfaces/inventory.interface';
-import { CreateOrderDto} from "../domain/Dto/createOrder.dto";
+import { CreateOrderDto, CreateOrderResponseDto } from "../domain/Dto/createOrder.dto";
 import { User } from "../../user-service/domain/entity/user";
 import { IlocationRepository } from '../../geolocation-service/domain/interface/Location.interface';
 
@@ -20,82 +20,62 @@ export class CreateOrderService {
         private readonly locationRepository: IlocationRepository, //
     ) { }
 
-    async createOrders(payload: {
-        customerId: string;
-        address: string;
-        cityId: string;
-        suborders: {
-            storeId: number;
-            orderItems: { productId: number; quantity: number; unitPrice: number }[];
-        }[];
-    }): Promise<CreateOrderDto[]> {
-        const { customerId, address, cityId, suborders } = payload;
-
-        const client = await this.userRepository.findByClientId(customerId);
+    async createOrder(order: CreateOrderResponseDto): Promise<CreateOrderDto> {
+        const client = await this.userRepository.findByClientId(order.customerId);
         if (!client) {
-            throw new Error(`Client with id ${customerId} not found`);
+            throw new Error(`Client with id ${order.customerId} not found`);
         }
 
-        const { latitude, longitude } = await this.geocodingService.geocode(address);
-        await this.validateClient(customerId);
+        const { latitude, longitude } = await this.geocodingService.geocode(order.address);
 
-        const ordersCreated: CreateOrderDto[] = [];
+        await this.validateClient(order.customerId);
 
-        for (const sub of suborders) {
-            const store = await this.storeRepository.findById(sub.storeId);
-            if (!store) throw new Error(`Store with id ${sub.storeId} not found`);
+        const store = await this.storeRepository.findById(order.storeId);
+        if (!store) {
+            throw new Error(`Store with id ${order.storeId} not found`);
+        }
 
-            const selectedDelivery = await this.selectBestDelivery(
-                String(sub.storeId),
-                String(cityId)
-            );
+        const selectedDelivery = await this.selectBestDelivery(String(order.storeId), String(order.cityId)); //y que esten activo el repartidor
 
-            const subtotal = sub.orderItems.reduce(
-                (sum, item) => sum + item.unitPrice * item.quantity,
-                0
-            );
+        const subtotal = order.orderItems.reduce((sum, item) => sum + item.unitPrice * item.quantity, 0);
 
-            // Validar y actualizar inventario
-            for (const item of sub.orderItems) {
-                const inventory = await this.inventoryRepository.findByStoreAndProduct(
-                    sub.storeId,
-                    item.productId
-                );
-
-                if (!inventory || inventory.availableQuantity < item.quantity) {
-                    throw new Error(
-                        `Not enough stock for product ${item.productId} in store ${sub.storeId}`
-                    );
-                }
-
-                await this.inventoryRepository.updateQuantity({
-                    storeId: sub.storeId,
-                    productId: item.productId,
-                    quantity: inventory.availableQuantity - item.quantity
-                });
+        // Actualizar inventario por cada producto
+        for (const item of order.orderItems) {
+            const inventory = await this.inventoryRepository.findByStoreAndProduct(order.storeId, item.productId);
+            if (!inventory) {
+                throw new Error(`Inventory for product ${item.productId} in store ${order.storeId} not found`);
             }
 
-            const city = Number(cityId);
-            const order = await this.orderRepository.create({
-                customerId,
-                address,
-                latitude,
-                longitude,
-                status: OrderStatus.PENDING,
-                subTotal: subtotal,
-                storeId: sub.storeId,
-                deliveryId: selectedDelivery.id!,
-                orderItems: sub.orderItems,
-                cityId: city,
-                deliveryDate: new Date()
-            });
+            if (inventory.availableQuantity < item.quantity) {
+                throw new Error(`Not enough stock for product ${item.productId} in store ${order.storeId}`);
+            }
 
-            ordersCreated.push(order);
+            const updatedQuantity = inventory.availableQuantity - item.quantity;
+
+            await this.inventoryRepository.updateQuantity({
+                storeId: order.storeId,
+                productId: item.productId,
+                quantity: updatedQuantity
+            });
         }
 
-        return ordersCreated;
-    }
+        const result = await this.orderRepository.create({
+            customerId: order.customerId,
+            address: order.address,
+            latitude,
+            longitude,
+            status: OrderStatus.PENDING, //esta pendiente mientras el delivery va a recoger
+            subTotal: subtotal,
+            storeId: order.storeId,
+            deliveryId: selectedDelivery.id!,
+            orderItems: order.orderItems,
+            cityId: order.cityId,
+            deliveryDate: new Date(), //mirar como asignar la fecha de entrega
 
+        });
+
+        return result;
+    }
 
     private async validateClient(clientId: string): Promise<void> {
         const client = await this.userRepository.findByClientId(clientId);

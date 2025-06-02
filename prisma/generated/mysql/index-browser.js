@@ -296,7 +296,7 @@ exports.Prisma.DeliveryLocationOrderByRelevanceFieldEnum = {
 };
 exports.OrderStatus = exports.$Enums.OrderStatus = {
   PENDING: 'PENDING',
-  READY: 'READY',
+  IN_PROGRESS: 'IN_PROGRESS',
   CANCELED: 'CANCELED',
   ONTHEWAY: 'ONTHEWAY',
   DELIVERED: 'DELIVERED'

@@ -9,7 +9,7 @@ import { InventoryRepository } from "../../../inventory-service/infraestructure/
 import { ErrorResponse } from "../../../shared/domain/interfaces/error.interface";
 import { UserRole } from '../../../../types/auth/index';
 import { UpdateOrderService } from '../../../order-service/application/updateOrder.service';
-import { CreateOrderDto } from '../../domain/Dto/createOrder.dto';
+import { CreateOrderDto, CreateOrderResponseDto } from '../../domain/Dto/createOrder.dto';
 import { OrderResponseDTO } from "../../domain/Dto/orderResponse.dto";
 import { CancelSubOrderService } from "../../application/CancelSubOrder.service";
 import { OrderItemRepository } from "../respository/orderItem.repository";
@@ -73,13 +73,10 @@ export class OrdersController extends Controller {
     // @Security('jwt', [UserRole.CLIENTE])
     @SuccessResponse("201", "Created")
     @Post('create')
-    public async createOrder(@Body() requestBody: any,
-    ): Promise<CreateOrderDto[] | ErrorResponse> {
+    public async createOrder(@Body() requestBody: CreateOrderResponseDto,
+    ): Promise<CreateOrderDto | ErrorResponse> {
         try {
-            const order = await this.createOrderService.createOrders({
-                ...requestBody,
-                cityId: String(requestBody.cityId)
-            });
+            const order = await this.createOrderService.createOrder(requestBody);
             if (!order) {
                 this.setStatus(400);
                 return { status: 400, message: "Bad Request" }
@@ -95,8 +92,6 @@ export class OrdersController extends Controller {
             return { status: 500, message: error instanceof Error ? error.message : "Internal Server Error" };
         }
     }
-
-
 
     /**
      * Obtener una orden por ID con sus relaciones
@@ -179,7 +174,7 @@ export class OrdersController extends Controller {
     }
 
     //obtener las ordenes de un usuario
-    @Get('user/{userId}') //ya no es necesario
+    @Get('user/{userId}')
     @SuccessResponse("200", "OK")
     public async getOrdersByUserId(@Path() userId: string): Promise<OrderResponseDTO[]> {
         try {
@@ -211,8 +206,6 @@ export class OrdersController extends Controller {
             throw new Error(error instanceof Error ? error.message : "Internal Server Error");
         }
     }
-
-
 
 }
 

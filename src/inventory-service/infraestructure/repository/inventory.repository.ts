@@ -87,7 +87,7 @@ export class InventoryRepository implements IInventoryRepository {
       : null;
   }
 
-  async getAllStoreWithProduct(cityId: number): Promise<StoreProductDto[]> {
+  async getAllStoreWithProduct(): Promise<StoreProductDto[]> {
     const inventories = await prismaMysql.inventory.findMany({
       include: {
         store: true,
@@ -103,7 +103,6 @@ export class InventoryRepository implements IInventoryRepository {
         },
         store: {
           status: 'ACTIVE',
-          cityId: cityId, 
         },
         product: {
           status: 'ACTIVE',

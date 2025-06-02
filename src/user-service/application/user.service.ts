@@ -50,17 +50,6 @@ export class UserService {
 
     return users;
   }
-
-  async createCourier(courierData: any): Promise<UserType> {
-    const newCourier = await this.userRepository.createUser(courierData);
-    if (!newCourier.id) {
-      throw new Error("Created courier does not have a valid id.");
-    }
-    return {
-      ...newCourier,
-      id: newCourier.id as string,
-    };
-  }
 }
 
 

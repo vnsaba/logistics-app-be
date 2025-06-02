@@ -1,6 +1,6 @@
 import { Order } from "../entity/order";
 import { UpdateOrderDto } from "../Dto/updateOrder.dto";
-// import { CreateOrderDto } from "../Dto/createOrder.dto";
+import { CreateOrderDto } from "../Dto/createOrder.dto";
 import { OrderResponseDTO } from "../Dto/orderResponse.dto";
 import { OrderStatus } from "prisma/generated/mysql";
 import { OrderDetailResponseDTO } from "../Dto/orderDetail.dto";
@@ -28,4 +28,8 @@ export interface IOrderRepository {
     startDate: Date,
     endDate: Date
   ): Promise<EnrichedOrder[] | null>;
+
+  // updateStatus(id:number, status:OrderStatus): Promise<Order>;
+  // findByClientId(clientId: string): Promise<Order[]>
+  // findByOrder(id: number): Promise<Order>
 }

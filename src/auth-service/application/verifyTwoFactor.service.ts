@@ -54,8 +54,7 @@ export class VerifyTwoFactorService {
             id: user.id!,
             name: user.fullname,
             role,
-            email: user.email,
-            cityId: user.cityId,
+            email: user.email
         }, {  expiresIn: "1h" });
 
         return { token };
