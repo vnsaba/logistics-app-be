@@ -163,3 +163,7 @@ build
 
 # End of https://www.toptal.com/developers/gitignore/api/node,visualstudiocode
 prisma/generated/
+
+test_report.xlsx
+test_report.pdf
+
