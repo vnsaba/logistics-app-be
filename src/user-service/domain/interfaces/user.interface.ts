@@ -20,4 +20,5 @@ export interface IUserRepository {
   findByDeliveries(cityId: string, storeId: string): Promise<User[]> // no sirve, borrar
   getAllCouriersWithLocation(): Promise<any[]>
   getUsersByRole(role: string): Promise<Omit<UserType, "current_password">[]>;
+  updateOrdersToday(id: string, ordersToday: number): Promise<void>;
 }

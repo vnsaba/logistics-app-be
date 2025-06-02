@@ -209,5 +209,13 @@ export class UserRepository implements IUserRepository {
     return role ? role.name : null;
   }
 
+  async updateOrdersToday(id: string, ordersToday: number): Promise<void> {
+    await prismaMongo.user.update({
+      where: { id },
+      data: { ordersToday },
+    });
+
+  }
+
 
 }
