@@ -38,6 +38,10 @@ export class UserRepository implements IUserRepository {
         verificationCodeExpires: userData.verificationCodeExpires ?? null,
         twoFactorCode: userData.twoFactorCode ?? null,
         twoFactorExpires: userData.twoFactorExpires ?? null,
+        cityId: userData.cityId ?? null,
+        backOrders: userData.backOrders ?? 0,
+        ordersToday: userData.ordersToday ?? 0,
+        storeId: userData.storeId ?? null,
       },
     });
   }
@@ -160,6 +164,7 @@ export class UserRepository implements IUserRepository {
         },
         cityId: cityId,
         storeId: storeId,
+        status: "ACTIVE",
       },
     });
   }
@@ -203,4 +208,6 @@ export class UserRepository implements IUserRepository {
     });
     return role ? role.name : null;
   }
+
+
 }

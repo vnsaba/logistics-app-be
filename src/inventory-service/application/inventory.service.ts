@@ -155,7 +155,7 @@ export class InventoryService {
     return await this.inventoryRepository.findProductByProductId(productId);
   }
 
-  async getAllWithStoreAndProduct(): Promise<StoreProductDto[]> {
-    return await this.inventoryRepository.getAllStoreWithProduct();
+  async getAllWithStoreAndProduct(cityId:number): Promise<StoreProductDto[]> {
+    return await this.inventoryRepository.getAllStoreWithProduct(cityId);
   }
 }

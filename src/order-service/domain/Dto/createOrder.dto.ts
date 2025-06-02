@@ -16,10 +16,26 @@ export interface CreateOrderDto {
 }
 
 
+// export interface CreateOrderResponseDto {
+//     customerId: string,
+//     address: string,
+//     storeId: number,
+//     cityId: number,
+//     orderItems: CreateOrderItemDto[];
+// }
+
+
+
 export interface CreateOrderResponseDto {
-    customerId: string,
-    address: string,
-    storeId: number,
-    cityId: number,
-    orderItems: CreateOrderItemDto[];
+  customerId: string;
+  address: string;
+  cityId: string;
+  suborders: {
+    storeId: number;
+    orderItems: {
+      productId: number;
+      quantity: number;
+      unitPrice: number;
+    }[];
+  }[];
 }

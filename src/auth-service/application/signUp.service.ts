@@ -32,11 +32,12 @@ export class SignUpService {
   ): Promise<User> {
     const errors: ValidationError[] = [];
 
-    phone = `+57${phone}`;
 
     if (!/^\d{10}$/.test(phone) || !phone.startsWith('3')) {
       throw new HttpError("El número de teléfono debe tener 10 dígitos y comenzar con 3.", 400);
     }
+
+    phone = `+57${phone}`;
 
 
     const existingUser = await this.userRepository.getByEmail(email);

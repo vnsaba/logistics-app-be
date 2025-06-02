@@ -2,7 +2,7 @@ import { StoreRepository } from "../infraestructure/repository/store.repository"
 import { Store } from "../domain/entity/store";
 import { CreateStoreDto } from "../infraestructure/dto/create-store.dto";
 import { UpdateStoreDto } from "../infraestructure/dto/update-store.dto";
-import { UserRepository } from "src/user-service/infraestructure/repository/user.repository";
+import { UserRepository } from "../../user-service/infraestructure/repository/user.repository";
 
 export class StoreService {
   constructor(
