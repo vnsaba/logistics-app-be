@@ -164,6 +164,26 @@ export class UserRepository implements IUserRepository {
     });
   }
 
+  async getAllCouriersWithLocation(): Promise<any[]> {
+    return await prismaMongo.user.findMany({
+      where: {
+        role: {
+          name: "REPARTIDOR",
+        },
+        status: "ACTIVE",
+      },
+      include: {
+        lastLocation: {
+          orderBy: {
+            createdAt: 'desc',
+          },
+          take: 1,
+        },
+      },
+    });
+  }
+
+
   async getUsersByRole(
     role: string
   ): Promise<Omit<UserType, "current_password">[]> {
