@@ -14,12 +14,12 @@ export class CourierController extends Controller {
     }
 
     //crear un courier
-    @Post("/create ")
+    @Post()
     async createCourier(@Body() courierData: any): Promise<any> {
         return await this.userService.createCourier(courierData);
     }
 
-    @Get("/")
+    @Get()
     async getCouriersWithLocation(): Promise<any[]> {
         return await this.userService.getCouriersWithLocation();
     }

@@ -50,6 +50,9 @@ export class CreateOrderService {
                 String(cityId)
             );
 
+            //actualizar las ordenes del repartidor
+            await this.userRepository.updateOrdersToday(selectedDelivery.id!, selectedDelivery.ordersToday! + 1);
+
             const subtotal = sub.orderItems.reduce(
                 (sum, item) => sum + item.unitPrice * item.quantity,
                 0
