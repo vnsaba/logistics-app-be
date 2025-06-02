@@ -8,7 +8,7 @@ export class StoreService {
   constructor(
     private readonly storeRepository: StoreRepository,
     private readonly userRepository: UserRepository
-  ) {}
+  ) { }
 
   async create(storeData: CreateStoreDto): Promise<Store> {
     const store = Store.createFrom(storeData);
@@ -76,7 +76,6 @@ export class StoreService {
     await this.storeRepository.delete(id);
   }
 
-  // todo: revisar que sirva
   public async getByManager(managerId: string): Promise<Store[]> {
     const user = await this.userRepository.findById(managerId);
     if (!user) {
