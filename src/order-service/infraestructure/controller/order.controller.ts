@@ -116,7 +116,7 @@ export class OrdersController extends Controller {
 
     @SuccessResponse("200", "OK")
     @Post('{orderId}/cancel')
-    @Security('jwt', [UserRole.CLIENTE])
+    @Security('jwt', [UserRole.CLIENTE]) //borar duplciado
     public async cancelSubOrder(
         @Path() orderId: number,
     ): Promise<{ message: string } | ErrorResponse> {

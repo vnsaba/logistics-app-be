@@ -90,7 +90,7 @@ export class CreateOrderService {
                 deliveryId: selectedDelivery.id!,
                 orderItems: sub.orderItems,
                 cityId: city,
-                deliveryDate: new Date()
+                deliveryDate: new Date().getTime() + 30 * 60 * 1000, 
             });
 
             ordersCreated.push(order);
