@@ -179,7 +179,7 @@ export class OrdersController extends Controller {
     }
 
     //obtener las ordenes de un usuario
-    @Get('user/{userId}') //ya no es necesario
+    @Get('user/{userId}') 
     @SuccessResponse("200", "OK")
     public async getOrdersByUserId(@Path() userId: string): Promise<OrderResponseDTO[]> {
         try {
