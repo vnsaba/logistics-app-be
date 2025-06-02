@@ -12,8 +12,8 @@ export class LocationController extends Controller {
     private readonly getLocationHistoryService: GetLocationHistoryService;
     private readonly saveDeliveryLocationService: SaveDeliveryLocationService;
     private readonly locationRepository = new LocationRepository;
-    
-    constructor(){
+
+    constructor() {
         super();
         this.getCurrentLocationService = new GetCurrentLocationService(this.locationRepository);
         this.getLocationHistoryService = new GetLocationHistoryService(this.locationRepository);
@@ -46,13 +46,14 @@ export class LocationController extends Controller {
         @Path() deliveryId: string,
         @Path() from: Date,
         @Path() to: Date
-    ): Promise<DeliverylocationDto[]> {
+    ): Promise<{ lat: number; lng: number; timestamp: Date }[]> {
         const history = await this.getLocationHistoryService.getLocationHistory(deliveryId, from, to);
+
         if (!history || history.length === 0) {
             this.setStatus(404);
             return Promise.reject({ message: 'No location history found' });
         }
+
         return history;
     }
-
 }
