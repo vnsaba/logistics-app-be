@@ -40,4 +40,11 @@ export class DepartmentRepository {
 
     return departments;
   }
+
+  async findById(id: number): Promise<Department | null> {
+    const department = await prismaMysql.department.findUnique({
+      where: { id },
+    });
+    return department ? Department.createFrom(department) : null;
+  }
 }

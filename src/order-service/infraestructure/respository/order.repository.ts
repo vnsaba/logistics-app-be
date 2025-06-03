@@ -296,7 +296,6 @@ export class OrdersRepository implements IOrderRepository {
 
     //listar los pedidos de un repartidor
     async getOrdersByCourierId(courierId: string): Promise<OrderResponseDTO[]> {
-        console.log("Fetching orders for courier:", courierId);
         throw new Error("Method not implemented.");
     }
 

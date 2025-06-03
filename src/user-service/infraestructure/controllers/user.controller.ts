@@ -3,6 +3,7 @@ import { UserService } from '../../application/user.service';
 import { UserRepository } from '../repository/user.repository';
 import { UserRole, User as UserType } from '../../../../types/auth/index';
 import { CityRepository } from '../../../city-service/infraestructure/repository/city.repository';
+import { UserDto } from '../../application/dtos/users.dto';
 
 
 @Route('users')
@@ -21,9 +22,9 @@ export class UserController extends Controller {
 
   // @Security('jwt', [UserRole.ADMINISTRADOR])
   @Get()
-  public async getAllUsers(): Promise<Omit<UserType, 'current_password'>[]> {
+  public async getAllUsers(): Promise<UserDto[]> {
     this.setStatus(200);
-    const users = await this.userService.getAllUsers();
+    const users = await this.userService.getAll();
     return users;
   }
 
@@ -35,5 +36,5 @@ export class UserController extends Controller {
     return users;
   }
 
-  
+
 }

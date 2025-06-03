@@ -4,6 +4,7 @@ import { prismaMongo } from "../../../../prisma/index";
 import { IUserRepository } from "../../domain/interfaces/user.interface";
 
 export class UserRepository implements IUserRepository {
+
   async findById(id: string): Promise<User | null> {
     const user = await prismaMongo.user.findUnique({ where: { id }, include: { role: true } });
     return user;
@@ -130,6 +131,20 @@ export class UserRepository implements IUserRepository {
       },
     });
 
+    return users;
+  }
+
+  public async getAllClients(): Promise<User[]> {
+    const users = await prismaMongo.user.findMany({
+      where: {
+        role: {
+          name: "CLIENTE",
+        },
+      },
+      include: {
+        role: true,
+      },
+    })
     return users;
   }
 

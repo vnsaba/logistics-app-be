@@ -37,9 +37,9 @@ export class GetOrderDetailSerice {
         const possibleStatuses = ['Pending', 'Ready', 'On The Way', 'Delivered'];
 
         const eventMap = new Map(order.events.map(e => [e.status, e.date])); 
-        console.log('Event Map:', eventMap);
-        console.log('Possible Statuses:', possibleStatuses);
-        console.log('Order Events:', order.events);
+        // console.log('Event Map:', eventMap);
+        // console.log('Possible Statuses:', possibleStatuses);
+        // console.log('Order Events:', order.events);
         const completeEvents = possibleStatuses.map(status => ({
             status,
             date: eventMap.get(status.toUpperCase()) || null,
