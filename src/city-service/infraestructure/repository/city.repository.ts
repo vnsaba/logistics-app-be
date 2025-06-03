@@ -1,13 +1,11 @@
 // infraestructure/repository/city.repository.ts
 import { ICityRepository } from "../../domain/interface/city.interface";
-import { PrismaClient } from "../../../../prisma/generated/mysql";
+import { prismaMysql } from "../../../../prisma/index";
 import { City } from "../../domain/entity/city";
-
-const prisma = new PrismaClient();
 
 export class CityRepository implements ICityRepository {
   async findById(id: number): Promise<City | null> {
-    const city = await prisma.city.findUnique({
+    const city = await prismaMysql.city.findUnique({
       where: { id },
     });
     return city ? City.createFrom(city) : null;
@@ -17,7 +15,7 @@ export class CityRepository implements ICityRepository {
     name: string,
     departmentId: number
   ): Promise<City | null> {
-    return await prisma.city.findFirst({
+    return await prismaMysql.city.findFirst({
       where: {
         name,
         departmentId,
@@ -35,7 +33,7 @@ export class CityRepository implements ICityRepository {
       departmentId: pair.departmentId,
     }));
 
-    const cities = await prisma.city.findMany({
+    const cities = await prismaMysql.city.findMany({
       where: {
         OR: whereConditions,
       },
@@ -45,7 +43,7 @@ export class CityRepository implements ICityRepository {
   }
 
   async create(data: { name: string; departmentId: number }): Promise<City> {
-    return await prisma.city.create({
+    return await prismaMysql.city.create({
       data,
     });
   }
@@ -55,7 +53,7 @@ export class CityRepository implements ICityRepository {
   ): Promise<City[]> {
     if (citiesData.length === 0) return [];
 
-    await prisma.city.createMany({
+    await prismaMysql.city.createMany({
       data: citiesData,
       skipDuplicates: true,
     });
@@ -65,7 +63,7 @@ export class CityRepository implements ICityRepository {
       new Set(citiesData.map((c) => c.departmentId))
     );
 
-    const cities = await prisma.city.findMany({
+    const cities = await prismaMysql.city.findMany({
       where: {
         name: { in: names },
         departmentId: { in: departmentIds },
@@ -76,7 +74,7 @@ export class CityRepository implements ICityRepository {
   }
 
   async findAllWithDepartments(): Promise<City[]> {
-    const cities = await prisma.city.findMany({
+    const cities = await prismaMysql.city.findMany({
       include: {
         department: true,
       },

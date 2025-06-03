@@ -1,11 +1,9 @@
-import { PrismaClient } from "../../../../prisma/generated/mysql";
+import { prismaMysql } from "../../../../prisma/index";
 import { Department } from "../../domain/entity/department";
-
-const prisma = new PrismaClient();
 
 export class DepartmentRepository {
   async findByName(name: string): Promise<Department | null> {
-    return await prisma.department.findFirst({
+    return await prismaMysql.department.findFirst({
       where: {
         name,
       },
@@ -13,13 +11,13 @@ export class DepartmentRepository {
   }
 
   async create(data: { name: string }): Promise<Department> {
-    return await prisma.department.create({
+    return await prismaMysql.department.create({
       data,
     });
   }
 
   async findByNames(names: string[]): Promise<Department[]> {
-    const departments = await prisma.department.findMany({
+    const departments = await prismaMysql.department.findMany({
       where: {
         name: {
           in: names,
@@ -35,7 +33,7 @@ export class DepartmentRepository {
       name: dep.name,
     }));
 
-    await prisma.department.createMany({
+    await prismaMysql.department.createMany({
       data,
       skipDuplicates: true, // Evita errores si ya existen con el mismo nombre
     });

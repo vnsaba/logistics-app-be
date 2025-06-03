@@ -1,14 +1,12 @@
-import { PrismaClient } from '../../../../prisma/generated/mysql';
+import { prismaMysql } from "../../../../prisma/index";
 import { IHistoricalMovementRepository } from '../../domain/interfaces/historical-movement.interface';
 import { HistoricalMovement } from '../../domain/entity/historical-movement';
-
-const prisma = new PrismaClient();
 
 export class HistoricalMovementRepository implements IHistoricalMovementRepository {
   async create(movementData: Partial<HistoricalMovement>): Promise<HistoricalMovement> {
     const movement = HistoricalMovement.createFrom(movementData);
 
-    const created = await prisma.historicalMovement.create({
+    const created = await prismaMysql.historicalMovement.create({
       data: {
         inventoryId: movement.inventoryId,
         user: movement.userId,
@@ -25,7 +23,7 @@ export class HistoricalMovementRepository implements IHistoricalMovementReposito
   }
 
   async findById(id: number): Promise<HistoricalMovement | null> {
-    const movement = await prisma.historicalMovement.findUnique({ where: { id } });
+    const movement = await prismaMysql.historicalMovement.findUnique({ where: { id } });
     return movement
       ? HistoricalMovement.createFrom({
           ...movement,
@@ -35,7 +33,7 @@ export class HistoricalMovementRepository implements IHistoricalMovementReposito
   }
 
   async findByInventoryId(inventoryId: number): Promise<HistoricalMovement[]> {
-    const movements = await prisma.historicalMovement.findMany({ where: { inventoryId } });
+    const movements = await prismaMysql.historicalMovement.findMany({ where: { inventoryId } });
     return movements.map(movement =>
       HistoricalMovement.createFrom({
         ...movement,
@@ -45,7 +43,7 @@ export class HistoricalMovementRepository implements IHistoricalMovementReposito
   }
 
   async findAll(): Promise<HistoricalMovement[]> {
-    const movements = await prisma.historicalMovement.findMany();
+    const movements = await prismaMysql.historicalMovement.findMany();
     return movements.map(movement =>
       HistoricalMovement.createFrom({
         ...movement,
