@@ -102,7 +102,7 @@ export class UserService {
               text: city
                 ? `${city.name}, ${department?.name ?? "Departamento desconocido"}`
                 : "Ciudad desconocida",
-              coordinate: ["0", "0"], 
+              coordinate: { lat: "0", lng: "0" }, 
             },
           ],
         };

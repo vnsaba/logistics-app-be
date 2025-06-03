@@ -18,6 +18,13 @@ export class UserDto {
     }[];
     addresses!: { //reempalzar esa informacion por la ciudad y el departamento
         text: string;
-        coordinate: [string, string];
+        coordinate: CoordinateDto;
     }[];
+}
+
+
+// coordinate.dto.ts
+export class CoordinateDto {
+  lat!: string;
+  lng!: string;
 }
