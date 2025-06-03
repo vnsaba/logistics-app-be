@@ -1,4 +1,5 @@
-import { prismaMysql } from "../../../../prisma/index";
+// import { prismaMysql } from "../../../db-instances";
+import { prismaMysql } from '../../../db-instances';
 import { Category } from '../../domain/entity/category';
 import { ICategoryRepository } from '../../domain/interfaces/category.interface';
 

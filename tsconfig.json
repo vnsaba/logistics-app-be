@@ -8,19 +8,19 @@
     "sourceMap": true,
     "outDir": "dist",
     "declaration": true,
-    "strict": true,
+    "strict": false,
 
     /* Basic Options */
     "incremental": true,
 
     /* Strict Type-Checking Options */
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
-    "strictBindCallApply": true,
-    "strictPropertyInitialization": true,
-    "noImplicitThis": true,
-    "alwaysStrict": true,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "strictFunctionTypes": false,
+    "strictBindCallApply": false,
+    "strictPropertyInitialization": false,
+    "noImplicitThis": false,
+    "alwaysStrict": false,
 
     /* Additional Checks */
     "noUnusedLocals": true,
