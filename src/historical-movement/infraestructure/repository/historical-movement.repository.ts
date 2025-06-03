@@ -1,4 +1,4 @@
-import { prismaMysql } from "../../../../prisma/index";
+import { prismaMysql } from "../../../db-instances";
 import { IHistoricalMovementRepository } from '../../domain/interfaces/historical-movement.interface';
 import { HistoricalMovement } from '../../domain/entity/historical-movement';
 

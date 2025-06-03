@@ -1,5 +1,5 @@
 import { Product } from '../../domain/entity/product';
-import { prismaMysql } from "../../../../prisma/index";
+import { prismaMysql } from "../../../db-instances";
 import { IProductRepository } from "../../domain/interfaces/product.interface";
 
 

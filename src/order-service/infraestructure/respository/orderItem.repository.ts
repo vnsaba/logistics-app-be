@@ -1,6 +1,6 @@
-import { OrderItem } from "prisma/generated/mysql";
+import { OrderItem } from "../../../../prisma/generated/mysql";
 import { IOrderItemRepository } from "../../domain/interface/orderItem.interface";
-import { prismaMysql } from "../../../../prisma/index";
+import { prismaMysql } from "../../../db-instances";
 import { UpdateOrderItemDto } from "../../domain/Dto/UpdateOrderItemDto";
 
 

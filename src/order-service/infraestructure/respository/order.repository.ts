@@ -1,9 +1,9 @@
 import { IOrderRepository } from "../../domain/interface/order.interface";
 import { CreateOrderDto } from "../../domain/Dto/createOrder.dto";
-import { prismaMysql } from "../../../../prisma/index";
+import { prismaMysql } from "../../../db-instances";
 import { UpdateOrderDto } from "../../domain/Dto/updateOrder.dto";
 import { OrderResponseDTO } from "../../domain/Dto/orderResponse.dto";
-import { prismaMongo } from "../../../../prisma/index";
+import { prismaMongo } from "../../../db-instances";
 import { Order } from "../../domain/entity/order";
 import { OrderStatus } from "../../../shared/enums/orderStatus.enum";
 import { OrderDetailResponseDTO } from "../../domain/Dto/orderDetail.dto";
