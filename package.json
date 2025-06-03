@@ -1,13 +1,13 @@
 {
   "name": "logistics-app-be",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "prisma": {
     "seed": "ts-node --transpile-only prisma/seed.ts"
   },
   "scripts": {
     "dev": "tsoa spec-and-routes && nodemon",
-    "build": "tsoa spec-and-routes && tsc && cp -r prisma/generated dist/prisma/generated",
+    "build": "npm run generate:all && tsoa spec-and-routes && tsc",
     "start": "node dist/src/server.js",
     "test": "jest",
     "lint": "eslint src/**/*.ts",

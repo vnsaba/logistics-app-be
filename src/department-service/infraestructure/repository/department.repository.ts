@@ -1,4 +1,4 @@
-import { prismaMysql } from "../../../../prisma/index";
+import { prismaMysql } from "../../../db-instances";
 import { Department } from "../../domain/entity/department";
 
 export class DepartmentRepository {
