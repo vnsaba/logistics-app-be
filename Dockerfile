@@ -20,7 +20,7 @@ RUN --mount=type=bind,source=package.json,target=package.json \
 COPY . .
 RUN npm run generate:all && npm run build
 USER node
-CMD ["node", "dist/src/server.js"]
+CMD ["sh", "-c", "npm run generate:all && node dist/src/server.js"]
 
 FROM base AS test
 ENV NODE_ENV=test
