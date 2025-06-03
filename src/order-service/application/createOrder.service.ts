@@ -23,13 +23,12 @@ export class CreateOrderService {
     async createOrders(payload: {
         customerId: string;
         address: string;
-        cityId: string;
-        suborders: {
+        subOrders: {
             storeId: number;
             orderItems: { productId: number; quantity: number; unitPrice: number }[];
         }[];
     }): Promise<CreateOrderDto[]> {
-        const { customerId, address, cityId, suborders } = payload;
+        const { customerId, address,  subOrders } = payload;
 
         const client = await this.userRepository.findByClientId(customerId);
         if (!client) {
@@ -41,13 +40,13 @@ export class CreateOrderService {
 
         const ordersCreated: CreateOrderDto[] = [];
 
-        for (const sub of suborders) {
+        for (const sub of subOrders) {
             const store = await this.storeRepository.findById(sub.storeId);
             if (!store) throw new Error(`Store with id ${sub.storeId} not found`);
 
             const selectedDelivery = await this.selectBestDelivery(
                 String(sub.storeId),
-                String(cityId)
+                String(client.cityId)
             );
 
             //actualizar las ordenes del repartidor
@@ -78,7 +77,7 @@ export class CreateOrderService {
                 });
             }
 
-            const city = Number(cityId);
+            const city = Number(client.cityId));
             const order = await this.orderRepository.create({
                 customerId,
                 address,
