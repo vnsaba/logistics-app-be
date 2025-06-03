@@ -77,7 +77,7 @@ export class CreateOrderService {
                 });
             }
 
-            const city = Number(client.cityId));
+            const city = Number(client.cityId);
             const order = await this.orderRepository.create({
                 customerId,
                 address,
