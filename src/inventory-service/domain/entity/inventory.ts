@@ -17,7 +17,7 @@ export class Inventory {
 
   private validate() {
     if (this.productId < 0) {
-      console.log("Product ID:", this.productId);
+      // console.log("Product ID:", this.productId);
       throw new Error("Product ID must be a positive number.");
     }
     if (this.storeId <= 0) {

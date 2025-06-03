@@ -314,7 +314,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\DSecondary\\logistics-app-be\\prisma\\generated\\mysql",
+      "value": "C:\\Users\\Usuario\\Desktop\\logistics-app-be\\prisma\\generated\\mysql",
       "fromEnvVar": null
     },
     "config": {
@@ -328,11 +328,11 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\DSecondary\\logistics-app-be\\prisma\\mysql\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\Usuario\\Desktop\\logistics-app-be\\prisma\\mysql\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
+    "rootEnvPath": "../../../.env",
     "schemaEnvPath": "../../../.env"
   },
   "relativePath": "../../mysql",

@@ -167,14 +167,18 @@ const config = {
       }
     ],
     "previewFeatures": [],
+<<<<<<< HEAD
+    "sourceFilePath": "C:\\DSecondary\\logistics-app-be\\prisma\\mongodb\\schema.prisma",
+=======
     "sourceFilePath": "C:\\DSecondary\\logistics-app-be\\prisma\\mongoDB\\schema.prisma",
+>>>>>>> 46c946d82e0ae125d8e8438752c06a26124a7121
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
+    "rootEnvPath": "../../../.env",
     "schemaEnvPath": "../../../.env"
   },
-  "relativePath": "../../mongoDB",
+  "relativePath": "../../mongodb",
   "clientVersion": "6.7.0",
   "engineVersion": "3cff47a7f5d65c3ea74883f1d736e41d68ce91ed",
   "datasourceNames": [

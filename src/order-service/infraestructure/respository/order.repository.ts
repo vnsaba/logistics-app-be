@@ -296,8 +296,95 @@ export class OrdersRepository implements IOrderRepository {
 
     //listar los pedidos de un repartidor
     async getOrdersByCourierId(courierId: string): Promise<OrderResponseDTO[]> {
-        console.log("Fetching orders for courier:", courierId);
-        throw new Error("Method not implemented.");
+        const orders = await prismaMysql.orders.findMany({
+            where: { deliveryId: courierId },
+            include: {
+                orderItems: { include: { product: { include: { category: true } } } },
+                store: true,
+                city: { include: { department: true } },
+                events: true,
+            }
+        })
+
+
+        const enrichedOrders = await Promise.all(
+            orders.map(async (order) => {
+                const [user, courier] = await Promise.all([
+                    prismaMongo.user.findUnique({ where: { id: order.customerId } }),
+                    prismaMongo.user.findUnique({ where: { id: order.deliveryId } }),
+                ]);
+
+                return {
+                    id: order.id,
+                    user: {
+                        id: user?.id ?? '',
+                        fullName: user?.fullname || '',
+                    },
+                    subtotal: order.subTotal,
+                    createdAt: order.createdAt.toISOString(),
+                    deliveryDate: order.deliveryDate ? order.deliveryDate.toISOString() : null,
+                    products: order.orderItems.map((item) => ({
+                        id: item.product.id,
+                        name: item.product.name,
+                        isActive: item.product.status === 'ACTIVE',
+                        description: item.product.description,
+                        images: [{
+                            url: item.product.imageUrl,
+                            name: item.product.name,
+                        }] as [{ url: string; name: string; }],
+                        createdAt: item.product.createdAt.toISOString(),
+                        unitPrice: item.unitPrice,
+                        category: item.product.categoryId
+                    })),
+                    status: {
+                        id: 0,
+                        text: order.status,
+                    },
+                    address: {
+                        text: 'N/A',
+                        latitude: 0,
+                        longitude: 0,
+                    },
+                    store: {
+                        id: order.store.id,
+                        name: order.store.name,
+                        isActive: order.store.status === 'ACTIVE',
+                        createdAt: order.store.createdAt.toISOString(),
+                        address: {
+                            "text": order.store.address,
+                            "latitude": order.store.latitude,
+                            "longitude": order.store.longitude,
+                        }
+                    },
+                    courier: courier
+                        ? {
+                            id: courier.id,
+                            name: courier.fullname,
+                            gender: 'N/A',
+                            gsm: courier.phone,
+                            createdAt: courier.created_at.toISOString(),
+                            accountNumber: courier.phone,
+                            address: {
+                                text: 'N/A',
+                                latitude: 0,
+                                longitude: 0,
+                            },
+                            status: {
+                                id: 0,
+                                text: courier.status,
+                            },
+                        }
+                        : null,
+                    events: order.events.map((e) => ({
+                        date: e.date,
+                        status: e.status,
+                    })),
+                    orderNumber: order.id,
+                };
+            })
+        );
+
+        return enrichedOrders;
     }
 
     //obtener las ordenes de un repartidor en la fecha actual

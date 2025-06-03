@@ -5,7 +5,7 @@ import { IUserRepository } from "../../user-service/domain/interfaces/user.inter
 import { IDistanceService } from "../../geolocation-service/domain/interface/distance.interface";
 import { OrderStatus } from "../../shared/enums/orderStatus.enum";
 import { IInventoryRepository } from '../../inventory-service/domain/interfaces/inventory.interface';
-import { CreateOrderDto} from "../domain/Dto/createOrder.dto";
+import { CreateOrderDto } from "../domain/Dto/createOrder.dto";
 import { User } from "../../user-service/domain/entity/user";
 import { IlocationRepository } from '../../geolocation-service/domain/interface/Location.interface';
 
@@ -89,7 +89,7 @@ export class CreateOrderService {
                 deliveryId: selectedDelivery.id!,
                 orderItems: sub.orderItems,
                 cityId: city,
-                deliveryDate: new Date().getTime() + 30 * 60 * 1000, 
+                deliveryDate: new Date(new Date().getTime() + 30 * 60 * 1000)
             });
 
             ordersCreated.push(order);

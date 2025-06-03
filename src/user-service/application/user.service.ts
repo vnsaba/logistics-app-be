@@ -1,19 +1,27 @@
 import { IUserRepository } from "../domain/interfaces/user.interface";
 import { User as UserType } from "../../../types/auth/index";
+import { ICityRepository } from '../../city-service/domain/interface/city.interface';
+import { UserDto } from "./dtos/users.dto";
+import { DepartmentRepository } from '../../department-service/infraestructure/repository/department.repository';
 
 export class UserService {
   private userRepository: IUserRepository;
+  private cityRepository: ICityRepository;
+  private departmentRepository: DepartmentRepository;
 
-  constructor(userRepository: IUserRepository) {
+
+  constructor(userRepository: IUserRepository, cityRepository: ICityRepository) {
     this.userRepository = userRepository;
+    this.cityRepository = cityRepository;
+    this.departmentRepository = new DepartmentRepository();
   }
+
 
   async getAllUsers(): Promise<Omit<UserType, "current_password">[]> {
     const users = await this.userRepository.getAllUsers();
 
     return users;
   }
-
   async getCouriersWithLocation(): Promise<any[]> {
     const couriers = await this.userRepository.getAllCouriersWithLocation();
 
@@ -61,6 +69,47 @@ export class UserService {
       id: newCourier.id as string,
     };
   }
+
+  async getAll(): Promise<UserDto[]> {
+    const users = await this.userRepository.getAllClients();
+
+    const usersWithCityAndDepartment = await Promise.all(
+      users.map(async (user): Promise<UserDto> => {
+        const city = await this.cityRepository.findById(Number(user.cityId));
+        const department = await this.departmentRepository.findById(city?.departmentId || 0);
+        return {
+          id: Number(user.id) ?? 0,
+          firstName: user.fullname.split(" ")[0] || "N/A",
+          lastName: user.fullname.split(" ").slice(1).join(" ") || "N/A",
+          fullaName: user.fullname || "N/A", // CUIDADO: es fullaName, no fullname (según tu DTO)
+          gender: "N/A", // No proporcionado, puedes ajustar si existe
+          gsm: user.phone || "N/A",
+          createdAt: user.created_at || new Date(),
+          isActive: user.status === "ACTIVE",
+          avatar: [
+            {
+              name: "N/A",
+              percent: 0,
+              size:40088,
+              status: "N/A",
+              type: "N/A",
+              uid: "N/A",
+              url: "https://marketplace.canva.com/EAFmXSny51I/1/0/1600w/canva-avatar-foto-de-perfil-mujer-dibujo-ilustrado-moderno-rojo-1Fscw8oj1-Q.jpg",
+            },
+          ],
+          addresses: [
+            {
+              text: city
+                ? `${city.name}, ${department?.name ?? "Departamento desconocido"}`
+                : "Ciudad desconocida",
+              coordinate: { lat: "0", lng: "0" }, 
+            },
+          ],
+        };
+      })
+    );
+
+    return usersWithCityAndDepartment;
+  }
+
 }
-
-

@@ -12,7 +12,6 @@ export interface IUserRepository {
   clearResetToken(email: string): Promise<void>;
   updateTwoFactor(id: string, code: string, expires: Date): Promise<void>;
   clearTwoFactor(id: string): Promise<void>;
-  getAllUsers(): Promise<Omit<UserType, 'current_password'>[]>
   findByClientId(id: string): Promise<User | null>;
   getAllUsers(): Promise<Omit<UserType, "current_password">[]>;
   createMany(users: User[]): Promise<(User | null)[]>;
@@ -21,4 +20,5 @@ export interface IUserRepository {
   getAllCouriersWithLocation(): Promise<any[]>
   getUsersByRole(role: string): Promise<Omit<UserType, "current_password">[]>;
   updateOrdersToday(id: string, ordersToday: number): Promise<void>;
+  getAllClients(): Promise<User[]> 
 }

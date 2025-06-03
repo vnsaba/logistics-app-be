@@ -7,6 +7,7 @@ export class CityRepository implements ICityRepository {
   async findById(id: number): Promise<City | null> {
     const city = await prismaMysql.city.findUnique({
       where: { id },
+      include: { department: true },
     });
     return city ? City.createFrom(city) : null;
   }
