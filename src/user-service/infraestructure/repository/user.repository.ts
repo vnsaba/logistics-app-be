@@ -5,7 +5,7 @@ import { IUserRepository } from "../../domain/interfaces/user.interface";
 
 export class UserRepository implements IUserRepository {
   async findById(id: string): Promise<User | null> {
-    const user = await prismaMongo.user.findUnique({ where: { id } });
+    const user = await prismaMongo.user.findUnique({ where: { id }, include: { role: true } });
     return user;
   }
 

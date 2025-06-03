@@ -4,6 +4,7 @@ import { UserService } from "../../application/user.service";
 import { CreateDeliveryDTO } from "../../domain/interfaces/createDelivery.dto";
 import { StoreRepository } from '../../../store-service/infraestructure/repository/store.repository';
 import { RoleRepository } from '../../../role-service/infraestructure/repository/role.repository';
+import { CityRepository } from '../../../city-service/infraestructure/repository/city.repository';
 
 @Route('couriers')
 @Tags('couriers')
@@ -12,11 +13,13 @@ export class CourierController extends Controller {
     private readonly StoreRepository: StoreRepository
     private readonly userRepository: UserRepository;
     private readonly roleRepository: RoleRepository;
+    private readonly cityRepository: CityRepository;
 
     constructor() {
         super();
+        this.cityRepository = new CityRepository();
         const userRepository = new UserRepository();
-        this.userService = new UserService(userRepository);
+        this.userService = new UserService(userRepository,this.cityRepository);
         this.StoreRepository = new StoreRepository();
         this.roleRepository = new RoleRepository();
         this.userRepository = userRepository;

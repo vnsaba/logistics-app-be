@@ -1,16 +1,60 @@
 import { IUserRepository } from "../domain/interfaces/user.interface";
 import { User as UserType } from "../../../types/auth/index";
+import { ICityRepository } from '../../city-service/domain/interface/city.interface';
+// import { DepartmentRepository } from '../../department-service/domain/';
 
 export class UserService {
   private userRepository: IUserRepository;
+  private cityRepository: ICityRepository;
+  // private departmentRepository: DepartmentRepository;
 
-  constructor(userRepository: IUserRepository) {
+
+  constructor(userRepository: IUserRepository, cityRepository: ICityRepository) {
     this.userRepository = userRepository;
+    this.cityRepository = cityRepository;
+    // this.departmentRepository = departmentRepository;
   }
 
   async getAllUsers(): Promise<Omit<UserType, "current_password">[]> {
     const users = await this.userRepository.getAllUsers();
+    console.log("Users fetched:", users);
 
+
+    //buscar la ciudad y el departamento de cada usuario
+    const usersWithCityAndDepartment = await Promise.all(
+      users.map(async (user) => {
+        const city = await this.cityRepository.findById(Number(1000));
+        console.log("City fetched:", city);
+
+        return {
+          id: user.id,
+          firstName: user.fullname.split(" ")[0] || "N/A",
+          lastName: user.fullname.split(" ").slice(1).join(" ") || "N/A",
+          fullname: user.fullname || "N/A",
+          email: user.email || "N/A",
+          gsm: user.phone || "N/A",
+          createdAt: user.created_at || new Date(),
+          isActive: user.status === "ACTIVE",
+          avatar: {
+            name: "N/A",
+            percent: 0,
+            size: 0,
+            status: "N/A",
+            type: "N/A",
+            uid: "N/A",
+            url: "N/A",
+          },
+          addresses: {
+            text: "N/A",
+            coordinate: [
+              "0",
+              "0",
+            ],
+          }
+        };
+      })
+    );
+    console.log("Users with city and department:", usersWithCityAndDepartment);
     return users;
   }
 
@@ -61,6 +105,8 @@ export class UserService {
       id: newCourier.id as string,
     };
   }
+
+
 }
 
 
