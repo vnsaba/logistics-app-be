@@ -90,7 +90,7 @@ export class UserService {
             {
               name: "N/A",
               percent: 0,
-              size: 0,
+              size:40088,
               status: "N/A",
               type: "N/A",
               uid: "N/A",
