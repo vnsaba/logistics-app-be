@@ -137,8 +137,6 @@ exports.Prisma.UserScalarFieldEnum = {
   cityId: 'cityId',
   backOrders: 'backOrders',
   ordersToday: 'ordersToday',
-  latitude: 'latitude',
-  longitude: 'longitude',
   storeId: 'storeId'
 };
 
