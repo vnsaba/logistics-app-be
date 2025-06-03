@@ -5,7 +5,7 @@ import { IUserRepository } from "../../user-service/domain/interfaces/user.inter
 import { IDistanceService } from "../../geolocation-service/domain/interface/distance.interface";
 import { OrderStatus } from "../../shared/enums/orderStatus.enum";
 import { IInventoryRepository } from '../../inventory-service/domain/interfaces/inventory.interface';
-import { CreateOrderDto} from "../domain/Dto/createOrder.dto";
+import { CreateOrderDto } from "../domain/Dto/createOrder.dto";
 import { User } from "../../user-service/domain/entity/user";
 import { IlocationRepository } from '../../geolocation-service/domain/interface/Location.interface';
 
@@ -28,7 +28,7 @@ export class CreateOrderService {
             orderItems: { productId: number; quantity: number; unitPrice: number }[];
         }[];
     }): Promise<CreateOrderDto[]> {
-        const { customerId, address,  subOrders } = payload;
+        const { customerId, address, subOrders } = payload;
 
         const client = await this.userRepository.findByClientId(customerId);
         if (!client) {
@@ -38,65 +38,77 @@ export class CreateOrderService {
         const { latitude, longitude } = await this.geocodingService.geocode(address);
         await this.validateClient(customerId);
 
-        const ordersCreated: CreateOrderDto[] = [];
+        const ordersCreated = await Promise.all(
+            subOrders.map(async (sub) => {
+                const store = await this.storeRepository.findById(sub.storeId);
+                if (!store) throw new Error(`Store with id ${sub.storeId} not found`);
 
-        for (const sub of subOrders) {
-            const store = await this.storeRepository.findById(sub.storeId);
-            if (!store) throw new Error(`Store with id ${sub.storeId} not found`);
-
-            const selectedDelivery = await this.selectBestDelivery(
-                String(sub.storeId),
-                String(client.cityId)
-            );
-
-            //actualizar las ordenes del repartidor
-            await this.userRepository.updateOrdersToday(selectedDelivery.id!, selectedDelivery.ordersToday! + 1);
-
-            const subtotal = sub.orderItems.reduce(
-                (sum, item) => sum + item.unitPrice * item.quantity,
-                0
-            );
-
-            // Validar y actualizar inventario
-            for (const item of sub.orderItems) {
-                const inventory = await this.inventoryRepository.findByStoreAndProduct(
-                    sub.storeId,
-                    item.productId
+                const selectedDelivery = await this.selectBestDelivery(
+                    String(sub.storeId),
+                    String(client.cityId)
                 );
 
-                if (!inventory || inventory.availableQuantity < item.quantity) {
-                    throw new Error(
-                        `Not enough stock for product ${item.productId} in store ${sub.storeId}`
-                    );
+                // Actualizar órdenes del repartidor
+                await this.userRepository.updateOrdersToday(
+                    selectedDelivery.id!,
+                    selectedDelivery.ordersToday! + 1
+                );
+
+                const subtotal = sub.orderItems.reduce(
+                    (sum, item) => sum + item.unitPrice * item.quantity,
+                    0
+                );
+
+                // Validar inventario en paralelo
+                const inventoryChecks = await Promise.all(
+                    sub.orderItems.map((item) =>
+                        this.inventoryRepository.findByStoreAndProduct(sub.storeId, item.productId)
+                    )
+                );
+
+                for (let i = 0; i < sub.orderItems.length; i++) {
+                    const item = sub.orderItems[i];
+                    const inventory = inventoryChecks[i];
+                    if (!inventory || inventory.availableQuantity < item.quantity) {
+                        throw new Error(
+                            `Not enough stock for product ${item.productId} in store ${sub.storeId}`
+                        );
+                    }
                 }
 
-                await this.inventoryRepository.updateQuantity({
+                // Actualizar inventarios en paralelo
+                await Promise.all(
+                    sub.orderItems.map((item, i) =>
+                        this.inventoryRepository.updateQuantity({
+                            storeId: sub.storeId,
+                            productId: item.productId,
+                            quantity: inventoryChecks[i].availableQuantity - item.quantity,
+                        })
+                    )
+                );
+
+                const city = Number(client.cityId);
+                const order = await this.orderRepository.create({
+                    customerId,
+                    address,
+                    latitude,
+                    longitude,
+                    status: OrderStatus.PENDING,
+                    subTotal: subtotal,
                     storeId: sub.storeId,
-                    productId: item.productId,
-                    quantity: inventory.availableQuantity - item.quantity
+                    deliveryId: selectedDelivery.id!,
+                    orderItems: sub.orderItems,
+                    cityId: city,
+                    deliveryDate: new Date(new Date().getTime() + 30 * 60 * 1000),
                 });
-            }
 
-            const city = Number(client.cityId);
-            const order = await this.orderRepository.create({
-                customerId,
-                address,
-                latitude,
-                longitude,
-                status: OrderStatus.PENDING,
-                subTotal: subtotal,
-                storeId: sub.storeId,
-                deliveryId: selectedDelivery.id!,
-                orderItems: sub.orderItems,
-                cityId: city,
-                deliveryDate: new Date().getTime() + 30 * 60 * 1000, 
-            });
-
-            ordersCreated.push(order);
-        }
+                return order;
+            })
+        );
 
         return ordersCreated;
     }
+
 
 
     private async validateClient(clientId: string): Promise<void> {
@@ -158,5 +170,3 @@ export class CreateOrderService {
     }
 
 }
-
-
