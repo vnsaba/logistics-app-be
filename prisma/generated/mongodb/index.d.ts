@@ -2161,15 +2161,11 @@ export namespace Prisma {
   export type UserAvgAggregateOutputType = {
     backOrders: number | null
     ordersToday: number | null
-    latitude: number | null
-    longitude: number | null
   }
 
   export type UserSumAggregateOutputType = {
     backOrders: number | null
     ordersToday: number | null
-    latitude: number | null
-    longitude: number | null
   }
 
   export type UserMinAggregateOutputType = {
@@ -2190,8 +2186,6 @@ export namespace Prisma {
     cityId: string | null
     backOrders: number | null
     ordersToday: number | null
-    latitude: number | null
-    longitude: number | null
     storeId: string | null
   }
 
@@ -2213,8 +2207,6 @@ export namespace Prisma {
     cityId: string | null
     backOrders: number | null
     ordersToday: number | null
-    latitude: number | null
-    longitude: number | null
     storeId: string | null
   }
 
@@ -2236,8 +2228,6 @@ export namespace Prisma {
     cityId: number
     backOrders: number
     ordersToday: number
-    latitude: number
-    longitude: number
     storeId: number
     _all: number
   }
@@ -2246,15 +2236,11 @@ export namespace Prisma {
   export type UserAvgAggregateInputType = {
     backOrders?: true
     ordersToday?: true
-    latitude?: true
-    longitude?: true
   }
 
   export type UserSumAggregateInputType = {
     backOrders?: true
     ordersToday?: true
-    latitude?: true
-    longitude?: true
   }
 
   export type UserMinAggregateInputType = {
@@ -2275,8 +2261,6 @@ export namespace Prisma {
     cityId?: true
     backOrders?: true
     ordersToday?: true
-    latitude?: true
-    longitude?: true
     storeId?: true
   }
 
@@ -2298,8 +2282,6 @@ export namespace Prisma {
     cityId?: true
     backOrders?: true
     ordersToday?: true
-    latitude?: true
-    longitude?: true
     storeId?: true
   }
 
@@ -2321,8 +2303,6 @@ export namespace Prisma {
     cityId?: true
     backOrders?: true
     ordersToday?: true
-    latitude?: true
-    longitude?: true
     storeId?: true
     _all?: true
   }
@@ -2431,8 +2411,6 @@ export namespace Prisma {
     cityId: string | null
     backOrders: number | null
     ordersToday: number | null
-    latitude: number | null
-    longitude: number | null
     storeId: string | null
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
@@ -2473,8 +2451,6 @@ export namespace Prisma {
     cityId?: boolean
     backOrders?: boolean
     ordersToday?: boolean
-    latitude?: boolean
-    longitude?: boolean
     storeId?: boolean
     role?: boolean | RoleDefaultArgs<ExtArgs>
     lastLocation?: boolean | User$lastLocationArgs<ExtArgs>
@@ -2501,12 +2477,10 @@ export namespace Prisma {
     cityId?: boolean
     backOrders?: boolean
     ordersToday?: boolean
-    latitude?: boolean
-    longitude?: boolean
     storeId?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullname" | "email" | "phone" | "current_password" | "roleId" | "status" | "created_at" | "updated_at" | "verificationCode" | "verificationCodeExpires" | "twoFactorCode" | "twoFactorExpires" | "resetPasswordToken" | "cityId" | "backOrders" | "ordersToday" | "latitude" | "longitude" | "storeId", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullname" | "email" | "phone" | "current_password" | "roleId" | "status" | "created_at" | "updated_at" | "verificationCode" | "verificationCodeExpires" | "twoFactorCode" | "twoFactorExpires" | "resetPasswordToken" | "cityId" | "backOrders" | "ordersToday" | "storeId", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     role?: boolean | RoleDefaultArgs<ExtArgs>
     lastLocation?: boolean | User$lastLocationArgs<ExtArgs>
@@ -2537,8 +2511,6 @@ export namespace Prisma {
       cityId: string | null
       backOrders: number | null
       ordersToday: number | null
-      latitude: number | null
-      longitude: number | null
       storeId: string | null
     }, ExtArgs["result"]["user"]>
     composites: {}
@@ -2951,8 +2923,6 @@ export namespace Prisma {
     readonly cityId: FieldRef<"User", 'String'>
     readonly backOrders: FieldRef<"User", 'Int'>
     readonly ordersToday: FieldRef<"User", 'Int'>
-    readonly latitude: FieldRef<"User", 'Float'>
-    readonly longitude: FieldRef<"User", 'Float'>
     readonly storeId: FieldRef<"User", 'String'>
   }
     
@@ -4436,8 +4406,6 @@ export namespace Prisma {
     cityId: 'cityId',
     backOrders: 'backOrders',
     ordersToday: 'ordersToday',
-    latitude: 'latitude',
-    longitude: 'longitude',
     storeId: 'storeId'
   };
 
@@ -4620,8 +4588,6 @@ export namespace Prisma {
     cityId?: StringNullableFilter<"User"> | string | null
     backOrders?: IntNullableFilter<"User"> | number | null
     ordersToday?: IntNullableFilter<"User"> | number | null
-    latitude?: FloatNullableFilter<"User"> | number | null
-    longitude?: FloatNullableFilter<"User"> | number | null
     storeId?: StringNullableFilter<"User"> | string | null
     role?: XOR<RoleScalarRelationFilter, RoleWhereInput>
     lastLocation?: LocationListRelationFilter
@@ -4645,8 +4611,6 @@ export namespace Prisma {
     cityId?: SortOrder
     backOrders?: SortOrder
     ordersToday?: SortOrder
-    latitude?: SortOrder
-    longitude?: SortOrder
     storeId?: SortOrder
     role?: RoleOrderByWithRelationInput
     lastLocation?: LocationOrderByRelationAggregateInput
@@ -4673,8 +4637,6 @@ export namespace Prisma {
     cityId?: StringNullableFilter<"User"> | string | null
     backOrders?: IntNullableFilter<"User"> | number | null
     ordersToday?: IntNullableFilter<"User"> | number | null
-    latitude?: FloatNullableFilter<"User"> | number | null
-    longitude?: FloatNullableFilter<"User"> | number | null
     storeId?: StringNullableFilter<"User"> | string | null
     role?: XOR<RoleScalarRelationFilter, RoleWhereInput>
     lastLocation?: LocationListRelationFilter
@@ -4698,8 +4660,6 @@ export namespace Prisma {
     cityId?: SortOrder
     backOrders?: SortOrder
     ordersToday?: SortOrder
-    latitude?: SortOrder
-    longitude?: SortOrder
     storeId?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
@@ -4729,8 +4689,6 @@ export namespace Prisma {
     cityId?: StringNullableWithAggregatesFilter<"User"> | string | null
     backOrders?: IntNullableWithAggregatesFilter<"User"> | number | null
     ordersToday?: IntNullableWithAggregatesFilter<"User"> | number | null
-    latitude?: FloatNullableWithAggregatesFilter<"User"> | number | null
-    longitude?: FloatNullableWithAggregatesFilter<"User"> | number | null
     storeId?: StringNullableWithAggregatesFilter<"User"> | string | null
   }
 
@@ -4867,8 +4825,6 @@ export namespace Prisma {
     cityId?: string | null
     backOrders?: number | null
     ordersToday?: number | null
-    latitude?: number | null
-    longitude?: number | null
     storeId?: string | null
     role: RoleCreateNestedOneWithoutUserInput
     lastLocation?: LocationCreateNestedManyWithoutUserInput
@@ -4892,8 +4848,6 @@ export namespace Prisma {
     cityId?: string | null
     backOrders?: number | null
     ordersToday?: number | null
-    latitude?: number | null
-    longitude?: number | null
     storeId?: string | null
     lastLocation?: LocationUncheckedCreateNestedManyWithoutUserInput
   }
@@ -4914,8 +4868,6 @@ export namespace Prisma {
     cityId?: NullableStringFieldUpdateOperationsInput | string | null
     backOrders?: NullableIntFieldUpdateOperationsInput | number | null
     ordersToday?: NullableIntFieldUpdateOperationsInput | number | null
-    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
-    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
     storeId?: NullableStringFieldUpdateOperationsInput | string | null
     role?: RoleUpdateOneRequiredWithoutUserNestedInput
     lastLocation?: LocationUpdateManyWithoutUserNestedInput
@@ -4938,8 +4890,6 @@ export namespace Prisma {
     cityId?: NullableStringFieldUpdateOperationsInput | string | null
     backOrders?: NullableIntFieldUpdateOperationsInput | number | null
     ordersToday?: NullableIntFieldUpdateOperationsInput | number | null
-    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
-    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
     storeId?: NullableStringFieldUpdateOperationsInput | string | null
     lastLocation?: LocationUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -4962,8 +4912,6 @@ export namespace Prisma {
     cityId?: string | null
     backOrders?: number | null
     ordersToday?: number | null
-    latitude?: number | null
-    longitude?: number | null
     storeId?: string | null
   }
 
@@ -4983,8 +4931,6 @@ export namespace Prisma {
     cityId?: NullableStringFieldUpdateOperationsInput | string | null
     backOrders?: NullableIntFieldUpdateOperationsInput | number | null
     ordersToday?: NullableIntFieldUpdateOperationsInput | number | null
-    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
-    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
     storeId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -5005,8 +4951,6 @@ export namespace Prisma {
     cityId?: NullableStringFieldUpdateOperationsInput | string | null
     backOrders?: NullableIntFieldUpdateOperationsInput | number | null
     ordersToday?: NullableIntFieldUpdateOperationsInput | number | null
-    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
-    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
     storeId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -5214,18 +5158,6 @@ export namespace Prisma {
     isSet?: boolean
   }
 
-  export type FloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
-    isSet?: boolean
-  }
-
   export type RoleScalarRelationFilter = {
     is?: RoleWhereInput
     isNot?: RoleWhereInput
@@ -5259,16 +5191,12 @@ export namespace Prisma {
     cityId?: SortOrder
     backOrders?: SortOrder
     ordersToday?: SortOrder
-    latitude?: SortOrder
-    longitude?: SortOrder
     storeId?: SortOrder
   }
 
   export type UserAvgOrderByAggregateInput = {
     backOrders?: SortOrder
     ordersToday?: SortOrder
-    latitude?: SortOrder
-    longitude?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -5289,8 +5217,6 @@ export namespace Prisma {
     cityId?: SortOrder
     backOrders?: SortOrder
     ordersToday?: SortOrder
-    latitude?: SortOrder
-    longitude?: SortOrder
     storeId?: SortOrder
   }
 
@@ -5312,16 +5238,12 @@ export namespace Prisma {
     cityId?: SortOrder
     backOrders?: SortOrder
     ordersToday?: SortOrder
-    latitude?: SortOrder
-    longitude?: SortOrder
     storeId?: SortOrder
   }
 
   export type UserSumOrderByAggregateInput = {
     backOrders?: SortOrder
     ordersToday?: SortOrder
-    latitude?: SortOrder
-    longitude?: SortOrder
   }
 
   export type EnumStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -5396,23 +5318,6 @@ export namespace Prisma {
     _sum?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedIntNullableFilter<$PrismaModel>
     _max?: NestedIntNullableFilter<$PrismaModel>
-    isSet?: boolean
-  }
-
-  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedFloatNullableFilter<$PrismaModel>
-    _min?: NestedFloatNullableFilter<$PrismaModel>
-    _max?: NestedFloatNullableFilter<$PrismaModel>
     isSet?: boolean
   }
 
@@ -5599,15 +5504,6 @@ export namespace Prisma {
     unset?: boolean
   }
 
-  export type NullableFloatFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-    unset?: boolean
-  }
-
   export type RoleUpdateOneRequiredWithoutUserNestedInput = {
     create?: XOR<RoleCreateWithoutUserInput, RoleUncheckedCreateWithoutUserInput>
     connectOrCreate?: RoleCreateOrConnectWithoutUserInput
@@ -5775,18 +5671,6 @@ export namespace Prisma {
     isSet?: boolean
   }
 
-  export type NestedFloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
-    isSet?: boolean
-  }
-
   export type NestedEnumStatusWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
     in?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
@@ -5861,7 +5745,7 @@ export namespace Prisma {
     isSet?: boolean
   }
 
-  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel> | null
     in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
     notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
@@ -5869,12 +5753,7 @@ export namespace Prisma {
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedFloatNullableFilter<$PrismaModel>
-    _min?: NestedFloatNullableFilter<$PrismaModel>
-    _max?: NestedFloatNullableFilter<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
     isSet?: boolean
   }
 
@@ -5922,8 +5801,6 @@ export namespace Prisma {
     cityId?: string | null
     backOrders?: number | null
     ordersToday?: number | null
-    latitude?: number | null
-    longitude?: number | null
     storeId?: string | null
     lastLocation?: LocationCreateNestedManyWithoutUserInput
   }
@@ -5945,8 +5822,6 @@ export namespace Prisma {
     cityId?: string | null
     backOrders?: number | null
     ordersToday?: number | null
-    latitude?: number | null
-    longitude?: number | null
     storeId?: string | null
     lastLocation?: LocationUncheckedCreateNestedManyWithoutUserInput
   }
@@ -6006,8 +5881,6 @@ export namespace Prisma {
     cityId?: StringNullableFilter<"User"> | string | null
     backOrders?: IntNullableFilter<"User"> | number | null
     ordersToday?: IntNullableFilter<"User"> | number | null
-    latitude?: FloatNullableFilter<"User"> | number | null
-    longitude?: FloatNullableFilter<"User"> | number | null
     storeId?: StringNullableFilter<"User"> | string | null
   }
 
@@ -6126,8 +5999,6 @@ export namespace Prisma {
     cityId?: string | null
     backOrders?: number | null
     ordersToday?: number | null
-    latitude?: number | null
-    longitude?: number | null
     storeId?: string | null
     role: RoleCreateNestedOneWithoutUserInput
   }
@@ -6150,8 +6021,6 @@ export namespace Prisma {
     cityId?: string | null
     backOrders?: number | null
     ordersToday?: number | null
-    latitude?: number | null
-    longitude?: number | null
     storeId?: string | null
   }
 
@@ -6187,8 +6056,6 @@ export namespace Prisma {
     cityId?: NullableStringFieldUpdateOperationsInput | string | null
     backOrders?: NullableIntFieldUpdateOperationsInput | number | null
     ordersToday?: NullableIntFieldUpdateOperationsInput | number | null
-    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
-    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
     storeId?: NullableStringFieldUpdateOperationsInput | string | null
     role?: RoleUpdateOneRequiredWithoutUserNestedInput
   }
@@ -6210,8 +6077,6 @@ export namespace Prisma {
     cityId?: NullableStringFieldUpdateOperationsInput | string | null
     backOrders?: NullableIntFieldUpdateOperationsInput | number | null
     ordersToday?: NullableIntFieldUpdateOperationsInput | number | null
-    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
-    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
     storeId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -6232,8 +6097,6 @@ export namespace Prisma {
     cityId?: string | null
     backOrders?: number | null
     ordersToday?: number | null
-    latitude?: number | null
-    longitude?: number | null
     storeId?: string | null
   }
 
@@ -6260,8 +6123,6 @@ export namespace Prisma {
     cityId?: NullableStringFieldUpdateOperationsInput | string | null
     backOrders?: NullableIntFieldUpdateOperationsInput | number | null
     ordersToday?: NullableIntFieldUpdateOperationsInput | number | null
-    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
-    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
     storeId?: NullableStringFieldUpdateOperationsInput | string | null
     lastLocation?: LocationUpdateManyWithoutUserNestedInput
   }
@@ -6282,8 +6143,6 @@ export namespace Prisma {
     cityId?: NullableStringFieldUpdateOperationsInput | string | null
     backOrders?: NullableIntFieldUpdateOperationsInput | number | null
     ordersToday?: NullableIntFieldUpdateOperationsInput | number | null
-    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
-    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
     storeId?: NullableStringFieldUpdateOperationsInput | string | null
     lastLocation?: LocationUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -6304,8 +6163,6 @@ export namespace Prisma {
     cityId?: NullableStringFieldUpdateOperationsInput | string | null
     backOrders?: NullableIntFieldUpdateOperationsInput | number | null
     ordersToday?: NullableIntFieldUpdateOperationsInput | number | null
-    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
-    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
     storeId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
