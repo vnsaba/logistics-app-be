@@ -167,7 +167,11 @@ const config = {
       }
     ],
     "previewFeatures": [],
+<<<<<<< HEAD
     "sourceFilePath": "C:\\DSecondary\\logistics-app-be\\prisma\\mongodb\\schema.prisma",
+=======
+    "sourceFilePath": "C:\\DSecondary\\logistics-app-be\\prisma\\mongoDB\\schema.prisma",
+>>>>>>> 46c946d82e0ae125d8e8438752c06a26124a7121
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
