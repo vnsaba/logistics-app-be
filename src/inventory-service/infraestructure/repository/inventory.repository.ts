@@ -1,5 +1,5 @@
 import { IInventoryRepository } from "../../domain/interfaces/inventory.interface";
-import { prismaMysql } from "../../../../prisma/index";
+import { prismaMysql } from "../../../db-instances";
 import { Inventory } from "../../domain/entity/inventory";
 import { Product } from "../../../product-service/domain/entity/product";
 import { StoreProductDto } from "../dto/StoreProduct.dto";

@@ -1,5 +1,5 @@
 import { Store } from "../../domain/entity/store";
-import { prismaMysql } from "../../../../prisma/index";
+import { prismaMysql } from "../../../db-instances";
 import { IStoreRepository } from "../../domain/interfaces/store.interface";
 
 export class StoreRepository implements IStoreRepository {
