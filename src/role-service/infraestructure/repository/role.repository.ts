@@ -1,6 +1,6 @@
 import { Role } from '../../domain/entity/role';
 import { Permission } from '../../domain/entity/permission';
-import { prismaMongo } from "../../../../prisma/index";
+import { prismaMongo } from "../../../db-instances";
 import { IRoleRepository } from '../../domain/interfaces/role.interface';
 
 export class RoleRepository implements IRoleRepository {

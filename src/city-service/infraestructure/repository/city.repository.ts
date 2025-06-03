@@ -1,6 +1,6 @@
 // infraestructure/repository/city.repository.ts
 import { ICityRepository } from "../../domain/interface/city.interface";
-import { prismaMysql } from "../../../../prisma/index";
+import { prismaMysql } from "../../../db-instances";
 import { City } from "../../domain/entity/city";
 
 export class CityRepository implements ICityRepository {

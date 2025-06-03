@@ -1,6 +1,6 @@
 import { User } from "../../domain/entity/user";
 import { User as UserType } from "../../../../types/auth/index";
-import { prismaMongo } from "../../../../prisma/index";
+import { prismaMongo } from "../../../db-instances";
 import { IUserRepository } from "../../domain/interfaces/user.interface";
 
 export class UserRepository implements IUserRepository {
