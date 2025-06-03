@@ -58,6 +58,7 @@ describe("ResetPasswordService", () => {
       getAllCouriersWithLocation: jest.fn(), 
       getUsersByRole: jest.fn(),
       updateOrdersToday: jest.fn(),
+      getAllClients: jest.fn(),
     } as jest.Mocked<IUserRepository>;
 
 
