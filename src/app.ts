@@ -24,7 +24,7 @@ app.use(json());
 app.use(cors());
 
 // **RUTA MANUAL PARA PDF**
-app.get("/reports/:deliveryId/pdf", async (req: ExRequest, res: ExResponse) => {
+app.get("/api/couriers/:deliveryId/pdf", async (req: ExRequest, res: ExResponse) => {
   try {
     const { deliveryId } = req.params;
 
@@ -45,7 +45,7 @@ app.get("/reports/:deliveryId/pdf", async (req: ExRequest, res: ExResponse) => {
 });
 
 // **RUTA MANUAL PARA EXCEL**
-app.get("/reports/:deliveryId/excel", async (req: ExRequest, res: ExResponse) => {
+app.get("/api/couriers/:deliveryId/excel", async (req: ExRequest, res: ExResponse) => {
   try {
     const { deliveryId } = req.params;
 
