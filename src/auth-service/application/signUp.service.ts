@@ -38,6 +38,7 @@ export class SignUpService {
     }
 
     phone = `+57${phone}`;
+    const cityId = '2335'
 
 
     const existingUser = await this.userRepository.getByEmail(email);
@@ -67,7 +68,8 @@ export class SignUpService {
       email,
       passwordHash,
       clientRolId,
-      phone
+      phone,
+      cityId
     );
     newUser.status = "PENDING";
 
