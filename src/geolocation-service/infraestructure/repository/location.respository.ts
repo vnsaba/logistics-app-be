@@ -1,4 +1,4 @@
-import { prismaMongo } from "../../../../prisma/index";
+import { prismaMongo } from "../../../db-instances";
 import { IlocationRepository } from "../../domain/interface/Location.interface";
 import { DeliverylocationDto , SaveDeliverylocationDto} from "../../domain/dto/deliveryLocation.dto";
 
