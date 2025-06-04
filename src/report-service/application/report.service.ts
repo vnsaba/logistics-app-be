@@ -13,13 +13,24 @@ export class ReportService {
   async generateReport(
     deliveryId: string
   ): Promise<{ pdf: Buffer; excel: Buffer }> {
-    // Obtener la fecha actual
-    const today = new Date();
+    // // Obtener la fecha actual
+    // const today = new Date();
+    // const startOfDay = new Date(today);
+    // startOfDay.setHours(0, 0, 0, 0);
+
+    // const endOfDay = new Date(today);
+    // endOfDay.setHours(23, 59, 59, 999);
+
+    // Establecer la fecha de prueba como el 01 de junio de 2025 en UTC
+    const today = new Date(Date.UTC(2025, 5, 1)); // Meses en JavaScript son base 0 (junio es 5)
     const startOfDay = new Date(today);
-    startOfDay.setHours(0, 0, 0, 0);
+    startOfDay.setUTCHours(0, 0, 0, 0);
 
     const endOfDay = new Date(today);
-    endOfDay.setHours(23, 59, 59, 999);
+    endOfDay.setUTCHours(23, 59, 59, 999);
+
+    console.log("Start Date:", startOfDay.toISOString());
+    console.log("End Date:", endOfDay.toISOString());
 
     // Obtener los pedidos asignados al repartidor en la fecha actual
     const orders = await this.orderRepository.findByDeliveryAndDate(
@@ -27,6 +38,8 @@ export class ReportService {
       startOfDay,
       endOfDay
     );
+
+    console.log(orders)
 
 
     if (!orders || orders.length === 0) {
@@ -86,8 +99,8 @@ export class ReportService {
       });
 
       // Estilos generales
-      const primaryColor = "#1E90FF"; 
-      const secondaryColor = "#F5F5F5"; 
+      const primaryColor = "#1E90FF";
+      const secondaryColor = "#F5F5F5";
 
       // Encabezado del reporte con logo
       doc.rect(0, 0, doc.page.width, 80).fill(primaryColor);
@@ -136,7 +149,7 @@ export class ReportService {
           doc.text(`$${order.subTotal.toFixed(2)}`, 50 + columnWidths[0] + columnWidths[1] + columnWidths[2] + columnSpacing * 3, rowTop);
           doc.text(`${order.status}`, 50 + columnWidths[0] + columnWidths[1] + columnWidths[2] + columnWidths[3] + columnSpacing * 4, rowTop);
 
-          rowTop += 20; 
+          rowTop += 20;
         });
       }
 

@@ -306,6 +306,9 @@ export class OrdersRepository implements IOrderRepository {
         startDate: Date,
         endDate: Date
     ): Promise<any[] | null> {
+        console.log("Fetching orders for deliveryId:", deliveryId);
+        console.log("Start Date:", startDate);
+        console.log("End Date:", endDate);
         const orders = await prismaMysql.orders.findMany({
             where: {
                 deliveryId: deliveryId,
