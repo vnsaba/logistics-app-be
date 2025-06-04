@@ -20,12 +20,23 @@ export class LocationController extends Controller {
         this.saveDeliveryLocationService = new SaveDeliveryLocationService(this.locationRepository);
     }
 
+    /**
+ * Guarda la ubicación actual de un repartidor.
+ * @param body Datos de ubicación a guardar.
+ * @returns Indica si la operación fue exitosa.
+ */
     @Post('update')
     public async updateLocation(@Body() body: SaveDeliverylocationDto): Promise<{ success: boolean }> {
         await this.saveDeliveryLocationService.saveDeliveryLocation(body);
         return { success: true };
     }
 
+
+  /**
+   * Obtiene la última ubicación conocida de un repartidor.
+   * @param deliveryId ID del repartidor.
+   * @returns Ubicación actual del repartidor.
+   */
     @Get('{deliveryId}/current')
     public async getCurrentLocation(@Path() deliveryId: string): Promise<{ latitude: number, longitude: number, timestamp: number }> {
         const location = await this.getCurrentLocationService.getCurrentLocation(deliveryId);
@@ -40,6 +51,13 @@ export class LocationController extends Controller {
         };
     }
 
+      /**
+   * Obtiene el historial de ubicaciones de un repartidor entre dos fechas.
+   * @param deliveryId ID del repartidor.
+   * @param from Fecha de inicio (ISO).
+   * @param to Fecha de fin (ISO).
+   * @returns Lista de ubicaciones.
+   */
     @Get('{deliveryId}/history/{from}/{to}')
     async getLocationHistory(
         @Path() deliveryId: string,

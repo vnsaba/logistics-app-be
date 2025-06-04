@@ -1,4 +1,4 @@
-import { Controller, Post, Route, SuccessResponse, Body, Tags, Get, Security, Path, Put } from "tsoa";
+import { Controller, Post, Route, SuccessResponse, Body, Tags, Get, Path, Put } from "tsoa";
 import { CreateOrderService } from '../../application/createOrder.service';
 import { OrdersRepository } from "../respository/order.repository";
 import { StoreRepository } from "../../../store-service/infraestructure/repository/store.repository";
@@ -7,12 +7,8 @@ import { UserRepository } from "../../../user-service/infraestructure/repository
 import { DistanceService } from '../../../geolocation-service/infraestructure/distanceService';
 import { InventoryRepository } from "../../../inventory-service/infraestructure/repository/inventory.repository";
 import { ErrorResponse } from "../../../shared/domain/interfaces/error.interface";
-import { UserRole } from '../../../../types/auth/index';
-import { UpdateOrderService } from '../../../order-service/application/updateOrder.service';
 import { CreateOrderDto } from '../../domain/Dto/createOrder.dto';
 import { OrderResponseDTO } from "../../domain/Dto/orderResponse.dto";
-import { CancelSubOrderService } from "../../application/CancelSubOrder.service";
-import { OrderItemRepository } from "../respository/orderItem.repository";
 import { UpdateOrderStatusService } from "../../application/updateOrderStatus.service";
 import { OrderStatus } from "../../../shared/enums/orderStatus.enum";
 import { GetOrderDetailSerice } from "../../application/getOrderDetails.service";
@@ -28,10 +24,7 @@ export class OrdersController extends Controller {
     private readonly userSRepository: UserRepository
     private readonly distanceService: DistanceService
     private readonly inventoryRepository: InventoryRepository
-    private readonly cancelSubOrderService: CancelSubOrderService;
     private readonly updateOrderStatus: UpdateOrderStatusService;
-    private readonly orderItemRepository: OrderItemRepository;
-    private readonly updateOrderService: UpdateOrderService;
     private readonly getOrderDetailSerice: GetOrderDetailSerice
     private readonly locationRepository: LocationRepository;
 
@@ -43,19 +36,20 @@ export class OrdersController extends Controller {
         this.distanceService = new DistanceService(process.env.GEOCODING_API as string);
         this.userSRepository = new UserRepository();
         this.inventoryRepository = new InventoryRepository();
-        this.orderItemRepository = new OrderItemRepository();
         this.locationRepository = new LocationRepository();
-        this.updateOrderService = new UpdateOrderService(this.orderRepository, this.geocodingService); //actualiza la direccion
         this.createOrderService = new CreateOrderService(this.orderRepository, this.storeRepository,
             this.geocodingService, this.userSRepository, this.distanceService, this.inventoryRepository, this.locationRepository);
-        this.cancelSubOrderService = new CancelSubOrderService(this.orderRepository, this.orderItemRepository, this.inventoryRepository);
         this.updateOrderStatus = new UpdateOrderStatusService(this.orderRepository)
         this.getOrderDetailSerice = new GetOrderDetailSerice(this.orderRepository, this.userSRepository, this.locationRepository, this.geocodingService);
     }
 
 
+    /**
+     * Obtener todas las órdenes con sus relaciones
+     * @returns Lista de órdenes
+     */
     @Get()
-    @SuccessResponse("200", "OK") //obtener la iformacion de todas las ordenes
+    @SuccessResponse("200", "Lista de órdenes obtenida correctamente")
     public async getAllOrders(): Promise<OrderResponseDTO[]> {
         try {
             const orders = await this.orderRepository.getAllWithRelations();
@@ -70,7 +64,11 @@ export class OrdersController extends Controller {
         }
     }
 
-    // @Security('jwt', [UserRole.CLIENTE])
+    /**
+     * Crear una nueva orden
+     * @param requestBody Información para crear la orden
+     * @returns Arreglo de órdenes creadas
+     */
     @SuccessResponse("201", "Created")
     @Post('create')
     public async createOrder(@Body() requestBody: any,
@@ -114,27 +112,14 @@ export class OrdersController extends Controller {
         return order;
     }
 
-    @SuccessResponse("200", "OK")
-    @Post('{orderId}/cancel')
-    @Security('jwt', [UserRole.CLIENTE]) //borar duplciado
-    public async cancelSubOrder(
-        @Path() orderId: number,
-    ): Promise<{ message: string } | ErrorResponse> {
-        try {
-            const result = await this.cancelSubOrderService.cancelSubOrder(orderId);
-            if (!result) {
-                this.setStatus(404);
-                return { status: 404, message: "Suborder not found" };
-            }
-            this.setStatus(200);
-            return result;
-        } catch (error) {
-            this.setStatus(500);
-            return { status: 500, message: error instanceof Error ? error.message : "Internal Server Error" };
-        }
-    }
 
 
+    /**
+ * Actualizar el estado de una orden
+ * @param orderId ID de la orden
+ * @param body Estado nuevo
+ * @returns Mensaje de confirmación
+ */
     @Put('{orderId}/status')
     public async updateStatus(
         @Path() orderId: number,
@@ -154,32 +139,13 @@ export class OrdersController extends Controller {
         }
     }
 
-
-    @Put('{orderId}/address')
-    public async updateAddress(
-        @Path() orderId: number,
-        @Body() body: { address: string }
-    ): Promise<{ message: string } | ErrorResponse> {
-        try {
-            const order = await this.updateOrderService.updateOrder(orderId, body.address);
-            if (!order) {
-                this.setStatus(404);
-                return { status: 404, message: "Order not found" };
-            }
-            this.setStatus(200);
-            return { message: "Order address updated successfully" };
-        } catch (error) {
-            if (error instanceof Error) {
-                this.setStatus(400);
-                return { status: 400, message: error.message };
-            }
-            this.setStatus(500);
-            return { status: 500, message: "Internal Server Error" };
-        }
-    }
-
+    /**
+     * Obtener todas las órdenes de un cliente por su ID
+     * @param userId ID del cliente
+     * @returns Lista de órdenes del cliente
+     */
     //obtener las ordenes de un usuario
-    @Get('user/{userId}') 
+    @Get('user/{userId}')
     @SuccessResponse("200", "OK")
     public async getOrdersByUserId(@Path() userId: string): Promise<OrderResponseDTO[]> {
         try {
@@ -195,8 +161,11 @@ export class OrdersController extends Controller {
         }
     }
 
-    //obtener las ordenes de un courier
-    @Get('courier/{courierId}')
+  /**
+   * Obtener todas las órdenes asignadas a un repartidor
+   * @param courierId ID del repartidor
+   * @returns Lista de órdenes del repartidor
+   */    @Get('courier/{courierId}')
     @SuccessResponse("200", "OK")
     public async getOrdersByCourierId(@Path() courierId: string): Promise<OrderResponseDTO[]> {
         try {
@@ -215,9 +184,3 @@ export class OrdersController extends Controller {
 
 
 }
-
-
-
-
-
-
