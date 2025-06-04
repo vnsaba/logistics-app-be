@@ -1,20 +1,23 @@
 import express, { Response as ExResponse, Request as ExRequest, urlencoded, json } from "express";
-import { RegisterRoutes } from '../build/routes';
+import { RegisterRoutes } from "../build/routes";
 import swaggerUi from "swagger-ui-express";
 import { ValidateError } from "tsoa";
 import cors from "cors";
 
-import { ReportService } from "../src/report-service/application/report.service";  
-import { OrdersRepository } from "../src/order-service/infraestructure/respository/order.repository"; 
+import { ReportService } from "../src/report-service/application/report.service";
+import { OrdersRepository } from "../src/order-service/infraestructure/respository/order.repository";
 
 export const app = express();
 
-// Swagger UI
+// Configuración de Swagger UI
 app.use("/docs", swaggerUi.serve, async (_req: ExRequest, res: ExResponse) => {
-  const html = await import("../build/swagger.json").then(mod => swaggerUi.generateHTML(mod));
+  const html = await import("../build/swagger.json").then((mod) =>
+    swaggerUi.generateHTML(mod)
+  );
   res.send(html);
 });
 
+// Configuración de middlewares
 app.use(
   urlencoded({
     extended: true,
@@ -23,7 +26,7 @@ app.use(
 app.use(json());
 app.use(cors());
 
-// **RUTA MANUAL PARA PDF**
+// *RUTA MANUAL PARA PDF*
 app.get("/api/couriers/:deliveryId/pdf", async (req: ExRequest, res: ExResponse) => {
   try {
     const { deliveryId } = req.params;
@@ -44,7 +47,7 @@ app.get("/api/couriers/:deliveryId/pdf", async (req: ExRequest, res: ExResponse)
   }
 });
 
-// **RUTA MANUAL PARA EXCEL**
+// *RUTA MANUAL PARA EXCEL*
 app.get("/api/couriers/:deliveryId/excel", async (req: ExRequest, res: ExResponse) => {
   try {
     const { deliveryId } = req.params;
@@ -80,7 +83,7 @@ app.use(function errorHandler(
 ): void {
   if (err instanceof ValidateError) {
     res.status(422).json({
-      message: 'Validation Failed',
+      message: "Validation Failed",
       details: err?.fields,
     });
   } else if (err instanceof Error) {
@@ -91,3 +94,4 @@ app.use(function errorHandler(
     next();
   }
 });
+

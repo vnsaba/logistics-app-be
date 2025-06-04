@@ -29,8 +29,8 @@ export class LocationRepository implements IlocationRepository {
             deliveryId: location.userId,
             latitude: location.latitude,
             longitude: location.longitude,
-            timestamp: location.timestamp.toISOString()
-        }
+            timestamp: location.createdAt.toISOString()     
+   }
     }
 
     async getLocationHistory(deliveryId: string, from: Date, to: Date): Promise<DeliverylocationDto[]> {
